@@ -2,6 +2,7 @@
 #define CUPIDWINDOW_H
 
 #include <QMainWindow>
+#include "sidebarwidget.h"
 
 namespace Ui {
 class cuPIDWindow;
@@ -17,7 +18,7 @@ public:
 
 private:
     Ui::cuPIDWindow *ui;
-
+    SideBarWidget projectSidebar;
     /*
      * reference current user of the cuPID system
      */

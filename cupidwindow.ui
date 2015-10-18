@@ -34,18 +34,12 @@
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
           <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QPushButton" name="pushButton">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
+           <property name="spacing">
+            <number>0</number>
+           </property>
           </layout>
          </item>
         </layout>
-        <zorder>widget_2</zorder>
-        <zorder>verticalLayoutWidget</zorder>
        </widget>
       </item>
       <item>
@@ -71,7 +65,7 @@
      <x>0</x>
      <y>0</y>
      <width>520</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

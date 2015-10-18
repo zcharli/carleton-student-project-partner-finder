@@ -14,13 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     cupidwindow.cpp \
-    loginform.cpp
+    loginform.cpp \
+    sidebarwidget.cpp
 
 HEADERS  += \
     cupidwindow.h \
-    loginform.h
+    loginform.h \
+    sidebarwidget.h
 
 
 FORMS    += \
     cupidwindow.ui \
-    loginform.ui
+    loginform.ui \
+    sidebarwidget.ui
