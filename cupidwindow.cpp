@@ -20,6 +20,7 @@ void cuPIDWindow::viewWillAppear()
 {
     this->setFixedSize(WINDOW_MAX_WIDTH, WINDOW_MAX_HEIGHT);
     ui->textEdit->setText("<h1>Welcome " + *currentUser + "</h1>");
+    projectSidebar.setUsername(*currentUser);
 }
 
 void cuPIDWindow::acceptUserLogin(QString& user)

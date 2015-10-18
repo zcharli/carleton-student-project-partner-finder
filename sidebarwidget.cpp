@@ -6,9 +6,23 @@ SideBarWidget::SideBarWidget(QWidget *parent) :
     ui(new Ui::SideBarWidget)
 {
     ui->setupUi(this);
+
+
+    viewWillAppear();
+
 }
 
 SideBarWidget::~SideBarWidget()
 {
     delete ui;
+}
+
+void SideBarWidget::viewWillAppear()
+{
+
+}
+
+void SideBarWidget::setUsername(const QString strUsername)
+{
+    ui->lblUsername->setText(strUsername);
 }
