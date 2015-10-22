@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "sidebarwidget.h"
+#include "profilewidget.h"
 
 namespace Ui {
 class cuPIDWindow;
@@ -12,13 +13,16 @@ class cuPIDWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
+        Ui::cuPIDWindow *ui;
     explicit cuPIDWindow(QWidget *parent = 0);
     ~cuPIDWindow();
-
+    void displayProfile(ProfileWidget*);
 private:
-    Ui::cuPIDWindow *ui;
+
     SideBarWidget projectSidebar;
+    ProfileWidget profileWidget;
     /*
      * reference current user of the cuPID system
      */
@@ -40,6 +44,13 @@ public slots:
      * @return: void
     */
     void acceptUserLogin(QString& user);
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted after the
+     *          profile button is clicked
+     * @return: void
+    */
+    void generateProfilePage();
 };
 
 #endif // CUPIDWINDOW_H
