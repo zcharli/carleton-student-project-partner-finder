@@ -26,3 +26,8 @@ void SideBarWidget::setUsername(const QString strUsername)
 {
     ui->lblUsername->setText(strUsername);
 }
+
+void SideBarWidget::on_btnProfile_clicked()
+{
+    emit profileClicked();
+}

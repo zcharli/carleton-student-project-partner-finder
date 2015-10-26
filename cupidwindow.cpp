@@ -14,6 +14,13 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     // Initialize side bar widget (child of left pane)
     ui->sideBar->layout()->addWidget(&projectSidebar);
     projectSidebar.show();
+
+    //adds all the main content to the main widget
+    ui->mainContentStackedWidget->layout()->addWidget(&profileWidget);
+    //connects the profile button to the generateProfile page method
+    QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
+                     this, SLOT(generateProfilePage()));
+
 }
 
 void cuPIDWindow::viewWillAppear()
@@ -30,7 +37,13 @@ void cuPIDWindow::acceptUserLogin(QString& user)
     viewWillAppear();
 }
 
+void cuPIDWindow::generateProfilePage()
+{
+    //sets the current widget of maincontentStackedWidget to the profile widget
+    ui->mainContentStackedWidget->setCurrentWidget(&profileWidget);
+}
 cuPIDWindow::~cuPIDWindow()
 {
     delete ui;
 }
+

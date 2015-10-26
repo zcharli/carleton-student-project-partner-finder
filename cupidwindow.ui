@@ -43,16 +43,15 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="mainContentWidget" native="true">
-        <layout class="QGridLayout" name="gridLayout_4">
-         <item row="0" column="0">
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
-            <widget class="QTextEdit" name="textEdit"/>
-           </item>
-          </layout>
-         </item>
-        </layout>
+       <widget class="QStackedWidget" name="mainContentStackedWidget">
+        <widget class="QWidget" name="page">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QTextEdit" name="textEdit"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_2"/>
        </widget>
       </item>
      </layout>

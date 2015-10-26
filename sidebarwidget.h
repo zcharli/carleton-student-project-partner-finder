@@ -16,6 +16,18 @@ public:
     ~SideBarWidget();
     void setUsername(const QString strUsername);
 
+signals:
+    /*!
+     *  @param: username: QString (output)
+     *   @desc: A signal emitted when the login is performed.
+     *          username the username entered in the dialog
+     * @return: void
+    */
+    void profileClicked();
+
+public slots:
+    void on_btnProfile_clicked();
+
 private:
     Ui::SideBarWidget *ui;
 
