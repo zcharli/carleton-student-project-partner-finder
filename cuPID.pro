@@ -16,13 +16,27 @@ SOURCES += main.cpp\
     cupidwindow.cpp \
     loginform.cpp \
     sidebarwidget.cpp \
-    profilewidget.cpp
+    profilewidget.cpp \
+    Models/user.cpp \
+    Models/studentuser.cpp \
+    Models/administratoruser.cpp \
+    Models/projectpartnerprofile.cpp \
+    Models/qualification.cpp \
+    Models/project.cpp \
+    Models/configuration.cpp
 
 HEADERS  += \
     cupidwindow.h \
     loginform.h \
     sidebarwidget.h \
-    profilewidget.h
+    profilewidget.h \
+    Models/user.h \
+    Models/studentuser.h \
+    Models/administratoruser.h \
+    Models/projectpartnerprofile.h \
+    Models/qualification.h \
+    Models/project.h \
+    Models/configuration.h
 
 
 FORMS    += \
