@@ -6,1379 +6,521 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>782</width>
-    <height>426</height>
+    <width>784</width>
+    <height>428</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="1">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QTabWidget" name="myProfileWidget">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="userCodingTab">
+      <attribute name="title">
+       <string>Coding / Technical</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QFormLayout" name="formLayout">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lblUserCGPA">
+           <property name="text">
+            <string>CGPA</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="spinUserCGPA"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="userLifestyleTab">
+      <attribute name="title">
+       <string>Lifestyle</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <layout class="QFormLayout" name="formLayout_2">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+         </property>
+         <item row="2" column="0">
+          <widget class="QLabel" name="lblVisionary">
+           <property name="text">
+            <string>A Visionary</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QRadioButton" name="radioStronglyAgree">
+             <property name="text">
+              <string>Strongly Agree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioAgree">
+             <property name="text">
+              <string>Agree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioNeutral">
+             <property name="text">
+              <string>Neutral</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioDisagree">
+             <property name="text">
+              <string>Disagree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioStronglyDisagree">
+             <property name="text">
+              <string>Strongly Disagree</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QRadioButton" name="radioStronglyAgree_2">
+             <property name="text">
+              <string>Strongly Agree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioAgree_2">
+             <property name="text">
+              <string>Agree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioNeutral_2">
+             <property name="text">
+              <string>Neutral</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioDisagree_2">
+             <property name="text">
+              <string>Disagree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioStronglyDisagree_2">
+             <property name="text">
+              <string>Strongly Disagree</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="4" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QRadioButton" name="radioStronglyAgree_3">
+             <property name="text">
+              <string>Strongly Agree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioAgree_3">
+             <property name="text">
+              <string>Agree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioNeutral_3">
+             <property name="text">
+              <string>Neutral</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioDisagree_3">
+             <property name="text">
+              <string>Disagree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioStronglyDisagree_3">
+             <property name="text">
+              <string>Strongly Disagree</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="5" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QRadioButton" name="radioStronglyAgree_4">
+             <property name="text">
+              <string>Strongly Agree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioAgree_4">
+             <property name="text">
+              <string>Agree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioNeutral_4">
+             <property name="text">
+              <string>Neutral</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioDisagree_4">
+             <property name="text">
+              <string>Disagree</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioStronglyDisagree_4">
+             <property name="text">
+              <string>Strongly Disagree</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="6" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QRadioButton" name="radio0to5">
+             <property name="text">
+              <string>0-5 Hours</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radio5to10">
+             <property name="text">
+              <string>5-10 Hours</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radio10to20">
+             <property name="text">
+              <string>10-20 Hours</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radio20Plus">
+             <property name="text">
+              <string>20+ Hours</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="lblUserStress">
+           <property name="text">
+            <string>Stress Dealing</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="lblUserOutgoing">
+           <property name="text">
+            <string>Outgoing</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="lblUserExcellence">
+           <property name="text">
+            <string>Excellence</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="lblUserWorkHours">
+           <property name="text">
+            <string>Working Hours
+Outside of school </string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lblSelectOne">
+           <property name="text">
+            <string>Select One</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="userWorkEthicTab">
+      <attribute name="title">
+       <string>Work Ethic</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_10">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QLabel" name="lblAssignmentSubmission">
+           <property name="text">
+            <string>Suppose at a normal day at school, one of your more difficult classes gave out an assignment 
+due in 1 week. When would you like to submit this assignment in reference to the due date.
+</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_15">
+           <item>
+            <widget class="QRadioButton" name="radioFirstDay">
+             <property name="text">
+              <string>On the first Day</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioBetweenFirstandLast">
+             <property name="text">
+              <string>Between the first 
+day and due date</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioOnLast">
+             <property name="text">
+              <string>On the due date</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioLate">
+             <property name="text">
+              <string>After the 
+due date</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblWorkPreference">
+           <property name="text">
+            <string>You often like to work during these times:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_16">
+           <item>
+            <widget class="QCheckBox" name="userWorkingMorning">
+             <property name="text">
+              <string>Morning</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="userWorkingAfternoon">
+             <property name="text">
+              <string>Afternoon</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="userWorkEvening">
+             <property name="text">
+              <string>Evening</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="userWorkingNight">
+             <property name="text">
+              <string>Night</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblProjectHours">
+           <property name="text">
+            <string>Time willing to spend on projects every week (Hours):</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QSpinBox" name="spinUserTimeOnProject"/>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblAlgorithmQuestion">
+           <property name="text">
+            <string>You are tasked to implement an algorithm for tomorrow and you come up with a solution that works. 
+You know it could be faster. What are you willing to do in order to make it faster
+</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_17">
+           <item>
+            <widget class="QRadioButton" name="radioLeaveIt">
+             <property name="text">
+              <string>Leave it as it is</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioGoogleSearch">
+             <property name="text">
+              <string>Do google search</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioReadResearchPaper">
+             <property name="text">
+              <string>Read a research paper.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioReadBook">
+             <property name="text">
+              <string>Read a book on 
+the subject.</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="teammateCodingTab">
+      <attribute name="title">
+       <string>Teammate Coding / Technical</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QFormLayout" name="formLayout_3">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lblTeammateCGPA">
+           <property name="text">
+            <string>Teammate's CGPA</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="spinTeammateCGPA"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="codingQuestionTab">
+      <attribute name="title">
+       <string>Coding Question</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="btnSave">
      <property name="text">
       <string>Save Changes</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QTabWidget" name="qualificationTabWidget">
-     <property name="currentIndex">
-      <number>1</number>
-     </property>
-     <widget class="QWidget" name="UserTab">
-      <attribute name="title">
-       <string>My Qualifications</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_6">
-       <item>
-        <widget class="QTabWidget" name="myProfileWidget">
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="tabPosition">
-          <enum>QTabWidget::North</enum>
-         </property>
-         <property name="tabShape">
-          <enum>QTabWidget::Rounded</enum>
-         </property>
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <widget class="QWidget" name="userCodingTab">
-          <attribute name="title">
-           <string>Coding / Technical</string>
-          </attribute>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <layout class="QFormLayout" name="formLayout">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="lblUserCGPA">
-               <property name="text">
-                <string>CGPA</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QSpinBox" name="spinUserCGPA"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="lbUserlOOProficiency">
-               <property name="text">
-                <string>Object Oriented
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QSlider" name="sliderUserOO">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="lblUserUIProficiency">
-               <property name="text">
-                <string>User Interface
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QSlider" name="sliderUserUI">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="lblUserScriptingProficiency">
-               <property name="text">
-                <string>Scripting
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QSlider" name="sliderUserScripting">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="lblUserDBProficiency">
-               <property name="text">
-                <string>Database
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QSlider" name="sliderUserDB">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="lblUserDesignPatternsProficiency">
-               <property name="text">
-                <string>Design patterns
-and System architecture
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QSlider" name="sliderUserDesignPatterns">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="lblUserDataStructuresProficiency">
-               <property name="text">
-                <string>Data Structures and
-Algorithms Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QSlider" name="sliderUserDataStructures">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="userLifestyleTab">
-          <attribute name="title">
-           <string>Lifestyle</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_9">
-           <item>
-            <layout class="QFormLayout" name="formLayout_2">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-             </property>
-             <item row="2" column="0">
-              <widget class="QLabel" name="lblVisionary">
-               <property name="text">
-                <string>A Visionary</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <item>
-                <widget class="QRadioButton" name="radioStronglyAgree">
-                 <property name="text">
-                  <string>Strongly Agree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userVisionarySelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioAgree">
-                 <property name="text">
-                  <string>Agree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userVisionarySelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioNeutral">
-                 <property name="text">
-                  <string>Neutral</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userVisionarySelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioDisagree">
-                 <property name="text">
-                  <string>Disagree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userVisionarySelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioStronglyDisagree">
-                 <property name="text">
-                  <string>Strongly Disagree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userVisionarySelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="3" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <item>
-                <widget class="QRadioButton" name="radioStronglyAgree_2">
-                 <property name="text">
-                  <string>Strongly Agree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userStressSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioAgree_2">
-                 <property name="text">
-                  <string>Agree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userStressSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioNeutral_2">
-                 <property name="text">
-                  <string>Neutral</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userStressSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioDisagree_2">
-                 <property name="text">
-                  <string>Disagree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userStressSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioStronglyDisagree_2">
-                 <property name="text">
-                  <string>Strongly Disagree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userStressSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="4" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
-               <item>
-                <widget class="QRadioButton" name="radioStronglyAgree_3">
-                 <property name="text">
-                  <string>Strongly Agree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userOutgoingSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioAgree_3">
-                 <property name="text">
-                  <string>Agree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userOutgoingSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioNeutral_3">
-                 <property name="text">
-                  <string>Neutral</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userOutgoingSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioDisagree_3">
-                 <property name="text">
-                  <string>Disagree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userOutgoingSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioStronglyDisagree_3">
-                 <property name="text">
-                  <string>Strongly Disagree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userOutgoingSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="5" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QRadioButton" name="radioStronglyAgree_4">
-                 <property name="text">
-                  <string>Strongly Agree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userExcellenceSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioAgree_4">
-                 <property name="text">
-                  <string>Agree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userExcellenceSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioNeutral_4">
-                 <property name="text">
-                  <string>Neutral</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userExcellenceSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioDisagree_4">
-                 <property name="text">
-                  <string>Disagree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userExcellenceSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioStronglyDisagree_4">
-                 <property name="text">
-                  <string>Strongly Disagree</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userExcellenceSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="6" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout">
-               <item>
-                <widget class="QRadioButton" name="radio0to5">
-                 <property name="text">
-                  <string>0-5 Hours</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userWorkHoursSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radio5to10">
-                 <property name="text">
-                  <string>5-10 Hours</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userWorkHoursSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radio10to20">
-                 <property name="text">
-                  <string>10-20 Hours</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userWorkHoursSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radio20Plus">
-                 <property name="text">
-                  <string>20+ Hours</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userWorkHoursSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="lblUserStress">
-               <property name="text">
-                <string>Stress Dealing</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="lblUserOutgoing">
-               <property name="text">
-                <string>Outgoing</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="lblUserExcellence">
-               <property name="text">
-                <string>Excellence</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="lblUserWorkHours">
-               <property name="text">
-                <string>Working Hours
-Outside of school </string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="lblSelectOne">
-               <property name="text">
-                <string>Select One</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="userWorkEthicTab">
-          <attribute name="title">
-           <string>Work Ethic</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_10">
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <item>
-              <widget class="QLabel" name="lblAssignmentSubmission">
-               <property name="text">
-                <string>Suppose at a normal day at school, one of your more difficult classes gave out an assignment 
-due in 1 week. When would you like to submit this assignment in reference to the due date.
-</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_15">
-               <item>
-                <widget class="QRadioButton" name="radioFirstDay">
-                 <property name="text">
-                  <string>On the first Day</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userAssignmentSubmissionSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioBetweenFirstandLast">
-                 <property name="text">
-                  <string>Between the first 
-day and due date</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userAssignmentSubmissionSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioOnLast">
-                 <property name="text">
-                  <string>On the due date</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userAssignmentSubmissionSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioLate">
-                 <property name="text">
-                  <string>After the 
-due date</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userAssignmentSubmissionSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QLabel" name="lblWorkPreference">
-               <property name="text">
-                <string>You often like to work during these times:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_16">
-               <item>
-                <widget class="QCheckBox" name="userWorkingMorning">
-                 <property name="text">
-                  <string>Morning</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="userWorkingAfternoon">
-                 <property name="text">
-                  <string>Afternoon</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="userWorkEvening">
-                 <property name="text">
-                  <string>Evening</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="userWorkingNight">
-                 <property name="text">
-                  <string>Night</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QLabel" name="lblProjectHours">
-               <property name="text">
-                <string>Time willing to spend on projects every week (Hours):</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_10">
-               <item>
-                <widget class="QSpinBox" name="spinUserTimeOnProject"/>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QLabel" name="lblAlgorithmQuestion">
-               <property name="text">
-                <string>You are tasked to implement an algorithm for tomorrow and you come up with a solution that works. 
-You know it could be faster. What are you willing to do in order to make it faster
-</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_17">
-               <item>
-                <widget class="QRadioButton" name="radioLeaveIt">
-                 <property name="text">
-                  <string>Leave it as it is</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userAlgorithmSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioGoogleSearch">
-                 <property name="text">
-                  <string>Do google search</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userAlgorithmSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioReadResearchPaper">
-                 <property name="text">
-                  <string>Read a research paper.</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userAlgorithmSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioReadBook">
-                 <property name="text">
-                  <string>Read a book on 
-the subject.</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">userAlgorithmSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="codingQuestionTab">
-          <attribute name="title">
-           <string>Coding Question</string>
-          </attribute>
-         </widget>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="TeammateTab">
-      <attribute name="title">
-       <string>Teammate Qualifications</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_11">
-       <item>
-        <widget class="QTabWidget" name="TeammateWidget">
-         <property name="tabPosition">
-          <enum>QTabWidget::North</enum>
-         </property>
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <widget class="QWidget" name="teammateCodingTab">
-          <attribute name="title">
-           <string>Teammate Coding / Technical</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_12">
-           <item>
-            <layout class="QFormLayout" name="formLayout_3">
-             <property name="fieldGrowthPolicy">
-              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-             </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="lblTeammateCGPA">
-               <property name="text">
-                <string>Teammate's CGPA</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QSpinBox" name="spinTeammateCGPA"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="lbTeammatelOOProficiency">
-               <property name="text">
-                <string>Teammate's Object Oriented
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QSlider" name="sliderTeammateOO">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="lblTeammateUIProficiency">
-               <property name="text">
-                <string>Teammate's User Interface
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QSlider" name="sliderTeammateUI">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="lblTeammateScriptingProficiency">
-               <property name="text">
-                <string>Teammate's Scripting
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QSlider" name="sliderTeammateScripting">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="lblTeammateDBProficiency">
-               <property name="text">
-                <string>Teammate's Database
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QSlider" name="sliderTeammateDB">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="lblTeammateDesignPatternsProficiency">
-               <property name="text">
-                <string>Teammate's Design patterns
-and System architecture
-Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1">
-              <widget class="QSlider" name="sliderTeammateDesignPatterns">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="lblTeammateDataStructuresProficiency">
-               <property name="text">
-                <string>Teammate's Data Structures and
-Algorithms Proficiency</string>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="1">
-              <widget class="QSlider" name="sliderTeammateDataStructures">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="teammateLifestyleTab">
-          <attribute name="title">
-           <string>Teammate Lifestyle</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_13">
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Select Your Teammate Preferences:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
-             <item>
-              <layout class="QFormLayout" name="formLayout_5">
-               <property name="fieldGrowthPolicy">
-                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-               </property>
-               <item row="2" column="0">
-                <widget class="QLabel" name="lblVisionary_2">
-                 <property name="text">
-                  <string>A Visionary</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <layout class="QHBoxLayout" name="horizontalLayout_11">
-                 <item>
-                  <widget class="QRadioButton" name="radioStronglyAgree_5">
-                   <property name="text">
-                    <string>Strongly Agree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateVisionarySelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioAgree_5">
-                   <property name="text">
-                    <string>Agree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateVisionarySelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioNeutral_5">
-                   <property name="text">
-                    <string>Neutral</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateVisionarySelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioDisagree_5">
-                   <property name="text">
-                    <string>Disagree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateVisionarySelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioStronglyDisagree_5">
-                   <property name="text">
-                    <string>Strongly Disagree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateVisionarySelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="lblUserStress_2">
-                 <property name="text">
-                  <string>Stress Dealing</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <layout class="QHBoxLayout" name="horizontalLayout_12">
-                 <item>
-                  <widget class="QRadioButton" name="radioStronglyAgree_6">
-                   <property name="text">
-                    <string>Strongly Agree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateStressSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioAgree_6">
-                   <property name="text">
-                    <string>Agree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateStressSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioNeutral_6">
-                   <property name="text">
-                    <string>Neutral</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateStressSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioDisagree_6">
-                   <property name="text">
-                    <string>Disagree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateStressSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioStronglyDisagree_6">
-                   <property name="text">
-                    <string>Strongly Disagree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateStressSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="lblUserOutgoing_2">
-                 <property name="text">
-                  <string>Outgoing</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <layout class="QHBoxLayout" name="horizontalLayout_13">
-                 <item>
-                  <widget class="QRadioButton" name="radioStronglyAgree_7">
-                   <property name="text">
-                    <string>Strongly Agree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateOutgoingSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioAgree_7">
-                   <property name="text">
-                    <string>Agree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateOutgoingSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioNeutral_7">
-                   <property name="text">
-                    <string>Neutral</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateOutgoingSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioDisagree_7">
-                   <property name="text">
-                    <string>Disagree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateOutgoingSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioStronglyDisagree_7">
-                   <property name="text">
-                    <string>Strongly Disagree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateOutgoingSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="5" column="0">
-                <widget class="QLabel" name="lblUserExcellence_2">
-                 <property name="text">
-                  <string>Excellence</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
-                <layout class="QHBoxLayout" name="horizontalLayout_14">
-                 <item>
-                  <widget class="QRadioButton" name="radioStronglyAgree_8">
-                   <property name="text">
-                    <string>Strongly Agree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateExcellenceSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioAgree_8">
-                   <property name="text">
-                    <string>Agree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateExcellenceSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioNeutral_8">
-                   <property name="text">
-                    <string>Neutral</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateExcellenceSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioDisagree_8">
-                   <property name="text">
-                    <string>Disagree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateExcellenceSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioStronglyDisagree_8">
-                   <property name="text">
-                    <string>Strongly Disagree</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateExcellenceSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="6" column="0">
-                <widget class="QLabel" name="lblUserWorkHours_2">
-                 <property name="text">
-                  <string>Working Hours
-Outside of school </string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1">
-                <layout class="QHBoxLayout" name="horizontalLayout_21">
-                 <item>
-                  <widget class="QRadioButton" name="radio0to5_2">
-                   <property name="text">
-                    <string>0-5 Hours</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateWorkHoursSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radio5to10_2">
-                   <property name="text">
-                    <string>5-10 Hours</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateWorkHoursSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radio10to20_2">
-                   <property name="text">
-                    <string>10-20 Hours</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateWorkHoursSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radio20Plus_2">
-                   <property name="text">
-                    <string>20+ Hours</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">teammateWorkHoursSelection</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="teammateWorkEthicTab">
-          <attribute name="title">
-           <string>Teammate Work Ethic</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_14">
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_7">
-             <item>
-              <widget class="QLabel" name="lblAssignmentSubmission_2">
-               <property name="text">
-                <string>Your teammates would submit assignments:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_22">
-               <item>
-                <widget class="QRadioButton" name="radioFirstDay_2">
-                 <property name="text">
-                  <string>On the first Day</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">teammateAssignmentSubmissionSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioBetweenFirstandLast_2">
-                 <property name="text">
-                  <string>Between the first 
-day and due date</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">teammateAssignmentSubmissionSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioOnLast_2">
-                 <property name="text">
-                  <string>On the due date</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">teammateAssignmentSubmissionSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioLate_2">
-                 <property name="text">
-                  <string>After the 
-due date</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">teammateAssignmentSubmissionSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QLabel" name="lblWorkPreference_2">
-               <property name="text">
-                <string>You would like to work with your teammates:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_23">
-               <item>
-                <widget class="QCheckBox" name="teammateWorkingMorning">
-                 <property name="text">
-                  <string>Morning</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="teammateWorkingAfternoon">
-                 <property name="text">
-                  <string>Afternoon</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="teammateWorkEvening">
-                 <property name="text">
-                  <string>Evening</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="teammateWorkingNight">
-                 <property name="text">
-                  <string>Night</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QLabel" name="lblProjectHours_2">
-               <property name="text">
-                <string>How many hours would you prefer your teammates be available per week:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_9">
-               <item>
-                <widget class="QSpinBox" name="spinTeammateTimeOnProject_2"/>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QLabel" name="lblAlgorithmQuestion_2">
-               <property name="text">
-                <string>You prefer a teammate that:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_24">
-               <item>
-                <widget class="QRadioButton" name="radioLeaveIt_2">
-                 <property name="text">
-                  <string>Only does the required work</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">teammateAlgorithmSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioGoogleSearch_2">
-                 <property name="text">
-                  <string>Researches on google to
-improve the work.</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">teammateAlgorithmSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioReadResearchPaper_2">
-                 <property name="text">
-                  <string>Reads a research paper.
-to improve the work.</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">teammateAlgorithmSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioReadBook_2">
-                 <property name="text">
-                  <string>Read a book on 
-the subject to improve
- the work.</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">teammateAlgorithmSelection</string>
-                 </attribute>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </item>
   </layout>
-  <zorder>qualificationTabWidget</zorder>
-  <zorder>btnSave</zorder>
  </widget>
  <tabstops>
-  <tabstop>qualificationTabWidget</tabstop>
   <tabstop>btnSave</tabstop>
-  <tabstop>TeammateWidget</tabstop>
-  <tabstop>radioStronglyAgree_5</tabstop>
-  <tabstop>radioAgree_5</tabstop>
-  <tabstop>radioDisagree_5</tabstop>
-  <tabstop>radioStronglyDisagree_5</tabstop>
-  <tabstop>radioStronglyAgree_6</tabstop>
-  <tabstop>radioAgree_6</tabstop>
-  <tabstop>radioDisagree_6</tabstop>
-  <tabstop>radioStronglyDisagree_6</tabstop>
-  <tabstop>radioStronglyAgree_7</tabstop>
-  <tabstop>radioAgree_7</tabstop>
-  <tabstop>radioDisagree_7</tabstop>
-  <tabstop>radioStronglyDisagree_7</tabstop>
-  <tabstop>radioStronglyAgree_8</tabstop>
-  <tabstop>radioAgree_8</tabstop>
-  <tabstop>radioDisagree_8</tabstop>
-  <tabstop>radioStronglyDisagree_8</tabstop>
-  <tabstop>radio0to5_2</tabstop>
-  <tabstop>radio5to10_2</tabstop>
-  <tabstop>radio10to20_2</tabstop>
-  <tabstop>radio20Plus_2</tabstop>
-  <tabstop>radioFirstDay_2</tabstop>
-  <tabstop>radioBetweenFirstandLast_2</tabstop>
-  <tabstop>radioOnLast_2</tabstop>
-  <tabstop>radioLate_2</tabstop>
-  <tabstop>teammateWorkingMorning</tabstop>
-  <tabstop>teammateWorkingAfternoon</tabstop>
-  <tabstop>teammateWorkEvening</tabstop>
-  <tabstop>teammateWorkingNight</tabstop>
-  <tabstop>radioLeaveIt_2</tabstop>
-  <tabstop>radioGoogleSearch_2</tabstop>
-  <tabstop>radioReadResearchPaper_2</tabstop>
-  <tabstop>radioReadBook_2</tabstop>
-  <tabstop>spinTeammateCGPA</tabstop>
-  <tabstop>sliderTeammateOO</tabstop>
-  <tabstop>sliderTeammateUI</tabstop>
-  <tabstop>sliderTeammateScripting</tabstop>
-  <tabstop>sliderTeammateDB</tabstop>
-  <tabstop>sliderTeammateDesignPatterns</tabstop>
-  <tabstop>sliderTeammateDataStructures</tabstop>
  </tabstops>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="teammateExcellenceSelection"/>
-  <buttongroup name="userWorkHoursSelection"/>
-  <buttongroup name="teammateOutgoingSelection"/>
-  <buttongroup name="userAssignmentSubmissionSelection"/>
-  <buttongroup name="teammateStressSelection"/>
-  <buttongroup name="teammateWorkHoursSelection"/>
-  <buttongroup name="userAlgorithmSelection"/>
-  <buttongroup name="userVisionarySelection"/>
-  <buttongroup name="userStressSelection"/>
+  <buttongroup name="userOutgoingSelection"/>
   <buttongroup name="teammateAlgorithmSelection"/>
   <buttongroup name="teammateVisionarySelection"/>
+  <buttongroup name="userWorkHoursSelection"/>
+  <buttongroup name="teammateStressSelection"/>
+  <buttongroup name="userAlgorithmSelection"/>
+  <buttongroup name="userVisionarySelection"/>
+  <buttongroup name="teammateWorkHoursSelection"/>
   <buttongroup name="teammateAssignmentSubmissionSelection"/>
+  <buttongroup name="teammateOutgoingSelection"/>
   <buttongroup name="userExcellenceSelection"/>
-  <buttongroup name="userOutgoingSelection"/>
+  <buttongroup name="teammateExcellenceSelection"/>
+  <buttongroup name="userStressSelection"/>
+  <buttongroup name="userAssignmentSubmissionSelection"/>
  </buttongroups>
 </ui>

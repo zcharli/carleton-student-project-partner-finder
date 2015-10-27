@@ -16,13 +16,15 @@ SOURCES += main.cpp\
     cupidwindow.cpp \
     loginform.cpp \
     sidebarwidget.cpp \
-    profilewidget.cpp
+    profilewidget.cpp \
+    cupidslider.cpp
 
 HEADERS  += \
     cupidwindow.h \
     loginform.h \
     sidebarwidget.h \
-    profilewidget.h
+    profilewidget.h \
+    cupidslider.h
 
 
 FORMS    += \
