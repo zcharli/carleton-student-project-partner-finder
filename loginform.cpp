@@ -32,7 +32,6 @@ LoginForm::~LoginForm()
 
 void LoginForm::slotAdministratorUserLogin()
 {
-
     QString username = ui->txtLogin->text();
     if(username.compare(QString(DEBUG_USER)) == 0)
     {
