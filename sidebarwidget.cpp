@@ -1,5 +1,4 @@
 #include "sidebarwidget.h"
-#include "ui_sidebarwidget.h"
 
 SideBarWidget::SideBarWidget(QWidget *parent) :
     QWidget(parent),
@@ -22,10 +21,11 @@ void SideBarWidget::viewWillAppear()
 
 }
 
-void SideBarWidget::setUsername(const QString strUsername)
+Ui::SideBarWidget* SideBarWidget::getUI()
 {
-    ui->lblUsername->setText(strUsername);
+    return ui;
 }
+
 
 void SideBarWidget::on_btnProfile_clicked()
 {

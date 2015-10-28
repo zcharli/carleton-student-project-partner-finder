@@ -7,7 +7,7 @@ class User
 {
 public:
   User(QString&, QString&, QString&, int);
-  ~User();
+  virtual ~User();
 
   //accessor Functions
   //getters

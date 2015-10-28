@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
     cuPIDWindow cuPIDWindow;
 
     //connect login dialog with main cuPID window
-    QObject::connect(&cuPIDLoginForm, SIGNAL(loginAccepted(QString&)),
-                     &cuPIDWindow, SLOT(acceptUserLogin(QString&)));
+    QObject::connect(&cuPIDLoginForm, SIGNAL(loginAccepted(User*)),
+                     &cuPIDWindow, SLOT(acceptUserLogin(User*)));
 
     cuPIDLoginForm.show();
 

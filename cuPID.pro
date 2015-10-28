@@ -17,8 +17,7 @@ SOURCES += main.cpp\
     loginform.cpp \
     sidebarwidget.cpp \
     profilewidget.cpp \
-    cupidslider.cpp
-
+    cupidslider.cpp \
     Models/user.cpp \
     Models/studentuser.cpp \
     Models/administratoruser.cpp \

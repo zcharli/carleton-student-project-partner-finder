@@ -17,7 +17,7 @@ class StudentUser : public User
 
 public:
     StudentUser(QString&, QString&, QString&, int);
-    ~StudentUser();
+    virtual ~StudentUser();
 
     //accessor functions
     /*!
