@@ -17,6 +17,8 @@ SOURCES += main.cpp\
     loginform.cpp \
     sidebarwidget.cpp \
     profilewidget.cpp \
+    cupidslider.cpp
+
     Models/user.cpp \
     Models/studentuser.cpp \
     Models/administratoruser.cpp \
@@ -30,6 +32,7 @@ HEADERS  += \
     loginform.h \
     sidebarwidget.h \
     profilewidget.h \
+    cupidslider.h \
     Models/user.h \
     Models/studentuser.h \
     Models/administratoruser.h \

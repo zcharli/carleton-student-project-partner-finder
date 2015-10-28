@@ -2,6 +2,7 @@
 #define PROFILEWIDGET_H
 
 #include <QWidget>
+#include "cupidslider.h"
 
 namespace Ui {
 class ProfileWidget;
