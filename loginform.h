@@ -44,6 +44,14 @@ private:
     void viewWillAppear();
 
     /*!
+     *       @param: none
+     *        @desc: all clean up that needs to be done before
+     *               this view dissapears from the screen
+     *      @return: void
+     */
+    void viewWillDisappear();
+
+    /*!
      *  @param: usernameToValidate: QString&
      *  @desc: gets the currentUser with the given username
      *  @return: currentUser: User* (null if validation failed)
@@ -73,6 +81,14 @@ public slots:
      * @return: void
     */
     void slotStudentUserLogin();
+
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted from an
+     *          successful user logout
+     * @return: void
+    */
+    void promptUserLogin();
 };
 
 #endif // LOGINFORM_H

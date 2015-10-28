@@ -31,3 +31,13 @@ void SideBarWidget::on_btnProfile_clicked()
 {
     emit profileClicked();
 }
+
+void SideBarWidget::on_btnSettings_clicked()
+{
+    emit settingsClicked();
+}
+
+void SideBarWidget::on_btnLogOut_clicked()
+{
+    emit logOutClicked();
+}

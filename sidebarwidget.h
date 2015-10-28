@@ -25,15 +25,30 @@ public:
 
 signals:
     /*!
-     *  @param: username: QString (output)
-     *   @desc: A signal emitted when the login is performed.
-     *          username the username entered in the dialog
+     *  @param: void
+     *   @desc: A signal emitted when the profile button is clicked
      * @return: void
     */
     void profileClicked();
 
+    /*!
+     *  @param: void
+     *   @desc: A signal emitted when the logout button is clicked
+     * @return: void
+    */
+    void logOutClicked();
+
+    /*!
+     *  @param: void
+     *   @desc: A signal emitted when the settings button is clicked
+     * @return: void
+    */
+    void settingsClicked();
+
 public slots:
     void on_btnProfile_clicked();
+    void on_btnLogOut_clicked();
+    void on_btnSettings_clicked();
 
 private:
     Ui::SideBarWidget *ui;
