@@ -19,6 +19,8 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 
     //adds all the main content to the main widget
     ui->mainContentStackedWidget->layout()->addWidget(&profileWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&projectWidget);
+    ui->mainContentStackedWidget->setCurrentWidget(&projectWidget);
     //connects the profile button to the generateProfile page method
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
                      this, SLOT(generateProfilePage()));

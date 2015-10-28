@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     Models/projectpartnerprofile.cpp \
     Models/qualification.cpp \
     Models/project.cpp \
-    Models/configuration.cpp
+    Models/configuration.cpp \
+    projectlistwidget.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -38,7 +39,8 @@ HEADERS  += \
     Models/projectpartnerprofile.h \
     Models/qualification.h \
     Models/project.h \
-    Models/configuration.h
+    Models/configuration.h \
+    projectlistwidget.h
 
 
 FORMS    += \
