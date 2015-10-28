@@ -29,6 +29,12 @@ void LoginForm::viewWillAppear()
     ui->progBarLogin->setValue(PROG_BAR_DEFAULT_VALUE);
 }
 
+void LoginForm::viewWillDisappear()
+{
+    ui->eLabel->setText("");
+    ui->txtLogin->setText("");
+}
+
 
 LoginForm::~LoginForm()
 {
@@ -86,6 +92,7 @@ void LoginForm::slotAdministratorUserLogin()
     if (currentUser != NULL)
     {
         emit loginAccepted(currentUser);
+        viewWillDisappear();
         close();
     }
     else
@@ -110,8 +117,16 @@ void LoginForm::slotStudentUserLogin()
     if (currentUser != NULL)
     {
         emit loginAccepted(currentUser);
+        viewWillDisappear();
         close();
     }
     else
         presentError(QString(INVALID_USERNAME_MESSAGE));
+}
+
+
+void LoginForm::promptUserLogin()
+{
+    viewWillAppear();
+    show();
 }
