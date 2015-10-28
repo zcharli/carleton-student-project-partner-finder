@@ -2,6 +2,7 @@
 #define SIDEBARWIDGET_H
 
 #include <QWidget>
+#include "ui_sidebarwidget.h"  //Side effect of creating a getter to the ui element of the class, but this makes things easier
 
 namespace Ui {
 class SideBarWidget;
@@ -14,7 +15,13 @@ class SideBarWidget : public QWidget
 public:
     explicit SideBarWidget(QWidget *parent = 0);
     ~SideBarWidget();
-    void setUsername(const QString strUsername);
+
+    /*!
+     *  @param: none
+     *   @desc: returns the ui elements of the sideBarWidget
+     * @return: ui: Ui::SideBarWidget*
+    */
+    Ui::SideBarWidget* getUI();
 
 signals:
     /*!

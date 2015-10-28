@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "sidebarwidget.h"
 #include "profilewidget.h"
+#include "Models/user.h"
 
 namespace Ui {
 class cuPIDWindow;
@@ -26,7 +27,7 @@ private:
     /*
      * reference current user of the cuPID system
      */
-    QString *currentUser;
+    User *currentUser;
 
     /*!
      *       @param: none
@@ -38,12 +39,12 @@ private:
 
 public slots:
     /*!
-     *  @param: user: QString (input);
+     *  @param: user: User* (input);
      *   @desc: A slot to accept the signal emitted after a
      *          successful User login from the login diaglog
      * @return: void
     */
-    void acceptUserLogin(QString& user);
+    void acceptUserLogin(User* user);
     /*!
      *  @param: none
      *   @desc: A slot to accept the signal emitted after the

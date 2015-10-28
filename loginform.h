@@ -3,9 +3,17 @@
 
 #include <QWidget>
 
+//  forward declarations
+class User;
+
 namespace Ui {
 class LoginForm;
 }
+
+enum UserType {
+    Administrator = 0,
+    Student = 1
+};
 
 class LoginForm : public QWidget
 {
@@ -17,12 +25,12 @@ public:
 
 signals:
     /*!
-     *  @param: username: QString (output)
+     *  @param: username: User& (output)
      *   @desc: A signal emitted when the login is performed.
      *          username the username entered in the dialog
      * @return: void
     */
-    void loginAccepted(QString& username);
+    void loginAccepted(User *currentUser);
 
 private:
     Ui::LoginForm *ui;
@@ -34,6 +42,20 @@ private:
      *      @return: void
      */
     void viewWillAppear();
+
+    /*!
+     *  @param: usernameToValidate: QString&
+     *  @desc: gets the currentUser with the given username
+     *  @return: currentUser: User* (null if validation failed)
+     */
+    void getCurrentUserWithUserName(QString& username, UserType type, User **currentUser);
+
+    /*!
+     *       @param: errorStringToPresent: QString
+     *        @desc: presents a string of error text to the user
+     *      @return: void
+     */
+    void presentError(QString errorString);
 
 public slots:
     /*!

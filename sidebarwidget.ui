@@ -98,37 +98,44 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="btnDiscoverProject">
        <property name="text">
         <string>Discover Project</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="Line" name="line_5">
+      <widget class="Line" name="dividerDiscoverProject">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_5">
+      <widget class="QPushButton" name="btnCreateProject">
        <property name="text">
         <string>Create Project</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="Line" name="line_4">
+      <widget class="Line" name="dividerCreateProject">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="btnMyProjects">
        <property name="text">
-        <string>My Project</string>
+        <string>My Projects</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="dividerMyProjects">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>

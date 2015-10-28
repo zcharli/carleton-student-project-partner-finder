@@ -13,7 +13,7 @@ class AdministratorUser : public User
 
 public:
     AdministratorUser(QString&, QString&, QString&, int);
-    ~AdministratorUser();
+    virtual ~AdministratorUser();
 
     //accessor functions
     /*!
