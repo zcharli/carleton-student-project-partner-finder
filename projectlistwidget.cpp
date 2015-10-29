@@ -66,7 +66,7 @@ void ProjectListWidget::displayList()
         title[i] = new QLabel(projectList[i]->getTitle());
         title[i]->setFont(QFont("",20));
 
-        numPPPs[i] = new QLabel(QString::number(projectList[i]->getNumPPPs())+" Students Registered");
+        numPPPs[i] = new QLabel(QString::number(projectList[i]->getNumberOfRegisteredUsers())+" Students Registered");
         numPPPs[i]->setAlignment(Qt::AlignRight);
 
         desc[i] = new QLabel(projectList[i]->getDescription());
