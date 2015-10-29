@@ -507,20 +507,4 @@ the subject.</string>
  </tabstops>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="userOutgoingSelection"/>
-  <buttongroup name="teammateAlgorithmSelection"/>
-  <buttongroup name="teammateVisionarySelection"/>
-  <buttongroup name="userWorkHoursSelection"/>
-  <buttongroup name="teammateStressSelection"/>
-  <buttongroup name="userAlgorithmSelection"/>
-  <buttongroup name="userVisionarySelection"/>
-  <buttongroup name="teammateWorkHoursSelection"/>
-  <buttongroup name="teammateAssignmentSubmissionSelection"/>
-  <buttongroup name="teammateOutgoingSelection"/>
-  <buttongroup name="userExcellenceSelection"/>
-  <buttongroup name="teammateExcellenceSelection"/>
-  <buttongroup name="userStressSelection"/>
-  <buttongroup name="userAssignmentSubmissionSelection"/>
- </buttongroups>
 </ui>

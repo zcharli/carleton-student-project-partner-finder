@@ -28,7 +28,9 @@ SOURCES += main.cpp\
     settingswidget.cpp \
     Repository/projectrepository.cpp \
     Repository/userrepository.cpp \
-    Repository/databasemanager.cpp
+    Repository/databasemanager.cpp \
+    projectdetails.cpp \
+    Models/cupidsession.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -47,7 +49,9 @@ HEADERS  += \
     Repository/irepository.h \
     Repository/projectrepository.h \
     Repository/userrepository.h \
-    Repository/databasemanager.h
+    Repository/databasemanager.h \
+    projectdetails.h \
+    Models/cupidsession.h
 
 
 FORMS    += \
@@ -55,7 +59,8 @@ FORMS    += \
     loginform.ui \
     sidebarwidget.ui \
     profilewidget.ui \
-    settingswidget.ui
+    settingswidget.ui \
+    projectdetails.ui
 
 RESOURCES += \
     Resources.qrc

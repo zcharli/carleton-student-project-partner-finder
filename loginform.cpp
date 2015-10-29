@@ -3,7 +3,8 @@
 #include "ui_loginform.h"
 #include "Models/administratoruser.h"
 #include "Models/studentuser.h"
-#include "Repository/databasemanager.h"
+#include "Models/cupidsession.h"
+
 #define PROG_BAR_DEFAULT_VALUE 0
 
 #define DEBUG_USER "Leonidas"
@@ -18,7 +19,7 @@ LoginForm::LoginForm(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->btnAdministrator, &QPushButton::clicked, this, &LoginForm::slotAdministratorUserLogin);
     connect(ui->btnStudent, &QPushButton::clicked, this, &LoginForm::slotStudentUserLogin);
-    DatabaseManager db;
+
     viewWillAppear();
 }
 
@@ -63,11 +64,16 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
         case Administrator:
             (*currentUser) = new AdministratorUser(firstname, lastname, username, id);
             break;
-    case Student:
+        case Student:
             (*currentUser) = new StudentUser(firstname, lastname, username, id);
             break;
 
     }
+
+    // Add the current user to the session
+    CupidSession *session;
+    session = CupidSession::getInstance();
+    session->currentUser = *currentUser;
 }
 
 void LoginForm::presentError(QString errorString)
