@@ -28,10 +28,6 @@ private:
     ProfileWidget profileWidget;
     ProjectListWidget projectWidget;
     SettingsWidget settingsWidget;
-    /*
-     * reference current user of the cuPID system
-     */
-    User *currentUser;
 
     /*!
      *       @param: none
@@ -59,12 +55,12 @@ signals:
 
 public slots:
     /*!
-     *  @param: user: User* (input);
+     *  @param: none
      *   @desc: A slot to accept the signal emitted after a
      *          successful User login from the login diaglog
      * @return: void
     */
-    void acceptUserLogin(User* user);
+    void acceptUserLogin();
 
     /*!
      *  @param: none

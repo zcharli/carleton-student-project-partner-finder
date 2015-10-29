@@ -59,8 +59,8 @@ void cuPIDWindow::viewWillAppear()
 
 void cuPIDWindow::viewWillDisappear()
 {
-    delete currentUser;
-
+    CupidSession::getInstance()->deleteCurrentUser();
+    
     //show all hidden elements
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
     sideBarUi->btnDiscoverProject->show();
@@ -73,10 +73,9 @@ void cuPIDWindow::viewWillDisappear()
     //TODO: restore user back to home screen.
 }
 
-void cuPIDWindow::acceptUserLogin(User *user)
+void cuPIDWindow::acceptUserLogin()
 {
     show();
-    currentUser = user;
     viewWillAppear();
 }
 
@@ -84,7 +83,6 @@ void cuPIDWindow::logCurrentUserOut()
 {
     viewWillDisappear();
     hide();
-    CupidSession::getInstance()->deleteCurrentUser();
     emit userLoggedOut();
 }
 

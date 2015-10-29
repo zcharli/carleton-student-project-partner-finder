@@ -25,12 +25,12 @@ public:
 
 signals:
     /*!
-     *  @param: username: User& (output)
+     *  @param: clear
      *   @desc: A signal emitted when the login is performed.
      *          username the username entered in the dialog
      * @return: void
     */
-    void loginAccepted(User *currentUser);
+    void loginAccepted();
 
 private:
     Ui::LoginForm *ui;

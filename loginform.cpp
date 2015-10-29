@@ -94,7 +94,7 @@ void LoginForm::slotAdministratorUserLogin()
     getCurrentUserWithUserName(username, Administrator, &currentUser);
     if (currentUser != NULL)
     {
-        emit loginAccepted(currentUser);
+        emit loginAccepted();
         viewWillDisappear();
         close();
     }
@@ -119,7 +119,7 @@ void LoginForm::slotStudentUserLogin()
 
     if (currentUser != NULL)
     {
-        emit loginAccepted(currentUser);
+        emit loginAccepted();
         viewWillDisappear();
         close();
     }
