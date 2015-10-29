@@ -45,7 +45,6 @@ HEADERS  += \
     Models/project.h \
     Models/configuration.h \
     settingswidget.h \
-    Repository/irepository.h \
     Repository/projectrepository.h \
     Repository/userrepository.h \
     Repository/storage.h \

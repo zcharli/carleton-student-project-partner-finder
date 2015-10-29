@@ -22,12 +22,7 @@ DatabaseManager::DatabaseManager()
 
 DatabaseManager::~DatabaseManager() {}
 
-bool DatabaseManager::isDbOpen()
-{
-    return db.isOpen();
-}
-
-QSqlDatabase DatabaseManager::getDB()
+QSqlDatabase& DatabaseManager::getDB()
 {
     return db;
 }
