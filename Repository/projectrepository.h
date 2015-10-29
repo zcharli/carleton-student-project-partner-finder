@@ -2,76 +2,75 @@
 #define PROJECTREPOSITORY_H
 
 #include <QVector>
-#include "irepository.h"
+#include <QtSql/QSqlDatabase>
 
+class User;
 class Project;
 
-class ProjectRepository : public IRepository<Project>
+class ProjectRepository
 {
 public:
-    ProjectRepository();
-    virtual ~ProjectRepository();
+    ProjectRepository(QSqlDatabase &db);
+    ~ProjectRepository();
 
     /*!
-     *       @param: objectToSave: Project&
-     *        @desc: saves the type Project to database,
-     *               when Project.id is 0 or null:
-     *                   insert -> returns ID of the new row
-     *                   else update
-     *      @return: saveSuccessful: int
+     *       @param: user: User&, projects: Project&
+     *        @desc: handles the database actions necessary for when the user has created a project
+     *      @return: success or failure: bool
      */
-    virtual unsigned int save(const Project&);
+    int userCreatedProject(User &user, Project &project);
 
     /*!
-     *       @param: idToDelete: int
-     *        @desc: deletes the type Project to database
-     *      @return: success or failure: int
+     *       @param: user: User&, projects: Project&
+     *        @desc: handles the database actions necessary for fetching the Projects for the user
+     *      @return: success or failure: bool
      */
-    virtual unsigned int deleteFromRepo(const int);
+    int fetchProjectForUser(User &user, Project &project);
 
     /*!
-     *       @param: idToFetch: int
-     *        @desc: fetchs the type Project to database
-     *      @return: entityObject: TEntity&
+     *       @param: user: User&, projects: Project&
+     *        @desc: handles the database actions necessary for when the user updates a project
+     *      @return: success or failure: bool
      */
-    virtual Project& fetchById(const int);
+    int userUpdatedProject(User &user, Project &project);
 
     /*!
-     *       @param: idToFetch (optional): int
-     *        @desc: fetchs all type Project to database
-     *      @return: entityObject: QVector<Project*>&
+     *       @param: user: User&, projects: Project&
+     *        @desc: handles the database actions necessary for fetching all projects
+     *      @return: success or failure: bool
      */
-    virtual QVector<Project*>& fetchAll(const int=0);
+    int fetchAllProjects(User &user, QVector<Project *>& projects);
 
     /*!
-     *       @param: idToRegister, idOfProject: int. int
-     *        @desc: registers the user id to project
-     *      @return: success or failure error code: int
+     *       @param: user: User&, projects: Project&
+     *        @desc: handles the database actions necessary for fetching projects for the user
+     *      @return: success or failure: bool
      */
-    unsigned int registerPPPToProject(const int,const int);
+    int fetchProjectsForUser(User &user, QVector<Project *>& projects);
 
     /*!
-     *       @param: idToUnRegister, idOfProject: int. int
-     *        @desc: unregisteres the user id to project
-     *      @return: success or failure error code: int
+     *       @param: user: User&, projects: Project&
+     *        @desc: handles the database actions necessary for when the user registers in a project
+     *      @return: success or failure: bool
      */
-    unsigned int unRegisterPPPFromProject(const int, const int);
+    int userRegisteredInProject(User &user, Project &project);
 
-// It is possible we don't be needing this
-//    /*!
-//     *       @param: none
-//     *        @desc: get the configurations set by the AdministratorUser on the project
-//     *      @return: configurations: QVector<Configuration*>*
-//     *        @note: this repository class fetchs pointers and should be coverted to
-//     *               references when passed to the project class (getProjectConfigurations)
-//     *               in project.h
-//     */
-//    QVector<Configuration*>* fetchProjectConfigurations();
+    /*!
+     *       @param: user: User&, projects: Project&
+     *        @desc: handles the database actions necessary for when the user unregisters from a project
+     *      @return: success or failure: bool
+     */
+    int userUnregisteredFromProject(User &user, Project &project);
 
-
+    /*!
+     *       @param: user: User&, projects: Project&
+     *        @desc: handles the database actions necessary for fetching the PPPs for a particular project
+     *      @return: success or failure: bool
+     */
+    int fetchPPPsForProject(User &user, Project &project);
 
 private:
-    //const ProjectConfigurationRepository& configurationRepo; // May not need this
+    QSqlDatabase db;
 };
 
 #endif // PROJECTREPOSITORY_H

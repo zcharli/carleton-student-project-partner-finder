@@ -20,6 +20,8 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 
     //adds all the main content to the main widget
     ui->mainContentStackedWidget->layout()->addWidget(&profileWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&projectWidget);
+    ui->mainContentStackedWidget->setCurrentWidget(&projectWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
 
     //connects the profile button to the generateProfile page method
@@ -101,4 +103,3 @@ cuPIDWindow::~cuPIDWindow()
 {
     delete ui;
 }
-

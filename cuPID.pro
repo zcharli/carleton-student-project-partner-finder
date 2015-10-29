@@ -25,6 +25,7 @@ SOURCES += main.cpp\
     Models/qualification.cpp \
     Models/project.cpp \
     Models/configuration.cpp \
+    projectlistwidget.cpp \
     settingswidget.cpp \
     Repository/projectrepository.cpp \
     Repository/userrepository.cpp \
@@ -46,8 +47,8 @@ HEADERS  += \
     Models/qualification.h \
     Models/project.h \
     Models/configuration.h \
+    projectlistwidget.h \
     settingswidget.h \
-    Repository/irepository.h \
     Repository/projectrepository.h \
     Repository/userrepository.h \
     Repository/databasemanager.h \
@@ -60,8 +61,9 @@ FORMS    += \
     loginform.ui \
     sidebarwidget.ui \
     profilewidget.ui \
-    settingswidget.ui \
-    projectdetails.ui
+    projectdetails.ui \
+    profilewidget.ui \
+    settingswidget.ui
 
 RESOURCES += \
     Resources.qrc

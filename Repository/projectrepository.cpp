@@ -1,42 +1,59 @@
 #include "projectrepository.h"
 #include "Models/project.h"
+#include "Models/user.h"
 
-ProjectRepository::ProjectRepository()
-{}
+ProjectRepository::ProjectRepository(QSqlDatabase& db)
+{
+    this->db = db;
+}
 
 ProjectRepository::~ProjectRepository()
 {}
 
-unsigned int ProjectRepository::save(const Project& projectObj)
+int ProjectRepository::userCreatedProject(User &user, Project &project)
 {
+    //TODO:
     return 0;
 }
 
-unsigned int ProjectRepository::deleteFromRepo(const int idToDelete)
+int ProjectRepository::fetchProjectForUser(User &user, Project &project)
 {
+    //TODO:
     return 0;
 }
 
-Project& ProjectRepository::fetchById(const int idToFetch)
+int ProjectRepository::userUpdatedProject(User &user, Project &project)
 {
-    QString i = "";
-    QString b = "";
-    Project placeholder(i,b);
-    return placeholder;
-}
-
-QVector<Project*>& ProjectRepository::fetchAll(const int idToFetch)
-{
-    QVector<Project*> placeholder;
-    return placeholder;
-}
-
-unsigned int ProjectRepository::registerPPPToProject(const int userId, const int projectID)
-{
+    //TODO:
     return 0;
 }
 
-unsigned int ProjectRepository::unRegisterPPPFromProject(const int userId, const int projectID)
+int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects)
 {
+    //TODO:
+    return 0;
+}
+
+int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& projects)
+{
+    //TODO:
+    return 0;
+}
+
+int ProjectRepository::userRegisteredInProject(User &user, Project &project)
+{
+    //TODO:
+    return 0;
+}
+
+int ProjectRepository::userUnregisteredFromProject(User &user, Project &project)
+{
+    //TODO:
+    return 0;
+}
+
+int ProjectRepository::fetchPPPsForProject(User &user, Project &project)
+{
+    //TODO:
     return 0;
 }

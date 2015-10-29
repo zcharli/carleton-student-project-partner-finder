@@ -6,6 +6,7 @@
 #include "profilewidget.h"
 #include "settingswidget.h"
 #include "Models/user.h"
+#include "projectlistwidget.h"
 
 namespace Ui {
 class cuPIDWindow;
@@ -25,6 +26,7 @@ private:
 
     SideBarWidget projectSidebar;
     ProfileWidget profileWidget;
+    ProjectListWidget projectWidget;
     SettingsWidget settingsWidget;
     /*
      * reference current user of the cuPID system
