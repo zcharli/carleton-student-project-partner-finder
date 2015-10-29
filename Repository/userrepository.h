@@ -2,6 +2,7 @@
 #define USERREPOSITORY_H
 
 #include <QVector>
+#include <QtSql/QSqlDatabase>
 #include "irepository.h"
 
 class User;
@@ -50,6 +51,9 @@ public:
      *        @note: checks if username is associated with admin/student user
      */
     bool validateLogin(const QString&);
+
+private:
+    QSqlDatabase db;
 
 };
 

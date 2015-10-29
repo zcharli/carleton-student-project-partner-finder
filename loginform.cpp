@@ -3,7 +3,7 @@
 #include "ui_loginform.h"
 #include "Models/administratoruser.h"
 #include "Models/studentuser.h"
-
+#include "Repository/databasemanager.h"
 #define PROG_BAR_DEFAULT_VALUE 0
 
 #define DEBUG_USER "Leonidas"
@@ -18,7 +18,7 @@ LoginForm::LoginForm(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->btnAdministrator, &QPushButton::clicked, this, &LoginForm::slotAdministratorUserLogin);
     connect(ui->btnStudent, &QPushButton::clicked, this, &LoginForm::slotStudentUserLogin);
-
+    DatabaseManager db;
     viewWillAppear();
 }
 
