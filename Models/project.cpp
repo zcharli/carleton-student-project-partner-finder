@@ -35,6 +35,16 @@ void Project::unRegisterPPP(ProjectPartnerProfile* profile)
     }
 }
 
+int Project::getNumberOfRegisteredUsers()
+{
+    return numberOfRegisteredUsers;
+}
+
+void Project::setNumberOfRegisteredUsers(int newNum)
+{
+    numberOfRegisteredUsers = newNum;
+}
+
 bool Project::isPPPRegistered(ProjectPartnerProfile* profile)
 {
     return registeredPPPs.contains(profile);

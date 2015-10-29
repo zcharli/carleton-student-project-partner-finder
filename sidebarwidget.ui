@@ -216,7 +216,7 @@ border-bottom: 1px solid black;
       </widget>
      </item>
      <item>
-      <widget class="Line" name="line_3">
+      <widget class="Line" name="dividerProfile">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -230,16 +230,16 @@ border-bottom: 1px solid black;
       </widget>
      </item>
      <item>
-      <widget class="Line" name="line_2">
+      <widget class="Line" name="dividerSettings">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnQuit">
+      <widget class="QPushButton" name="btnLogOut">
        <property name="text">
-        <string>Quit</string>
+        <string>Log Out</string>
        </property>
       </widget>
      </item>

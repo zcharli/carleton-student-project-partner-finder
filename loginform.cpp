@@ -3,7 +3,7 @@
 #include "ui_loginform.h"
 #include "Models/administratoruser.h"
 #include "Models/studentuser.h"
-
+#include "Repository/databasemanager.h"
 #define PROG_BAR_DEFAULT_VALUE 0
 
 #define DEBUG_USER "Leonidas"
@@ -18,7 +18,7 @@ LoginForm::LoginForm(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->btnAdministrator, &QPushButton::clicked, this, &LoginForm::slotAdministratorUserLogin);
     connect(ui->btnStudent, &QPushButton::clicked, this, &LoginForm::slotStudentUserLogin);
-
+    DatabaseManager db;
     viewWillAppear();
 }
 
@@ -27,6 +27,12 @@ void LoginForm::viewWillAppear()
     ui->progBarLogin->hide();
     ui->eLabel->hide();
     ui->progBarLogin->setValue(PROG_BAR_DEFAULT_VALUE);
+}
+
+void LoginForm::viewWillDisappear()
+{
+    ui->eLabel->setText("");
+    ui->txtLogin->setText("");
 }
 
 
@@ -86,6 +92,7 @@ void LoginForm::slotAdministratorUserLogin()
     if (currentUser != NULL)
     {
         emit loginAccepted(currentUser);
+        viewWillDisappear();
         close();
     }
     else
@@ -110,8 +117,16 @@ void LoginForm::slotStudentUserLogin()
     if (currentUser != NULL)
     {
         emit loginAccepted(currentUser);
+        viewWillDisappear();
         close();
     }
     else
         presentError(QString(INVALID_USERNAME_MESSAGE));
+}
+
+
+void LoginForm::promptUserLogin()
+{
+    viewWillAppear();
+    show();
 }

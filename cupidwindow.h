@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "sidebarwidget.h"
 #include "profilewidget.h"
+#include "settingswidget.h"
 #include "Models/user.h"
 #include "projectlistwidget.h"
 
@@ -26,6 +27,7 @@ private:
     SideBarWidget projectSidebar;
     ProfileWidget profileWidget;
     ProjectListWidget projectWidget;
+    SettingsWidget settingsWidget;
     /*
      * reference current user of the cuPID system
      */
@@ -39,6 +41,22 @@ private:
      */
     void viewWillAppear();
 
+    /*!
+     *       @param: none
+     *        @desc: all cleanup that needs to be done before
+     *               this view leaves the screen
+     *      @return: void
+     */
+    void viewWillDisappear();
+
+signals:
+    /*!
+     *  @param: none
+     *   @desc: A signal emitted when the current User has been logged out
+     *  @return: void
+    */
+    void userLoggedOut();
+
 public slots:
     /*!
      *  @param: user: User* (input);
@@ -47,6 +65,7 @@ public slots:
      * @return: void
     */
     void acceptUserLogin(User* user);
+
     /*!
      *  @param: none
      *   @desc: A slot to accept the signal emitted after the
@@ -54,6 +73,22 @@ public slots:
      * @return: void
     */
     void generateProfilePage();
+
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted after the
+     *          settings button is clicked
+     * @return: void
+    */
+    void generateSettingsPage();
+
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted after the
+     *          logout button is clicked
+     * @return: void
+    */
+    void logCurrentUserOut();
 };
 
 #endif // CUPIDWINDOW_H

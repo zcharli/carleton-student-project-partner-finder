@@ -12,6 +12,8 @@ int main(int argc, char *argv[])
     //connect login dialog with main cuPID window
     QObject::connect(&cuPIDLoginForm, SIGNAL(loginAccepted(User*)),
                      &cuPIDWindow, SLOT(acceptUserLogin(User*)));
+    QObject::connect(&cuPIDWindow, SIGNAL(userLoggedOut()),
+                     &cuPIDLoginForm, SLOT(promptUserLogin()));
 
     cuPIDLoginForm.show();
 

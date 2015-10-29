@@ -21,10 +21,15 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&profileWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&projectWidget);
     ui->mainContentStackedWidget->setCurrentWidget(&projectWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
+
     //connects the profile button to the generateProfile page method
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
                      this, SLOT(generateProfilePage()));
-
+    QObject::connect(&projectSidebar, SIGNAL(logOutClicked()),
+                     this, SLOT(logCurrentUserOut()));
+    QObject::connect(&projectSidebar, SIGNAL(settingsClicked()),
+                     this, SLOT(generateSettingsPage()));
 }
 
 void cuPIDWindow::viewWillAppear()
@@ -41,12 +46,30 @@ void cuPIDWindow::viewWillAppear()
     {
         sideBarUi->btnDiscoverProject->hide();
         sideBarUi->dividerDiscoverProject->hide();
+        sideBarUi->btnProfile->hide();
+        sideBarUi->dividerProfile->hide();
     }
     else if (dynamic_cast<StudentUser *>(currentUser))
     {
         sideBarUi->btnCreateProject->hide();
         sideBarUi->dividerCreateProject->hide();
     }
+}
+
+void cuPIDWindow::viewWillDisappear()
+{
+    delete currentUser;
+
+    //show all hidden elements
+    Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
+    sideBarUi->btnDiscoverProject->show();
+    sideBarUi->dividerDiscoverProject->show();
+    sideBarUi->btnProfile->show();
+    sideBarUi->dividerProfile->show();
+    sideBarUi->btnCreateProject->show();
+    sideBarUi->dividerCreateProject->show();
+
+    //TODO: restore user back to home screen.
 }
 
 void cuPIDWindow::acceptUserLogin(User *user)
@@ -56,13 +79,25 @@ void cuPIDWindow::acceptUserLogin(User *user)
     viewWillAppear();
 }
 
+void cuPIDWindow::logCurrentUserOut()
+{
+    viewWillDisappear();
+    hide();
+    emit userLoggedOut();
+}
+
 void cuPIDWindow::generateProfilePage()
 {
     //sets the current widget of maincontentStackedWidget to the profile widget
     ui->mainContentStackedWidget->setCurrentWidget(&profileWidget);
 }
+
+void cuPIDWindow::generateSettingsPage()
+{
+    ui->mainContentStackedWidget->setCurrentWidget(&settingsWidget);
+}
+
 cuPIDWindow::~cuPIDWindow()
 {
     delete ui;
 }
-
