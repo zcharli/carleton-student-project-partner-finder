@@ -6,12 +6,13 @@
 #include "irepository.h"
 
 class User;
+class ProjectPartnerProfile;
 
 class UserRepository : public IRepository<User>
 {
 public:
     UserRepository();
-    ~UserRepository();
+    virtual ~UserRepository();
 
     /*!
      *       @param: objectToSave: User&
@@ -51,6 +52,34 @@ public:
      *        @note: checks if username is associated with admin/student user
      */
     bool validateLogin(const QString&);
+
+    /*!
+     *       @param: user: User&, ppp: ProjectPartnerProfile&
+     *        @desc: handles the database actions necessary when a user creates a ppp
+     *      @return: success or failure: bool
+     */
+    int userCreatedPPP(User&, ProjectPartnerProfile&);
+
+    /*!
+     *       @param: user: User&, ppp: ProjectPartnerProfile&
+     *        @desc: handles the database actions necessary for retrieving the PPP for a User
+     *      @return: success or failure: bool
+     */
+    int fetchPPPForUser(User&, ProjectPartnerProfile&);
+
+    /*!
+     *       @param: user: User&, ppp: ProjectPartnerProfile&
+     *        @desc: handles the database actions necessary for when a user updates his/her ppp
+     *      @return: success or failure: bool
+     */
+    int userUpdatedPPP(User&, ProjectPartnerProfile&);
+
+    /*!
+     *       @param: user: User&, ppp: ProjectPartnerProfile&
+     *        @desc: handles the database actions necessary for when the user has deleted his/her ppp
+     *      @return: success or failure: bool
+     */
+    int userDeletedPPP(User&, ProjectPartnerProfile&);
 
 private:
     QSqlDatabase db;

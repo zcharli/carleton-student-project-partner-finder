@@ -15,7 +15,12 @@ StudentUser::~StudentUser()
 
 int StudentUser::getNumberOfProjectsRegistered()
 {
-    return registeredProjects.size();
+    return numProjectsRegistered;
+}
+
+void StudentUser::setNumberOfProjectsRegistered(int newNum)
+{
+    numProjectsRegistered = newNum;
 }
 
 void StudentUser::addProjectToRegisteredProjects(Project* project)

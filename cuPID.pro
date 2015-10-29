@@ -28,6 +28,7 @@ SOURCES += main.cpp\
     settingswidget.cpp \
     Repository/projectrepository.cpp \
     Repository/userrepository.cpp \
+    Repository/storage.cpp \
     Repository/databasemanager.cpp
 
 HEADERS  += \
@@ -47,6 +48,7 @@ HEADERS  += \
     Repository/irepository.h \
     Repository/projectrepository.h \
     Repository/userrepository.h \
+    Repository/storage.h \
     Repository/databasemanager.h
 
 
