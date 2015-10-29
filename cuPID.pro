@@ -25,7 +25,9 @@ SOURCES += main.cpp\
     Models/qualification.cpp \
     Models/project.cpp \
     Models/configuration.cpp \
-    settingswidget.cpp
+    settingswidget.cpp \
+    Repository/projectrepository.cpp \
+    Repository/userrepository.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -40,7 +42,10 @@ HEADERS  += \
     Models/qualification.h \
     Models/project.h \
     Models/configuration.h \
-    settingswidget.h
+    settingswidget.h \
+    Repository/irepository.h \
+    Repository/projectrepository.h \
+    Repository/userrepository.h
 
 
 FORMS    += \
