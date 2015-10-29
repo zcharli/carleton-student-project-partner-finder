@@ -2,6 +2,7 @@
 #define USERREPOSITORY_H
 
 #include <QVector>
+#include <QtSql/QSqlDatabase>
 #include "irepository.h"
 
 class User;
@@ -79,6 +80,10 @@ public:
      *      @return: success or failure: bool
      */
     int userDeletedPPP(User&, ProjectPartnerProfile&);
+
+private:
+    QSqlDatabase db;
+
 };
 
 #endif // USERREPOSITORY_H

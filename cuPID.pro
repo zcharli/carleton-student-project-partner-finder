@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     settingswidget.cpp \
     Repository/projectrepository.cpp \
     Repository/userrepository.cpp \
-    Repository/storage.cpp
+    Repository/storage.cpp \
+    Repository/databasemanager.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -47,7 +48,8 @@ HEADERS  += \
     Repository/irepository.h \
     Repository/projectrepository.h \
     Repository/userrepository.h \
-    Repository/storage.h
+    Repository/storage.h \
+    Repository/databasemanager.h
 
 
 FORMS    += \
@@ -56,3 +58,12 @@ FORMS    += \
     sidebarwidget.ui \
     profilewidget.ui \
     settingswidget.ui
+
+RESOURCES += \
+    Resources.qrc
+
+copydata.commands = $(COPY_DIR) $$PWD/Data $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata

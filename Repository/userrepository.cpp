@@ -2,7 +2,12 @@
 #include "Models/user.h"
 #include "Models/projectpartnerprofile.h"
 
-UserRepository::UserRepository() {}
+UserRepository::UserRepository()
+{
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "cuPIDdb";
+    db.setDatabaseName(dbName);
+}
 
 UserRepository::~UserRepository() {}
 
