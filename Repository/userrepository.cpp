@@ -1,6 +1,11 @@
 #include "userrepository.h"
 #include "Models/user.h"
-UserRepository::UserRepository() {}
+UserRepository::UserRepository()
+{
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "cuPIDdb";
+    db.setDatabaseName(dbName);
+}
 
 UserRepository::~UserRepository() {}
 

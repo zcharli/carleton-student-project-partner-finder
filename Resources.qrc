@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/data/cuPIDdb">
+        <file alias="database">Data/cuPIDdb</file>
+    </qresource>
+</RCC>
