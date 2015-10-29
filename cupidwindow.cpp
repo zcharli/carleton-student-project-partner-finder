@@ -34,21 +34,21 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 void cuPIDWindow::viewWillAppear()
 {
     this->setFixedSize(WINDOW_MAX_WIDTH, WINDOW_MAX_HEIGHT);
-    ui->textEdit->setText("<h1>Welcome " + CupidSession::getInstance()->currentUser->getUserName() + "</h1>");
+    ui->textEdit->setText("<h1>Welcome " + CupidSession::getInstance()->getCurrentUser()->getUserName() + "</h1>");
 
     /*  configure Sidebar options based on user     */
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
-    sideBarUi->lblUsername->setText(CupidSession::getInstance()->currentUser->getUserName());
+    sideBarUi->lblUsername->setText(CupidSession::getInstance()->getCurrentUser()->getUserName());
 
     //  check what kind of user we are
-    if (dynamic_cast<AdministratorUser *>(CupidSession::getInstance()->currentUser))
+    if (dynamic_cast<AdministratorUser *>(CupidSession::getInstance()->getCurrentUser()))
     {
         sideBarUi->btnDiscoverProject->hide();
         sideBarUi->dividerDiscoverProject->hide();
         sideBarUi->btnProfile->hide();
         sideBarUi->dividerProfile->hide();
     }
-    else if (dynamic_cast<StudentUser *>(CupidSession::getInstance()->currentUser))
+    else if (dynamic_cast<StudentUser *>(CupidSession::getInstance()->getCurrentUser()))
     {
         sideBarUi->btnCreateProject->hide();
         sideBarUi->dividerCreateProject->hide();
@@ -82,6 +82,7 @@ void cuPIDWindow::logCurrentUserOut()
 {
     viewWillDisappear();
     hide();
+    CupidSession::getInstance()->deleteCurrentUser();
     emit userLoggedOut();
 }
 

@@ -30,9 +30,8 @@ SOURCES += main.cpp\
     Repository/userrepository.cpp \
     Repository/databasemanager.cpp \
     projectdetails.cpp \
-    Models/cupidsession.cpp
-    Repository/storage.cpp \
-    Repository/databasemanager.cpp
+    Models/cupidsession.cpp \
+    Repository/storage.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -53,10 +52,8 @@ HEADERS  += \
     Repository/userrepository.h \
     Repository/databasemanager.h \
     projectdetails.h \
-    Models/cupidsession.h
-    Repository/storage.h \
-    Repository/databasemanager.h
-
+    Models/cupidsession.h \
+    Repository/storage.h
 
 FORMS    += \
     cupidwindow.ui \

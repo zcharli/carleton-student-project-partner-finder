@@ -2,6 +2,9 @@
 #include "ui_projectdetails.h"
 #include "Models/cupidsession.h"
 #include "Models/user.h"
+#include <QPushButton>
+#include "Models/administratoruser.h"
+#include "Models/studentuser.h"
 
 ProjectDetails::ProjectDetails(Project* project, QWidget *parent) :
     QWidget(parent),
@@ -20,7 +23,7 @@ ProjectDetails::ProjectDetails(Project* project, QWidget *parent) :
 
     // Hook up these button handlers
     QObject::connect(ui->btnRegistration, &QPushButton::clicked, this, &ProjectDetails::on_btnRegistration_clicked);
-    QObject::connect(ui->btnStartAlgo, &PushButton::clicked, this, &ProjectDetails::on_btnStartAlgo_clicked);
+    QObject::connect(ui->btnStartAlgo, &QPushButton::clicked, this, &ProjectDetails::on_btnStartAlgo_clicked);
 }
 
 ProjectDetails::~ProjectDetails()
@@ -35,14 +38,14 @@ void ProjectDetails::viewWillAppear()
     ui->txtProjTitle->setText(projectViewing->getTitle());
 
     //  check what kind of user we are and make the nessesary changes to the UI
-    if (dynamic_cast<AdministratorUser *>(CupidSession::getInstance()->currentUser))
+    if (dynamic_cast<AdministratorUser *>(CupidSession::getInstance()->getCurrentUser()))
     {
         ui->btnRegistration->hide();
     }
-    else if (dynamic_cast<StudentUser *>(CupidSession::getInstance()->currentUser))
+    else if (dynamic_cast<StudentUser *>(CupidSession::getInstance()->getCurrentUser()))
     {
         ui->btnStartAlgo->hide();
-        if(((StudentUser *)CupidSession::getInstance()->currentUser)->isRegisteredInProject(projectViewing))
+        if(((StudentUser *)CupidSession::getInstance()->getCurrentUser())->isRegisteredInProject(projectViewing))
         {
             ui->btnRegistration->setText(tr("Unregister"));
             isRegistered = true;
@@ -53,7 +56,7 @@ void ProjectDetails::viewWillAppear()
 
 void ProjectDetails::on_btnRegistration_clicked()
 {
-    StudentUser* stuUser = (StudentUser *)CupidSession::getInstance()->currentUser;
+    StudentUser* stuUser = (StudentUser *)CupidSession::getInstance()->getCurrentUser();
     if(stuUser->getProfile() == NULL)
     {
         // Notify StudentUser that they don't have a PPP

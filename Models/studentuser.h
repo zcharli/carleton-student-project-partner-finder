@@ -63,7 +63,7 @@ public:
      *        @desc: gets the ProjectPartnerProfile Associated with the StudentUser
      *      @return: studentUserPPP: ProjectPartnerProfile&
      */
-    ProjectPartnerProfile& getProfile();
+    ProjectPartnerProfile* getProfile();
 };
 
 #endif // STUDENTUSER_H

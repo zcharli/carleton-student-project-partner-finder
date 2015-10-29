@@ -1,15 +1,12 @@
 #include "cupidsession.h"
 
-User* CupidSession::currentUser = 0;
-bool CupidSession::isInstance = false;
 CupidSession* CupidSession::singleton = NULL;
 
 CupidSession* CupidSession::getInstance()
 {
-    if(!isInstance)
+    if(singleton == NULL)
     {
         singleton = new CupidSession();
-        isInstance = true;
         return singleton;
     }
     else
@@ -18,8 +15,22 @@ CupidSession* CupidSession::getInstance()
     }
 }
 
+void CupidSession::setCurrentUser(User* userToSet)
+{
+    currentUser = userToSet;
+}
+
+void CupidSession::deleteCurrentUser()
+{
+    delete currentUser;
+}
+
+User* CupidSession::getCurrentUser()
+{
+    return currentUser;
+}
+
 CupidSession::~CupidSession()
 {
-  isInstance = false; 
   delete currentUser;
 }

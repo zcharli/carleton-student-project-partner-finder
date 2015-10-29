@@ -67,13 +67,10 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
         case Student:
             (*currentUser) = new StudentUser(firstname, lastname, username, id);
             break;
-
     }
 
     // Add the current user to the session
-    CupidSession *session;
-    session = CupidSession::getInstance();
-    session->currentUser = *currentUser;
+    CupidSession::getInstance()->setCurrentUser(*currentUser);
 }
 
 void LoginForm::presentError(QString errorString)
