@@ -13,13 +13,6 @@ public:
 
     /*!
      *       @param: none
-     *        @desc: checks if the sqlite database connection is open
-     *      @return: open success or failure: bool
-     */
-    bool isDbOpen();
-
-    /*!
-     *       @param: none
      *        @desc: gets the error of the last sql statement
      *      @return: SqlError
      */
@@ -30,7 +23,7 @@ public:
      *        @desc: gets the opened database
      *      @return: QSqlDatabase
      */
-    QSqlDatabase getDB();
+    QSqlDatabase& getDB();
 
 private:
     QSqlDatabase db;

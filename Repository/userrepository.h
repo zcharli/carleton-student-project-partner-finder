@@ -3,55 +3,15 @@
 
 #include <QVector>
 #include <QtSql/QSqlDatabase>
-#include "irepository.h"
 
 class User;
 class ProjectPartnerProfile;
 
-class UserRepository : public IRepository<User>
+class UserRepository
 {
 public:
-    UserRepository();
-    virtual ~UserRepository();
-
-    /*!
-     *       @param: objectToSave: User&
-     *        @desc: saves the type User to database,
-     *               when User.id is 0 or null:
-     *                   insert -> returns ID of the new row
-     *                   else update
-     *      @return: saveSuccessful: int
-     */
-    virtual unsigned int save(const User&);
-
-    /*!
-     *       @param: idToDelete: int
-     *        @desc: deletes the type User to database
-     *      @return: success or failure: int
-     */
-    virtual unsigned int deleteFromRepo(const int);
-
-    /*!
-     *       @param: idToFetch: int
-     *        @desc: fetchs the type User to database
-     *      @return: entityObject: TEntity&
-     */
-    virtual User& fetchById(const int);
-
-    /*!
-     *       @param: idToFetch (optional): int
-     *        @desc: fetchs all type User to database
-     *      @return: entityObject: QVector<User*>&
-     */
-    virtual QVector<User*>& fetchAll(const int=0);
-
-    /*!
-     *       @param: userName: QString
-     *        @desc: fetchs the user object from database
-     *      @return: success or failure: bool
-     *        @note: checks if username is associated with admin/student user
-     */
-    bool validateLogin(const QString&);
+    UserRepository(QSqlDatabase&);
+    ~UserRepository();
 
     /*!
      *       @param: user: User&, ppp: ProjectPartnerProfile&
@@ -80,6 +40,21 @@ public:
      *      @return: success or failure: bool
      */
     int userDeletedPPP(User&, ProjectPartnerProfile&);
+
+    /*!
+     *       @param: username: QString&, user: User&
+     *        @desc: handles the database actions necessary for when a user attempts to login
+     *      @return: success or failure: bool
+     */
+    int retrieveUserWithUsername(QString& username, User& user);
+
+    /*!
+     *       @param: user: User&
+     *        @desc: handles the database actions necessary for when a user creates a new Account
+     *      @return: success or failure: bool
+     */
+    int createUser(User& user);
+
 
 private:
     QSqlDatabase db;
