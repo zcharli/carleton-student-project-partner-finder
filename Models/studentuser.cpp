@@ -43,7 +43,11 @@ bool StudentUser::isRegisteredInProject(Project* project)
     return registeredProjects.contains(project);
 }
 
-ProjectPartnerProfile& StudentUser::getProfile()
+ProjectPartnerProfile* StudentUser::getProfile()
 {
-    return *profile;
+    if(profile == NULL)
+    {
+        return NULL;
+    }
+    return profile;
 }
