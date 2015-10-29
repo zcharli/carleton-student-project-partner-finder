@@ -12,6 +12,7 @@ class Project
 {
     QVector<Configuration> projectConfigurations;
     QVector<ProjectPartnerProfile*> registeredPPPs;
+    int numberOfRegisteredUsers;
     QString title;
     QString description;
 
@@ -26,6 +27,20 @@ public:
      *      @return: configurations: QVector<Configuration>&
      */
     QVector<Configuration>& getProjectConfigurations();
+    \
+    /*!
+     *       @param: none
+     *        @desc: get the number of registered users
+     *      @return: numUsersRegisted: int
+     */
+    int getNumberOfRegisteredUsers();
+
+    /*!
+     *       @param: newNum: int
+     *        @desc: sets the number of registered users
+     *      @return: void
+     */
+    void setNumberOfRegisteredUsers(int);
 
     /*!
      *       @param: profileToRegister: ProjectPartnerProfile*

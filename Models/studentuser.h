@@ -14,6 +14,7 @@ class StudentUser : public User
 
     ProjectPartnerProfile *profile;
     QVector<Project*> registeredProjects;
+    int numProjectsRegistered;
 
 public:
     StudentUser(QString&, QString&, QString&, int);
@@ -26,6 +27,13 @@ public:
      *      @return: number of projects registered in : int
      */
     int getNumberOfProjectsRegistered();
+
+    /*!
+     *       @param: newNum: int
+     *        @desc: sets the number of projects StudentUser is registered in
+     *      @return: void
+     */
+    void setNumberOfProjectsRegistered(int);
 
     /*!
      *       @param: projectToAdd: Project*

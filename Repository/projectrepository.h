@@ -10,7 +10,7 @@ class ProjectRepository : public IRepository<Project>
 {
 public:
     ProjectRepository();
-    ~ProjectRepository();
+    virtual ~ProjectRepository();
 
     /*!
      *       @param: objectToSave: Project&
