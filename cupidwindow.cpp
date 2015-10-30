@@ -21,8 +21,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 
     //adds all the main content to the main widget
     ui->mainContentStackedWidget->layout()->addWidget(&profileWidget);
-    ui->mainContentStackedWidget->layout()->addWidget(&projectWidget);
-    ui->mainContentStackedWidget->setCurrentWidget(&projectWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&discoverProjectsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
 
     //connects the profile button to the generateProfile page method
@@ -32,21 +31,23 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      this, SLOT(logCurrentUserOut()));
     QObject::connect(&projectSidebar, SIGNAL(settingsClicked()),
                      this, SLOT(generateSettingsPage()));
+    QObject::connect(&projectSidebar, SIGNAL(discoverProjectsClicked()),
+                     this, SLOT(generateDiscoverProjectsPage()));
 }
 
 void cuPIDWindow::viewWillAppear()
 {
     this->setFixedSize(WINDOW_MAX_WIDTH, WINDOW_MAX_HEIGHT);
-    ui->textEdit->setText("<h1>Welcome " + CupidSession::getInstance()->getCurrentUser()->getUserName() + "</h1>");
+    ui->txtWelcome->setText("<h1>Welcome " + CupidSession::getInstance()->getCurrentUser()->getUserName() + "</h1>");
 
     /*  configure Sidebar options based on user     */
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
-    sideBarUi->lblUsername->setText(CupidSession::getInstance()->getCurrentUser()->getUserName());
+    sideBarUi->lblUsername->setText(CupidSession::getInstance()->getCurrentUser()->getFirstName() + " " +CupidSession::getInstance()->getCurrentUser()->getLastName());
 
     //  check what kind of user we are
     if (dynamic_cast<AdministratorUser *>(CupidSession::getInstance()->getCurrentUser()))
     {
-        sideBarUi->btnDiscoverProject->hide();
+        sideBarUi->btnDiscoverProjects->hide();
         sideBarUi->dividerDiscoverProject->hide();
         sideBarUi->btnProfile->hide();
         sideBarUi->dividerProfile->hide();
@@ -64,7 +65,7 @@ void cuPIDWindow::viewWillDisappear()
 
     //show all hidden elements
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
-    sideBarUi->btnDiscoverProject->show();
+    sideBarUi->btnDiscoverProjects->show();
     sideBarUi->dividerDiscoverProject->show();
     sideBarUi->btnProfile->show();
     sideBarUi->dividerProfile->show();
@@ -72,6 +73,7 @@ void cuPIDWindow::viewWillDisappear()
     sideBarUi->dividerCreateProject->show();
 
     //TODO: restore user back to home screen.
+    ui->txtWelcome->show();
 }
 
 void cuPIDWindow::acceptUserLogin()
@@ -97,6 +99,11 @@ void cuPIDWindow::generateProfilePage()
 void cuPIDWindow::generateSettingsPage()
 {
     ui->mainContentStackedWidget->setCurrentWidget(&settingsWidget);
+}
+
+void cuPIDWindow::generateDiscoverProjectsPage()
+{
+    ui->mainContentStackedWidget->setCurrentWidget(&discoverProjectsWidget);
 }
 
 cuPIDWindow::~cuPIDWindow()

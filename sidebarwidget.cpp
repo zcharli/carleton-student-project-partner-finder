@@ -41,3 +41,8 @@ void SideBarWidget::on_btnLogOut_clicked()
 {
     emit logOutClicked();
 }
+
+void SideBarWidget::on_btnDiscoverProjects_clicked()
+{
+    emit discoverProjectsClicked();
+}

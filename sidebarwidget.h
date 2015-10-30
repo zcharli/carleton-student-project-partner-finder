@@ -45,10 +45,18 @@ signals:
     */
     void settingsClicked();
 
+    /*!
+     *  @param: void
+     *   @desc: A signal emitted when the dicoverProjects button is clicked
+     * @return: void
+    */
+    void discoverProjectsClicked();
+
 public slots:
     void on_btnProfile_clicked();
     void on_btnLogOut_clicked();
     void on_btnSettings_clicked();
+    void on_btnDiscoverProjects_clicked();
 
 private:
     Ui::SideBarWidget *ui;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>784</width>
-    <height>474</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,13 +47,17 @@
          <widget class="QLabel" name="lblNoProfile">
           <property name="font">
            <font>
-            <pointsize>14</pointsize>
+            <pointsize>16</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
           <property name="text">
-           <string>Hmmm... You dont Seem to have a profile.
+           <string>.        .
+--------
+
+
+Hmmm... You dont Seem to have a profile.
 Lets fix that!
 Click on the Create PPP to begin.</string>
           </property>
@@ -100,7 +104,7 @@ Click on the Create PPP to begin.</string>
             <x>0</x>
             <y>0</y>
             <width>742</width>
-            <height>278</height>
+            <height>304</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -315,7 +319,7 @@ Click on the Create PPP to begin.</string>
             <x>0</x>
             <y>0</y>
             <width>742</width>
-            <height>278</height>
+            <height>304</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">

@@ -23,6 +23,7 @@ void CupidSession::setCurrentUser(User* userToSet)
 void CupidSession::deleteCurrentUser()
 {
     delete currentUser;
+    currentUser = NULL;
 }
 
 User* CupidSession::getCurrentUser()

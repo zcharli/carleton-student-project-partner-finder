@@ -98,9 +98,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="btnDiscoverProject">
+      <widget class="QPushButton" name="btnDiscoverProjects">
        <property name="text">
-        <string>Discover Project</string>
+        <string>Discover Projects</string>
        </property>
       </widget>
      </item>
