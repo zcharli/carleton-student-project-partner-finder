@@ -40,3 +40,8 @@ int CupidSlider::getValue()
 {
     return slider->value();
 }
+
+void CupidSlider::setValue(int newValue)
+{
+    slider->setValue(newValue);
+}

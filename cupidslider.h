@@ -19,6 +19,14 @@ public:
      *      @return: int
      */
     int getValue();
+
+    /*!
+     *       @param: newValue: int
+     *        @desc: sets the value of the QSlider
+     *      @return: void
+     */
+    void setValue(int newValue);
+
 private:
     /*
      * Labels for displaying the minimum value and maximum value under the slider
