@@ -24,6 +24,16 @@ StudentUser& ProjectPartnerProfile::getStudentUser()
     return user;
 }
 
+int ProjectPartnerProfile::getPPPID()
+{
+    return pppID;
+}
+
+void ProjectPartnerProfile::setPPPID(int id)
+{
+    this->pppID = id;
+}
+
 void ProjectPartnerProfile::addQualificationToPersonalQualifications(Qualification qualification)
 {
     personalQualifications.append(qualification);
@@ -63,3 +73,20 @@ bool ProjectPartnerProfile::hasTeamMateQualification(Qualification qualification
 {
     return teamMateQualifications.contains(qualification);
 }
+
+QVector<Qualification> ProjectPartnerProfile::getPersonalQualifications()
+{
+    return personalQualifications;
+}
+
+QVector<Qualification> ProjectPartnerProfile::getQualifications()
+{
+    return teamMateQualifications + personalQualifications;
+}
+
+void ProjectPartnerProfile::addQualification(int index,Qualification qualification)
+{
+    qualifications[index] = qualification;
+}
+
+

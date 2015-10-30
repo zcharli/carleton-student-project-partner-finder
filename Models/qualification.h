@@ -8,6 +8,8 @@ public:
 
     //overloaded == operator
     bool operator==(Qualification const);
+
+    int value;
 };
 
 #endif // QUALIFICATION_H

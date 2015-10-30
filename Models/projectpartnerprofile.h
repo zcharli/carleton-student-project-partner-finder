@@ -14,6 +14,8 @@ class ProjectPartnerProfile
     QString biography;
     QVector<Qualification> personalQualifications;
     QVector<Qualification> teamMateQualifications;
+    Qualification *qualifications;
+    int pppID;
 
 public:
     ProjectPartnerProfile(StudentUser&, QString&);
@@ -85,6 +87,40 @@ public:
      */
     bool hasTeamMateQualification(Qualification qualification);
 
+    /*!
+     *       @param: none
+     *        @desc: returns all qualifications
+     *      @return: personalQualifications: QVection<Qualification>
+     */
+    QVector<Qualification> getPersonalQualifications();
+
+    /*!
+     *       @param: none
+     *        @desc: returns all qualifications
+     *      @return: teamMateQualifications: QVection<Qualification>
+     */
+    QVector<Qualification> getQualifications();
+
+    /*!
+     *       @param: none
+     *        @desc: get the project partner id
+     *      @return: pppID: int
+     */
+    int getPPPID();
+
+    /*!
+     *       @param: id: int
+     *        @desc: sets the project partner id
+     *      @return: none
+     */
+    void setPPPID(int id);
+
+    /*!
+     *       @param: index, qualificationToAdd: int, Qualification
+     *        @desc: add the specified qualification to the list of the owner's qualifications
+     *      @return: void
+     */
+    void addQualification(int index,Qualification qualification);
 
 };
 
