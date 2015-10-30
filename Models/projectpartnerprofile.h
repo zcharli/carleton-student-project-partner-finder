@@ -53,8 +53,6 @@ public:
      */
     StudentUser& getStudentUser();
 
-
-
     /*!
      *       @param: qualificationToChange: Qualification
      *        @desc: changes the value of the given qualification
@@ -77,6 +75,19 @@ public:
      */
     bool hasWorkEthic(WorkEthicQualificationMapping);
 
+    /*!
+     *       @param: none
+     *        @desc: get the project partner id
+     *      @return: pppID: int
+     */
+    int getPPPID();
+
+    /*!
+     *       @param: id: int
+     *        @desc: sets the project partner id
+     *      @return: none
+     */
+    void setPPPID(int id);
 
 };
 

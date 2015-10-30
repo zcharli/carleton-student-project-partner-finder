@@ -54,7 +54,8 @@ HEADERS  += \
     Repository/databasemanager.h \
     projectdetails.h \
     Models/cupidsession.h \
-    Repository/storage.h
+    Repository/storage.h \
+    Repository/errorcodes.h
 
 FORMS    += \
     cupidwindow.ui \

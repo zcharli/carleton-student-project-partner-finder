@@ -25,6 +25,16 @@ StudentUser& ProjectPartnerProfile::getStudentUser()
     return user;
 }
 
+int ProjectPartnerProfile::getPPPID()
+{
+    return pppID;
+}
+
+void ProjectPartnerProfile::setPPPID(int id)
+{
+    this->pppID = id;
+}
+
 void ProjectPartnerProfile::changeQualification(Qualification newQualification)
 {
     qualifications[newQualification.getType()] = newQualification;
@@ -42,3 +52,7 @@ bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPositi
     //get the value of the work ethic bit
     return (workEthicBit & (1 << bitPosition)) >> bitPosition;
 }
+
+
+
+

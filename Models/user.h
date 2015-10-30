@@ -54,6 +54,13 @@ public:
     */
    void setUserName(QString&);
 
+   /*!
+    *       @param: none
+    *        @desc: gets the user's id
+    *      @return: id: int
+    */
+   int getUserId();
+
 protected:
    QString firstName;
    QString lastName;

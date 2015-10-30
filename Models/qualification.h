@@ -61,7 +61,6 @@ public:
      *      @return: value: int
      */
     int getType();
-
 };
 
 #endif // QUALIFICATION_H
