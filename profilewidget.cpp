@@ -1,5 +1,4 @@
 #include "profilewidget.h"
-#include "ui_profilewidget.h"
 #include "Models/qualification.h"
 
 ProfileWidget::ProfileWidget(QWidget *parent):
@@ -71,50 +70,34 @@ ProfileWidget::ProfileWidget(QWidget *parent):
 
 ProfileWidget::~ProfileWidget()
 {
+    delete sliderUserOO;
+    delete sliderUserUI;
+    delete sliderUserScripting;
+    delete sliderUserDB;
+    delete sliderUserDesignPatterns;
+    delete sliderUserDataStructures;
+    delete sliderUserComputerSecurity;
+    delete sliderUserSoftwareDocumentation;
+    delete sliderUserNetworkComputing;
+    delete sliderUserVersionControl;
+    delete sliderUserWebDevelopment;
+    delete sliderTeammateOO;
+    delete sliderTeammateUI;
+    delete sliderTeammateScripting;
+    delete sliderTeammateDB;
+    delete sliderTeammateDesignPatterns;
+    delete sliderTeammateDataStructures;
+    delete sliderTeammateComputerSecurity;
+    delete sliderTeammateSoftwareDocumentation;
+    delete sliderTeammateNetworkComputing;
+    delete sliderTeammateVersionControl;
+    delete sliderTeammateWebDevelopment;
     delete ui;
 }
 
-void ProfileWidget::didSetProfile()
+Ui::ProfileWidget& ProfileWidget::getUI()
 {
-    ui->spinUserCGPA->setValue(profile->getQualification(userCGPA).getValue());
-    sliderUserOO->setValue(profile->getQualification(userOO).getValue());
-    sliderUserUI->setValue(profile->getQualification(userUI).getValue());
-    sliderUserScripting->setValue(profile->getQualification(userScripting).getValue());
-    sliderUserDB->setValue(profile->getQualification(userDB).getValue());
-    sliderUserDesignPatterns->setValue(profile->getQualification(userDesignPatterns).getValue());
-    sliderUserDataStructures->setValue(profile->getQualification(userDataStructures).getValue());
-    sliderUserComputerSecurity->setValue(profile->getQualification(userComputerSecurity).getValue());
-    sliderUserSoftwareDocumentation->setValue(profile->getQualification(userSoftwareDocumentation).getValue());
-    sliderUserNetworkComputing->setValue(profile->getQualification(userNetworkComputing).getValue());
-    sliderUserVersionControl->setValue(profile->getQualification(userVersionControl).getValue());
-    sliderUserWebDevelopment->setValue(profile->getQualification(userWebDevelopment).getValue());
-
-    //loop over all 8 work ethic qualifications
-    for (int i = 0; i < 8; i++)
-    {
-        switch(i)
-        {
-
-        }
-    }
-
-    sliderTeammateOO->setValue(profile->getQualification(teamMateOO).getValue());
-    sliderTeammateUI->setValue(profile->getQualification(teamMateUI).getValue());
-    sliderTeammateScripting->setValue(profile->getQualification(teamMateScripting).getValue());
-    sliderTeammateDB->setValue(profile->getQualification(teamMateDB).getValue());
-    sliderTeammateDesignPatterns->setValue(profile->getQualification(teamMateDesignPatterns).getValue());
-    sliderTeammateDataStructures->setValue(profile->getQualification(teamMateDataStructures).getValue());
-    sliderTeammateComputerSecurity->setValue(profile->getQualification(teamMateComputerSecurity).getValue());
-    sliderTeammateSoftwareDocumentation->setValue(profile->getQualification(teamMateSoftwareDocumentation).getValue());
-    sliderTeammateNetworkComputing->setValue(profile->getQualification(teamMateNetworkComputing).getValue());
-    sliderTeammateVersionControl->setValue(profile->getQualification(teamMateVersionControl).getValue());
-    sliderTeammateWebDevelopment->setValue(profile->getQualification(teamMateWebDevelopment).getValue());
-}
-
-void ProfileWidget::setProfile(ProjectPartnerProfile *profile)
-{
-    this->profile = profile;
-    didSetProfile();
+    return *ui;
 }
 
 void ProfileWidget::on_chkHardworking_clicked()
@@ -190,11 +173,6 @@ void ProfileWidget::on_chkDependable_clicked()
     enableDisableCheckBoxes();
 }
 
-void ProfileWidget::parseQualifications()
-{
-
-}
-
 void ProfileWidget::enableDisableCheckBoxes(){
     if(numBoxSelected >= 5){
         ui->chkDependable->setEnabled(ui->chkDependable->isChecked());
@@ -221,5 +199,15 @@ void ProfileWidget::enableDisableCheckBoxes(){
 
 void ProfileWidget::on_btnSave_clicked()
 {
+    emit userToSavePPP();
+}
 
+void ProfileWidget::on_btnEditPPP_clicked()
+{
+    emit userToEditPPP();
+}
+
+void ProfileWidget::on_btnCreatePPP_clicked()
+{
+    emit userToCreatePPP();
 }

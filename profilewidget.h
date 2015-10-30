@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "cupidslider.h"
+#include "ui_profilewidget.h"
 #include "Models/projectpartnerprofile.h"
 
 
@@ -18,8 +19,7 @@ public:
     explicit ProfileWidget(QWidget *parent = 0);
     ~ProfileWidget();
 
-    //Accessor for setting the API
-    void setProfile(ProjectPartnerProfile*);
+    Ui::ProfileWidget& getUI();
 
     /*
      * All of the custom sliders required for User Coding and technical knowledge
@@ -51,18 +51,25 @@ public:
     CupidSlider* sliderTeammateVersionControl;
     CupidSlider* sliderTeammateWebDevelopment;
 
-private:
-    /* API for widget is a PPP  */
-    ProjectPartnerProfile *profile;
-
     int numBoxSelected;
+
     void enableDisableCheckBoxes();
+
+signals:
+    void userToEditPPP();
+    void userToSavePPP();
+    void userToCreatePPP();
+
+private:
     void didSetProfile();
-    void parseQualifications();
 
 private slots:
 
     void on_btnSave_clicked();
+
+    void on_btnEditPPP_clicked();
+
+    void on_btnCreatePPP_clicked();
 
     void on_chkHardworking_clicked();
 

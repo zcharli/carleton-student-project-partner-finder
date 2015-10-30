@@ -2,22 +2,10 @@
 #define PROJECTPARTNERPROFILE_H
 
 #include <QString>
+#include "Models/qualification.h"
 
 //forward declarations
 class StudentUser;
-class Qualification;
-
-enum WorkEthicQualificationMapping
-{
-    dependableBit = 0,
-    organizedBit,
-    proactiveBit,
-    efficientBit,
-    humorBit,
-    impulsiveBit,
-    flexibleBit,
-    hardworkingBit
-};
 
 #define NUMBER_OF_QUALIFICATIONS 25
 
@@ -26,6 +14,7 @@ class ProjectPartnerProfile
     StudentUser& user;
     QString biography;
     Qualification *qualifications;
+    int pppID;
 
 public:
     ProjectPartnerProfile(StudentUser&, QString&, Qualification*);

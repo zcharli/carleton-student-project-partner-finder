@@ -7,6 +7,7 @@
 #include "settingswidget.h"
 #include "Models/user.h"
 #include "projectlistwidget.h"
+#include "Controllers/pppcontroller.h"
 
 namespace Ui {
 class cuPIDWindow;
@@ -23,6 +24,8 @@ public:
     ~cuPIDWindow();
     void displayProfile(ProfileWidget*);
 private:
+    //Controllers
+    PPPController *pppController;
 
     SideBarWidget projectSidebar;
     ProfileWidget profileWidget;

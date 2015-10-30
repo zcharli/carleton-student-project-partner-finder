@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     Repository/databasemanager.cpp \
     projectdetails.cpp \
     Models/cupidsession.cpp \
-    Repository/storage.cpp
+    Repository/storage.cpp \
+    Controllers/pppcontroller.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -55,7 +56,8 @@ HEADERS  += \
     projectdetails.h \
     Models/cupidsession.h \
     Repository/storage.h \
-    Repository/errorcodes.h
+    Repository/errorcodes.h \
+    Controllers/pppcontroller.h 
 
 FORMS    += \
     cupidwindow.ui \
