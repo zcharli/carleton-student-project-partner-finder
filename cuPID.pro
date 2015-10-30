@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     projectdetails.cpp \
     Models/cupidsession.cpp \
     Repository/storage.cpp \
-    Controllers/pppcontroller.cpp
+    Controllers/pppcontroller.cpp \
+    signupform.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -57,7 +58,8 @@ HEADERS  += \
     Models/cupidsession.h \
     Repository/storage.h \
     Repository/errorcodes.h \
-    Controllers/pppcontroller.h 
+    Controllers/pppcontroller.h \ 
+    signupform.h
 
 FORMS    += \
     cupidwindow.ui \
@@ -66,7 +68,8 @@ FORMS    += \
     profilewidget.ui \
     projectdetails.ui \
     profilewidget.ui \
-    settingswidget.ui
+    settingswidget.ui \
+    signupform.ui
 
 RESOURCES += \
     Resources.qrc

@@ -6,6 +6,7 @@ StudentUser::StudentUser(QString& fName, QString& lName, QString& userName, int 
     User(fName, lName, userName, id)
 {
     profile = NULL;
+    userType = Student;
 }
 
 StudentUser::~StudentUser()

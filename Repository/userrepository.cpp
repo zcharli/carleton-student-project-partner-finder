@@ -59,10 +59,12 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
     qualificationQuery += "start transactions;";
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
-        qualificationQuery += QString("Insert into ppp_qualifications (qualification_id,ppp_id,value) values (%d,%d,%d);").arg(
-                    i, pppID, ppp.getQualification(i).getValue());
+        //  have to convert args to string first!!
+        qualificationQuery += QString("Insert into ppp_qualifications (qualification_id,ppp_id,value) values (%1,%2,%3);").
+                arg(QString::number(i),QString::number(pppID),QString::number(ppp.getQualification(i).getValue()));
     }
-    qualificationQuery += QString("Update users set ppp_id=%d where user_id=%d;").arg(pppID,user.getUserId());
+    qualificationQuery += QString("Update users set ppp_id=%1 where user_id=%2;").
+            arg(QString::number(pppID),QString::number(user.getUserId()));
     qualificationQuery += "commit;";
 
     QSqlQuery insertQualifications(this->db);
@@ -207,8 +209,12 @@ int UserRepository::createUser(User& user)
         if(!createQuery.exec())
         {
             qDebug() << "createUser error:  " << this->db.lastError();
+            return createQuery.lastError().number();
+        } else // successful
+        {
+            return 0;
         }
-        return this->db.lastError().number();
+
     }
-    return 0;
+    return -1;
 }

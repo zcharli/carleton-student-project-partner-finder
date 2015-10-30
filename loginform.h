@@ -2,6 +2,7 @@
 #define LOGINFORM_H
 
 #include <QWidget>
+#include "signupform.h"
 
 #include "Models/user.h"
 
@@ -28,6 +29,8 @@ signals:
 
 private:
     Ui::LoginForm *ui;
+
+    SignUpForm signUpForm;
 
     /*!
      *       @param: none
@@ -78,11 +81,26 @@ public slots:
 
     /*!
      *  @param: none
+     *   @desc: A slot to accept the signal emitted from a successful signup
+     * @return: void
+    */
+    void signUpSucceeded(User *);
+
+    /*!
+     *  @param: none
      *   @desc: A slot to accept the signal emitted from an
      *          successful user logout
      * @return: void
     */
     void promptUserLogin();
+
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted from an
+     *          attempt to create a new account
+     * @return: void
+    */
+    void slotCreateNewAccount();
 };
 
 #endif // LOGINFORM_H
