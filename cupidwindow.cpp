@@ -3,6 +3,7 @@
 #include "Models/administratoruser.h"
 #include "Models/studentuser.h"
 #include "Models/cupidsession.h"
+#include "Models/qualification.h"
 #include <QLayout>
 
 #define WINDOW_MAX_WIDTH 1000
@@ -60,7 +61,7 @@ void cuPIDWindow::viewWillAppear()
 void cuPIDWindow::viewWillDisappear()
 {
     CupidSession::getInstance()->deleteCurrentUser();
-    
+
     //show all hidden elements
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
     sideBarUi->btnDiscoverProject->show();
@@ -88,6 +89,7 @@ void cuPIDWindow::logCurrentUserOut()
 
 void cuPIDWindow::generateProfilePage()
 {
+    pppController = new PPPController(&profileWidget);
     //sets the current widget of maincontentStackedWidget to the profile widget
     ui->mainContentStackedWidget->setCurrentWidget(&profileWidget);
 }

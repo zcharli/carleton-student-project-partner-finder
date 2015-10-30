@@ -1,6 +1,8 @@
 #ifndef QUALIFICATION_H
 #define QUALIFICATION_H
 
+#define NUMBER_OF_WORK_ETHICS_QUALIFICATIONS 8
+
 enum QualificationType
 {
     userCGPA = 0,
@@ -29,6 +31,17 @@ enum QualificationType
     teamMateWebDevelopment,
 };
 
+enum WorkEthicQualificationMapping
+{
+    dependableBit = 0,
+    organizedBit,
+    proactiveBit,
+    efficientBit,
+    humorBit,
+    impulsiveBit,
+    flexibleBit,
+    hardworkingBit
+};
 
 class Qualification
 {
@@ -37,6 +50,45 @@ class Qualification
 
 public:
     Qualification(QualificationType, int);
+
+    /*!
+     *  @param:   arrayOfMappings: WorkEthicQualificationMapping*
+     *   @desc:   Creates a workEthic entity bit mapping given an array of WorkEthicQualificationMapping
+     *            The values in the given mapping array must be inline with the sequence of the enum
+     *            definition of the WorkEthicQualificationMapping.
+     *  @retuns:  workEthicQualifiction: Qualification
+     */
+    static Qualification WorkEthicQualificationFromMapping(bool*);
+
+    /*!
+     *  @param:   qualificationToParse: Qualification, workEthics: bool** (output)
+     *   @desc:   Creates an array of the work ethics values for the given qualification.
+                  NOTE: an empty bool** must be sent to this function because it allocates new memory.
+     *  @retuns:  none
+     */
+    static void WorkEthicMappingFromQualification(Qualification, bool**);
+
+    /*!
+     *  @param:   workEthicBit: WorkEthicMapping, qualifcationInQuestion: Qualification&
+     *   @desc:   retuns a boolean if the bit for the given workEthic has been set
+     *  @retuns:  isSet: bool
+     */
+    static bool GetWorkEthicBitForWorkEthicQualification(WorkEthicQualificationMapping, Qualification&);
+
+    /*!
+     *  @param:   workEthicBit: WorkEthicMapping, qualifcationInQuestion: Qualification&
+     *   @desc:   sets the workEthic bit of the given qualification
+     *  @retuns:  void
+     */
+    static void SetWorkEthicBitForWorkEthicQualification(WorkEthicQualificationMapping, Qualification&);
+
+    /*!
+     *  @param:   workEthicBit: WorkEthicMapping, qualifcationInQuestion: Qualification&
+     *   @desc:   clears the workEthic bit of the given qualification
+     *  @retuns:  void
+     */
+    static void ClearWorkEthicBitForWorkEthicQualification(WorkEthicQualificationMapping, Qualification&);
+
 
     //overloaded == operator
     bool operator==(Qualification const);

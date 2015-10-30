@@ -1,40 +1,12 @@
 #include "userrepository.h"
 #include "Models/user.h"
 #include "Models/projectpartnerprofile.h"
+#include "Models/qualification.h"
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QStringBuilder>
-#include <QVector>
 #include "Models/qualification.h"
 #include "QDebug"
-
-enum QualificationType
-{
-   userCGPA = 0,
-   userOO,
-   userUI,
-   userScripting,
-   userDB,
-   userDesignPatterns,
-   userDataStructures,
-   userComputerSecurity,
-   userSoftwareDocumentation,
-   userNetworkComputing,
-   userVersionControl,
-   userWebDevelopment,
-   userWorkEthic,
-   teamMateOO,
-   teamMateUI,
-   teamMateScripting,
-   teamMateDB,
-   teamMateDesignPatterns,
-   teamMateDataStructures,
-   teamMateComputerSecurity,
-   teamMateSoftwareDocumentation,
-   teamMateNetworkComputing,
-   teamMateVersionControl,
-   teamMateWebDevelopment,
-};
 
 UserRepository::UserRepository(QSqlDatabase& db)
 {
@@ -45,9 +17,10 @@ UserRepository::~UserRepository() {}
 
 int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
 {
-    QSqlQuery insertPPP(this->db);
+    /*QSqlQuery insertPPP(this->db);
     // "SELECT last_insert_rowid();"
-    QVector<Qualification> qualifications = ppp.getQualifications();
+    //QVector<Qualification> qualifications = ppp.getQualifications();
+    //  My mod
 
     // We need to add teammate and personal tech score here
     insertPPP.prepare("INSERT INTO ppp (we_bs,user_id) VALUES (:we_bs,:user_id)");
@@ -93,7 +66,7 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
         qDebug() << "insertQualifications error:  ";// << this->db.lastError();
     }
 
-
+*/
     return 0;
 }
 

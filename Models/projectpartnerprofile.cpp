@@ -48,9 +48,7 @@ Qualification ProjectPartnerProfile::getQualification(int index)
 
 bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
 {
-    char workEthicBit = char(qualifications[userWorkEthic].getValue());
-    //get the value of the work ethic bit
-    return (workEthicBit & (1 << bitPosition)) >> bitPosition;
+    Qualification::GetWorkEthicBitForWorkEthicQualification(bitPosition, qualifications[userWorkEthic]);
 }
 
 
