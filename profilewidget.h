@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "cupidslider.h"
+#include "Models/projectpartnerprofile.h"
 
 
 namespace Ui {
@@ -16,6 +17,10 @@ class ProfileWidget : public QWidget
 public:
     explicit ProfileWidget(QWidget *parent = 0);
     ~ProfileWidget();
+
+    //Accessor for setting the API
+    void setProfile(ProjectPartnerProfile*);
+
     /*
      * All of the custom sliders required for User Coding and technical knowledge
      */
@@ -47,10 +52,17 @@ public:
     CupidSlider* sliderTeammateWebDevelopment;
 
 private:
+    /* API for widget is a PPP  */
+    ProjectPartnerProfile *profile;
+
     int numBoxSelected;
     void enableDisableCheckBoxes();
+    void didSetProfile();
+    void parseQualifications();
 
 private slots:
+
+    void on_btnSave_clicked();
 
     void on_chkHardworking_clicked();
 

@@ -1,22 +1,34 @@
 #ifndef PROJECTPARTNERPROFILE_H
 #define PROJECTPARTNERPROFILE_H
 
-#include <QVector>
 #include <QString>
 
 //forward declarations
 class StudentUser;
 class Qualification;
 
+enum WorkEthicQualificationMapping
+{
+    dependableBit = 0,
+    organizedBit,
+    proactiveBit,
+    efficientBit,
+    humorBit,
+    impulsiveBit,
+    flexibleBit,
+    hardworkingBit
+};
+
+#define NUMBER_OF_QUALIFICATIONS 25
+
 class ProjectPartnerProfile
 {
     StudentUser& user;
     QString biography;
-    QVector<Qualification> personalQualifications;
-    QVector<Qualification> teamMateQualifications;
+    Qualification *qualifications;
 
 public:
-    ProjectPartnerProfile(StudentUser&, QString&);
+    ProjectPartnerProfile(StudentUser&, QString&, Qualification*);
     ~ProjectPartnerProfile();
 
     //accessor Functions
@@ -41,49 +53,29 @@ public:
      */
     StudentUser& getStudentUser();
 
+
+
     /*!
-     *       @param: qualificationToAdd: Qualification
-     *        @desc: add the specified qualification to the list of the ownwers PPP qualifications
+     *       @param: qualificationToChange: Qualification
+     *        @desc: changes the value of the given qualification
      *      @return: void
      */
-    void addQualificationToPersonalQualifications(Qualification qualification);
+    void changeQualification(Qualification);
 
     /*!
-     *       @param: qualificationToAdd: Qualification
-     *        @desc: add the specified qualification to the list of the ownwer's potential teammates' PPP qualifications
-     *      @return: void
+     *       @param: qualificationIndex: int
+     *        @desc: gets the given qualification for the specified index
+     *      @return: Qualification
      */
-    void addQualificationToTeamMateQualifications(Qualification qualification);
+    Qualification getQualification(int);
+
 
     /*!
-     *       @param: qualificationToRemove: Qualification
-     *        @desc: remove the specified qualification from the list of the ownwers PPP qualifications
-     *               (if the qualification is contained in the list). Does nothing otherwise
-     *      @return: void
+     *       @param: qualificationIndex: int
+     *        @desc: gets the given qualification for the specified index
+     *      @return: Qualification
      */
-    void removeQualificationFromPersonalQualifications(Qualification qualification);
-
-    /*!
-     *       @param: qualificationToRemove: Qualification
-     *        @desc: remove the specified qualification from the list of the ownwer's potential teammates' PPP qualifications
-     *               (if the qualification is contained in the list). Does nothing otherwise
-     *      @return: void
-     */
-    void removeQualificationFromTeamMateQualifications(Qualification qualification);
-
-    /*!
-     *       @param: qualificationToCheck: Qualification
-     *        @desc: check if the PPP has the given personal qualification
-     *      @return: hasQualification: bool
-     */
-    bool hasPersonalQualification(Qualification qualification);
-
-    /*!
-     *       @param: qualificationToCheck: Qualification
-     *        @desc: check if the PPP has the given teammate qualification
-     *      @return: hasQualification: bool
-     */
-    bool hasTeamMateQualification(Qualification qualification);
+    bool hasWorkEthic(WorkEthicQualificationMapping);
 
 
 };

@@ -2,9 +2,10 @@
 #include "studentuser.h"
 #include "qualification.h"
 
-ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser, QString& bio):
+ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser, QString& bio, Qualification* qualifications):
     user(studentUser), biography(bio)
 {
+    this->qualifications = qualifications;
 }
 
 ProjectPartnerProfile::~ProjectPartnerProfile()
@@ -24,42 +25,20 @@ StudentUser& ProjectPartnerProfile::getStudentUser()
     return user;
 }
 
-void ProjectPartnerProfile::addQualificationToPersonalQualifications(Qualification qualification)
+void ProjectPartnerProfile::changeQualification(Qualification newQualification)
 {
-    personalQualifications.append(qualification);
+    qualifications[newQualification.getType()] = newQualification;
 }
 
-void ProjectPartnerProfile::addQualificationToTeamMateQualifications(Qualification qualification)
+Qualification ProjectPartnerProfile::getQualification(int index)
 {
-   teamMateQualifications.append(qualification);
+    //TODO: Need to do error checking here.
+    return qualifications[index];
 }
 
-void ProjectPartnerProfile::removeQualificationFromPersonalQualifications(Qualification qualification)
+bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
 {
-    int index = personalQualifications.indexOf(qualification);
-
-    if (index != -1)
-    {
-        personalQualifications.remove(index);
-    }
-}
-
-void ProjectPartnerProfile::removeQualificationFromTeamMateQualifications(Qualification qualification)
-{
-    int index = teamMateQualifications.indexOf(qualification);
-
-    if (index != -1)
-    {
-        teamMateQualifications.remove(index);
-    }
-}
-
-bool ProjectPartnerProfile::hasPersonalQualification(Qualification qualification)
-{
-    return personalQualifications.contains(qualification);
-}
-
-bool ProjectPartnerProfile::hasTeamMateQualification(Qualification qualification)
-{
-    return teamMateQualifications.contains(qualification);
+    char workEthicBit = char(qualifications[userWorkEthic].getValue());
+    //get the value of the work ethic bit
+    return (workEthicBit & (1 << bitPosition)) >> bitPosition;
 }
