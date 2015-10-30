@@ -47,3 +47,13 @@ int User::getUserId()
 {
     return id;
 }
+
+UserType User::getUserType()
+{
+    return userType;
+}
+
+void User::setUserType(UserType t)
+{
+    userType = t;
+}

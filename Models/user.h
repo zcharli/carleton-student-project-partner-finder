@@ -3,6 +3,11 @@
 
 #include <QString>
 
+enum UserType {
+    Administrator = 0,
+    Student = 1
+};
+
 class User
 {
 public:
@@ -61,10 +66,26 @@ public:
     */
    int getUserId();
 
+   /*!
+    *       @param: none
+    *        @desc: gets the user's id's type
+    *      @return: userType: int / UserType
+    */
+   UserType getUserType();
+
+   /*!
+    *       @param: none
+    *        @desc: gets the user's id's type
+    *      @return: userType: int / UserType
+    */
+   void setUserType(UserType);
+
+
 protected:
    QString firstName;
    QString lastName;
    QString userName;
+   UserType userType;
 
    //Needed when quering database
    int id;
