@@ -42,11 +42,11 @@ public:
     int userDeletedPPP(User&, ProjectPartnerProfile&);
 
     /*!
-     *       @param: username: QString&, user: User&
+     *       @param: username: QString&, user, userType: User&, int
      *        @desc: handles the database actions necessary for when a user attempts to login
      *      @return: success or failure: bool
      */
-    int retrieveUserWithUsername(QString& username, User& user);
+    int retrieveUserWithUsername(QString& username, User& user, int);
 
     /*!
      *       @param: user: User&

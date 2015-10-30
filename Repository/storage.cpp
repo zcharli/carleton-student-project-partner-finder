@@ -65,7 +65,7 @@ int Storage::executeActionForPPP(ActionType action, User& user, ProjectPartnerPr
  */
 int Storage::loginUserWithUsername(QString& username, User& user)
 {
-    return repoUser->retrieveUserWithUsername(username, user);
+    return repoUser->retrieveUserWithUsername(username, user, user.getUserType());
 }
 
 /*   @input: signedupUser: User&

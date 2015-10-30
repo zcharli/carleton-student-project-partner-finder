@@ -3,17 +3,11 @@
 
 #include <QWidget>
 
-//  forward declarations
-class User;
+#include "Models/user.h"
 
 namespace Ui {
 class LoginForm;
 }
-
-enum UserType {
-    Administrator = 0,
-    Student = 1
-};
 
 class LoginForm : public QWidget
 {
