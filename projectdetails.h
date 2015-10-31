@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "Models/project.h"
+#include "sidebarwidget.h"
 
 namespace Ui {
 class ProjectDetails;
@@ -41,7 +42,7 @@ signals:
 public slots:
     void on_btnRegistration_clicked();
     void on_btnStartAlgo_clicked();
-    void handleUserContextSwitch();
+    void handleUserContextSwitch(DetailViewType);
 
 private:
     Ui::ProjectDetails *ui;

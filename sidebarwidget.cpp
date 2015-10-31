@@ -1,5 +1,7 @@
 #include "sidebarwidget.h"
 
+
+
 SideBarWidget::SideBarWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SideBarWidget)
@@ -30,24 +32,24 @@ Ui::SideBarWidget* SideBarWidget::getUI()
 
 void SideBarWidget::on_btnProfile_clicked()
 {
-    emit userToSwitchContext();
+    emit userToSwitchContextTo(Profile);
     emit profileClicked();
 }
 
 void SideBarWidget::on_btnSettings_clicked()
 {
-    emit userToSwitchContext();
+    emit userToSwitchContextTo(Settings);
     emit settingsClicked();
 }
 
 void SideBarWidget::on_btnLogOut_clicked()
 {
-    emit userToSwitchContext();
+    emit userToSwitchContextTo(Logout);
     emit logOutClicked();
 }
 
 void SideBarWidget::on_btnDiscoverProjects_clicked()
 {
-    emit userToSwitchContext();
+    emit userToSwitchContextTo(DiscoverProjets);
     emit discoverProjectsClicked();
 }

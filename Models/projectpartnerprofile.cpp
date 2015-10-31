@@ -5,12 +5,21 @@
 ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
     user(studentUser)
 {
+    if(studentUser.profile)
+    {
+        delete studentUser.profile;
+        studentUser.profile = NULL;
+    }
+    studentUser.profile = this;
     qualifications = Qualification::DefaultQualifications();
+    pppID = 0;
 }
 
 ProjectPartnerProfile::~ProjectPartnerProfile()
 {
-
+    user.profile = NULL;
+    delete qualifications;
+    qualifications = NULL;
 }
 
 StudentUser& ProjectPartnerProfile::getStudentUser()

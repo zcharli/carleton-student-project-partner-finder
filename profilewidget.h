@@ -5,6 +5,7 @@
 #include "cupidslider.h"
 #include "ui_profilewidget.h"
 #include "Models/projectpartnerprofile.h"
+#include "sidebarwidget.h"
 
 
 namespace Ui {
@@ -77,6 +78,7 @@ signals:
     void userToSavePPP();
     void userToCreatePPP();
     void userToLeavePPP();
+    void userToViewPPP();
 
 private:
     void didSetProfile();
@@ -105,7 +107,7 @@ private slots:
 
     void on_chkDependable_clicked();
 
-    void handleUserContextSwitch();
+    void handleUserContextSwitch(DetailViewType);
 
 private:
     Ui::ProfileWidget *ui;

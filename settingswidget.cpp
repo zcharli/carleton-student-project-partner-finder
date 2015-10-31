@@ -14,7 +14,15 @@ SettingsWidget::~SettingsWidget()
 }
 
 
-void SettingsWidget::handleUserContextSwitch()
+void SettingsWidget::handleUserContextSwitch(DetailViewType type)
 {
+    if (type = Settings)
+    {
+        //entering view
+    }
+    else
+    {
+        //Leaving View
+    }
 
 }

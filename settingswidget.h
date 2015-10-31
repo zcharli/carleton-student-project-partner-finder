@@ -2,6 +2,7 @@
 #define SETTINGSWIDGET_H
 
 #include <QWidget>
+#include "sidebarwidget.h"
 
 namespace Ui {
 class SettingsWidget;
@@ -17,7 +18,7 @@ public:
 
 public slots:
     /*! handle the user context switching from this widget to another   */
-    void handleUserContextSwitch();
+    void handleUserContextSwitch(DetailViewType);
 
 private:
     Ui::SettingsWidget *ui;

@@ -295,8 +295,18 @@ void ProfileWidget::on_btnCreatePPP_clicked()
     emit userToCreatePPP();
 }
 
-void ProfileWidget::handleUserContextSwitch()
+void ProfileWidget::handleUserContextSwitch(DetailViewType type)
 {
-    emit userToLeavePPP();
+    if (type == Profile)
+    {
+        emit userToViewPPP();
+        viewWillAppear();
+    }
+    else
+    {
+        emit userToLeavePPP();
+        viewWillDisappear();
+    }
+
 
 }

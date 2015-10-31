@@ -85,7 +85,15 @@ void ProjectDetails::on_btnStartAlgo_clicked()
     emit startAlgoClicked();
 }
 
-void ProjectDetails::handleUserContextSwitch()
+void ProjectDetails::handleUserContextSwitch(DetailViewType type)
 {
-
+    if (type == ProjectDetailType)
+    {
+        //entering view
+        viewWillAppear();
+    }
+    else
+    {
+        //leaving view
+    }
 }

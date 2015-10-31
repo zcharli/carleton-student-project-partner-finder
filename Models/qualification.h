@@ -1,8 +1,10 @@
 #ifndef QUALIFICATION_H
 #define QUALIFICATION_H
 
+#include "studentuser.h"
+
 #define NUMBER_OF_WORK_ETHICS_QUALIFICATIONS 8
-#define NUMBER_OF_QUALIFICATIONS 25
+#define NUMBER_OF_QUALIFICATIONS 24
 
 enum QualificationType
 {
@@ -65,7 +67,7 @@ public:
      *            definition of the WorkEthicQualificationMapping.
      *  @retuns:  workEthicQualifiction: Qualification
      */
-    static Qualification WorkEthicQualificationFromMapping(bool*);
+    static Qualification WorkEthicQualificationFromMapping(int[]);
 
     /*!
      *  @param:   qualificationToParse: Qualification, workEthics: bool** (output)
@@ -73,7 +75,7 @@ public:
                   NOTE: an empty bool** must be sent to this function because it allocates new memory.
      *  @retuns:  none
      */
-    static void WorkEthicMappingFromQualification(Qualification, bool**);
+    static void WorkEthicMappingFromQualification(Qualification, int**);
 
     /*!
      *  @param:   workEthicBit: WorkEthicMapping, qualifcationInQuestion: Qualification&
@@ -95,6 +97,13 @@ public:
      *  @retuns:  void
      */
     static void ClearWorkEthicBitForWorkEthicQualification(WorkEthicQualificationMapping, Qualification&);
+
+    /*!
+     *  @param:   StudentUserToCalculate: StudentUser&, personalScore: int& output param, teammateScore: int& output param
+     *   @desc:   clears the workEthic bit of the given qualification
+     *  @retuns:  void
+     */
+    static void TechnicalScoreForStudentUser(StudentUser&, float&, float&);
 
 
     //overloaded == operator

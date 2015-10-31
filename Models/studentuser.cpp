@@ -8,11 +8,13 @@ StudentUser::StudentUser(QString& fName, QString& lName, QString& userName, int 
     profile = NULL;
     userType = Student;
     pppIDForFetch = 0;
+    numProjectsRegistered = 0;
 }
 
 StudentUser::~StudentUser()
 {
     delete profile;
+    profile = NULL;
 }
 
 int StudentUser::getNumberOfProjectsRegistered()

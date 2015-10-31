@@ -119,10 +119,22 @@ void LoginForm::presentError(QString errorString)
 
 void LoginForm::signUpSucceeded(User *currentUser)
 {
-    CupidSession::getInstance()->setCurrentUser(currentUser);
-    emit loginAccepted();
-    viewWillDisappear();
-    close();
+    QString username = currentUser->getUserName();
+    UserType type = currentUser->getUserType();
+
+    delete currentUser;
+    currentUser = NULL;
+
+    getCurrentUserWithUserName(username, type, &currentUser);
+
+    if (currentUser != NULL)
+    {
+        emit loginAccepted();
+        viewWillDisappear();
+        close();
+    }
+    else
+        presentError(QString(INVALID_USERNAME_MESSAGE));
 }
 
 void LoginForm::slotAdministratorUserLogin()
