@@ -25,6 +25,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&profileWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&discoverProjectsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&createProjectWidget);
 
     //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
@@ -35,6 +36,14 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      this, SLOT(generateSettingsPage()));
     QObject::connect(&projectSidebar, SIGNAL(discoverProjectsClicked()),
                      this, SLOT(generateDiscoverProjectsPage()));
+    QObject::connect(&projectSidebar, SIGNAL(createProjectClicked()),
+                     this, SLOT(generateCreateProjectPage()));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
+                     &profileWidget, SLOT(handleUserContextSwitch()));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
+                     &discoverProjectsWidget, SLOT(handleUserContextSwitch()));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
+                     &settingsWidget, SLOT(handleUserContextSwitch()));
     //setup context switch handlers
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
                      &profileWidget, SLOT(handleUserContextSwitch(DetailViewType)));
@@ -42,7 +51,6 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      &discoverProjectsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
                      &settingsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
-
 }
 
 void cuPIDWindow::viewWillAppear()
@@ -122,6 +130,11 @@ void cuPIDWindow::generateSettingsPage()
 void cuPIDWindow::generateDiscoverProjectsPage()
 {
     ui->mainContentStackedWidget->setCurrentWidget(&discoverProjectsWidget);
+}
+
+void cuPIDWindow::generateCreateProjectPage()
+{
+    ui->mainContentStackedWidget->setCurrentWidget(&createProjectWidget);
 }
 
 cuPIDWindow::~cuPIDWindow()

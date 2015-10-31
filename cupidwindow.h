@@ -5,6 +5,7 @@
 #include "sidebarwidget.h"
 #include "profilewidget.h"
 #include "settingswidget.h"
+#include "createprojectwidget.h"
 #include "Models/user.h"
 #include "projectlistwidget.h"
 #include "Controllers/pppcontroller.h"
@@ -29,6 +30,7 @@ private:
 
     SideBarWidget projectSidebar;
     ProfileWidget profileWidget;
+    CreateProjectWidget createProjectWidget;
     ProjectListWidget discoverProjectsWidget;
     SettingsWidget settingsWidget;
 
@@ -96,6 +98,15 @@ public slots:
      * @return: void
     */
     void logCurrentUserOut();
+
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted after the
+     *          Create Project Button is clicked
+     * @return: void
+    */
+    void generateCreateProjectPage();
+
 };
 
 #endif // CUPIDWINDOW_H

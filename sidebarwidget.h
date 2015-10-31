@@ -70,12 +70,22 @@ signals:
     */
     void userToSwitchContextTo(DetailViewType);
 
+    /*!
+     *  @param: void
+     *   @desc: A signal emitted when the user is navigating to a differrent screen
+     * @return: void
+    */
+    void createProjectClicked();
+
 
 public slots:
     void on_btnProfile_clicked();
     void on_btnLogOut_clicked();
     void on_btnSettings_clicked();
     void on_btnDiscoverProjects_clicked();
+
+private slots:
+    void on_btnCreateProject_clicked();
 
 private:
     Ui::SideBarWidget *ui;
