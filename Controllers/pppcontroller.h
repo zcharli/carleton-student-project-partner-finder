@@ -36,7 +36,8 @@ public slots:
     void editPPP();
     void savePPP();
     void createPPP();
-    void handleContextSwitch();
+    void handleContextSwitchToView();
+    void handleContexSwitchAwayFromView();
 };
 
 #endif // PPPCONTROLLER_H

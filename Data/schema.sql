@@ -11,7 +11,7 @@ CREATE TABLE `users` (
 	`type`	INTEGER NOT NULL,
 	`ppp_id`	INTEGER,
 	`date_created`	DATETIME DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY(ppp_id) REFERENCES ppp(ppp_id)	
+	FOREIGN KEY(ppp_id) REFERENCES ppp(ppp_id)
 );
 CREATE TABLE `ppp` (
 	`ppp_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,6 +52,6 @@ CREATE TABLE `project_configurations` (
 CREATE TABLE `configurations` (
 	`config_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`text`	INTEGER NOT NULL,
-	`value`	INTEGER NOT NULL 
+	`value`	INTEGER NOT NULL
 );
 --COMMIT;

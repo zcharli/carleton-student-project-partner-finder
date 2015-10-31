@@ -12,6 +12,8 @@ class Project;
 class StudentUser : public User
 {
 
+    friend class ProjectPartnerProfile;
+
     ProjectPartnerProfile *profile;
     QVector<Project*> registeredProjects;
     int numProjectsRegistered;

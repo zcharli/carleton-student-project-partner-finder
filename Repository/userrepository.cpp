@@ -27,18 +27,22 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
 {
     QSqlQuery insertPPP(this->db);
 
-    // We need to add teammate and personal tech score here
-    insertPPP.prepare("INSERT INTO ppp (we_bs,user_id) VALUES (:we_bs,:user_id)");
+    float personalScore = 0;
+    float teamMateScore = 0;
+    Qualification::TechnicalScoreForStudentUser(static_cast<StudentUser&>(user), personalScore, teamMateScore);
+    insertPPP.prepare("INSERT INTO ppp (personal_tech_score, we_bs, teammate_tech_score) VALUES (:personal_tech_score, :we_bs, :teammate_tech_score)");
+    insertPPP.bindValue(":personal_tech_score", personalScore);
     insertPPP.bindValue(":we_bs", ppp.getQualification(userWorkEthic).getValue());
-    insertPPP.bindValue(":user_id", user.getUserId());
+    insertPPP.bindValue(":teammate_tech_score", teamMateScore);
     if(!insertPPP.exec())
     {
-        qDebug() << "userCreatedPPP error:  "<< this->db.lastError();
+        qDebug() << "userCreatedPPP error:  "<< insertPPP.lastError();
+        return insertPPP.lastError().number();
     }
 
     int pppID = 0;
     QSqlQuery getPPPId(this->db);
-    getPPPId.prepare("SELECT last_insert_rowid()");
+    getPPPId.prepare("SELECT max(ppp_id) FROM ppp;");
     if(getPPPId.exec())
     {
         if(getPPPId.next())
@@ -48,16 +52,18 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
     }
     if(pppID == 0)
     {
-        qDebug() << "Unsuccessfully retrived last PPP id inserted!"<< this->db.lastError();
+        qDebug() << "Unsuccessfully retrived last PPP id inserted!"<< getPPPId.lastError();
+        return getPPPId.lastError().number();
     }
 
     // Set the PPP since its been created
     ppp.setPPPID(pppID);
 
     // Now start the big transaction to save Qualifications
-    QString qualificationQuery;
+    //  Proper way to do this!!!!!
+    /*QString qualificationQuery;
     int i;
-    qualificationQuery += "start transactions;";
+    qualificationQuery += "begin transaction;";
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
         //  have to convert args to string first!!
@@ -72,21 +78,54 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
     insertQualifications.prepare(qualificationQuery);
     if(!insertQualifications.exec())
     {
-        qDebug() << "insertQualifications error:  "<< this->db.lastError();
+        qDebug() << "insertQualifications error:  "<< insertQualifications.lastError();
+        qDebug() << qualificationQuery;
+        return insertQualifications.lastError().number();
+    }*/
+
+
+    //  Bad but woks! ######################################
+    QString qualificationQuery;
+    int i;
+    for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
+    {
+        qualificationQuery = QString("Insert into ppp_qualifications (qualification_id,ppp_id,value) values (%1,%2,%3);").
+                arg(QString::number(i),QString::number(pppID),QString::number(ppp.getQualification(i).getValue()));
+                QSqlQuery insertQualifications(this->db);
+                insertQualifications.prepare(qualificationQuery);
+                if(!insertQualifications.exec())
+                {
+                    qDebug() << "insertQualifications error:  "<< insertQualifications.lastError();
+                    qDebug() << qualificationQuery;
+                    return insertQualifications.lastError().number();
+                }
     }
+    qualificationQuery = QString("Update users set ppp_id=%1 where user_id=%2;").
+            arg(QString::number(pppID),QString::number(user.getUserId()));
 
+    QSqlQuery insertQualifications(this->db);
+    insertQualifications.prepare(qualificationQuery);
+    if(!insertQualifications.exec())
+    {
+        qDebug() << "insertQualifications error:  "<< insertQualifications.lastError();
+        qDebug() << qualificationQuery;
+        return insertQualifications.lastError().number();
+    }
+    //#######################################################
 
-    return this->db.lastError().number();
+    //success;
+    return 0;
 }
 
 int UserRepository::fetchPPPForUser(User &user, ProjectPartnerProfile& ppp)
 {
     // This join will ensure we only return PPP qualifications if the user has a PPP
     // This also helps ensure that after a student deletes their profile, then nothing will return
-    QString fetchQuery = "Select * from ppp_qualifications p join users u on u.ppp_id=p.ppp_id where ppp_id=:id";
+    StudentUser& student= static_cast<StudentUser&>(user);
+    QString fetchQuery = "Select * from ppp_qualifications p join users u on u.ppp_id = p.ppp_id where p.ppp_id = " + QString::number(student.getFetchIDForPPP());
     QSqlQuery fetchPPP(this->db);
     fetchPPP.prepare(fetchQuery);
-    fetchPPP.bindValue(":id", (static_cast<StudentUser&>(user)).getFetchIDForPPP());
+    //fetchPPP.bindValue(":id", (static_cast<StudentUser&>(user)).getFetchIDForPPP());
     // Execute this fetch and populate the ppp's qualifications
     if(fetchPPP.exec())
     {
@@ -101,40 +140,65 @@ int UserRepository::fetchPPPForUser(User &user, ProjectPartnerProfile& ppp)
             Qualification returnedQualification((QualificationType)fetchPPP.value(0).toInt(),fetchPPP.value(2).toInt());
             ppp.changeQualification(returnedQualification);
         }
+        ppp.setPPPID(student.getFetchIDForPPP());
+
     }
     else
     {
-        qDebug() << "fetchPPPForUser error:  "<< this->db.lastError();
+        qDebug() << "fetchPPPForUser error:  "<< fetchPPP.lastError();
+        qDebug() << fetchQuery;
         return fetchPPP.lastError().number();
     }
-
     //success
     return 0;
 }
 
 int UserRepository::userUpdatedPPP(User &user, ProjectPartnerProfile &ppp)
 {
+    /*  Correct Way to do this but not working for some reason
+     *  Best bet is to loop over every insert -> This is slower
+     *
     // Create a big transaction to speed up the query
     // We update all qualification whether or not they changed
-    QString massUpdateQuery = "start transaction;";
+    QString massUpdateQuery = "begin transaction;";
     QSqlQuery updatePPPQuery(this->db);
     int i;
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
-        massUpdateQuery += QString("Update ppp_qualifications set value=%d where ppp_id=%d and qualification_id=%d;").arg(
-                    ppp.getQualification(i).getValue(), ppp.getPPPID(), ppp.getQualification(i).getType());
+        massUpdateQuery += QString("Update ppp_qualifications set value=%1 where ppp_id=%2 and qualification_id=%3;").arg(
+                    QString::number(ppp.getQualification(i).getValue()), QString::number(ppp.getPPPID()), QString::number(ppp.getQualification(i).getType()));
     }
     massUpdateQuery += "commit;";
 
     updatePPPQuery.prepare(massUpdateQuery);
     if(!updatePPPQuery.exec())
     {
-        qDebug() << "userUpdatedPPP error:  "<< this->db.lastError();
+        qDebug() << "userUpdatedPPP error:  "<< updatePPPQuery.lastError();
         return updatePPPQuery.lastError().number();
-
     }
     // Successful
+    return 0;*/
+
+    //  BAD!!!!! BUT WORKS ##########################################
+    QString massUpdateQuery;
+    QSqlQuery updatePPPQuery(this->db);
+    int i;
+    for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
+    {
+        massUpdateQuery = QString("Update ppp_qualifications set value=%1 where ppp_id=%2 and qualification_id=%3;").arg(
+                    QString::number(ppp.getQualification(i).getValue()), QString::number(ppp.getPPPID()), QString::number(ppp.getQualification(i).getType()));
+        updatePPPQuery.prepare(massUpdateQuery);
+
+        if(!updatePPPQuery.exec())
+        {
+            qDebug() << "userUpdatedPPP error:  "<< updatePPPQuery.lastError();
+            return updatePPPQuery.lastError().number();
+        }
+    }
+
+    // Successful
     return 0;
+    //##########################################
 }
 
 int UserRepository::userDeletedPPP(User &user, ProjectPartnerProfile &ppp)
@@ -177,9 +241,11 @@ int UserRepository::retrieveUserWithUsername(QString& username, User& user, int 
             //  3 -> lname
             //  4 -> type (admin/student)
             //  5 -> ppp_id
+            int id = loginQuery.value(0).toInt();
             QString fname = QString(loginQuery.value(2).toString());
             QString lname = QString(loginQuery.value(3).toString());
 
+            user.setUserId(id);
             user.setFirstName(fname);
             user.setLastName(lname);
             user.setUserName(username);

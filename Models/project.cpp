@@ -7,6 +7,7 @@ Project::Project(QString& title, QString& desc)
 {
     this->title = title;
     this->description = desc;
+    numberOfRegisteredUsers = 0;
 }
 
 Project::~Project()
