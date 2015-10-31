@@ -6,8 +6,8 @@
 CREATE TABLE `users` (
 	`user_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`username`	TEXT NOT NULL UNIQUE,
-	`fname`	TEXT NOT NULL UNIQUE,
-	`lname`	TEXT NOT NULL UNIQUE,
+	`fname`	TEXT NOT NULL,
+	`lname`	TEXT NOT NULL,
 	`type`	INTEGER NOT NULL,
 	`ppp_id`	INTEGER,
 	`date_created`	DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -15,9 +15,10 @@ CREATE TABLE `users` (
 );
 CREATE TABLE `ppp` (
 	`ppp_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`personal_tech_score` TEXT,
-	`we_bs` TEXT,
-	`teammate_tech_score` TEXT
+	`bio` TEXT,
+	`ptscore` INTEGER,
+	`we_bs` INTEGER,
+	`ttscore` INTEGER
 );
 CREATE TABLE `qualification` (
 	`qualification_id`	INTEGER PRIMARY KEY AUTOINCREMENT
@@ -34,13 +35,13 @@ CREATE TABLE `project` (
 	`project_description`	TEXT NOT NULL,
 	`date_created`	DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE `ppp_qualifications` (
 	`qualification_id`	INTEGER NOT NULL,
 	`ppp_id`	INTEGER NOT NULL,
 	`value`	INTEGER,
 	FOREIGN KEY(ppp_id) REFERENCES ppp(ppp_id)
 	FOREIGN KEY(qualification_id) REFERENCES qualification(qualification_id)
-
 );
 CREATE TABLE `project_configurations` (
 	`config_id`	INTEGER NOT NULL,

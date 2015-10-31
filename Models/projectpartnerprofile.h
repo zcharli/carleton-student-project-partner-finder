@@ -15,9 +15,13 @@ class ProjectPartnerProfile
     QString biography;
     Qualification *qualifications;
     int pppID;
+    int personalTechnicalScore;
+    int teammateTechnicalScore;
+    char workEthic;
 
 public:
     ProjectPartnerProfile(StudentUser&, QString&, Qualification*);
+    ProjectPartnerProfile(StudentUser&,int,int,char);
     ~ProjectPartnerProfile();
 
     //accessor Functions
@@ -72,11 +76,58 @@ public:
     int getPPPID();
 
     /*!
-     *       @param: id: int
-     *        @desc: sets the project partner id
+     *       @param: ppp id: int
+     *        @desc: set the project partner id
      *      @return: none
      */
-    void setPPPID(int id);
+    void setPPPID(int);
+
+    /*!
+     *       @param: none
+     *        @desc: returns the score that the user registered their PPP with
+     *      @return: personalTechnicalScore: int
+     */
+    int getPersonalTechnicalScore();
+
+    /*!
+     *       @param: personalTechnicalScore: int
+     *        @desc: sets the computed personal technical score
+     *      @return: none
+     */
+    void setPersonalTechnicalScore(int);
+
+
+    /*!
+     *       @param: none
+     *        @desc: gets the precomputed teammate technical score
+     *      @return: teammateTechnicalScore: int
+     */
+    int getTeammateTechnicalScore();
+
+
+    /*!
+     *       @param: teammateTechnicalScore: int
+     *        @desc: sets the precomputed teammate technical score
+     *      @return: none
+     */
+    void setTeammateTechnicalScore(int);
+
+
+    /*!
+     *       @param: none
+     *        @desc: gets the work ethic byte
+     *      @return: workEthic: char
+     */
+    char getWorkEthicByte();
+
+
+    /*!
+     *       @param: workEthic: char
+     *        @desc: sets the work ethic char
+     *      @return: none
+     */
+    void setWorkEthicByte(char);
+
 
 };
 
