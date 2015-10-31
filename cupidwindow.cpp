@@ -15,6 +15,8 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    pppController = NULL;
+
     // Initialize side bar widget (child of left pane)
     ui->sideBar->layout()->addWidget(&projectSidebar);
     projectSidebar.show();
@@ -24,7 +26,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&discoverProjectsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
 
-    //connects the profile button to the generateProfile page method
+    //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
                      this, SLOT(generateProfilePage()));
     QObject::connect(&projectSidebar, SIGNAL(logOutClicked()),
@@ -33,6 +35,14 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      this, SLOT(generateSettingsPage()));
     QObject::connect(&projectSidebar, SIGNAL(discoverProjectsClicked()),
                      this, SLOT(generateDiscoverProjectsPage()));
+    //setup context switch handlers
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
+                     &profileWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
+                     &discoverProjectsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
+                     &settingsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+
 }
 
 void cuPIDWindow::viewWillAppear()
@@ -62,6 +72,10 @@ void cuPIDWindow::viewWillAppear()
 void cuPIDWindow::viewWillDisappear()
 {
     CupidSession::getInstance()->deleteCurrentUser();
+    CupidSession::getInstance()->deleteCurrentProject();
+
+    delete pppController;
+    pppController = NULL;
 
     //show all hidden elements
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
@@ -91,9 +105,13 @@ void cuPIDWindow::logCurrentUserOut()
 
 void cuPIDWindow::generateProfilePage()
 {
-    pppController = new PPPController(&profileWidget);
+    if (pppController == NULL)
+    {
+        pppController = new PPPController(&profileWidget);
+    }
     //sets the current widget of maincontentStackedWidget to the profile widget
     ui->mainContentStackedWidget->setCurrentWidget(&profileWidget);
+    profileWidget.viewWillAppear();
 }
 
 void cuPIDWindow::generateSettingsPage()

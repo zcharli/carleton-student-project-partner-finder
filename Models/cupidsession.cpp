@@ -2,6 +2,13 @@
 
 CupidSession* CupidSession::singleton = NULL;
 
+CupidSession::CupidSession()
+{
+    currentUser = NULL;
+    currentPPP = NULL;
+    currentProject = NULL;
+}
+
 CupidSession* CupidSession::getInstance()
 {
     if(singleton == NULL)
@@ -20,15 +27,37 @@ void CupidSession::setCurrentUser(User* userToSet)
     currentUser = userToSet;
 }
 
+void CupidSession::setCurrentProject(Project* projectToSet)
+{
+    currentProject = projectToSet;
+}
+
 void CupidSession::deleteCurrentUser()
 {
-    delete currentUser;
-    currentUser = NULL;
+    if(currentUser)
+    {
+        delete currentUser;
+        currentUser = NULL;
+    }
+}
+
+void CupidSession::deleteCurrentProject()
+{
+    if(currentProject)
+    {
+        delete currentProject;
+        currentProject = NULL;
+    }
 }
 
 User* CupidSession::getCurrentUser()
 {
     return currentUser;
+}
+
+Project* CupidSession::getCurrentProject()
+{
+    return currentProject;
 }
 
 CupidSession::~CupidSession()

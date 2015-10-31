@@ -7,12 +7,9 @@
 //forward declarations
 class StudentUser;
 
-#define NUMBER_OF_QUALIFICATIONS 25
-
 class ProjectPartnerProfile
 {
     StudentUser& user;
-    QString biography;
     Qualification *qualifications;
     int pppID;
     int personalTechnicalScore;
@@ -20,25 +17,11 @@ class ProjectPartnerProfile
     char workEthic;
 
 public:
-    ProjectPartnerProfile(StudentUser&, QString&, Qualification*);
     ProjectPartnerProfile(StudentUser&,int,int,char);
+    ProjectPartnerProfile(StudentUser&);
     ~ProjectPartnerProfile();
 
     //accessor Functions
-    /*!
-     *       @param: none
-     *        @desc: get the biography of the PPP
-     *      @return: biography: QString&
-     */
-    QString& getBiography();
-
-    /*!
-     *       @param: newBiography: QString&
-     *        @desc: set the biography of the PPP
-     *      @return: void
-     */
-     void setBiography(QString& newBiography);
-
     /*!
      *       @param: none
      *        @desc: get the StudentUser who owns the current PPP

@@ -87,3 +87,15 @@ void ProjectListWidget::displayList()
     this->setLayout(new QHBoxLayout);
 
 }
+
+void ProjectListWidget::handleUserContextSwitch(DetailViewType type)
+{
+    if (type == DiscoverProjets)
+    {
+        //entering view
+    }
+    else
+    {
+        //Leaving view
+    }
+}

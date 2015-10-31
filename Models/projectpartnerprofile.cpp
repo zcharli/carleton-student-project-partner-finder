@@ -2,10 +2,17 @@
 #include "studentuser.h"
 #include "qualification.h"
 
-ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser, QString& bio, Qualification* qualifications):
-    user(studentUser), biography(bio)
+ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
+    user(studentUser)
 {
-    this->qualifications = qualifications;
+    if(studentUser.profile)
+    {
+        delete studentUser.profile;
+        studentUser.profile = NULL;
+    }
+    studentUser.profile = this;
+    qualifications = Qualification::DefaultQualifications();
+    pppID = 0;
 }
 
 ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore,int tscore,char we) :
@@ -13,15 +20,10 @@ ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore
 {}
 
 ProjectPartnerProfile::~ProjectPartnerProfile()
-{}
-
-QString& ProjectPartnerProfile::getBiography()
 {
-    return biography;
-}
-void ProjectPartnerProfile::setBiography(QString& newBiography)
-{
-    biography = newBiography;
+    user.profile = NULL;
+    delete qualifications;
+    qualifications = NULL;
 }
 
 StudentUser& ProjectPartnerProfile::getStudentUser()

@@ -60,6 +60,13 @@ public:
    void setUserName(QString&);
 
    /*!
+    *       @param: id: int
+    *        @desc: sets the user's id
+    *      @return: void
+    */
+   void setUserId(int);
+
+   /*!
     *       @param: none
     *        @desc: gets the user's id
     *      @return: id: int

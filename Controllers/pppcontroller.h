@@ -24,6 +24,7 @@ class PPPController : public QObject
     void setupUIForState(ProfileState);
     void populateProfileView();
     void updatePPP();
+    void retrievePPP();
 
 public:
     explicit PPPController(ProfileWidget*, QObject *parent = 0);
@@ -35,7 +36,8 @@ public slots:
     void editPPP();
     void savePPP();
     void createPPP();
-
+    void handleContextSwitchToView();
+    void handleContexSwitchAwayFromView();
 };
 
 #endif // PPPCONTROLLER_H

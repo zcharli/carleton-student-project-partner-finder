@@ -8,6 +8,7 @@
 #include <QHBoxLayout>
 #include <QString>
 #include "Models/project.h"
+#include "sidebarwidget.h"
 
 class ProjectListWidget : public QScrollArea
 {
@@ -45,7 +46,7 @@ private:
 signals:
 
 public slots:
-
+    void handleUserContextSwitch(DetailViewType);
 };
 
 #endif // PROJECTLISTWIDGET_H

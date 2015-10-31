@@ -43,6 +43,11 @@ void User::setUserName(QString& newUserName)
   userName = newUserName;
 }
 
+void User::setUserId(int newID)
+{
+    id = newID;
+}
+
 int User::getUserId()
 {
     return id;
