@@ -52,6 +52,14 @@ signals:
     */
     void discoverProjectsClicked();
 
+    /*!
+     *  @param: void
+     *   @desc: A signal emitted when the user is navigating to a differrent screen
+     * @return: void
+    */
+    void userToSwitchContext();
+
+
 public slots:
     void on_btnProfile_clicked();
     void on_btnLogOut_clicked();

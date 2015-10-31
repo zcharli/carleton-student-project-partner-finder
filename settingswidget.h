@@ -15,6 +15,10 @@ public:
     explicit SettingsWidget(QWidget *parent = 0);
     ~SettingsWidget();
 
+public slots:
+    /*! handle the user context switching from this widget to another   */
+    void handleUserContextSwitch();
+
 private:
     Ui::SettingsWidget *ui;
 };

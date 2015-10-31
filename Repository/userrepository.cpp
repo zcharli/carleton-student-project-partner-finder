@@ -1,5 +1,6 @@
 #include "userrepository.h"
 #include "Models/user.h"
+#include "Models/studentuser.h"
 #include "Models/projectpartnerprofile.h"
 #include <QSqlQuery>
 #include <QSqlQueryModel>
@@ -85,7 +86,7 @@ int UserRepository::fetchPPPForUser(User &user, ProjectPartnerProfile& ppp)
     QString fetchQuery = "Select * from ppp_qualifications p join users u on u.ppp_id=p.ppp_id where ppp_id=:id";
     QSqlQuery fetchPPP(this->db);
     fetchPPP.prepare(fetchQuery);
-    fetchPPP.bindValue(":id", ppp.getPPPID());
+    fetchPPP.bindValue(":id", (static_cast<StudentUser&>(user)).getFetchIDForPPP());
     // Execute this fetch and populate the ppp's qualifications
     if(fetchPPP.exec())
     {
@@ -104,9 +105,11 @@ int UserRepository::fetchPPPForUser(User &user, ProjectPartnerProfile& ppp)
     else
     {
         qDebug() << "fetchPPPForUser error:  "<< this->db.lastError();
+        return fetchPPP.lastError().number();
     }
 
-    return this->db.lastError().number();
+    //success
+    return 0;
 }
 
 int UserRepository::userUpdatedPPP(User &user, ProjectPartnerProfile &ppp)
@@ -127,10 +130,11 @@ int UserRepository::userUpdatedPPP(User &user, ProjectPartnerProfile &ppp)
     if(!updatePPPQuery.exec())
     {
         qDebug() << "userUpdatedPPP error:  "<< this->db.lastError();
+        return updatePPPQuery.lastError().number();
 
     }
     // Successful
-    return this->db.lastError().number();
+    return 0;
 }
 
 int UserRepository::userDeletedPPP(User &user, ProjectPartnerProfile &ppp)
@@ -146,9 +150,11 @@ int UserRepository::userDeletedPPP(User &user, ProjectPartnerProfile &ppp)
     if(!deleteQuery.exec())
     {
         qDebug() << "userDeletedPPP error:  " << this->db.lastError();
+        return deleteQuery.lastError().number();
     }
 
-    return this->db.lastError().number();
+    //successful
+    return 0;
 }
 
 int UserRepository::retrieveUserWithUsername(QString& username, User& user, int type)
@@ -179,7 +185,11 @@ int UserRepository::retrieveUserWithUsername(QString& username, User& user, int 
             user.setUserName(username);
 
            // Going to get PPP only when needed so we won't populate that now.
-           //if(loginQuery.value(4).toInt() == studentType) {}
+           if(loginQuery.value(4).toInt() == Student)
+           {
+              //set the pppIDForFetch for the StudentUser
+              static_cast<StudentUser&>(user).setFetchIDForPPP(loginQuery.value(5).toInt());
+           }
         }
         else
         {

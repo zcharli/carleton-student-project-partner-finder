@@ -1,6 +1,7 @@
 #include "pppcontroller.h"
 #include "Models/cupidsession.h"
 #include "Models/studentuser.h"
+#include "Repository/storage.h"
 
 
 PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
@@ -12,6 +13,34 @@ PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
     QObject::connect(profileView, SIGNAL(userToEditPPP()), this, SLOT(editPPP()));
     QObject::connect(profileView, SIGNAL(userToSavePPP()), this, SLOT(savePPP()));
     QObject::connect(profileView, SIGNAL(userToCreatePPP()), this, SLOT(createPPP()));
+    QObject::connect(profileView, SIGNAL(userToLeavePPP()), this, SLOT(handleContextSwitch()));
+
+    retrievePPP();
+}
+
+void PPPController::retrievePPP()
+{
+    StudentUser *currentUser = (StudentUser*)CupidSession::getInstance()->getCurrentUser();
+    //try checking the session to see if the profile has been retrieved
+    profile = CupidSession::getInstance()->getCurrentProfile();
+    if(!profile && ((StudentUser*)currentUser)->getFetchIDForPPP() != 0)
+    {
+        profile = new ProjectPartnerProfile(*currentUser);
+        if(Storage::defaultStorage().executeActionForPPP(fetchPPP, *currentUser, *profile) != 0)
+        {
+            //TODO: Error occurred on retrieving PPP
+            delete profile;
+            profile = NULL;
+        }
+
+        //Save the current Profile to the session
+        CupidSession::getInstance()->setCurrentProfile(profile);
+    }
+    else
+    {
+        //  current user has no profile
+    }
+
 
     didSetProfile();
 }
@@ -30,6 +59,11 @@ void PPPController::didSetProfile()
 }
 
 PPPController::~PPPController()
+{
+
+}
+
+void PPPController::handleContextSwitch()
 {
 
 }
@@ -88,7 +122,7 @@ void PPPController::setupUIForState(ProfileState state)
 
 void PPPController::populateProfileView()
 {
-    if(profile)
+    if(profile && profile->getPPPID() != 0) //User has a valid PPP
     {
         //setup the profileView with PPP details
         profileView->getUI().spinUserCGPA->setValue(profile->getQualification(userCGPA).getValue());
@@ -164,6 +198,10 @@ void PPPController::populateProfileView()
         profileView->sliderTeammateVersionControl->setValue(profile->getQualification(teamMateVersionControl).getValue());
         profileView->sliderTeammateWebDevelopment->setValue(profile->getQualification(teamMateWebDevelopment).getValue());
     }
+    else
+    {
+        profileView->setUpDefault();
+    }
 }
 
 void PPPController::enableInteractions(bool shouldEnable)
@@ -208,13 +246,19 @@ void PPPController::editPPP()
 
 void PPPController::savePPP()
 {
-    //TODO: Save PPP here
+    updatePPP();
+
+    //TODO: SavePPP
+
     setupUIForState(Viewing);
 }
 
 void PPPController::createPPP()
 {
-    //TODO: Create empty profile here
+    StudentUser *currentUser = (StudentUser *)CupidSession::getInstance()->getCurrentUser();
+    profile = new ProjectPartnerProfile(*currentUser);
+
+
     setupUIForState(Editing);
 }
 
@@ -287,7 +331,5 @@ void PPPController::updatePPP()
         profile->changeQualification(Qualification(teamMateSoftwareDocumentation, profileView->sliderTeammateSoftwareDocumentation->getValue()));
         profile->changeQualification(Qualification(teamMateNetworkComputing, profileView->sliderTeammateNetworkComputing->getValue()));
         profile->changeQualification(Qualification(teamMateWebDevelopment, profileView->sliderTeammateWebDevelopment->getValue()));
-
-        //TODO: also save PPP here
     }
 }

@@ -2,6 +2,7 @@
 #define QUALIFICATION_H
 
 #define NUMBER_OF_WORK_ETHICS_QUALIFICATIONS 8
+#define NUMBER_OF_QUALIFICATIONS 25
 
 enum QualificationType
 {
@@ -29,6 +30,7 @@ enum QualificationType
     teamMateNetworkComputing,
     teamMateVersionControl,
     teamMateWebDevelopment,
+    noneType
 };
 
 enum WorkEthicQualificationMapping
@@ -49,7 +51,12 @@ class Qualification
     QualificationType type;
 
 public:
-    Qualification(QualificationType, int);
+    Qualification(QualificationType=noneType, int=0);
+
+    /*!     returns a qualifications array defaulted to the correct indexes that match
+     *      The QualificationType. the values are initialized to zero
+     */
+    static Qualification* DefaultQualifications();
 
     /*!
      *  @param:   arrayOfMappings: WorkEthicQualificationMapping*

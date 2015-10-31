@@ -41,6 +41,7 @@ signals:
 public slots:
     void on_btnRegistration_clicked();
     void on_btnStartAlgo_clicked();
+    void handleUserContextSwitch();
 
 private:
     Ui::ProjectDetails *ui;

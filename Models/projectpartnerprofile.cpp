@@ -2,22 +2,15 @@
 #include "studentuser.h"
 #include "qualification.h"
 
-ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser, QString& bio, Qualification* qualifications):
-    user(studentUser), biography(bio)
+ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
+    user(studentUser)
 {
-    this->qualifications = qualifications;
+    qualifications = Qualification::DefaultQualifications();
 }
 
 ProjectPartnerProfile::~ProjectPartnerProfile()
-{}
+{
 
-QString& ProjectPartnerProfile::getBiography()
-{
-    return biography;
-}
-void ProjectPartnerProfile::setBiography(QString& newBiography)
-{
-    biography = newBiography;
 }
 
 StudentUser& ProjectPartnerProfile::getStudentUser()

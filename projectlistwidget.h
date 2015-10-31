@@ -45,7 +45,7 @@ private:
 signals:
 
 public slots:
-
+    void handleUserContextSwitch();
 };
 
 #endif // PROJECTLISTWIDGET_H
