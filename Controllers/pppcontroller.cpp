@@ -3,6 +3,8 @@
 #include "Models/studentuser.h"
 #include "Repository/storage.h"
 
+#include <QDebug>
+
 
 PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
     QObject(parent)
@@ -13,18 +15,23 @@ PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
     QObject::connect(profileView, SIGNAL(userToEditPPP()), this, SLOT(editPPP()));
     QObject::connect(profileView, SIGNAL(userToSavePPP()), this, SLOT(savePPP()));
     QObject::connect(profileView, SIGNAL(userToCreatePPP()), this, SLOT(createPPP()));
-    QObject::connect(profileView, SIGNAL(userToLeavePPP()), this, SLOT(handleContextSwitch()));
+    QObject::connect(profileView, SIGNAL(userToLeavePPP()), this, SLOT(handleContexSwitchAwayFromView()));
+    QObject::connect(profileView, SIGNAL(userToViewPPP()), this, SLOT(handleContextSwitchToView()));
+
 
     retrievePPP();
 }
 
 void PPPController::retrievePPP()
 {
+    profile = NULL;
+
     StudentUser *currentUser = (StudentUser*)CupidSession::getInstance()->getCurrentUser();
     //try checking the session to see if the profile has been retrieved
-    profile = CupidSession::getInstance()->getCurrentProfile();
+    profile = currentUser->getProfile();
     if(!profile && ((StudentUser*)currentUser)->getFetchIDForPPP() != 0)
     {
+        //User has a profile in the database so we need to fetch it.
         profile = new ProjectPartnerProfile(*currentUser);
         if(Storage::defaultStorage().executeActionForPPP(fetchPPP, *currentUser, *profile) != 0)
         {
@@ -32,9 +39,10 @@ void PPPController::retrievePPP()
             delete profile;
             profile = NULL;
         }
-
-        //Save the current Profile to the session
-        CupidSession::getInstance()->setCurrentProfile(profile);
+        else
+        {
+            //Success
+        }
     }
     else
     {
@@ -63,9 +71,17 @@ PPPController::~PPPController()
 
 }
 
-void PPPController::handleContextSwitch()
+void PPPController::handleContextSwitchToView()
 {
+    retrievePPP();
+}
 
+void PPPController::handleContexSwitchAwayFromView()
+{
+    //Remove reference to current profile if any
+    profile = NULL;
+    profileView->setUpDefault();
+    setupUIForState(NoProfile);
 }
 
 void PPPController::setupUIForState(ProfileState state)
@@ -78,41 +94,41 @@ void PPPController::setupUIForState(ProfileState state)
             profileView->getUI().noProfileView->setHidden(true);
             profileView->getUI().myProfileWidget->setHidden(false);
 
-            //disableAllInteractions
-            enableInteractions(false);
-
             //hide all other buttons except edit
             profileView->getUI().btnSave->setHidden(true);
             profileView->getUI().btnEditPPP->setHidden(false);
             profileView->getUI().btnCreatePPP->setHidden(true);
             populateProfileView();
+
+            //disableAllInteractions
+            enableInteractions(false);
             break;
         case Editing:
             //choose which main view to display
             profileView->getUI().noProfileView->setHidden(true);
             profileView->getUI().myProfileWidget->setHidden(false);
 
-            //enableAllInteractions
-            enableInteractions(true);
-
             //hide all other buttons except save
             profileView->getUI().btnSave->setHidden(false);
             profileView->getUI().btnEditPPP->setHidden(true);
             profileView->getUI().btnCreatePPP->setHidden(true);
             populateProfileView();
+
+            //disableAllInteractions
+            enableInteractions(true);
             break;
         case NoProfile:
             //choose which main view to display
             profileView->getUI().noProfileView->setHidden(false);
             profileView->getUI().myProfileWidget->setHidden(true);
 
-            //enableAllInteractions
-            enableInteractions(true);
-
             //hide all other buttons except save
             profileView->getUI().btnSave->setHidden(true);
             profileView->getUI().btnEditPPP->setHidden(true);
             profileView->getUI().btnCreatePPP->setHidden(false);
+
+            //enableAllInteractions
+            enableInteractions(true);
             break;
         default:
             break;
@@ -125,7 +141,7 @@ void PPPController::populateProfileView()
     if(profile && profile->getPPPID() != 0) //User has a valid PPP
     {
         //setup the profileView with PPP details
-        profileView->getUI().spinUserCGPA->setValue(profile->getQualification(userCGPA).getValue());
+        profileView->getUI().spinUserCGPA->setValue(profile->getQualification(userCGPA).getValue()/(float)10);
         profileView->sliderUserOO->setValue(profile->getQualification(userOO).getValue());
         profileView->sliderUserUI->setValue(profile->getQualification(userUI).getValue());
         profileView->sliderUserScripting->setValue(profile->getQualification(userScripting).getValue());
@@ -241,14 +257,50 @@ void PPPController::enableInteractions(bool shouldEnable)
 
 void PPPController::editPPP()
 {
-    setupUIForState(Editing);
+    if (profile)
+    {
+        setupUIForState(Editing);
+    }
+    else
+    {
+        //  Don't know when this will be the case but it's good to check
+        //TODO: NO PROFILE ERROR
+        qDebug() <<"NO PROFILE FOR EDITING";
+    }
 }
 
 void PPPController::savePPP()
 {
     updatePPP();
 
+    StudentUser *user = (StudentUser*)CupidSession::getInstance()->getCurrentUser();
+
     //TODO: SavePPP
+    if(profile->getPPPID() == 0)
+    {
+        //new PPP account
+        if(Storage::defaultStorage().executeActionForPPP(createdPPP, *user, *profile) == 0)
+        {
+            //TODO: SAVE SUCCESSFUL Message
+        }
+        else
+        {
+            //TODO: SAVE ERROR Message
+        }
+    }
+    else
+    {
+        //updated PPP
+        if(Storage::defaultStorage().executeActionForPPP(updatedPPP, *user, *profile) == 0)
+        {
+             //TODO: UPDATE SUCCESSFUL MESSAGE
+        }
+        else
+        {
+            //TODO: UPDATE ERROR MESSAGE
+        }
+
+    }
 
     setupUIForState(Viewing);
 }
@@ -257,7 +309,6 @@ void PPPController::createPPP()
 {
     StudentUser *currentUser = (StudentUser *)CupidSession::getInstance()->getCurrentUser();
     profile = new ProjectPartnerProfile(*currentUser);
-
 
     setupUIForState(Editing);
 }
@@ -268,7 +319,7 @@ void PPPController::updatePPP()
     if(profile)
     {
         //extract all updated values and modify the configurations
-        profile->changeQualification(Qualification(userCGPA, profileView->getUI().spinUserCGPA->value()));
+        profile->changeQualification(Qualification(userCGPA, (profileView->getUI().spinUserCGPA->value())*10)); //multiply by 10 because of the decimal
         profile->changeQualification(Qualification(userOO, profileView->sliderUserOO->getValue()));
         profile->changeQualification(Qualification(userUI, profileView->sliderUserUI->getValue()));
         profile->changeQualification(Qualification(userScripting, profileView->sliderUserScripting->getValue()));
@@ -282,7 +333,7 @@ void PPPController::updatePPP()
         profile->changeQualification(Qualification(userWebDevelopment, profileView->sliderUserWebDevelopment->getValue()));
 
         //loop over all 8 work ethic qualifications
-        bool workEthics[NUMBER_OF_WORK_ETHICS_QUALIFICATIONS];
+        int workEthics[NUMBER_OF_WORK_ETHICS_QUALIFICATIONS];
         for (int i = 0; i < NUMBER_OF_WORK_ETHICS_QUALIFICATIONS; i++)
         {
             bool isChecked = false;
@@ -299,23 +350,23 @@ void PPPController::updatePPP()
                     isChecked = profileView->getUI().chkProactive->isChecked();
                     break;
                 case efficientBit:
-                    isChecked = profileView->getUI().chkProactive->isChecked();
+                    isChecked = profileView->getUI().chkEfficient->isChecked();
                     break;
                 case humorBit:
-                    isChecked = profileView->getUI().chkProactive->isChecked();
+                    isChecked = profileView->getUI().chkHumour->isChecked();
                     break;
                 case impulsiveBit:
-                    isChecked = profileView->getUI().chkProactive->isChecked();
+                    isChecked = profileView->getUI().chkImpulsive->isChecked();
                     break;
                 case flexibleBit:
-                    isChecked = profileView->getUI().chkProactive->isChecked();
+                    isChecked = profileView->getUI().chkFlexible->isChecked();
                     break;
                 case hardworkingBit:
-                    isChecked = profileView->getUI().chkProactive->isChecked();
+                    isChecked = profileView->getUI().chkHardworking->isChecked();
                     break;
             }
 
-            workEthics[i] = isChecked;
+            workEthics[i] = isChecked ? 1 : 0;
         }
         //create the workEthic qualification
         Qualification workEthicQualification = Qualification::WorkEthicQualificationFromMapping(workEthics);
@@ -330,6 +381,7 @@ void PPPController::updatePPP()
         profile->changeQualification(Qualification(teamMateComputerSecurity, profileView->sliderTeammateComputerSecurity->getValue()));
         profile->changeQualification(Qualification(teamMateSoftwareDocumentation, profileView->sliderTeammateSoftwareDocumentation->getValue()));
         profile->changeQualification(Qualification(teamMateNetworkComputing, profileView->sliderTeammateNetworkComputing->getValue()));
+        profile->changeQualification(Qualification(teamMateVersionControl, profileView->sliderTeammateVersionControl->getValue()));
         profile->changeQualification(Qualification(teamMateWebDevelopment, profileView->sliderTeammateWebDevelopment->getValue()));
     }
 }

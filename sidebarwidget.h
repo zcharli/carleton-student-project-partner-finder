@@ -4,6 +4,17 @@
 #include <QWidget>
 #include "ui_sidebarwidget.h"  //Side effect of creating a getter to the ui element of the class, but this makes things easier
 
+enum DetailViewType
+{
+    DiscoverProjets = 0,
+    MyProjects,
+    CreateProject,
+    Profile,
+    Settings,
+    ProjectDetailType,
+    Logout
+};
+
 namespace Ui {
 class SideBarWidget;
 }
@@ -57,7 +68,7 @@ signals:
      *   @desc: A signal emitted when the user is navigating to a differrent screen
      * @return: void
     */
-    void userToSwitchContext();
+    void userToSwitchContextTo(DetailViewType);
 
     /*!
      *  @param: void

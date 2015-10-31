@@ -32,11 +32,6 @@ void CupidSession::setCurrentProject(Project* projectToSet)
     currentProject = projectToSet;
 }
 
-void CupidSession::setCurrentProfile(ProjectPartnerProfile* profileToSet)
-{
-    currentPPP = profileToSet;
-}
-
 void CupidSession::deleteCurrentUser()
 {
     if(currentUser)
@@ -55,15 +50,6 @@ void CupidSession::deleteCurrentProject()
     }
 }
 
-void CupidSession::deleteCurrentProfile()
-{
-    if(currentPPP)
-    {
-        delete currentPPP;
-        currentPPP = NULL;
-    }
-}
-
 User* CupidSession::getCurrentUser()
 {
     return currentUser;
@@ -72,11 +58,6 @@ User* CupidSession::getCurrentUser()
 Project* CupidSession::getCurrentProject()
 {
     return currentProject;
-}
-
-ProjectPartnerProfile* CupidSession::getCurrentProfile()
-{
-    return currentPPP;
 }
 
 CupidSession::~CupidSession()

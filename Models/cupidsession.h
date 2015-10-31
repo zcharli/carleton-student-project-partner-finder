@@ -31,13 +31,6 @@ public:
     void setCurrentProject(Project*);
 
     /*!
-     *       @param: currentUser:
-     *        @desc: sets the current profile for session
-     *      @return: void
-     */
-    void setCurrentProfile(ProjectPartnerProfile*);
-
-    /*!
      *       @param: none
      *        @desc: free the current user from memory, ready to add a new user.
      *      @return: void
@@ -50,13 +43,6 @@ public:
      *      @return: void
      */
     void deleteCurrentProject();
-
-    /*!
-     *       @param: none
-     *        @desc: free the current profile from memory, ready to add a new ppp.
-     *      @return: void
-     */
-    void deleteCurrentProfile();
 
     /*!
      *       @param: none

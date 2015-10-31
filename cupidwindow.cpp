@@ -15,6 +15,8 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    pppController = NULL;
+
     // Initialize side bar widget (child of left pane)
     ui->sideBar->layout()->addWidget(&projectSidebar);
     projectSidebar.show();
@@ -42,7 +44,13 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      &discoverProjectsWidget, SLOT(handleUserContextSwitch()));
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
                      &settingsWidget, SLOT(handleUserContextSwitch()));
-
+    //setup context switch handlers
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
+                     &profileWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
+                     &discoverProjectsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
+                     &settingsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
 }
 
 void cuPIDWindow::viewWillAppear()
@@ -72,6 +80,10 @@ void cuPIDWindow::viewWillAppear()
 void cuPIDWindow::viewWillDisappear()
 {
     CupidSession::getInstance()->deleteCurrentUser();
+    CupidSession::getInstance()->deleteCurrentProject();
+
+    delete pppController;
+    pppController = NULL;
 
     //show all hidden elements
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
@@ -101,9 +113,13 @@ void cuPIDWindow::logCurrentUserOut()
 
 void cuPIDWindow::generateProfilePage()
 {
-    pppController = new PPPController(&profileWidget);
+    if (pppController == NULL)
+    {
+        pppController = new PPPController(&profileWidget);
+    }
     //sets the current widget of maincontentStackedWidget to the profile widget
     ui->mainContentStackedWidget->setCurrentWidget(&profileWidget);
+    profileWidget.viewWillAppear();
 }
 
 void cuPIDWindow::generateSettingsPage()
