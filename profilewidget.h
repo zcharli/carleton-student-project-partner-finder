@@ -21,6 +21,22 @@ public:
 
     Ui::ProfileWidget& getUI();
 
+    /*!
+     *       @param: none
+     *        @desc: all setup that needs to be done
+     *               before this object appears on screen to the user.
+     *      @return: void
+     */
+    void viewWillAppear();
+
+    /*!
+     *       @param: none
+     *        @desc: all cleanup that needs to be done before
+     *               this view leaves the screen
+     *      @return: void
+     */
+    void viewWillDisappear();
+
     /*
      * All of the custom sliders required for User Coding and technical knowledge
      */
@@ -54,11 +70,13 @@ public:
     int numBoxSelected;
 
     void enableDisableCheckBoxes();
+    void setUpDefault();
 
 signals:
     void userToEditPPP();
     void userToSavePPP();
     void userToCreatePPP();
+    void userToLeavePPP();
 
 private:
     void didSetProfile();
@@ -86,6 +104,8 @@ private slots:
     void on_chkOrganized_clicked();
 
     void on_chkDependable_clicked();
+
+    void handleUserContextSwitch();
 
 private:
     Ui::ProfileWidget *ui;

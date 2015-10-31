@@ -87,3 +87,8 @@ void ProjectListWidget::displayList()
     this->setLayout(new QHBoxLayout);
 
 }
+
+void ProjectListWidget::handleUserContextSwitch()
+{
+
+}

@@ -84,3 +84,8 @@ void ProjectDetails::on_btnStartAlgo_clicked()
     // Start the matching algorithm
     emit startAlgoClicked();
 }
+
+void ProjectDetails::handleUserContextSwitch()
+{
+
+}

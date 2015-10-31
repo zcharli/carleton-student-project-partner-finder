@@ -6,6 +6,18 @@ Qualification::Qualification(QualificationType type, int value)
     this->value = value;
 }
 
+Qualification* Qualification::DefaultQualifications()
+{
+    Qualification *array = new Qualification[NUMBER_OF_QUALIFICATIONS];
+
+    for (int i = 0; i < NUMBER_OF_QUALIFICATIONS; i++)
+    {
+        array[(QualificationType)i] = noneType;
+    }
+
+    return array;
+}
+
 Qualification Qualification::WorkEthicQualificationFromMapping(bool* mapping)
 {
     Qualification qualification(userWorkEthic, 0);

@@ -1,6 +1,8 @@
 #include "profilewidget.h"
 #include "Models/qualification.h"
 
+#define DEFAULT_VALUE 0
+
 ProfileWidget::ProfileWidget(QWidget *parent):
     QWidget(parent),
     ui(new Ui::ProfileWidget)
@@ -66,6 +68,87 @@ ProfileWidget::ProfileWidget(QWidget *parent):
     ui->formLayout_3->addRow(new QLabel("Version Control\nExperience"), sliderTeammateVersionControl);
     ui->formLayout_3->addRow(new QLabel("Web Development\nSkills"), sliderTeammateWebDevelopment);
     numBoxSelected = 0;
+
+    viewWillAppear();
+}
+
+
+void ProfileWidget::viewWillAppear()
+{
+    //setup Profile for current Profile
+}
+
+
+void ProfileWidget::viewWillDisappear()
+{
+    //set all views to default state
+    setUpDefault();
+}
+
+void ProfileWidget::setUpDefault()
+{
+    ui->spinUserCGPA->setValue(DEFAULT_VALUE);
+    this->sliderUserOO->setValue(DEFAULT_VALUE);
+    this->sliderUserUI->setValue(DEFAULT_VALUE);
+    this->sliderUserScripting->setValue(DEFAULT_VALUE);
+    this->sliderUserDB->setValue(DEFAULT_VALUE);
+    this->sliderUserDesignPatterns->setValue(DEFAULT_VALUE);
+    this->sliderUserDataStructures->setValue(DEFAULT_VALUE);
+    this->sliderUserComputerSecurity->setValue(DEFAULT_VALUE);
+    this->sliderUserSoftwareDocumentation->setValue(DEFAULT_VALUE);
+    this->sliderUserNetworkComputing->setValue(DEFAULT_VALUE);
+    this->sliderUserVersionControl->setValue(DEFAULT_VALUE);
+    this->sliderUserWebDevelopment->setValue(DEFAULT_VALUE);
+
+    //loop over all 8 work ethic qualifications
+    this->numBoxSelected = 0;
+    for (int i = 0; i < NUMBER_OF_WORK_ETHICS_QUALIFICATIONS; i++)
+    {
+        QCheckBox *currentChkBox = NULL;
+        bool isChecked = false;
+
+        switch(i)
+        {
+            case dependableBit:
+                currentChkBox = ui->chkDependable;
+                break;
+            case organizedBit:
+                currentChkBox = ui->chkOrganized;
+                break;
+            case proactiveBit:
+                currentChkBox = ui->chkProactive;
+                break;
+            case efficientBit:
+                currentChkBox = ui->chkEfficient;
+                break;
+            case humorBit:
+                currentChkBox = ui->chkHumour;
+                break;
+            case impulsiveBit:
+                currentChkBox = ui->chkImpulsive;
+                break;
+            case flexibleBit:
+                currentChkBox = ui->chkFlexible;
+                break;
+            case hardworkingBit:
+                currentChkBox = ui->chkHardworking;
+                break;
+        }
+
+        currentChkBox->setChecked(isChecked);
+    }
+
+    this->sliderTeammateOO->setValue(DEFAULT_VALUE);
+    this->sliderTeammateUI->setValue(DEFAULT_VALUE);
+    this->sliderTeammateScripting->setValue(DEFAULT_VALUE);
+    this->sliderTeammateDB->setValue(DEFAULT_VALUE);
+    this->sliderTeammateDesignPatterns->setValue(DEFAULT_VALUE);
+    this->sliderTeammateDataStructures->setValue(DEFAULT_VALUE);
+    this->sliderTeammateComputerSecurity->setValue(DEFAULT_VALUE);
+    this->sliderTeammateSoftwareDocumentation->setValue(DEFAULT_VALUE);
+    this->sliderTeammateNetworkComputing->setValue(DEFAULT_VALUE);
+    this->sliderTeammateVersionControl->setValue(DEFAULT_VALUE);
+    this->sliderTeammateWebDevelopment->setValue(DEFAULT_VALUE);
 }
 
 ProfileWidget::~ProfileWidget()
@@ -210,4 +293,10 @@ void ProfileWidget::on_btnEditPPP_clicked()
 void ProfileWidget::on_btnCreatePPP_clicked()
 {
     emit userToCreatePPP();
+}
+
+void ProfileWidget::handleUserContextSwitch()
+{
+    emit userToLeavePPP();
+
 }

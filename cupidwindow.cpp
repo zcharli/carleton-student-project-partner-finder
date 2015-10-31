@@ -24,7 +24,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&discoverProjectsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
 
-    //connects the profile button to the generateProfile page method
+    //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
                      this, SLOT(generateProfilePage()));
     QObject::connect(&projectSidebar, SIGNAL(logOutClicked()),
@@ -33,6 +33,13 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      this, SLOT(generateSettingsPage()));
     QObject::connect(&projectSidebar, SIGNAL(discoverProjectsClicked()),
                      this, SLOT(generateDiscoverProjectsPage()));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
+                     &profileWidget, SLOT(handleUserContextSwitch()));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
+                     &discoverProjectsWidget, SLOT(handleUserContextSwitch()));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
+                     &settingsWidget, SLOT(handleUserContextSwitch()));
+
 }
 
 void cuPIDWindow::viewWillAppear()
