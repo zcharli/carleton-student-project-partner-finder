@@ -18,15 +18,15 @@ int Configuration::getValue()
 }
 
 
-void setValue(int newValue)
+void Configuration::setValue(int newValue)
 {
     value = newValue;
 }
 
 
-Configuration* Configuration::DefaultConfiguration()
+Configuration* Configuration::DefaultConfigurations()
 {
-    Configuration *configs = new Configration[NUMBER_OF_CONFIGURATIONS];
+    Configuration *configs = new Configuration[NUMBER_OF_CONFIGURATIONS];
 
     for (int i = 0; i < NUMBER_OF_CONFIGURATIONS; i++)
         configs[i] = Configuration();

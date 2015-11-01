@@ -29,8 +29,8 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
 
     if(!createProject.exec())
     {
-        qDebug() << "userCreatedProject error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "userCreatedProject error:  "<< createProject.lastError();
+        return createProject.lastError().number();
     }
 
     int projectID = 0;
@@ -45,11 +45,12 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
     }
     else
     {
-        qDebug() << "getProjectID error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "getProjectID error:  "<< getProjectID.lastError();
+        return getProjectID.lastError().number();
     }
 
     project.setProjectId(projectID);
+    qDebug() << "Projec ID" + project.getProjectId();
 
     // Register the admin user for this project since ONLY ADMIN can create projects
     QString associateAdmin = "Insert into project_registration (project_id, user_id) values (:pid,:uid)";
@@ -59,8 +60,8 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
     bindProjectToAdmin.bindValue(":uid",user.getUserId());
     if(!bindProjectToAdmin.exec())
     {
-        qDebug() << "bindProjectToAdmin error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "bindProjectToAdmin error:  "<< bindProjectToAdmin.lastError();
+        return bindProjectToAdmin.lastError().number();
     }
 
 
@@ -92,8 +93,8 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
     }
     else
     {
-        qDebug() << "fetchProject error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "fetchProject error:  "<< fetchProject.lastError();
+        return fetchProject.lastError().number();
     }
 
     // Grab the number of users who are registered in this project
@@ -111,8 +112,8 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
     }
     else
     {
-        qDebug() << "fetchNumRegistered error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "fetchNumRegistered error:  "<< fetchNumRegistered.lastError();
+        return fetchNumRegistered.lastError().number();
     }
 
     return 0;
@@ -136,8 +137,8 @@ int ProjectRepository::userUpdatedProject(User &user, Project &project)
     updateProject.bindValue(":id",project.getProjectId());
     if(!updateProject.exec())
     {
-        qDebug() << "updateProject error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "updateProject error:  "<< updateProject.lastError();
+        return updateProject.lastError().number();
     }
 
     return 0;
@@ -181,8 +182,8 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
             }
             else
             {
-                qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< this->db.lastError();
-                return this->db.lastError().number();
+                qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< fetchNumRegistered.lastError();
+                return fetchNumRegistered.lastError().number();
             }
             ++tracker;
             projects.append(projectListElement);
@@ -190,8 +191,8 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
     }
     else
     {
-        qDebug() << "fetchAllProjects error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "fetchAllProjects error:  "<< fetchAllProjects.lastError();
+        return fetchAllProjects.lastError().number();
     }
 
     return 0;
@@ -234,8 +235,8 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
             }
             else
             {
-                qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< this->db.lastError();
-                return this->db.lastError().number();
+                qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< fetchNumRegistered.lastError();
+                return fetchNumRegistered.lastError().number();
             }
             ++tracker;
             projects.append(projectListElement);
@@ -243,8 +244,8 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
     }
     else
     {
-        qDebug() << "fetchProject error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "fetchProject error:  "<< fetchProject.lastError();
+        return fetchProject.lastError().number();
     }
 
     return 0;
@@ -266,8 +267,8 @@ int ProjectRepository::userRegisteredInProject(User &user, Project &project)
     registerUser.bindValue(":uid",project.getProjectId());
     if(!registerUser.exec())
     {
-        qDebug() << "registerUser error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "registerUser error:  "<< registerUser.lastError();
+        return registerUser.lastError().number();
     }
 
     // Increment the number of students that are registered now that have just registered one
@@ -293,8 +294,8 @@ int ProjectRepository::userUnregisteredFromProject(User &user, Project &project)
     unRegisterUser.bindValue(":uid",project.getProjectId());
     if(!unRegisterUser.exec())
     {
-        qDebug() << "unRegisterUser error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "unRegisterUser error:  "<< unRegisterUser.lastError();
+        return unRegisterUser.lastError().number();
     }
 
     // Decrement the number of students that are registered now that have just unregistered one
@@ -353,8 +354,8 @@ int ProjectRepository::fetchPPPsForProject(User &user, Project &project)
     }
     else
     {
-       qDebug() << "fetchUsersRegistered error:  "<< this->db.lastError();
-       return this->db.lastError().number();
+       qDebug() << "fetchUsersRegistered error:  "<< fetchUsersRegistered.lastError();
+       return fetchUsersRegistered.lastError().number();
     }
 
     return 0;

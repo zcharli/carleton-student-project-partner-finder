@@ -14,15 +14,29 @@ class ProjectDetails : public QWidget
     Q_OBJECT
 
 public:
-    ProjectDetails(Project*, QWidget *parent = 0);
+    ProjectDetails(QWidget *parent = 0);
     ~ProjectDetails();
 
     /*!
      *  @param: none
-     *   @desc: populates the current project data into the view
+     *   @desc: all setup for this VC done here
      * @return: void
     */
     void viewWillAppear();
+
+    /*!
+     *  @param: none
+     *   @desc: all clean up for this VC done here
+     * @return: void
+    */
+    void viewWillDisappear();
+
+    /*!
+     *  @param: none
+     *   @desc: set the current Project to be viewed
+     * @return: void
+    */
+    void setProject(Project*);
 
 signals:
     /*!
@@ -39,15 +53,27 @@ signals:
     */
     void startAlgoClicked();
 
+    /*!
+     *  @param: void
+     *   @desc: A signal emitted when the edit Project button is clicked
+     * @return: void
+    */
+    void editProjectClicked();
+
 public slots:
     void on_btnRegistration_clicked();
     void on_btnStartAlgo_clicked();
+    void on_btnEditProject_clicked();
     void handleUserContextSwitch(DetailViewType);
+    void userToViewProject();
 
 private:
     Ui::ProjectDetails *ui;
-    Project* projectViewing;
+    Project* project;
     bool isRegistered;
+
+    void didSetProject();
+    void updateUI();
 };
 
 #endif // PROJECTDETAILS_H

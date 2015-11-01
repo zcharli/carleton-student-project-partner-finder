@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QString>
 #include "Models/project.h"
+#include "sidebarwidget.h"
 
 namespace Ui {
 class CreateProjectWidget;
@@ -40,10 +41,12 @@ public:
      */
     void viewWillDisappear();
 
+signals:
+    void createProjectSucceeded();
 
 private slots:
-
     void on_btnSave_clicked();
+    void handleUserContextSwitch(DetailViewType type);
 
 private:
     Ui::CreateProjectWidget *ui;

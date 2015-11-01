@@ -1,6 +1,9 @@
 #include "createprojectwidget.h"
 #include "ui_createprojectwidget.h"
 #include "Repository/storage.h"
+#include "Models/user.h"
+#include "Models/cupidsession.h"
+#include <QDebug>
 
 CreateProjectWidget::CreateProjectWidget(QWidget *parent) :
     QWidget(parent),
@@ -16,38 +19,24 @@ CreateProjectWidget::CreateProjectWidget(QWidget *parent) :
     viewWillAppear();
 }
 
-void CreateProjectWidget::setUpNewProject()
-{
-    if(project != NULL)
-    {
-        delete project;
-        project = NULL;
-    }
-
-    QString title = "";
-    QString description = "";
-    project = new Project(title, description);
-}
-
 
 void CreateProjectWidget::viewWillAppear()
 {
-    setUpNewProject();
+    ui->txtProjectTitle->setText("");
+    ui->txtProjectDesc->setText("");
 }
 
 void CreateProjectWidget::viewWillDisappear()
 {
-    if(profile != NULL)
-    {
-        delete profile;
-        project = NULL;
-    }
+    ui->txtProjectTitle->setText("");
+    ui->txtProjectDesc->setText("");
+    project = NULL;
 }
 
 void CreateProjectWidget::saveNewProject()
 {
     QString title = ui->txtProjectTitle->text();
-    QString description = ui->txtProjectDesc->text();
+    QString description = ui->txtProjectDesc->toPlainText();
     int sizeConfiguration = ui->teamSizeSpinBox->value();
 
     if (title == "" || description == "")
@@ -61,9 +50,30 @@ void CreateProjectWidget::saveNewProject()
         return;
     }
 
-    project->setTitle(title);
-    project->setDescription(description);
-    project->
+    project = new Project(title, description);
+    project->changeConfiguration(Configuration(TeamSize, sizeConfiguration));
+
+    //Save project to database
+    User *user = CupidSession::getInstance()->getCurrentUser();
+    QVector<Project*> projects;
+    projects.append(project);
+
+    if (Storage::defaultStorage().executeActionForProject(createdProject, *user, projects) != 0)
+    {
+        //TODO: Error occurred
+        qDebug() << "Save failed";
+        delete project;
+        project = NULL;
+    }
+    else
+    {
+        //TODO: Save successfule
+        //  Should transiotion user to viewing newly created Prject
+        qDebug() << "Save Successful";
+        CupidSession::getInstance()->setCurrentProject(project);
+        viewWillDisappear();
+        emit createProjectSucceeded();
+    }
 
 }
 
@@ -72,15 +82,28 @@ CreateProjectWidget::~CreateProjectWidget()
     delete ui;
     if (project != NULL)
     {
-        delte project;
-        project = NULL
+        delete project;
+        project = NULL;
     }
 }
-
 
 void CreateProjectWidget::on_btnSave_clicked()
 {
     saveNewProject();
 }
 
+
+void CreateProjectWidget::handleUserContextSwitch(DetailViewType type)
+{
+    if (type == CreateProject)
+    {
+        viewWillAppear();
+    }
+    else
+    {
+        viewWillDisappear();
+    }
+
+
+}
 

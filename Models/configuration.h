@@ -17,7 +17,7 @@ class Configuration
 public:
     Configuration(ConfigurationType=NoType, int=0);
 
-    static Configuration* DefaultConfiguration();
+    static Configuration* DefaultConfigurations();
 
     /*!
      *       @param: none

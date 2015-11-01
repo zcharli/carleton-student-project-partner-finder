@@ -22,7 +22,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Create Project</string>
+      <string>Set Details For Project</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

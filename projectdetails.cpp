@@ -5,25 +5,22 @@
 #include <QPushButton>
 #include "Models/administratoruser.h"
 #include "Models/studentuser.h"
+#include "editteamconfigurationsdialog.h"
+#include "Repository/storage.h"
+#include <QDebug>
 
-ProjectDetails::ProjectDetails(Project* project, QWidget *parent) :
+ProjectDetails::ProjectDetails(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProjectDetails)
 {
     ui->setupUi(this);
-
-    // The project that is passed to this view
-    projectViewing = project;
+    this->project = NULL;
 
     // Retrieve the project data and populate them into the view
     viewWillAppear();
 
     // Flag to know if the currentUser is registered in this project
     isRegistered = false;
-
-    // Hook up these button handlers
-    QObject::connect(ui->btnRegistration, &QPushButton::clicked, this, &ProjectDetails::on_btnRegistration_clicked);
-    QObject::connect(ui->btnStartAlgo, &QPushButton::clicked, this, &ProjectDetails::on_btnStartAlgo_clicked);
 }
 
 ProjectDetails::~ProjectDetails()
@@ -31,27 +28,50 @@ ProjectDetails::~ProjectDetails()
     delete ui;
 }
 
+
+void ProjectDetails::didSetProject()
+{
+    updateUI();
+}
+
+void ProjectDetails::updateUI()
+{
+    if(project != NULL)
+    {
+        // Fill the form with all information from project
+        ui->txtProjDescription->setText(project->getDescription());
+        ui->txtProjTitle->setText(project->getTitle());
+        ui->lblRegisteredStudents->setText(QString::number(project->getNumberOfRegisteredUsers()) + " Students Registered in this Project");
+    }
+}
+
 void ProjectDetails::viewWillAppear()
 {
-    // Fill the form with all
-    ui->txtProjDescription->setText(projectViewing->getDescription());
-    ui->txtProjTitle->setText(projectViewing->getTitle());
-
     //  check what kind of user we are and make the nessesary changes to the UI
     if (dynamic_cast<AdministratorUser *>(CupidSession::getInstance()->getCurrentUser()))
     {
-        ui->btnRegistration->hide();
+        ui->btnRegistration->setHidden(true);
+        ui->btnEditProject->setHidden(false);
+        ui->btnStartAlgo->setHidden(false);
     }
     else if (dynamic_cast<StudentUser *>(CupidSession::getInstance()->getCurrentUser()))
     {
-        ui->btnStartAlgo->hide();
-        if(((StudentUser *)CupidSession::getInstance()->getCurrentUser())->isRegisteredInProject(projectViewing))
+        ui->btnRegistration->setHidden(false);
+        ui->btnEditProject->setHidden(true);
+        ui->btnStartAlgo->setHidden(true);
+        if(((StudentUser *)CupidSession::getInstance()->getCurrentUser())->isRegisteredInProject(project))
         {
             ui->btnRegistration->setText(tr("Unregister"));
             isRegistered = true;
         }
     }
 
+    updateUI();
+}
+
+void ProjectDetails::viewWillDisappear()
+{
+    project = NULL;
 }
 
 void ProjectDetails::on_btnRegistration_clicked()
@@ -65,13 +85,13 @@ void ProjectDetails::on_btnRegistration_clicked()
     }
     if(isRegistered) {
         // Unregister this student
-        projectViewing->unRegisterPPP(stuUser->getProfile());
+        project->unRegisterPPP(stuUser->getProfile());
         ui->btnRegistration->setText(tr("Register"));
         isRegistered = false;
     }
     else
     {
-        projectViewing->registerPPP(stuUser->getProfile());
+        project->registerPPP(stuUser->getProfile());
         ui->btnRegistration->setText(tr("Unregister"));
         isRegistered = true;
     }
@@ -79,10 +99,46 @@ void ProjectDetails::on_btnRegistration_clicked()
     emit registrationClicked();
 }
 
+
+
+void ProjectDetails::userToViewProject()
+{
+    this->project = CupidSession::getInstance()->getCurrentProject();
+    if(project != NULL)
+        didSetProject();
+
+    viewWillAppear();
+}
+
 void ProjectDetails::on_btnStartAlgo_clicked()
 {
     // Start the matching algorithm
     emit startAlgoClicked();
+}
+
+void ProjectDetails::on_btnEditProject_clicked()
+{
+    EditTeamConfigurationsDialog dialog(this);
+    dialog.getUi().teamSizeSpinBox->setValue(project->getProjectConfiguration(TeamSize).getValue());
+    dialog.exec();
+    if(dialog.result() == QDialog::Accepted)
+    {
+        int newTeamConfiguration =  dialog.getUi().teamSizeSpinBox->value();
+        QVector<Project*> projects;
+        projects.append(project);
+
+        //Save Configurations
+        if(Storage::defaultStorage().executeActionForProject(updatedProject, *(CupidSession::getInstance()->getCurrentUser()), projects) != 0)
+        {
+            //TODO: update error
+            qDebug() << "Error occured on update" + project->getProjectId();
+        }
+        else
+        {
+            //TODO: notify update succeeded
+        }
+    }
+    //QObject::connect(&dialog, SIGNAL(accepted(), this, SLOT(configurationsUpdated())));
 }
 
 void ProjectDetails::handleUserContextSwitch(DetailViewType type)
@@ -95,5 +151,6 @@ void ProjectDetails::handleUserContextSwitch(DetailViewType type)
     else
     {
         //leaving view
+        viewWillDisappear();
     }
 }

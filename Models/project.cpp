@@ -9,7 +9,7 @@ Project::Project(QString& title, QString& desc)
     numberOfRegisteredUsers = 0;
 
     //initialize configurations array
-    projectConfigurations = Configurations::DefaultConfigrations();
+    projectConfigurations = Configuration::DefaultConfigurations();
 }
 
 Project::~Project()
