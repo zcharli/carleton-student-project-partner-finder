@@ -37,6 +37,7 @@ SOURCES += main.cpp\
     signupform.cpp \
     createprojectwidget.cpp \
     editteamconfigurationsdialog.cpp \
+    projectcellwidget.cpp \
     homewidget.cpp
 
 HEADERS  += \
@@ -61,10 +62,11 @@ HEADERS  += \
     Models/cupidsession.h \
     Repository/storage.h \
     Repository/errorcodes.h \
-    Controllers/pppcontroller.h \ 
+    Controllers/pppcontroller.h \
     signupform.h \
     createprojectwidget.h \
     editteamconfigurationsdialog.h \
+    projectcellwidget.h \
     homewidget.h
 
 FORMS    += \
@@ -78,6 +80,7 @@ FORMS    += \
     signupform.ui \
     createprojectwidget.ui \
     editteamconfigurationsdialog.ui \
+    projectcellwidget.ui \
     homewidget.ui
 
 RESOURCES += \

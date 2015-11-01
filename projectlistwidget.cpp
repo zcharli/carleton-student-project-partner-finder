@@ -1,91 +1,117 @@
 #include "projectlistwidget.h"
+#include "projectcellwidget.h"
+#include "Models/cupidsession.h"
+#include "Repository/storage.h"
+#include <QDebug>
 
 ProjectListWidget::ProjectListWidget(QWidget *parent) :
     QScrollArea(parent)
 {
-    refreshList();
+    projectCells = NULL;
+    items = NULL;
+    listSize = 0;
+    this->setLayout(new QHBoxLayout);
+    viewWillAppear();
 }
 ProjectListWidget::~ProjectListWidget()
 {
-    for(int i=0; i<listSize; i++)
-    {
-        delete projectList[i];
-        delete title[i];
-        delete desc[i];
-        delete numPPPs[i];
-        delete btnViewProject[i];
-        delete f[i];
-    }
-    delete [] projectList;
-    delete [] title;
-    delete [] desc;
-    delete [] numPPPs;
-    delete [] btnViewProject;
-    delete [] f;
-    delete items;
+    cleanUpList();
 }
 
-void ProjectListWidget::refreshList()
+void ProjectListWidget::viewWillAppear()
 {
-    /*
-     * making dummy projects for a list while we wait for the database
-     */
-    listSize = 10;
-    projectList = new Project*[listSize];
-    title = new QLabel*[listSize];
-    desc = new QLabel*[listSize];
-    numPPPs = new QLabel*[listSize];
-    btnViewProject = new QPushButton*[listSize];
-    f = new QFrame*[listSize];
+    setUpList();
+}
 
-    QString c = "Project Title";
-    QString d = "This is the project description, i'm just adding content so it will look better. Description Description Description Description Description Description Description Description Description Description";
+void ProjectListWidget::viewWillDisappear()
+{
+    cleanUpList();
+}
 
-    for(int i=0; i<listSize; i++)
+void ProjectListWidget::cleanUpList()
+{
+    if(projectList.size() != 0)
     {
-       projectList[i] = new Project(c, d);
+        Project *currentProjectInSession = CupidSession::getInstance()->getCurrentProject();
+        for(int i = 0; i < listSize; i++)
+        {
+            if(currentProjectInSession != NULL && projectList[i] != currentProjectInSession)
+                delete projectList[i];
+        }
+        projectList.clear();
     }
-    /*
-     * Calls displayList directly to show all projects
-     */
-    displayList();
+
+    if(projectCells != NULL)
+    {
+        listSize = projectList.size();
+        for(int i = 0; i < listSize; i++)
+        {
+            items->layout()->removeWidget(projectCells[i]);
+            delete projectCells[i];
+        }
+        delete items;
+        delete [] projectCells;
+        projectCells = NULL;
+    }
+
+}
+
+void ProjectListWidget::setUpList()
+{
+    /* Clean up first */
+    cleanUpList();
+
+    //TODO: Query DB here!!!
+    User *currentUser = CupidSession::getInstance()->getCurrentUser();
+    if(Storage::defaultStorage().executeActionForProject(discoverProjects, *currentUser, projectList) != 0)
+    {
+        //ERROR:
+        qDebug() << "Error occured on fetch";
+    }
+    else
+    {
+        displayList();
+    }
 }
 
 void ProjectListWidget::displayList()
 {
     /*
-     * creates a widget with all of the projects in it as labels and a view project
-     * button for each. adds that widget to the object (Scroll Area)
+     * creates a widget with all of the projects in it as projectCellWidgets
      */
-    items = new QWidget;
-    items->setLayout(new QVBoxLayout);
-    setWidgetResizable(true); //need this so the vertical scroll bar appears
-
-    for(int i=0; i<listSize; i++)
+    if (projectList.size() != 0)
     {
-        title[i] = new QLabel(projectList[i]->getTitle());
-        title[i]->setFont(QFont("",20));
+        listSize = projectList.size();
+        projectCells = new ProjectCellWidget*[listSize];
+        items = new QWidget;
+        items->setLayout(new QFormLayout);
+        this->setWidget(items);
 
-        numPPPs[i] = new QLabel(QString::number(projectList[i]->getNumberOfRegisteredUsers())+" Students Registered");
-        numPPPs[i]->setAlignment(Qt::AlignRight);
+        setWidgetResizable(true); //need this so the vertical scroll bar appears
 
-        desc[i] = new QLabel(projectList[i]->getDescription());
-        desc[i]->setWordWrap(true); //need this so the description will go to the next line if its too long
+        for(int i=0; i<listSize; i++)
+        {
+            ProjectCellWidget *cell = new ProjectCellWidget();
+            cell->index = i;
+            cell->getUi().lblTitle->setText(projectList[i]->getTitle());
+            cell->getUi().lblDescription->setText(projectList[i]->getDescription());
+            cell->getUi().lblNumRegistered->setText(QString::number(projectList[i]->getNumberOfRegisteredUsers()) + " Students Registered");
+            QObject::connect(cell, SIGNAL(cellSelected(int)), this, SLOT(viewProjectSelected(int)));
 
-        btnViewProject[i] = new QPushButton("View Project");
+            projectCells[i] = cell;
+            items->layout()->addWidget(cell);
+        }
 
-        f[i] = new QFrame;
-        f[i]->setFrameShape(QFrame::HLine); //horizontal line
-
-        items->layout()->addWidget(numPPPs[i]);
-        items->layout()->addWidget(title[i]);
-        items->layout()->addWidget(desc[i]);
-        items->layout()->addWidget(btnViewProject[i]);
-        items->layout()->addWidget(f[i]);
     }
-    this->setWidget(items);
-    this->setLayout(new QHBoxLayout);
 
+}
+
+void ProjectListWidget::viewProjectSelected(int index)
+{
+    CupidSession::getInstance()->deleteCurrentProject();
+    CupidSession::getInstance()->setCurrentProject(projectList[index]);
+    emit userToViewProject();
+    viewWillDisappear();
 }
 
 void ProjectListWidget::handleUserContextSwitch(DetailViewType type)
@@ -93,9 +119,11 @@ void ProjectListWidget::handleUserContextSwitch(DetailViewType type)
     if (type == DiscoverProjets)
     {
         //entering view
+        viewWillAppear();
     }
     else
     {
         //Leaving view
+        viewWillDisappear();
     }
 }
