@@ -90,7 +90,7 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
         qualificationQuery = QString("Insert into ppp_qualifications (qualification_id,ppp_id,value) values (%1,%2,%3);").
-                arg(QString::number(i),QString::number(pppID),QString::number(ppp.getQualification(i).getValue()));
+                arg(QString::number(i + 1),QString::number(pppID),QString::number(ppp.getQualification(i).getValue()));
                 QSqlQuery insertQualifications(this->db);
                 insertQualifications.prepare(qualificationQuery);
                 if(!insertQualifications.exec())
@@ -137,7 +137,7 @@ int UserRepository::fetchPPPForUser(User &user, ProjectPartnerProfile& ppp)
             //  2 -> value (int)
 
             // Qualification returned will be copied to the PPP
-            Qualification returnedQualification((QualificationType)fetchPPP.value(0).toInt(),fetchPPP.value(2).toInt());
+            Qualification returnedQualification((QualificationType)(fetchPPP.value(0).toInt() - 1),fetchPPP.value(2).toInt());
             ppp.changeQualification(returnedQualification);
         }
         ppp.setPPPID(student.getFetchIDForPPP());
@@ -186,7 +186,7 @@ int UserRepository::userUpdatedPPP(User &user, ProjectPartnerProfile &ppp)
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
         massUpdateQuery = QString("Update ppp_qualifications set value=%1 where ppp_id=%2 and qualification_id=%3;").arg(
-                    QString::number(ppp.getQualification(i).getValue()), QString::number(ppp.getPPPID()), QString::number(ppp.getQualification(i).getType()));
+                    QString::number(ppp.getQualification(i).getValue()), QString::number(ppp.getPPPID()), QString::number(ppp.getQualification(i).getType() + 1));
         updatePPPQuery.prepare(massUpdateQuery);
 
         if(!updatePPPQuery.exec())

@@ -46,6 +46,13 @@ public:
      *      @return: none
      */
     void setType(ConfigurationType);
+
+    /*!
+     *       @param: none
+     *        @desc: a flag to show that this config is applicable to the algorithm (not null)
+     *      @return: bool
+     */
+    bool isUsed();
 };
 
 #endif // CONFIGURATION_H
