@@ -63,7 +63,7 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
             QString insertQualificationQuery = "Insert into project_configurations (config_id,project_id,value) values (:cid, :pid, :val)";
             QSqlQuery insertQualification(this->db);
             insertQualification.prepare(insertQualificationQuery);
-            insertQualification.bindValue(":cid",(int)project.getProjectConfiguration(i).getType());
+            insertQualification.bindValue(":cid",(int)project.getProjectConfiguration(i).getType() + 1);
             insertQualification.bindValue(":pid", projectID);
             insertQualification.bindValue(":val",project.getProjectConfiguration(i).getValue());
             if(!insertQualification.exec())
@@ -127,7 +127,7 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
                 while(fetchProjectConfiguration.next())
                 {
                     Configuration config(
-                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                (ConfigurationType)(fetchProjectConfiguration.value(0).toInt() - 1),
                                 fetchProjectConfiguration.value(1).toInt());
                     project.changeConfiguration(config);
                 }
@@ -200,7 +200,7 @@ int ProjectRepository::userUpdatedProject(User &user, Project &project)
             QSqlQuery updateProjConfig(this->db);
             updateProjConfig.prepare(updateProjConfigQuery);
             updateProjConfig.bindValue(":val", project.getProjectConfiguration(i).getValue());
-            updateProjConfig.bindValue(":cid",project.getProjectConfiguration(i).getType());
+            updateProjConfig.bindValue(":cid",project.getProjectConfiguration(i).getType() + 1);
             updateProjConfig.bindValue(":pid",project.getProjectId());
 
             if(!updateProjConfig.exec())
@@ -268,7 +268,7 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
                 while(fetchProjectConfiguration.next())
                 {
                     Configuration config(
-                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                (ConfigurationType)(fetchProjectConfiguration.value(0).toInt() - 1),
                                 fetchProjectConfiguration.value(1).toInt());
                     projectListElement->changeConfiguration(config);
                 }
@@ -344,7 +344,7 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
                 while(fetchProjectConfiguration.next())
                 {
                     Configuration config(
-                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                (ConfigurationType)(fetchProjectConfiguration.value(0).toInt() - 1),
                                 fetchProjectConfiguration.value(1).toInt());
                     projectListElement->changeConfiguration(config);
                 }

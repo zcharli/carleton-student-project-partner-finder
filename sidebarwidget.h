@@ -44,6 +44,13 @@ signals:
 
     /*!
      *  @param: void
+     *   @desc: A signal emitted when the home button is clicked
+     * @return: void
+    */
+    void homeClicked();
+
+    /*!
+     *  @param: void
      *   @desc: A signal emitted when the logout button is clicked
      * @return: void
     */
@@ -86,6 +93,8 @@ public slots:
 
 private slots:
     void on_btnCreateProject_clicked();
+
+    void on_btnHome_clicked();
 
 private:
     Ui::SideBarWidget *ui;

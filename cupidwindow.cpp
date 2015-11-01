@@ -27,7 +27,8 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&createProjectWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&projectDetailsWidget);
-
+    ui->mainContentStackedWidget->layout()->addWidget(&homeWidget);
+    ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
     //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
                      this, SLOT(generateProfilePage()));
@@ -38,6 +39,17 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     QObject::connect(&projectSidebar, SIGNAL(discoverProjectsClicked()),
                      this, SLOT(generateDiscoverProjectsPage()));
     QObject::connect(&projectSidebar, SIGNAL(createProjectClicked()),
+                     this, SLOT(generateCreateProjectPage()));
+    QObject::connect(&projectSidebar, SIGNAL(homeClicked()),
+                     this, SLOT(generateHomePage()));
+
+    QObject::connect(&homeWidget, SIGNAL(managePPPClicked()),
+                     this, SLOT(generateProfilePage()));
+    QObject::connect(&homeWidget, SIGNAL(discoverProjectsClicked()),
+                     this, SLOT(generateDiscoverProjectsPage()));
+    QObject::connect(&homeWidget, SIGNAL(editSettingsClicked()),
+                     this, SLOT(generateSettingsPage()));
+    QObject::connect(&homeWidget, SIGNAL(createProjectClicked()),
                      this, SLOT(generateCreateProjectPage()));
 
     //setup context switch handlers
@@ -76,11 +88,13 @@ void cuPIDWindow::viewWillAppear()
         sideBarUi->dividerDiscoverProject->hide();
         sideBarUi->btnProfile->hide();
         sideBarUi->dividerProfile->hide();
+        homeWidget.setAdmin();
     }
     else if (dynamic_cast<StudentUser *>(CupidSession::getInstance()->getCurrentUser()))
     {
         sideBarUi->btnCreateProject->hide();
         sideBarUi->dividerCreateProject->hide();
+        homeWidget.setStudent();
     }
 }
 
@@ -115,6 +129,7 @@ void cuPIDWindow::logCurrentUserOut()
 {
     viewWillDisappear();
     hide();
+    ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
     emit userLoggedOut();
 }
 
@@ -127,6 +142,10 @@ void cuPIDWindow::generateProfilePage()
     //sets the current widget of maincontentStackedWidget to the profile widget
     ui->mainContentStackedWidget->setCurrentWidget(&profileWidget);
     profileWidget.viewWillAppear();
+}
+
+void cuPIDWindow::generateHomePage(){
+    ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
 }
 
 void cuPIDWindow::generateSettingsPage()

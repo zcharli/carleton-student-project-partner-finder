@@ -98,6 +98,13 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="btnHome">
+       <property name="text">
+        <string>Home</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="btnDiscoverProjects">
        <property name="text">
         <string>Discover Projects</string>

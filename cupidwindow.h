@@ -10,6 +10,7 @@
 #include "projectlistwidget.h"
 #include "Controllers/pppcontroller.h"
 #include "projectdetails.h"
+#include "homewidget.h"
 
 namespace Ui {
 class cuPIDWindow;
@@ -34,6 +35,7 @@ private:
     CreateProjectWidget createProjectWidget;
     ProjectListWidget discoverProjectsWidget;
     SettingsWidget settingsWidget;
+    HomeWidget homeWidget;
 
     //Other views to be managed by the window
     ProjectDetails projectDetailsWidget;
@@ -78,6 +80,14 @@ public slots:
     */
     void acceptUserLogin();
 
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted after the
+     *          home button is clicked
+     * @return: void
+    */
+
+    void generateHomePage();
     /*!
      *  @param: none
      *   @desc: A slot to accept the signal emitted after the
