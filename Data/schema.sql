@@ -52,7 +52,6 @@ CREATE TABLE `project_configurations` (
 );
 CREATE TABLE `configurations` (
 	`config_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
-	`text`	INTEGER NOT NULL,
-	`value`	INTEGER NOT NULL
+	`text`	INTEGER NOT NULL
 );
 --COMMIT;
