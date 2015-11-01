@@ -124,6 +124,7 @@ void ProjectDetails::on_btnEditProject_clicked()
     if(dialog.result() == QDialog::Accepted)
     {
         int newTeamConfiguration =  dialog.getUi().teamSizeSpinBox->value();
+        project->changeConfiguration(Configuration(TeamSize, newTeamConfiguration));
         QVector<Project*> projects;
         projects.append(project);
 
@@ -136,6 +137,7 @@ void ProjectDetails::on_btnEditProject_clicked()
         else
         {
             //TODO: notify update succeeded
+            qDebug() << "Success";
         }
     }
     //QObject::connect(&dialog, SIGNAL(accepted(), this, SLOT(configurationsUpdated())));

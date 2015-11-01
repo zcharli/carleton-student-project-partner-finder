@@ -24,12 +24,14 @@ void CreateProjectWidget::viewWillAppear()
 {
     ui->txtProjectTitle->setText("");
     ui->txtProjectDesc->setText("");
+    ui->teamSizeSpinBox->setValue(0);
 }
 
 void CreateProjectWidget::viewWillDisappear()
 {
     ui->txtProjectTitle->setText("");
     ui->txtProjectDesc->setText("");
+    ui->teamSizeSpinBox->setValue(0);
     project = NULL;
 }
 

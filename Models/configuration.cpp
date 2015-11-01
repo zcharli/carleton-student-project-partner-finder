@@ -1,7 +1,7 @@
 #include "configuration.h"
 
 Configuration::Configuration(ConfigurationType type, int value) :
-    configType(type), value(value)
+    type(type), value(value)
 {
 
 }
@@ -32,23 +32,4 @@ Configuration* Configuration::DefaultConfigurations()
         configs[i] = Configuration();
 
     return configs;
-}
-
-Configuration::Configuration() {}
-
-Configuration::~Configuration() {}
-
-ConfigurationType Configuration::getType()
-{
-    return configType;
-}
-
-int Configuration::getValue()
-{
-    return value;
-}
-
-void Configuration::setType(ConfigurationType type)
-{
-    configType = type;
 }

@@ -51,22 +51,21 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
     }
 
     project.setProjectId(projectID);
-    qDebug() << "Projec ID" + project.getProjectId();
+    qDebug() << "Project ID" + QString::number(project.getProjectId());
 
     // Insert configurations
     int i;
-    Configuration* configArray = project.getProjectConfigurations(); // Unsure if there is a getIndex() for config arrat
     for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
     {
-        if((int)configArray[i].getType() != 0)
+        if((int)project.getProjectConfiguration(i).getValue() != 0)
         {
             // Maybe not all configurations are set
             QString insertQualificationQuery = "Insert into project_configurations (config_id,project_id,value) values (:cid, :pid, :val)";
             QSqlQuery insertQualification(this->db);
             insertQualification.prepare(insertQualificationQuery);
-            insertQualification.bindValue(":cid",(int)configArray[i].getType());
+            insertQualification.bindValue(":cid",(int)project.getProjectConfiguration(i).getType());
             insertQualification.bindValue(":pid", projectID);
-            insertQualification.bindValue(":val",configArray[i].getValue());
+            insertQualification.bindValue(":val",project.getProjectConfiguration(i).getValue());
             if(!insertQualification.exec())
             {
                 qDebug() << "insertQualification error:  "<< this->db.lastError();
@@ -193,16 +192,15 @@ int ProjectRepository::userUpdatedProject(User &user, Project &project)
 
     // Update all configurations
     int i;
-    Configuration* projConfigs = project.getProjectConfigurations();
     for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
     {
-        if((int)projConfigs[i].getType() != 0)
+        if((int)project.getProjectConfiguration(i).getValue() != 0)
         {
-            QString updateProjConfigQuery = "Update project_configuration set value=:val where config_id=:cid and project_id=:pid";
+            QString updateProjConfigQuery = "Update project_configurations set value=:val where config_id=:cid and project_id=:pid";
             QSqlQuery updateProjConfig(this->db);
             updateProjConfig.prepare(updateProjConfigQuery);
-            updateProjConfig.bindValue(":val", projConfigs[i].getValue());
-            updateProjConfig.bindValue(":cid",(int)projConfigs[i].getType());
+            updateProjConfig.bindValue(":val", project.getProjectConfiguration(i).getValue());
+            updateProjConfig.bindValue(":cid",project.getProjectConfiguration(i).getType());
             updateProjConfig.bindValue(":pid",project.getProjectId());
 
             if(!updateProjConfig.exec())

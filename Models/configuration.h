@@ -3,7 +3,6 @@
 
 #define NUMBER_OF_CONFIGURATIONS 1
 
-<<<<<<< HEAD
 enum ConfigurationType
 {
     TeamSize = 0,
@@ -12,7 +11,6 @@ enum ConfigurationType
 
 class Configuration
 {
-<<<<<<< HEAD
     ConfigurationType type;
     int value;
 
@@ -23,22 +21,8 @@ public:
 
     /*!
      *       @param: none
-     *        @desc: get the configuration type
-     *      @return: type: ConfigurationType
-=======
-    ConfigurationType configType;
-    int value;
-
-public:
-    Configuration();
-    Configuration(ConfigurationType,int);
-    ~Configuration();
-
-    /*!
-     *       @param: none
      *        @desc: get the configurations type set by the AdministratorUser on the project
      *      @return: configurationType: ConfigurationType*
->>>>>>> master
      */
     ConfigurationType getType();
 

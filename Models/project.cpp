@@ -26,11 +26,6 @@ Configuration Project::getProjectConfiguration(int index)
     return projectConfigurations[index];
 }
 
-void Project::changeConfiguration(Configuration newConfiguration)
-{
-    projectConfigurations[newConfiguration.getType()] = newConfiguration;
-}
-
 void Project::changeConfiguration(Configuration config)
 {
     projectConfigurations[(int)(config.getType())] = config;
@@ -88,7 +83,7 @@ void Project::setDescription(QString& newDescription)
 
 void Project::setProjectId(int id)
 {
-    id = id;
+    this->id = id;
 }
 
 int Project::getProjectId()
