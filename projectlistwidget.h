@@ -7,8 +7,10 @@
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QString>
+#include <QVector>
 #include "Models/project.h"
 #include "sidebarwidget.h"
+#include "projectcellwidget.h"
 
 class ProjectListWidget : public QScrollArea
 {
@@ -32,21 +34,27 @@ public:
      */
     void displayList();
 
+    void viewWillAppear();
+    void viewWillDisappear();
+    void cleanUpList();
+    void setUpList();
+
+signals:
+    void userToViewProject();
+
 private:
     /*
      * List of projects
      */
-    Project** projectList;
-    QWidget* items;
-    QLabel** title;
-    QLabel** desc;
-    QLabel** numPPPs;
-    QPushButton** btnViewProject;
-    QFrame** f;
+    QVector<Project*> projectList;
+    ProjectCellWidget **projectCells;
+    QWidget *items;
+
 signals:
 
 public slots:
     void handleUserContextSwitch(DetailViewType);
+    void viewProjectSelected(int index);
 };
 
 #endif // PROJECTLISTWIDGET_H

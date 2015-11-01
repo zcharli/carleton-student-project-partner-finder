@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>673</width>
+    <height>341</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,10 +20,16 @@
    <item>
     <widget class="QLabel" name="lblLogo">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>700</width>
+       <height>16777215</height>
+      </size>
      </property>
      <property name="styleSheet">
       <string notr="true"/>

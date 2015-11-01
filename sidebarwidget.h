@@ -9,6 +9,7 @@ enum DetailViewType
     DiscoverProjets = 0,
     MyProjects,
     CreateProject,
+    Home,
     Profile,
     Settings,
     ProjectDetailType,
@@ -90,10 +91,7 @@ public slots:
     void on_btnLogOut_clicked();
     void on_btnSettings_clicked();
     void on_btnDiscoverProjects_clicked();
-
-private slots:
     void on_btnCreateProject_clicked();
-
     void on_btnHome_clicked();
 
 private:
