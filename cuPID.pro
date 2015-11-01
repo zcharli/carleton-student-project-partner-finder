@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     Controllers/pppcontroller.cpp \
     signupform.cpp \
     createprojectwidget.cpp \
-    editteamconfigurationsdialog.cpp
+    editteamconfigurationsdialog.cpp \
+    homewidget.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -63,7 +64,8 @@ HEADERS  += \
     Controllers/pppcontroller.h \ 
     signupform.h \
     createprojectwidget.h \
-    editteamconfigurationsdialog.h
+    editteamconfigurationsdialog.h \
+    homewidget.h
 
 FORMS    += \
     cupidwindow.ui \
@@ -75,10 +77,12 @@ FORMS    += \
     settingswidget.ui \
     signupform.ui \
     createprojectwidget.ui \
-    editteamconfigurationsdialog.ui
+    editteamconfigurationsdialog.ui \
+    homewidget.ui
 
 RESOURCES += \
-    Resources.qrc
+    Resources.qrc \
+    Images/Images.qrc
 
 copydata.commands = $(COPY_DIR) $$PWD/Data $$OUT_PWD
 first.depends = $(first) copydata
