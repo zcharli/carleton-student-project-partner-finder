@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QString>
+#include "configuration.h"
 
 //forward declarations
 class Configuration;
@@ -10,7 +11,7 @@ class ProjectPartnerProfile;
 
 class Project
 {
-    QVector<Configuration> projectConfigurations;
+    Configuration *projectConfigurations;
     QVector<ProjectPartnerProfile*> registeredPPPs;
     int numberOfRegisteredUsers;
     QString title;
@@ -22,11 +23,18 @@ public:
 
     //accessor Functions
     /*!
-     *       @param: none
-     *        @desc: get the configurations set by the AdministratorUser on the project
-     *      @return: configurations: QVector<Configuration>&
+     *       @param: configuration: ConfigurationType
+     *        @desc: get the configuration for the specifed index (to match configuration type)
+     *      @return: configuration: Configuration
      */
-    QVector<Configuration>& getProjectConfigurations();
+    Configuration getProjectConfiguration(int);
+
+    /*!
+     *       @param: newConfiguration: Configuration
+     *        @desc: get the configurations set by the AdministratorUser on the project
+     *      @return: void
+     */
+    void changeConfiguration(Configuration);
     \
     /*!
      *       @param: none

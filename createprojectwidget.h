@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QString>
+#include "Models/project.h"
+
 namespace Ui {
 class CreateProjectWidget;
 }
@@ -11,17 +13,33 @@ class CreateProjectWidget : public QWidget
 {
     Q_OBJECT
     void presentError(QString* errorMessage);
+
+    /*  API for functionality   */
+    Project *project;
+
+    void setUpNewProject();
+    void saveNewProject();
+
 public:
     explicit CreateProjectWidget(QWidget *parent = 0);
     ~CreateProjectWidget();
 
-signals:
     /*!
-     *  @param: void
-     *   @desc: A signal emitted when the user chooses to save changes
-     * @return: void
-    */
-    void saveChangesClicked();
+     *       @param: none
+     *        @desc: all setup that needs to be done
+     *               before this object appears on screen to the user.
+     *      @return: void
+     */
+    void viewWillAppear();
+
+    /*!
+     *       @param: none
+     *        @desc: all cleanup that needs to be done before
+     *               this view leaves the screen
+     *      @return: void
+     */
+    void viewWillDisappear();
+
 
 private slots:
 

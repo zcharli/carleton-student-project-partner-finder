@@ -1,6 +1,5 @@
 #include "project.h"
 #include "projectpartnerprofile.h"
-#include "configuration.h"
 #include "studentuser.h"
 
 Project::Project(QString& title, QString& desc)
@@ -8,15 +7,28 @@ Project::Project(QString& title, QString& desc)
     this->title = title;
     this->description = desc;
     numberOfRegisteredUsers = 0;
+
+    //initialize configurations array
+    projectConfigurations = Configurations::DefaultConfigrations();
 }
 
 Project::~Project()
-{}
+{
+    delete[] projectConfigurations;
+    projectConfigurations = NULL;
+}
 
 //accessor Functions
-QVector<Configuration>& Project::getProjectConfigurations()
+
+Configuration Project::getProjectConfiguration(int index)
 {
-    return projectConfigurations;
+    //TODO: Bounds checking
+    return projectConfigurations[index];
+}
+
+void Project::changeConfiguration(Configuration newConfiguration)
+{
+    projectConfigurations[newConfiguration.getType()] = newConfiguration;
 }
 
 void Project::registerPPP(ProjectPartnerProfile* profile)

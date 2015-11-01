@@ -38,12 +38,6 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      this, SLOT(generateDiscoverProjectsPage()));
     QObject::connect(&projectSidebar, SIGNAL(createProjectClicked()),
                      this, SLOT(generateCreateProjectPage()));
-    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
-                     &profileWidget, SLOT(handleUserContextSwitch()));
-    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
-                     &discoverProjectsWidget, SLOT(handleUserContextSwitch()));
-    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContext()),
-                     &settingsWidget, SLOT(handleUserContextSwitch()));
     //setup context switch handlers
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
                      &profileWidget, SLOT(handleUserContextSwitch(DetailViewType)));

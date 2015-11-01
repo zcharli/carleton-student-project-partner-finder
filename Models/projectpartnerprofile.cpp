@@ -18,7 +18,7 @@ ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
 ProjectPartnerProfile::~ProjectPartnerProfile()
 {
     user.profile = NULL;
-    delete qualifications;
+    delete[] qualifications;
     qualifications = NULL;
 }
 
