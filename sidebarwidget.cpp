@@ -58,3 +58,8 @@ void SideBarWidget::on_btnCreateProject_clicked()
 {
     emit createProjectClicked();
 }
+
+void SideBarWidget::on_btnHome_clicked()
+{
+    emit homeClicked();
+}
