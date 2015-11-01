@@ -1,5 +1,7 @@
 #include "projectcellwidget.h"
 
+#define MAX_HEIGHT 175
+
 
 ProjectCellWidget::ProjectCellWidget(QWidget *parent) :
     QWidget(parent),
@@ -7,6 +9,7 @@ ProjectCellWidget::ProjectCellWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     index = 0;
+    this->setFixedHeight(MAX_HEIGHT);
 }
 
 ProjectCellWidget::~ProjectCellWidget()

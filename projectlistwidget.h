@@ -7,6 +7,7 @@
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QString>
+#include <QVector>
 #include "Models/project.h"
 #include "sidebarwidget.h"
 #include "projectcellwidget.h"
@@ -45,7 +46,7 @@ private:
     /*
      * List of projects
      */
-    Project** projectList;
+    QVector<Project*> projectList;
     ProjectCellWidget **projectCells;
     QWidget *items;
 

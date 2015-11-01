@@ -239,10 +239,10 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
             projectListElement->setProjectId(fetchAllProjects.value(0).toInt());
 
             // Fetch the number of registered users in this project
-            QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registation where project_id=:pid";
+            QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registration where project_id=:pid";
             QSqlQuery fetchNumRegistered(this->db);
             fetchNumRegistered.prepare(fetchRegisteredUsersInProjectQuery);
-            fetchNumRegistered.bindValue(":pid",projectListElement->getProjectId());
+            fetchNumRegistered.bindValue(":pid",QString::number(projectListElement->getProjectId()));
             if(fetchNumRegistered.exec())
             {
                 if(fetchNumRegistered.next())

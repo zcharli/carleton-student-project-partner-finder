@@ -43,14 +43,15 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     QObject::connect(&projectSidebar, SIGNAL(homeClicked()),
                      this, SLOT(generateHomePage()));
 
+    //Go through side bar as much as possible
     QObject::connect(&homeWidget, SIGNAL(managePPPClicked()),
-                     this, SLOT(generateProfilePage()));
+                     &projectSidebar, SLOT(on_btnProfile_clicked()));
     QObject::connect(&homeWidget, SIGNAL(discoverProjectsClicked()),
-                     this, SLOT(generateDiscoverProjectsPage()));
+                     &projectSidebar, SLOT(on_btnDiscoverProjects_clicked()));
     QObject::connect(&homeWidget, SIGNAL(editSettingsClicked()),
-                     this, SLOT(generateSettingsPage()));
+                     &projectSidebar, SLOT(on_btnSettings_clicked()));
     QObject::connect(&homeWidget, SIGNAL(createProjectClicked()),
-                     this, SLOT(generateCreateProjectPage()));
+                     &projectSidebar, SLOT(on_btnCreateProject_clicked()));
 
     //setup context switch handlers
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
