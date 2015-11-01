@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QString>
+#include <QSet>
 
 //forward declarations
 class Configuration;
@@ -11,10 +12,11 @@ class ProjectPartnerProfile;
 class Project
 {
     QVector<Configuration> projectConfigurations;
-    QVector<ProjectPartnerProfile*> registeredPPPs;
+    QSet<ProjectPartnerProfile*> registeredPPPs;
     int numberOfRegisteredUsers;
     QString title;
     QString description;
+    int id;
 
 public:
     Project(QString&, QString&);
@@ -93,6 +95,27 @@ public:
      *      @return: void
      */
     void setDescription(QString&);
+
+    /*!
+     *       @param: newId: int
+     *        @desc: sets the id of the project after its been added to db
+     *      @return: void
+     */
+    void setProjectId(int);
+
+    /*!
+     *       @param: none
+     *        @desc: gets the id of the project after its been added to db
+     *      @return: id: int
+     */
+    int getProjectId();
+
+    /*!
+     *       @param: ppp: ProjectPartnerProfile*
+     *        @desc: adds the ppp to the collection of profiles for this project
+     *      @return: none
+     */
+    void addPPPtoProject(ProjectPartnerProfile *ppp);
 };
 
 #endif // PROJECT_H

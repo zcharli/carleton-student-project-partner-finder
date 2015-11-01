@@ -7,7 +7,8 @@
 DatabaseManager::DatabaseManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbPath = QDir::currentPath() + "/Data/cuPIDdb";
+    //QString dbPath = QDir::currentPath() + "/Data/cuPIDdb";
+    QString dbPath = "/home/admin/cuPIDdb";
     db.setDatabaseName(dbPath);
     db.open();
     if(db.isOpen())

@@ -21,17 +21,15 @@ QVector<Configuration>& Project::getProjectConfigurations()
 
 void Project::registerPPP(ProjectPartnerProfile* profile)
 {
-    registeredPPPs.append(profile);
+    registeredPPPs.insert(profile);
     profile->getStudentUser().addProjectToRegisteredProjects(this);
 }
 
 void Project::unRegisterPPP(ProjectPartnerProfile* profile)
 {
-    int index = registeredPPPs.indexOf(profile);
-
-    if (index != -1)
+    if (isPPPRegistered(profile))
     {
-        registeredPPPs.remove(index);
+        registeredPPPs.remove(profile);
         profile->getStudentUser().removeProjectFromRegisteredProjects(this);
     }
 }
@@ -69,4 +67,27 @@ void Project::setTitle(QString& newTitle)
 void Project::setDescription(QString& newDescription)
 {
     description = newDescription;
+}
+
+void Project::setProjectId(int id)
+{
+    id = id;
+}
+
+int Project::getProjectId()
+{
+    return id;
+}
+
+void Project::addPPPtoProject(ProjectPartnerProfile *ppp)
+{
+    if(isPPPRegistered(ppp))
+    {
+        // Shouldnt be adding multiples in a set, this is bad with allocated memeory
+        delete ppp;
+    }
+    else
+    {
+        registeredPPPs.insert(ppp);
+    }
 }
