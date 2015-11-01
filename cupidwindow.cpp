@@ -26,6 +26,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&discoverProjectsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&createProjectWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&projectDetailsWidget);
 
     //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
@@ -46,6 +47,13 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      &discoverProjectsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
                      &settingsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
+                     &createProjectWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+
+    QObject::connect(&createProjectWidget, SIGNAL(createProjectSucceeded()),
+                     this, SLOT(generateProjectDetailsPage()));
+    QObject::connect(this, SIGNAL(userToViewProject()),
+                     &projectDetailsWidget, SLOT(userToViewProject()));
 }
 
 void cuPIDWindow::viewWillAppear()
@@ -130,6 +138,12 @@ void cuPIDWindow::generateDiscoverProjectsPage()
 void cuPIDWindow::generateCreateProjectPage()
 {
     ui->mainContentStackedWidget->setCurrentWidget(&createProjectWidget);
+}
+
+void cuPIDWindow::generateProjectDetailsPage()
+{
+    ui->mainContentStackedWidget->setCurrentWidget(&projectDetailsWidget);
+    emit userToViewProject();
 }
 
 cuPIDWindow::~cuPIDWindow()

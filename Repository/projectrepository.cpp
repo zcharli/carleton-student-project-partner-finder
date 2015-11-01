@@ -30,8 +30,8 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
 
     if(!createProject.exec())
     {
-        qDebug() << "userCreatedProject error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "userCreatedProject error:  "<< createProject.lastError();
+        return createProject.lastError().number();
     }
 
     int projectID = 0;
@@ -46,26 +46,26 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
     }
     else
     {
-        qDebug() << "getProjectID error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "getProjectID error:  "<< getProjectID.lastError();
+        return getProjectID.lastError().number();
     }
 
     project.setProjectId(projectID);
+    qDebug() << "Project ID" + QString::number(project.getProjectId());
 
     // Insert configurations
     int i;
-    Configuration* configArray = project.getProjectConfigurations(); // Unsure if there is a getIndex() for config arrat
     for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
     {
-        if(configArray[i].isUsed())
+        if((int)project.getProjectConfiguration(i).getValue() != 0)
         {
             // Maybe not all configurations are set
             QString insertQualificationQuery = "Insert into project_configurations (config_id,project_id,value) values (:cid, :pid, :val)";
             QSqlQuery insertQualification(this->db);
             insertQualification.prepare(insertQualificationQuery);
-            insertQualification.bindValue(":cid",(int)configArray[i].getType() + 1); // offset by 1
+            insertQualification.bindValue(":cid",(int)project.getProjectConfiguration(i).getType() + 1);
             insertQualification.bindValue(":pid", projectID);
-            insertQualification.bindValue(":val",configArray[i].getValue());
+            insertQualification.bindValue(":val",project.getProjectConfiguration(i).getValue());
             if(!insertQualification.exec())
             {
                 qDebug() << "insertQualification error:  "<< this->db.lastError();
@@ -82,8 +82,8 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
     bindProjectToAdmin.bindValue(":uid",user.getUserId());
     if(!bindProjectToAdmin.exec())
     {
-        qDebug() << "bindProjectToAdmin error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "bindProjectToAdmin error:  "<< bindProjectToAdmin.lastError();
+        return bindProjectToAdmin.lastError().number();
     }
 
 
@@ -141,8 +141,8 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
     }
     else
     {
-        qDebug() << "fetchProject error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "fetchProject error:  "<< fetchProject.lastError();
+        return fetchProject.lastError().number();
     }
 
     // Grab the number of users who are registered in this project
@@ -161,8 +161,8 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
     }
     else
     {
-        qDebug() << "fetchNumRegistered error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "fetchNumRegistered error:  "<< fetchNumRegistered.lastError();
+        return fetchNumRegistered.lastError().number();
     }
 
     return 0;
@@ -186,22 +186,21 @@ int ProjectRepository::userUpdatedProject(User &user, Project &project)
     updateProject.bindValue(":id",project.getProjectId());
     if(!updateProject.exec())
     {
-        qDebug() << "updateProject error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "updateProject error:  "<< updateProject.lastError();
+        return updateProject.lastError().number();
     }
 
     // Update all configurations
     int i;
-    Configuration* projConfigs = project.getProjectConfigurations();
     for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
     {
-        if(projConfigs[i].isUsed())
+        if((int)project.getProjectConfiguration(i).getValue() != 0)
         {
-            QString updateProjConfigQuery = "Update project_configuration set value=:val where config_id=:cid and project_id=:pid";
+            QString updateProjConfigQuery = "Update project_configurations set value=:val where config_id=:cid and project_id=:pid";
             QSqlQuery updateProjConfig(this->db);
             updateProjConfig.prepare(updateProjConfigQuery);
-            updateProjConfig.bindValue(":val", projConfigs[i].getValue());
-            updateProjConfig.bindValue(":cid",(int)projConfigs[i].getType() + 1);
+            updateProjConfig.bindValue(":val", project.getProjectConfiguration(i).getValue());
+            updateProjConfig.bindValue(":cid",project.getProjectConfiguration(i).getType() + 1);
             updateProjConfig.bindValue(":pid",project.getProjectId());
 
             if(!updateProjConfig.exec())
@@ -254,8 +253,8 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
             }
             else
             {
-                qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< this->db.lastError();
-                return this->db.lastError().number();
+                qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< fetchNumRegistered.lastError();
+                return fetchNumRegistered.lastError().number();
             }
 
 
@@ -286,8 +285,8 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
     }
     else
     {
-        qDebug() << "fetchAllProjects error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "fetchAllProjects error:  "<< fetchAllProjects.lastError();
+        return fetchAllProjects.lastError().number();
     }
 
     return 0;
@@ -331,8 +330,8 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
             }
             else
             {
-                qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< this->db.lastError();
-                return this->db.lastError().number();
+                qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< fetchNumRegistered.lastError();
+                return fetchNumRegistered.lastError().number();
             }
 
             // As there may be more than one configurations per project, we need to do a seperate query :(
@@ -362,8 +361,8 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
     }
     else
     {
-        qDebug() << "fetchProject error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "fetchProject error:  "<< fetchProject.lastError();
+        return fetchProject.lastError().number();
     }
 
     return 0;
@@ -385,8 +384,8 @@ int ProjectRepository::userRegisteredInProject(User &user, Project &project)
     registerUser.bindValue(":uid",project.getProjectId());
     if(!registerUser.exec())
     {
-        qDebug() << "registerUser error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "registerUser error:  "<< registerUser.lastError();
+        return registerUser.lastError().number();
     }
 
     // Increment the number of students that are registered now that have just registered one
@@ -412,8 +411,8 @@ int ProjectRepository::userUnregisteredFromProject(User &user, Project &project)
     unRegisterUser.bindValue(":uid",project.getProjectId());
     if(!unRegisterUser.exec())
     {
-        qDebug() << "unRegisterUser error:  "<< this->db.lastError();
-        return this->db.lastError().number();
+        qDebug() << "unRegisterUser error:  "<< unRegisterUser.lastError();
+        return unRegisterUser.lastError().number();
     }
 
     // Decrement the number of students that are registered now that have just unregistered one
@@ -472,8 +471,8 @@ int ProjectRepository::fetchPPPsForProject(User &user, Project &project)
     }
     else
     {
-       qDebug() << "fetchUsersRegistered error:  "<< this->db.lastError();
-       return this->db.lastError().number();
+       qDebug() << "fetchUsersRegistered error:  "<< fetchUsersRegistered.lastError();
+       return fetchUsersRegistered.lastError().number();
     }
 
     return 0;

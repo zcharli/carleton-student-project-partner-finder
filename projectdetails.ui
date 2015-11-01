@@ -43,7 +43,7 @@
    <item row="4" column="2">
     <widget class="QPushButton" name="btnStartAlgo">
      <property name="text">
-      <string>PushButton</string>
+      <string>Create Teams</string>
      </property>
     </widget>
    </item>
@@ -51,7 +51,8 @@
     <widget class="QLabel" name="lblRegisteredStudents">
      <property name="font">
       <font>
-       <pointsize>16</pointsize>
+       <pointsize>12</pointsize>
+       <italic>true</italic>
       </font>
      </property>
      <property name="text">
@@ -85,7 +86,7 @@
       </font>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Register</string>
      </property>
      <property name="checkable">
       <bool>false</bool>
@@ -120,6 +121,11 @@
        <width>2</width>
        <height>0</height>
       </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -157,6 +163,13 @@
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QPushButton" name="btnEditProject">
+     <property name="text">
+      <string>Edit Project</string>
      </property>
     </widget>
    </item>
