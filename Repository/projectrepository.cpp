@@ -57,13 +57,13 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
     Configuration* configArray = project.getProjectConfigurations(); // Unsure if there is a getIndex() for config arrat
     for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
     {
-        if((int)configArray[i].getType() != 0)
+        if(configArray[i].isUsed())
         {
             // Maybe not all configurations are set
             QString insertQualificationQuery = "Insert into project_configurations (config_id,project_id,value) values (:cid, :pid, :val)";
             QSqlQuery insertQualification(this->db);
             insertQualification.prepare(insertQualificationQuery);
-            insertQualification.bindValue(":cid",(int)configArray[i].getType());
+            insertQualification.bindValue(":cid",(int)configArray[i].getType() + 1); // offset by 1
             insertQualification.bindValue(":pid", projectID);
             insertQualification.bindValue(":val",configArray[i].getValue());
             if(!insertQualification.exec())
@@ -127,7 +127,7 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
                 while(fetchProjectConfiguration.next())
                 {
                     Configuration config(
-                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                (ConfigurationType)(fetchProjectConfiguration.value(0).toInt() - 1),
                                 fetchProjectConfiguration.value(1).toInt());
                     project.changeConfiguration(config);
                 }
@@ -195,13 +195,13 @@ int ProjectRepository::userUpdatedProject(User &user, Project &project)
     Configuration* projConfigs = project.getProjectConfigurations();
     for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
     {
-        if((int)projConfigs[i].getType() != 0)
+        if(projConfigs[i].isUsed())
         {
             QString updateProjConfigQuery = "Update project_configuration set value=:val where config_id=:cid and project_id=:pid";
             QSqlQuery updateProjConfig(this->db);
             updateProjConfig.prepare(updateProjConfigQuery);
             updateProjConfig.bindValue(":val", projConfigs[i].getValue());
-            updateProjConfig.bindValue(":cid",(int)projConfigs[i].getType());
+            updateProjConfig.bindValue(":cid",(int)projConfigs[i].getType() + 1);
             updateProjConfig.bindValue(":pid",project.getProjectId());
 
             if(!updateProjConfig.exec())
@@ -269,7 +269,7 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
                 while(fetchProjectConfiguration.next())
                 {
                     Configuration config(
-                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                (ConfigurationType)(fetchProjectConfiguration.value(0).toInt() - 1),
                                 fetchProjectConfiguration.value(1).toInt());
                     projectListElement->changeConfiguration(config);
                 }
@@ -345,7 +345,7 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
                 while(fetchProjectConfiguration.next())
                 {
                     Configuration config(
-                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                (ConfigurationType)(fetchProjectConfiguration.value(0).toInt() - 1),
                                 fetchProjectConfiguration.value(1).toInt());
                     projectListElement->changeConfiguration(config);
                 }

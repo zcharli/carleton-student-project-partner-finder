@@ -1,11 +1,11 @@
 #include "configuration.h"
 
 Configuration::Configuration(ConfigurationType type, int value) :
-    configType(type), value(value)
+    configType(type), value(value), applicable(true)
 {
 }
 
-Configuration::Configuration() {}
+Configuration::Configuration() : applicable(false) {}
 
 Configuration::~Configuration() {}
 
@@ -21,10 +21,16 @@ int Configuration::getValue()
 
 void Configuration::setValue(int val)
 {
-
+    applicable = true;
 }
 
 void Configuration::setType(ConfigurationType type)
 {
+    applicable = true;
     configType = type;
+}
+
+bool Configuration::isUsed()
+{
+    return applicable;
 }
