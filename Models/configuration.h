@@ -3,20 +3,21 @@
 
 #define NUMBER_OF_CONFIGURATIONS 1
 
-// Must start at 1
-enum ConfigurationType {
-    teamSize = 1
+enum ConfigurationType
+{
+    TeamSize = 0,
+    NoType
 };
 
 class Configuration
 {
-    ConfigurationType configType;
+    ConfigurationType type;
     int value;
 
 public:
-    Configuration();
-    Configuration(ConfigurationType,int);
-    ~Configuration();
+    Configuration(ConfigurationType=NoType, int=0);
+
+    static Configuration* DefaultConfigurations();
 
     /*!
      *       @param: none
@@ -27,7 +28,7 @@ public:
 
     /*!
      *       @param: none
-     *        @desc: get the configurations value set by the AdministratorUser on the project
+     *        @desc: get the configuration value
      *      @return: value: int
      */
     int getValue();

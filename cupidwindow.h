@@ -9,6 +9,7 @@
 #include "Models/user.h"
 #include "projectlistwidget.h"
 #include "Controllers/pppcontroller.h"
+#include "projectdetails.h"
 
 namespace Ui {
 class cuPIDWindow;
@@ -34,6 +35,9 @@ private:
     ProjectListWidget discoverProjectsWidget;
     SettingsWidget settingsWidget;
 
+    //Other views to be managed by the window
+    ProjectDetails projectDetailsWidget;
+
     /*!
      *       @param: none
      *        @desc: all setup that needs to be done
@@ -57,6 +61,13 @@ signals:
      *  @return: void
     */
     void userLoggedOut();
+
+    /*!
+     *  @param: none
+     *   @desc: A signal emitted when the current User has selected to view a project
+     *  @return: void
+    */
+    void userToViewProject();
 
 public slots:
     /*!
@@ -106,6 +117,14 @@ public slots:
      * @return: void
     */
     void generateCreateProjectPage();
+
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted after the
+     *          View Project Button is clicked
+     * @return: void
+    */
+    void generateProjectDetailsPage();
 
 };
 

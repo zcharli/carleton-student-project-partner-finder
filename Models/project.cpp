@@ -1,6 +1,5 @@
 #include "project.h"
 #include "projectpartnerprofile.h"
-#include "configuration.h"
 #include "studentuser.h"
 
 Project::Project(QString& title, QString& desc)
@@ -8,17 +7,23 @@ Project::Project(QString& title, QString& desc)
     this->title = title;
     this->description = desc;
     numberOfRegisteredUsers = 0;
-    projectConfigurations = NULL;
+
+    //initialize configurations array
+    projectConfigurations = Configuration::DefaultConfigurations();
 }
 
 Project::~Project()
 {
+    delete[] projectConfigurations;
+    projectConfigurations = NULL;
 }
 
 //accessor Functions
-Configuration* Project::getProjectConfigurations()
+
+Configuration Project::getProjectConfiguration(int index)
 {
-    return projectConfigurations;
+    //TODO: Bounds checking
+    return projectConfigurations[index];
 }
 
 void Project::changeConfiguration(Configuration config)
@@ -78,7 +83,7 @@ void Project::setDescription(QString& newDescription)
 
 void Project::setProjectId(int id)
 {
-    id = id;
+    this->id = id;
 }
 
 int Project::getProjectId()

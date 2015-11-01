@@ -1,30 +1,35 @@
 #include "configuration.h"
 
 Configuration::Configuration(ConfigurationType type, int value) :
-    configType(type), value(value)
+    type(type), value(value)
 {
+
 }
-
-Configuration::Configuration() {}
-
-Configuration::~Configuration() {}
 
 ConfigurationType Configuration::getType()
 {
-    return configType;
+    return type;
 }
+
 
 int Configuration::getValue()
 {
     return value;
 }
 
-void Configuration::setValue(int val)
-{
 
+void Configuration::setValue(int newValue)
+{
+    value = newValue;
 }
 
-void Configuration::setType(ConfigurationType type)
+
+Configuration* Configuration::DefaultConfigurations()
 {
-    configType = type;
+    Configuration *configs = new Configuration[NUMBER_OF_CONFIGURATIONS];
+
+    for (int i = 0; i < NUMBER_OF_CONFIGURATIONS; i++)
+        configs[i] = Configuration();
+
+    return configs;
 }
