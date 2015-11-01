@@ -8,15 +8,22 @@ Project::Project(QString& title, QString& desc)
     this->title = title;
     this->description = desc;
     numberOfRegisteredUsers = 0;
+    projectConfigurations = NULL;
 }
 
 Project::~Project()
-{}
+{
+}
 
 //accessor Functions
-QVector<Configuration>& Project::getProjectConfigurations()
+Configuration* Project::getProjectConfigurations()
 {
     return projectConfigurations;
+}
+
+void Project::changeConfiguration(Configuration config)
+{
+    projectConfigurations[(int)(config.getType())] = config;
 }
 
 void Project::registerPPP(ProjectPartnerProfile* profile)

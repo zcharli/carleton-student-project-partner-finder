@@ -11,7 +11,7 @@ class ProjectPartnerProfile;
 
 class Project
 {
-    QVector<Configuration> projectConfigurations;
+    Configuration* projectConfigurations;
     QSet<ProjectPartnerProfile*> registeredPPPs;
     int numberOfRegisteredUsers;
     QString title;
@@ -26,9 +26,16 @@ public:
     /*!
      *       @param: none
      *        @desc: get the configurations set by the AdministratorUser on the project
-     *      @return: configurations: QVector<Configuration>&
+     *      @return: configurations: Configuration*
      */
-    QVector<Configuration>& getProjectConfigurations();
+    Configuration* getProjectConfigurations();
+
+    /*!
+     *       @param: configuration: Configuration*
+     *        @desc: set the configurations that the AdministratorUser has entered
+     *      @return: none
+     */
+    void changeConfiguration(Configuration);
     \
     /*!
      *       @param: none
