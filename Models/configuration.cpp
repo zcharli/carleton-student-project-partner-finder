@@ -1,9 +1,9 @@
 #include "configuration.h"
 
-Configuration::Configuration(ConfigurationType type, int value)
+Configuration::Configuration(ConfigurationType type, int value) :
+    configType(type), value(value)
 {
-    this->type = type;
-    this->value = value;
+
 }
 
 ConfigurationType Configuration::getType()
@@ -32,4 +32,23 @@ Configuration* Configuration::DefaultConfigurations()
         configs[i] = Configuration();
 
     return configs;
+}
+
+Configuration::Configuration() {}
+
+Configuration::~Configuration() {}
+
+ConfigurationType Configuration::getType()
+{
+    return configType;
+}
+
+int Configuration::getValue()
+{
+    return value;
+}
+
+void Configuration::setType(ConfigurationType type)
+{
+    configType = type;
 }

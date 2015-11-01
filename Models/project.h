@@ -32,12 +32,12 @@ public:
     Configuration getProjectConfiguration(int);
 
     /*!
-     *       @param: newConfiguration: Configuration
-     *        @desc: get the configurations set by the AdministratorUser on the project
-     *      @return: void
+     *       @param: configuration: Configuration*
+     *        @desc: set the configurations that the AdministratorUser has entered
+     *      @return: none
      */
     void changeConfiguration(Configuration);
-    \
+
     /*!
      *       @param: none
      *        @desc: get the number of registered users

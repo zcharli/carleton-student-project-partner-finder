@@ -31,6 +31,11 @@ void Project::changeConfiguration(Configuration newConfiguration)
     projectConfigurations[newConfiguration.getType()] = newConfiguration;
 }
 
+void Project::changeConfiguration(Configuration config)
+{
+    projectConfigurations[(int)(config.getType())] = config;
+}
+
 void Project::registerPPP(ProjectPartnerProfile* profile)
 {
     registeredPPPs.insert(profile);

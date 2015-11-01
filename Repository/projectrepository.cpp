@@ -9,6 +9,7 @@
 #include "Models/projectpartnerprofile.h"
 #include "Models/qualification.h"
 #include "Models/studentuser.h"
+#include "Models/configuration.h"
 
 ProjectRepository::ProjectRepository(QSqlDatabase& db)
 {
@@ -52,6 +53,28 @@ int ProjectRepository::userCreatedProject(User &user, Project &project)
     project.setProjectId(projectID);
     qDebug() << "Projec ID" + project.getProjectId();
 
+    // Insert configurations
+    int i;
+    Configuration* configArray = project.getProjectConfigurations(); // Unsure if there is a getIndex() for config arrat
+    for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
+    {
+        if((int)configArray[i].getType() != 0)
+        {
+            // Maybe not all configurations are set
+            QString insertQualificationQuery = "Insert into project_configurations (config_id,project_id,value) values (:cid, :pid, :val)";
+            QSqlQuery insertQualification(this->db);
+            insertQualification.prepare(insertQualificationQuery);
+            insertQualification.bindValue(":cid",(int)configArray[i].getType());
+            insertQualification.bindValue(":pid", projectID);
+            insertQualification.bindValue(":val",configArray[i].getValue());
+            if(!insertQualification.exec())
+            {
+                qDebug() << "insertQualification error:  "<< this->db.lastError();
+                return this->db.lastError().number();
+            }
+        }
+    }
+
     // Register the admin user for this project since ONLY ADMIN can create projects
     QString associateAdmin = "Insert into project_registration (project_id, user_id) values (:pid,:uid)";
     QSqlQuery bindProjectToAdmin(this->db);
@@ -76,7 +99,7 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
         // This project hasnt been saved yet
         return -1;
     }
-    QString fetchProjectQuery = "Select project_id, project_title, project_description from project where project_id=:pid";
+    QString fetchProjectQuery = "Select p.project_id, p.project_title, p.project_description, c.config_id, c.value from project p where project_id=:pid";
     QSqlQuery fetchProject(this->db);
     fetchProject.prepare(fetchProjectQuery);
     fetchProject.bindValue(":pid",project.getProjectId());
@@ -84,11 +107,37 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
     {
         if(fetchProject.next())
         {
+            // Index
+            //  0 -> project id
+            //  1 -> project title
+            //  2 -> project description
+
             project.setProjectId(fetchProject.value(0).toInt());
             QString projTitle = QString(fetchProject.value(1).toString());
             project.setTitle(projTitle);
             QString projDesc = QString(fetchProject.value(2).toString());
             project.setDescription(projDesc);
+
+            // As there may be more than one configurations per project, we need to do a seperate query :(
+            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
+            QSqlQuery fetchProjectConfiguration(this->db);
+            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
+            fetchProjectConfiguration.bindValue(":pid",project.getProjectId());
+            if(fetchProjectConfiguration.exec())
+            {
+                while(fetchProjectConfiguration.next())
+                {
+                    Configuration config(
+                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                fetchProjectConfiguration.value(1).toInt());
+                    project.changeConfiguration(config);
+                }
+            }
+            else
+            {
+                qDebug() << "fetchProject error:  "<< this->db.lastError();
+                return this->db.lastError().number();
+            }
         }
     }
     else
@@ -107,7 +156,8 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
     {
         if(fetchNumRegistered.next())
         {
-            project.setNumberOfRegisteredUsers(fetchNumRegistered.value(0).toInt());
+            // Negate the AdministratorUser from the registration
+            project.setNumberOfRegisteredUsers(fetchNumRegistered.value(0).toInt() - 1);
         }
     }
     else
@@ -139,6 +189,28 @@ int ProjectRepository::userUpdatedProject(User &user, Project &project)
     {
         qDebug() << "updateProject error:  "<< updateProject.lastError();
         return updateProject.lastError().number();
+    }
+
+    // Update all configurations
+    int i;
+    Configuration* projConfigs = project.getProjectConfigurations();
+    for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
+    {
+        if((int)projConfigs[i].getType() != 0)
+        {
+            QString updateProjConfigQuery = "Update project_configuration set value=:val where config_id=:cid and project_id=:pid";
+            QSqlQuery updateProjConfig(this->db);
+            updateProjConfig.prepare(updateProjConfigQuery);
+            updateProjConfig.bindValue(":val", projConfigs[i].getValue());
+            updateProjConfig.bindValue(":cid",(int)projConfigs[i].getType());
+            updateProjConfig.bindValue(":pid",project.getProjectId());
+
+            if(!updateProjConfig.exec())
+            {
+                qDebug() << "updateProjConfig error:  "<< this->db.lastError();
+                return this->db.lastError().number();
+            }
+        }
     }
 
     return 0;
@@ -177,7 +249,8 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
             {
                 if(fetchNumRegistered.next())
                 {
-                    projectListElement->setNumberOfRegisteredUsers(fetchNumRegistered.value(0).toInt());
+                    // Negate the AdministratorUser from the count
+                    projectListElement->setNumberOfRegisteredUsers(fetchNumRegistered.value(0).toInt() - 1);
                 }
             }
             else
@@ -185,6 +258,29 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
                 qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< fetchNumRegistered.lastError();
                 return fetchNumRegistered.lastError().number();
             }
+
+
+            // As there may be more than one configurations per project, we need to do a seperate query :(
+            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
+            QSqlQuery fetchProjectConfiguration(this->db);
+            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
+            fetchProjectConfiguration.bindValue(":pid",projectListElement->getProjectId());
+            if(fetchProjectConfiguration.exec())
+            {
+                while(fetchProjectConfiguration.next())
+                {
+                    Configuration config(
+                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                fetchProjectConfiguration.value(1).toInt());
+                    projectListElement->changeConfiguration(config);
+                }
+            }
+            else
+            {
+                qDebug() << "fetchProject error on the" << tracker <<"-th project: "<< this->db.lastError();
+                return this->db.lastError().number();
+            }
+
             ++tracker;
             projects.append(projectListElement);
         }
@@ -230,7 +326,8 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
             {
                 if(fetchNumRegistered.next())
                 {
-                    projectListElement->setNumberOfRegisteredUsers(fetchNumRegistered.value(0).toInt());
+                    // Negate 1 for the AdministratorUser
+                    projectListElement->setNumberOfRegisteredUsers(fetchNumRegistered.value(0).toInt() - 1);
                 }
             }
             else
@@ -238,6 +335,28 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
                 qDebug() << "fetchNumRegistered error on the" << tracker <<"-th project: "<< fetchNumRegistered.lastError();
                 return fetchNumRegistered.lastError().number();
             }
+
+            // As there may be more than one configurations per project, we need to do a seperate query :(
+            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
+            QSqlQuery fetchProjectConfiguration(this->db);
+            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
+            fetchProjectConfiguration.bindValue(":pid",projectListElement->getProjectId());
+            if(fetchProjectConfiguration.exec())
+            {
+                while(fetchProjectConfiguration.next())
+                {
+                    Configuration config(
+                                (ConfigurationType)fetchProjectConfiguration.value(0).toInt(),
+                                fetchProjectConfiguration.value(1).toInt());
+                    projectListElement->changeConfiguration(config);
+                }
+            }
+            else
+            {
+                qDebug() << "fetchProject error on the" << tracker <<"-th project: "<< this->db.lastError();
+                return this->db.lastError().number();
+            }
+
             ++tracker;
             projects.append(projectListElement);
         }
