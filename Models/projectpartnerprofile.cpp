@@ -15,6 +15,10 @@ ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
     pppID = 0;
 }
 
+ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore,int tscore,char we) :
+    user(studentUser), personalTechnicalScore(pscore), teammateTechnicalScore(tscore), workEthic(we)
+{}
+
 ProjectPartnerProfile::~ProjectPartnerProfile()
 {
     user.profile = NULL;
@@ -50,9 +54,43 @@ Qualification ProjectPartnerProfile::getQualification(int index)
 
 bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
 {
-    Qualification::GetWorkEthicBitForWorkEthicQualification(bitPosition, qualifications[userWorkEthic]);
+    if(!Qualification::GetWorkEthicBitForWorkEthicQualification(bitPosition, qualifications[userWorkEthic]))
+    {
+        return false;
+    }
+    return true;
 }
 
+int ProjectPartnerProfile::getPersonalTechnicalScore()
+{
+    return personalTechnicalScore;
+}
+
+void ProjectPartnerProfile::setPersonalTechnicalScore(int iScore)
+{
+    personalTechnicalScore = iScore;
+}
+
+int ProjectPartnerProfile::getTeammateTechnicalScore()
+{
+    return teammateTechnicalScore;
+}
+
+void ProjectPartnerProfile::setTeammateTechnicalScore(int tScore)
+{
+    teammateTechnicalScore = tScore;
+}
+
+
+char ProjectPartnerProfile::getWorkEthicByte()
+{
+    return workEthic;
+}
+
+void ProjectPartnerProfile::setWorkEthicByte(char meThic)
+{
+    workEthic = meThic;
+}
 
 
 
