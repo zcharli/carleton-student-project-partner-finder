@@ -8,6 +8,7 @@
 #include "editteamconfigurationsdialog.h"
 #include "Repository/storage.h"
 #include <QDebug>
+#include "QMessageBox"
 
 ProjectDetails::ProjectDetails(QWidget *parent) :
     QWidget(parent),
@@ -21,6 +22,8 @@ ProjectDetails::ProjectDetails(QWidget *parent) :
 
     // Flag to know if the currentUser is registered in this project
     isRegistered = false;
+
+    QObject::connect(ui->btnRegistration, &QPushButton::clicked, this, &ProjectDetails::on_btnRegistration_clicked);
 }
 
 ProjectDetails::~ProjectDetails()
@@ -83,17 +86,53 @@ void ProjectDetails::on_btnRegistration_clicked()
 
         return;
     }
+
+    QVector<Project*> projects;
+    projects.append(project);
+
     if(isRegistered) {
+
         // Unregister this student
-        project->unRegisterPPP(stuUser->getProfile());
-        ui->btnRegistration->setText(tr("Register"));
-        isRegistered = false;
+        if(Storage::defaultStorage().executeActionForProject(unregisteredFromProject,*stuUser,projects))
+        {
+            // Error occured
+            qDebug() << "UnRegistration failed";
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","Sorry, an error has occured while saving your request!");
+            messageBox.setFixedSize(500,200);
+        }
+        else
+        {
+            // Refresh the current UI
+            qDebug() << "UnRegistration Successful";
+            project->unRegisterPPP(stuUser->getProfile());
+            ui->btnRegistration->setText(tr("Register"));
+            isRegistered = false;
+            QMessageBox messageBox;
+            messageBox.information(0,"Success","You're now unregistered from this project!");
+            messageBox.setFixedSize(500,200);
+        }
     }
     else
     {
-        project->registerPPP(stuUser->getProfile());
-        ui->btnRegistration->setText(tr("Unregister"));
-        isRegistered = true;
+        if(Storage::defaultStorage().executeActionForProject(registeredInProject,*stuUser, projects))
+        {
+            // Error occured
+            qDebug() << "Registration failed";
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","Sorry, an error has occured while saving your request!");
+            messageBox.setFixedSize(500,200);
+        }
+        else
+        {
+            qDebug() << "Registration Successful";
+            project->registerPPP(stuUser->getProfile());
+            ui->btnRegistration->setText(tr("Unregister"));
+            isRegistered = true;
+            QMessageBox messageBox;
+            messageBox.information(0,"Success","You're now registered in this project!");
+            messageBox.setFixedSize(500,200);
+        }
     }
 
     emit registrationClicked();
@@ -131,13 +170,19 @@ void ProjectDetails::on_btnEditProject_clicked()
         //Save Configurations
         if(Storage::defaultStorage().executeActionForProject(updatedProject, *(CupidSession::getInstance()->getCurrentUser()), projects) != 0)
         {
-            //TODO: update error
+            // update error
             qDebug() << "Error occured on update" + project->getProjectId();
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","An error occured while attempting to fufill your request");
+            messageBox.setFixedSize(500,200);
         }
         else
         {
-            //TODO: notify update succeeded
+            // notify update succeeded
             qDebug() << "Success";
+            QMessageBox messageBox;
+            messageBox.information(0,"Success","Your project has been successfulyl updated!");
+            messageBox.setFixedSize(500,200);
         }
     }
     //QObject::connect(&dialog, SIGNAL(accepted(), this, SLOT(configurationsUpdated())));

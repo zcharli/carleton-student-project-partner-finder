@@ -5,6 +5,7 @@
 #include "Models/studentuser.h"
 #include "Models/cupidsession.h"
 #include "Repository/storage.h"
+#include <QMessageBox>
 
 #define PROG_BAR_DEFAULT_VALUE 0
 
