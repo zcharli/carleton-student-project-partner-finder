@@ -16,9 +16,9 @@ CREATE TABLE `users` (
 CREATE TABLE `ppp` (
 	`ppp_id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`bio` TEXT,
-	`ptscore` INTEGER,
+	`personal_tech_score` INTEGER,
 	`we_bs` INTEGER,
-	`ttscore` INTEGER
+	`teammate_tech_score` INTEGER
 );
 CREATE TABLE `qualification` (
 	`qualification_id`	INTEGER PRIMARY KEY AUTOINCREMENT
