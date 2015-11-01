@@ -1,7 +1,7 @@
 #include "projectlistwidget.h"
 #include "projectcellwidget.h"
 #include "Models/cupidsession.h"
-#include "Models/cupidsession.h"
+#include "Repository/storage.h"
 
 ProjectListWidget::ProjectListWidget(QWidget *parent) :
     QScrollArea(parent)

@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     Controllers/pppcontroller.cpp \
     signupform.cpp \
     createprojectwidget.cpp \
-    editteamconfigurationsdialog.cpp
+    editteamconfigurationsdialog.cpp \
+    projectcellwidget.cpp
 
 HEADERS  += \
     cupidwindow.h \
@@ -63,7 +64,8 @@ HEADERS  += \
     Controllers/pppcontroller.h \ 
     signupform.h \
     createprojectwidget.h \
-    editteamconfigurationsdialog.h
+    editteamconfigurationsdialog.h \
+    projectcellwidget.h
 
 FORMS    += \
     cupidwindow.ui \
@@ -75,7 +77,8 @@ FORMS    += \
     settingswidget.ui \
     signupform.ui \
     createprojectwidget.ui \
-    editteamconfigurationsdialog.ui
+    editteamconfigurationsdialog.ui \
+    projectcellwidget.ui
 
 RESOURCES += \
     Resources.qrc

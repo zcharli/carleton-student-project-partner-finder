@@ -54,6 +54,10 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      this, SLOT(generateProjectDetailsPage()));
     QObject::connect(this, SIGNAL(userToViewProject()),
                      &projectDetailsWidget, SLOT(userToViewProject()));
+
+    QObject::connect(&discoverProjectsWidget, SIGNAL(userToViewProject()), this, SLOT(generateProjectDetailsPage()));
+    QObject::connect(this, SIGNAL(userToViewProject()), &projectDetailsWidget, SLOT(userToViewProject()));
+
 }
 
 void cuPIDWindow::viewWillAppear()
