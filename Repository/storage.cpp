@@ -101,6 +101,9 @@ int Storage::executeActionForProject(ActionType action, User& user, QVector<Proj
         case registeredInProject:
             successStatus = repoProject->userRegisteredInProject(user, *(projects[0]));
             break;
+        case unregisteredFromProject:
+            successStatus = repoProject->userUnregisteredFromProject(user, *(projects[0]));
+            break;
         case fetchPPPsForProject:
             successStatus = repoProject->fetchPPPsForProject(user, *(projects[0]));
             break;

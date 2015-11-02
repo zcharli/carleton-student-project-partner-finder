@@ -60,7 +60,7 @@ signals:
     */
     void editProjectClicked();
 
-public slots:
+private slots:
     void on_btnRegistration_clicked();
     void on_btnStartAlgo_clicked();
     void on_btnEditProject_clicked();
@@ -71,6 +71,7 @@ private:
     Ui::ProjectDetails *ui;
     Project* project;
     bool isRegistered;
+    QPushButton *btnRegister;
 
     void didSetProject();
     void updateUI();

@@ -39,22 +39,22 @@ int StudentUser::getFetchIDForPPP()
 
 void StudentUser::addProjectToRegisteredProjects(Project* project)
 {
-  registeredProjects.append(project);
+  myProjects.append(project);
 }
 
 void StudentUser::removeProjectFromRegisteredProjects(Project* project)
 {
-  int index = registeredProjects.indexOf(project);
+  int index = myProjects.indexOf(project);
 
   if (index != -1)
   {
-      registeredProjects.remove(index);
+      myProjects.remove(index);
   }
 }
 
 bool StudentUser::isRegisteredInProject(Project* project)
 {
-    return registeredProjects.contains(project);
+    return containsProject(project);
 }
 
 ProjectPartnerProfile* StudentUser::getProfile()

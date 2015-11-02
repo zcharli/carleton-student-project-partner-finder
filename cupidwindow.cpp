@@ -62,11 +62,17 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      &settingsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
                      &createProjectWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+    QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
+                     &projectDetailsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+
 
     QObject::connect(&createProjectWidget, SIGNAL(createProjectSucceeded()),
                      this, SLOT(generateProjectDetailsPage()));
     QObject::connect(this, SIGNAL(userToViewProject()),
                      &projectDetailsWidget, SLOT(userToViewProject()));
+
+//    QObject::connect(&projectDetailsWidget,SIGNAL(registrationClicked()),
+//                     &projectDetailsWidget,SLOT(on_btnRegistration_clicked));
 
     QObject::connect(&discoverProjectsWidget, SIGNAL(userToViewProject()), this, SLOT(generateProjectDetailsPage()));
     QObject::connect(this, SIGNAL(userToViewProject()), &projectDetailsWidget, SLOT(userToViewProject()));

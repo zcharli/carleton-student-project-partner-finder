@@ -147,7 +147,7 @@ int ProjectRepository::fetchProjectForUser(User &user, Project &project)
 
     // Grab the number of users who are registered in this project
     // This is only done because we lazy load the user PPPs into project
-    QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registation where project_id=:pid";
+    QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registration where project_id=:pid";
     QSqlQuery fetchNumRegistered(this->db);
     fetchNumRegistered.prepare(fetchRegisteredUsersInProjectQuery);
     fetchNumRegistered.bindValue(":pid",project.getProjectId());
@@ -295,7 +295,7 @@ int ProjectRepository::fetchAllProjects(User &user, QVector<Project *>& projects
 int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& projects)
 {
     // Dump the projects that belong to a user
-    QString fetchProjectsQuery = "Select project_id, project_title, project_description from project p join project_registration r on p.project_id=r.project_id where r.user_id=:uid";
+    QString fetchProjectsQuery = "Select p.project_id, p.project_title, p.project_description from project p join project_registration r on p.project_id=r.project_id where r.user_id=:uid";
     QSqlQuery fetchProject(this->db);
     fetchProject.prepare(fetchProjectsQuery);
     fetchProject.bindValue(":uid",user.getUserId());
@@ -316,7 +316,7 @@ int ProjectRepository::fetchProjectsForUser(User &user, QVector<Project *>& proj
             projectListElement->setProjectId(fetchProject.value(0).toInt());
 
             // Fetch the number of registered users in this project
-            QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registation where project_id=:pid";
+            QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registration where project_id=:pid";
             QSqlQuery fetchNumRegistered(this->db);
             fetchNumRegistered.prepare(fetchRegisteredUsersInProjectQuery);
             fetchNumRegistered.bindValue(":pid",projectListElement->getProjectId());
@@ -381,7 +381,7 @@ int ProjectRepository::userRegisteredInProject(User &user, Project &project)
     QSqlQuery registerUser(this->db);
     registerUser.prepare(registerUserQuery);
     registerUser.bindValue(":pid",project.getProjectId());
-    registerUser.bindValue(":uid",project.getProjectId());
+    registerUser.bindValue(":uid",user.getUserId());
     if(!registerUser.exec())
     {
         qDebug() << "registerUser error:  "<< registerUser.lastError();
@@ -408,7 +408,7 @@ int ProjectRepository::userUnregisteredFromProject(User &user, Project &project)
     QSqlQuery unRegisterUser(this->db);
     unRegisterUser.prepare(unRegisterUserQuery);
     unRegisterUser.bindValue(":pid",project.getProjectId());
-    unRegisterUser.bindValue(":uid",project.getProjectId());
+    unRegisterUser.bindValue(":uid",user.getUserId());
     if(!unRegisterUser.exec())
     {
         qDebug() << "unRegisterUser error:  "<< unRegisterUser.lastError();

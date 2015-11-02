@@ -9,7 +9,7 @@ class Project;
 
 class AdministratorUser : public User
 {
-    QVector<Project*> projectsCreated;
+    //QVector<Project*> projectsCreated;
 
 public:
     AdministratorUser(QString&, QString&, QString&, int);

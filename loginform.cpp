@@ -6,6 +6,7 @@
 #include "Models/cupidsession.h"
 #include "Repository/storage.h"
 #include <QMessageBox>
+#include "Models/projectpartnerprofile.h"
 
 #define PROG_BAR_DEFAULT_VALUE 0
 
@@ -104,9 +105,38 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
             presentError(LOGIN_ERROR_MESSAGE);
             return;
         }
+        else
+        {
+            if (dynamic_cast<StudentUser *>(*currentUser))
+            {
+                // Getting PPP data since its best to load up the user at start to avoid checks later
+                //User has a profile in the database so we need to fetch it.
+                ProjectPartnerProfile *profile = new ProjectPartnerProfile(*((StudentUser*)(*currentUser)));
+                if(Storage::defaultStorage().executeActionForPPP(fetchPPP, *((StudentUser*)(*currentUser)), *profile) != 0)
+                {
+                    // Error occurred on retrieving PPP
+                    delete profile;
+                    profile = NULL;
+                    QMessageBox messageBox;
+                    messageBox.critical(0,"Error","An error occured while trying to fetch your profile");
+                    messageBox.setFixedSize(500,200);
+                }
+                else
+                {
+
+                }
+            }
+
+            // Load the user up with the projects they have created
+            if(Storage::defaultStorage().executeActionForProject(fetchUsersProjects, **currentUser, (*currentUser)->getProjectsAssociated()))
+            {
+                QMessageBox messageBox;
+                messageBox.warning(0,"Error","Failed to retrieve Project information");
+                messageBox.setFixedSize(500,200);
+            }
+        }
 
     }
-
 
     // Add the current user to the session after successful login
     CupidSession::getInstance()->setCurrentUser(*currentUser);
