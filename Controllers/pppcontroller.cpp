@@ -2,6 +2,7 @@
 #include "Models/cupidsession.h"
 #include "Models/studentuser.h"
 #include "Repository/storage.h"
+#include "QMessageBox"
 
 #include <QDebug>
 
@@ -35,13 +36,17 @@ void PPPController::retrievePPP()
         profile = new ProjectPartnerProfile(*currentUser);
         if(Storage::defaultStorage().executeActionForPPP(fetchPPP, *currentUser, *profile) != 0)
         {
-            //TODO: Error occurred on retrieving PPP
+            // Error occurred on retrieving PPP
             delete profile;
             profile = NULL;
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","An error occured while trying to fetch your profile");
+            messageBox.setFixedSize(500,200);
         }
         else
         {
-            //Success
+            //Success (but nobody cares)
+
         }
     }
     else
@@ -281,11 +286,17 @@ void PPPController::savePPP()
         //new PPP account
         if(Storage::defaultStorage().executeActionForPPP(createdPPP, *user, *profile) == 0)
         {
-            //TODO: SAVE SUCCESSFUL Message
+            // SAVE SUCCESSFUL Message
+            QMessageBox messageBox;
+            messageBox.information(0,"Success","You can start registering your self to projects!");
+            messageBox.setFixedSize(500,200);
         }
         else
         {
-            //TODO: SAVE ERROR Message
+            // SAVE ERROR Message
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","An error occured while trying to create your profile :(");
+            messageBox.setFixedSize(500,200);
         }
     }
     else
@@ -293,11 +304,17 @@ void PPPController::savePPP()
         //updated PPP
         if(Storage::defaultStorage().executeActionForPPP(updatedPPP, *user, *profile) == 0)
         {
-             //TODO: UPDATE SUCCESSFUL MESSAGE
+             // UPDATE SUCCESSFUL MESSAGE
+            QMessageBox messageBox;
+            messageBox.information(0,"Success","We've just successfully update your profile!");
+            messageBox.setFixedSize(500,200);
         }
         else
         {
-            //TODO: UPDATE ERROR MESSAGE
+            // UPDATE ERROR MESSAGE
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","An error occured while trying to update your profile :(");
+            messageBox.setFixedSize(500,200);
         }
 
     }

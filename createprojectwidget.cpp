@@ -4,6 +4,7 @@
 #include "Models/user.h"
 #include "Models/cupidsession.h"
 #include <QDebug>
+#include <QMessageBox>
 
 CreateProjectWidget::CreateProjectWidget(QWidget *parent) :
     QWidget(parent),
@@ -43,12 +44,18 @@ void CreateProjectWidget::saveNewProject()
 
     if (title == "" || description == "")
     {
-        //TODO: Error user must fill in form to save
+        // Error user must fill in form to save
+        QMessageBox messageBox;
+        messageBox.warning(0,"Incomplete","Please fill in the title and description before saving.");
+        messageBox.setFixedSize(500,200);
         return;
     }
     if (sizeConfiguration <= 1)
     {
-        //TODO: Error Minimum size requirement is 2
+        // Error Minimum size requirement is 2
+        QMessageBox messageBox;
+        messageBox.warning(0,"Invalid Configuration","Team size configuration should be at least two.");
+        messageBox.setFixedSize(500,200);
         return;
     }
 
@@ -62,17 +69,23 @@ void CreateProjectWidget::saveNewProject()
 
     if (Storage::defaultStorage().executeActionForProject(createdProject, *user, projects) != 0)
     {
-        //TODO: Error occurred
+        // Error occurred
         qDebug() << "Save failed";
         delete project;
         project = NULL;
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","An error occured while attempting to fulfil your request.");
+        messageBox.setFixedSize(500,200);
     }
     else
     {
-        //TODO: Save successfule
+        // Save successfule
         //  Should transiotion user to viewing newly created Prject
         qDebug() << "Save Successful";
         CupidSession::getInstance()->setCurrentProject(project);
+        QMessageBox messageBox;
+        messageBox.information(0,"Success","Your project has been successfully created, students can now join");
+        messageBox.setFixedSize(500,200);
         viewWillDisappear();
         emit createProjectSucceeded();
     }
