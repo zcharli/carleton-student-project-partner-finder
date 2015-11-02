@@ -3,6 +3,7 @@
 #include "Models/studentuser.h"
 #include "Models/administratoruser.h"
 #include "Repository/storage.h"
+#include <QMessageBox>
 
 #define INCOMPLETE_INFORMATION_ERROR "Please fill out all fields"
 #define SIGN_UP_ERROR_MESSAGE "Something went wrong"
@@ -43,6 +44,9 @@ void SignUpForm::viewWillDisappear()
 void SignUpForm::presentError(QString errorString)
 {
     //TODO:
+    QMessageBox messageBox;
+    messageBox.critical(0,"Error",errorString);
+    messageBox.setFixedSize(500,200);
 }
 
 void SignUpForm::attemptSignUpForUser(UserType type, User **currentUser)
@@ -75,6 +79,9 @@ void SignUpForm::attemptSignUpForUser(UserType type, User **currentUser)
     {
         delete (*currentUser);  //Something went wrong in database.
         *currentUser = NULL;
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Either this username or something terrible happened to the database.");
+        messageBox.setFixedSize(500,200);
     }
 }
 

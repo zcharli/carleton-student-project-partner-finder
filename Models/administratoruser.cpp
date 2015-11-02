@@ -14,26 +14,26 @@ AdministratorUser::~AdministratorUser()
 
 int AdministratorUser::getNumberOfProjectsCreated()
 {
-    return projectsCreated.size();
+    return myProjects.size();
 }
 
 void AdministratorUser::addProjectToCreatedProjects(Project* project)
 {
-    projectsCreated.append(project);
+    myProjects.append(project);
 }
 
 
 void AdministratorUser::removeProjectFromCreatedProjects(Project* project)
 {
-    int index = projectsCreated.indexOf(project);
+    int index = myProjects.indexOf(project);
 
     if (index != -1)
     {
-        projectsCreated.remove(index);
+        myProjects.remove(index);
     }
 }
 
 bool AdministratorUser::didCreateProject(Project* project)
 {
-    return projectsCreated.contains(project);
+    return containsProject(project);
 }

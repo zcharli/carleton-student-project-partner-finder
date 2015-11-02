@@ -9,6 +9,7 @@
 #include "Repository/storage.h"
 #include <QDebug>
 #include "QMessageBox"
+#include "Models/projectpartnerprofile.h"
 
 ProjectDetails::ProjectDetails(QWidget *parent) :
     QWidget(parent),
@@ -22,8 +23,6 @@ ProjectDetails::ProjectDetails(QWidget *parent) :
 
     // Flag to know if the currentUser is registered in this project
     isRegistered = false;
-
-    QObject::connect(ui->btnRegistration, &QPushButton::clicked, this, &ProjectDetails::on_btnRegistration_clicked);
 }
 
 ProjectDetails::~ProjectDetails()
@@ -79,21 +78,26 @@ void ProjectDetails::viewWillDisappear()
 
 void ProjectDetails::on_btnRegistration_clicked()
 {
-    StudentUser* stuUser = (StudentUser *)CupidSession::getInstance()->getCurrentUser();
-    if(stuUser->getProfile() == NULL)
+    StudentUser* currentUser = (StudentUser *)CupidSession::getInstance()->getCurrentUser();
+
+    if(currentUser->getFetchIDForPPP() == 0)
     {
         // Notify StudentUser that they don't have a PPP
-
+        // We need to pull in PPP as soon as we log in.
+        QMessageBox messageBox;
+        messageBox.warning(0,"Registration failed","Please create a profile before you register!");
+        messageBox.setFixedSize(500,200);
         return;
     }
 
     QVector<Project*> projects;
     projects.append(project);
 
-    if(isRegistered) {
+    if(isRegistered)
+    {
 
         // Unregister this student
-        if(Storage::defaultStorage().executeActionForProject(unregisteredFromProject,*stuUser,projects))
+        if(Storage::defaultStorage().executeActionForProject(unregisteredFromProject,*currentUser,projects))
         {
             // Error occured
             qDebug() << "UnRegistration failed";
@@ -105,9 +109,10 @@ void ProjectDetails::on_btnRegistration_clicked()
         {
             // Refresh the current UI
             qDebug() << "UnRegistration Successful";
-            project->unRegisterPPP(stuUser->getProfile());
+            project->unRegisterPPP(currentUser->getProfile());
             ui->btnRegistration->setText(tr("Register"));
             isRegistered = false;
+            updateUI();
             QMessageBox messageBox;
             messageBox.information(0,"Success","You're now unregistered from this project!");
             messageBox.setFixedSize(500,200);
@@ -115,7 +120,7 @@ void ProjectDetails::on_btnRegistration_clicked()
     }
     else
     {
-        if(Storage::defaultStorage().executeActionForProject(registeredInProject,*stuUser, projects))
+        if(Storage::defaultStorage().executeActionForProject(registeredInProject,*currentUser, projects))
         {
             // Error occured
             qDebug() << "Registration failed";
@@ -126,9 +131,10 @@ void ProjectDetails::on_btnRegistration_clicked()
         else
         {
             qDebug() << "Registration Successful";
-            project->registerPPP(stuUser->getProfile());
+            project->registerPPP(currentUser->getProfile());
             ui->btnRegistration->setText(tr("Unregister"));
             isRegistered = true;
+            updateUI();
             QMessageBox messageBox;
             messageBox.information(0,"Success","You're now registered in this project!");
             messageBox.setFixedSize(500,200);
@@ -185,7 +191,6 @@ void ProjectDetails::on_btnEditProject_clicked()
             messageBox.setFixedSize(500,200);
         }
     }
-    //QObject::connect(&dialog, SIGNAL(accepted(), this, SLOT(configurationsUpdated())));
 }
 
 void ProjectDetails::handleUserContextSwitch(DetailViewType type)
