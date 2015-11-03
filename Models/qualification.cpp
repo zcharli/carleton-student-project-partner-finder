@@ -79,9 +79,7 @@ bool Qualification::GetWorkEthicBitForWorkEthicQualification(WorkEthicQualificat
 
 void Qualification::SetWorkEthicBitForWorkEthicQualification(WorkEthicQualificationMapping workEthicBit, Qualification& qualification)
 {
-    qDebug() << QString("before: " + QString::number(qualification.getValue()));
     unsigned char newValue = ((unsigned char)qualification.getValue()) | (1 << workEthicBit);
-    qDebug() << QString("after: " + QString::number(newValue));
     qualification.setValue(newValue);
 }
 

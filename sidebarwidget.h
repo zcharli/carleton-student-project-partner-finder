@@ -73,6 +73,13 @@ signals:
 
     /*!
      *  @param: void
+     *   @desc: A signal emitted when the my projects button is clicked
+     * @return: void
+    */
+    void myProjectsClicked();
+
+    /*!
+     *  @param: void
      *   @desc: A signal emitted when the user is navigating to a differrent screen
      * @return: void
     */
@@ -91,6 +98,7 @@ public slots:
     void on_btnLogOut_clicked();
     void on_btnSettings_clicked();
     void on_btnDiscoverProjects_clicked();
+    void on_btnMyProjects_clicked();
     void on_btnCreateProject_clicked();
     void on_btnHome_clicked();
 

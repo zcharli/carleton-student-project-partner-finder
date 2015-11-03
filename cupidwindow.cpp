@@ -23,7 +23,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 
     //adds all the main content to the main widget
     ui->mainContentStackedWidget->layout()->addWidget(&profileWidget);
-    ui->mainContentStackedWidget->layout()->addWidget(&discoverProjectsWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&projectsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&settingsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&createProjectWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&projectDetailsWidget);
@@ -37,7 +37,9 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     QObject::connect(&projectSidebar, SIGNAL(settingsClicked()),
                      this, SLOT(generateSettingsPage()));
     QObject::connect(&projectSidebar, SIGNAL(discoverProjectsClicked()),
-                     this, SLOT(generateDiscoverProjectsPage()));
+                     this, SLOT(generateProjectsPage()));
+    QObject::connect(&projectSidebar, SIGNAL(myProjectsClicked()),
+                     this, SLOT(generateProjectsPage()));
     QObject::connect(&projectSidebar, SIGNAL(createProjectClicked()),
                      this, SLOT(generateCreateProjectPage()));
     QObject::connect(&projectSidebar, SIGNAL(homeClicked()),
@@ -57,7 +59,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
                      &profileWidget, SLOT(handleUserContextSwitch(DetailViewType)));
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
-                     &discoverProjectsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
+                     &projectsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
                      &settingsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
@@ -74,7 +76,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 //    QObject::connect(&projectDetailsWidget,SIGNAL(registrationClicked()),
 //                     &projectDetailsWidget,SLOT(on_btnRegistration_clicked));
 
-    QObject::connect(&discoverProjectsWidget, SIGNAL(userToViewProject()), this, SLOT(generateProjectDetailsPage()));
+    QObject::connect(&projectsWidget, SIGNAL(userToViewProject()), this, SLOT(generateProjectDetailsPage()));
     QObject::connect(this, SIGNAL(userToViewProject()), &projectDetailsWidget, SLOT(userToViewProject()));
 
 }
@@ -160,9 +162,9 @@ void cuPIDWindow::generateSettingsPage()
     ui->mainContentStackedWidget->setCurrentWidget(&settingsWidget);
 }
 
-void cuPIDWindow::generateDiscoverProjectsPage()
+void cuPIDWindow::generateProjectsPage()
 {
-    ui->mainContentStackedWidget->setCurrentWidget(&discoverProjectsWidget);
+    ui->mainContentStackedWidget->setCurrentWidget(&projectsWidget);
 }
 
 void cuPIDWindow::generateCreateProjectPage()

@@ -33,7 +33,7 @@ private:
     SideBarWidget projectSidebar;
     ProfileWidget profileWidget;
     CreateProjectWidget createProjectWidget;
-    ProjectListWidget discoverProjectsWidget;
+    ProjectListWidget projectsWidget;
     SettingsWidget settingsWidget;
     HomeWidget homeWidget;
 
@@ -107,10 +107,10 @@ public slots:
     /*!
      *  @param: none
      *   @desc: A slot to accept the signal emitted after the
-     *          discoverProjects button is clicked
+     *          discoverProjects or myProjects button is clicked
      * @return: void
     */
-    void generateDiscoverProjectsPage();
+    void generateProjectsPage();
 
     /*!
      *  @param: none

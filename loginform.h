@@ -62,6 +62,13 @@ private:
      */
     void presentError(QString errorString);
 
+    /*!
+     *       @param: userToPopulate: User*
+     *        @desc: populate the user with the id of the projects he is registered in
+     *      @return: void
+     */
+    void populateUserProjects(User *);
+
 public slots:
     /*!
      *  @param: none

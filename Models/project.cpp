@@ -31,19 +31,18 @@ void Project::changeConfiguration(Configuration config)
     projectConfigurations[(int)(config.getType())] = config;
 }
 
-void Project::registerPPP(ProjectPartnerProfile* profile)
+void Project::registerPPP(ProjectPartnerProfile& profile)
 {
-    registeredPPPs.insert(profile);
-    profile->getStudentUser().addProjectToRegisteredProjects(this);
+    //Database updates the numberOfRegistered Users so dont worry about it here
+    registeredPPPs.insert(profile.getPPPID());
+    profile.getStudentUser().addProjectToUser(this->id);
 }
 
-void Project::unRegisterPPP(ProjectPartnerProfile* profile)
+void Project::unRegisterPPP(ProjectPartnerProfile& profile)
 {
-    if (isPPPRegistered(profile))
-    {
-        registeredPPPs.remove(profile);
-        profile->getStudentUser().removeProjectFromRegisteredProjects(this);
-    }
+    //Database updates the numberOfRegistered Users so dont worry about it here
+    registeredPPPs.remove(profile.getPPPID());
+    profile.getStudentUser().removeProjectFromUser(this->id);
 }
 
 int Project::getNumberOfRegisteredUsers()
@@ -53,12 +52,13 @@ int Project::getNumberOfRegisteredUsers()
 
 void Project::setNumberOfRegisteredUsers(int newNum)
 {
+    //Only mostly called by the database
     numberOfRegisteredUsers = newNum;
 }
 
-bool Project::isPPPRegistered(ProjectPartnerProfile* profile)
+bool Project::isPPPRegistered(ProjectPartnerProfile& profile)
 {
-    return registeredPPPs.contains(profile);
+    return registeredPPPs.contains(profile.getPPPID());
 }
 
 QString& Project::getTitle()
@@ -91,15 +91,7 @@ int Project::getProjectId()
     return id;
 }
 
-void Project::addPPPtoProject(ProjectPartnerProfile *ppp)
+void Project::addPPPtoProject(ProjectPartnerProfile* ppp)
 {
-    if(isPPPRegistered(ppp))
-    {
-        // Shouldnt be adding multiples in a set, this is bad with allocated memeory
-        delete ppp;
-    }
-    else
-    {
-        registeredPPPs.insert(ppp);
-    }
+
 }

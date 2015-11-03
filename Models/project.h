@@ -13,7 +13,7 @@ class ProjectPartnerProfile;
 class Project
 {
     Configuration *projectConfigurations;
-    QSet<ProjectPartnerProfile*> registeredPPPs;
+    QSet<int> registeredPPPs;
     int numberOfRegisteredUsers;
     QString title;
     QString description;
@@ -53,28 +53,28 @@ public:
     void setNumberOfRegisteredUsers(int);
 
     /*!
-     *       @param: profileToRegister: ProjectPartnerProfile*
+     *       @param: profileToRegister: ProjectPartnerProfile&
      *        @desc: register the given PPP to the project
      *               Must call isPPPRegistered first to check if the
      *               Profile has already been registered to prevent duplication
      *      @return: void
      */
-    void registerPPP(ProjectPartnerProfile*);
+    void registerPPP(ProjectPartnerProfile&);
 
     /*!
-     *       @param: profileToUnregister: ProjectPartnerProfile*
+     *       @param: profileToUnregister: ProjectPartnerProfile&
      *        @desc: unregister the given PPP from the project
      *               (if the PPP is registered). Does nothing otherwise.
      *      @return: void
      */
-    void unRegisterPPP(ProjectPartnerProfile*);
+    void unRegisterPPP(ProjectPartnerProfile&);
 
     /*!
-     *       @param: profileToCheck: ProjectPartnerProfile*
+     *       @param: profileToCheck: ProjectPartnerProfile&
      *        @desc: check if the given PPP is registered in the project;
      *      @return: isPPPRegistered: bool
      */
-    bool isPPPRegistered(ProjectPartnerProfile* profile);
+    bool isPPPRegistered(ProjectPartnerProfile&);
 
     /*!
      *       @param: none
@@ -123,7 +123,7 @@ public:
      *        @desc: adds the ppp to the collection of profiles for this project
      *      @return: none
      */
-    void addPPPtoProject(ProjectPartnerProfile *ppp);
+    void addPPPtoProject(ProjectPartnerProfile*);
 };
 
 #endif // PROJECT_H

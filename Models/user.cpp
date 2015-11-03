@@ -68,36 +68,23 @@ int User::getNumberOfProjectsAssociated()
     return myProjects.size();
 }
 
-void User::addProjectToUser(Project* project)
+void User::addProjectToUser(int projectID)
 {
-    myProjects.append(project);
+    myProjects.insert(projectID);
 }
 
 
-void User::removeProjectFromUser(Project* project)
+void User::removeProjectFromUser(int projectID)
 {
-    int index = myProjects.indexOf(project);
-
-    if (index != -1)
-    {
-        myProjects.remove(index);
-    }
+    if(myProjects.contains(projectID))
+        myProjects.remove(projectID);
 }
 
-QVector<Project *>& User::getProjectsAssociated(){
+QSet<int>& User::getProjectsAssociated(){
     return myProjects;
 }
 
-bool User::containsProject(Project *project)
+bool User::containsProject(Project& project)
 {
-    // Instead of checking contains, we should check if the project IDs are the same.
-    // Same project may be malloc'd by project list and User's projects
-    int i;
-    for(i=0;i<myProjects.size();++i)
-    {
-        if(myProjects.value(i)->getProjectId() == project->getProjectId())
-        {
-            return true;
-        }
-    }
+    return myProjects.contains(project.getProjectId());
 }

@@ -96,40 +96,40 @@ public:
    int getNumberOfProjectsAssociated();
 
    /*!
-    *       @param: projectToAdd: Project*
+    *       @param: IDofProjectToAdd: int
     *        @desc: adds the given project to the list of projects assocaited to the User
     *      @return: void
     */
-   void addProjectToUser(Project*);
+   void addProjectToUser(int);
 
    /*!
-    *       @param: projectToRemove: Project*
+    *       @param: IdofProjectToRemove: int
     *        @desc: removes the given project from the list of projects associated to the user
     *               (if the project is contained in the list). Does nothing otherwise
     *      @return: void
     */
-   void removeProjectFromUser(Project*);
+   void removeProjectFromUser(int);
 
    /*!
     *       @param: none
     *        @desc: returns the list of projects that are associated to this user
     *      @return: myProjects: QVection<Project *>
     */
-   QVector<Project*>& getProjectsAssociated();
+   QSet<int>& getProjectsAssociated();
 
    /*!
-    *       @param: bool
+    *       @param: projectToCheck
     *        @desc: checks if the project ID is inside the list
-    *      @return: project: Project*
+    *      @return: project: bool
     */
-   bool containsProject(Project*);
+   bool containsProject(Project&);
 
 protected:
    QString firstName;
    QString lastName;
    QString userName;
    UserType userType;
-   QVector<Project*> myProjects;
+   QSet<int> myProjects; //keep only the ids of the projects
    //Needed when quering database
    int id;
 };

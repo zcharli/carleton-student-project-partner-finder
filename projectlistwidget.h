@@ -12,6 +12,14 @@
 #include "sidebarwidget.h"
 #include "projectcellwidget.h"
 
+enum ListType
+{
+    discoverProjectsList = 0,
+    myProjectsList,
+    noList
+};
+
+
 class ProjectListWidget : public QScrollArea
 {
     Q_OBJECT
@@ -19,6 +27,7 @@ public:
     explicit ProjectListWidget(QWidget *parent = 0);
     ~ProjectListWidget();
     int listSize;
+    ListType listType;
 
     /*!
      *       @param: none

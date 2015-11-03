@@ -54,6 +54,12 @@ void SideBarWidget::on_btnDiscoverProjects_clicked()
     emit discoverProjectsClicked();
 }
 
+void SideBarWidget::on_btnMyProjects_clicked()
+{
+    emit userToSwitchContextTo(MyProjects);
+    emit myProjectsClicked();
+}
+
 void SideBarWidget::on_btnCreateProject_clicked()
 {
     emit userToSwitchContextTo(CreateProject);
