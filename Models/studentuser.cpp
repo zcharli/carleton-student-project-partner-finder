@@ -8,23 +8,12 @@ StudentUser::StudentUser(QString& fName, QString& lName, QString& userName, int 
     profile = NULL;
     userType = Student;
     pppIDForFetch = 0;
-    numProjectsRegistered = 0;
 }
 
 StudentUser::~StudentUser()
 {
     delete profile;
     profile = NULL;
-}
-
-int StudentUser::getNumberOfProjectsRegistered()
-{
-    return numProjectsRegistered;
-}
-
-void StudentUser::setNumberOfProjectsRegistered(int newNum)
-{
-    numProjectsRegistered = newNum;
 }
 
 void StudentUser::setFetchIDForPPP(int fetchID)
@@ -35,26 +24,6 @@ void StudentUser::setFetchIDForPPP(int fetchID)
 int StudentUser::getFetchIDForPPP()
 {
     return pppIDForFetch;
-}
-
-void StudentUser::addProjectToRegisteredProjects(Project* project)
-{
-  myProjects.append(project);
-}
-
-void StudentUser::removeProjectFromRegisteredProjects(Project* project)
-{
-  int index = myProjects.indexOf(project);
-
-  if (index != -1)
-  {
-      myProjects.remove(index);
-  }
-}
-
-bool StudentUser::isRegisteredInProject(Project* project)
-{
-    return containsProject(project);
 }
 
 ProjectPartnerProfile* StudentUser::getProfile()

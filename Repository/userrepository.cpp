@@ -58,6 +58,7 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
 
     // Set the PPP since its been created
     ppp.setPPPID(pppID);
+    static_cast<StudentUser&>(user).setFetchIDForPPP(pppID);
 
     // Now start the big transaction to save Qualifications
     //  Proper way to do this!!!!!

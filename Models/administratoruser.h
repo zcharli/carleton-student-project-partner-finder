@@ -9,7 +9,6 @@ class Project;
 
 class AdministratorUser : public User
 {
-    //QVector<Project*> projectsCreated;
 
 public:
     AdministratorUser(QString&, QString&, QString&, int);
@@ -37,14 +36,6 @@ public:
      *      @return: void
      */
     void removeProjectFromCreatedProjects(Project*);
-
-    /*!
-     *       @param: projectToCheck: Project*
-     *        @desc: checks if the AdministratorUser is the owner of a given Project
-     *               returns true if AdministratorUser is the owner. False otherwise
-     *      @return: didCreate: bool
-     */
-    bool didCreateProject(Project*);
 };
 
 #endif // ADMINISTRATORUSER_H

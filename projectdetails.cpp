@@ -40,6 +40,16 @@ void ProjectDetails::updateUI()
 {
     if(project != NULL)
     {
+        if(CupidSession::getInstance()->getCurrentUser()->containsProject(*project))
+        {
+            ui->btnRegistration->setText(tr("Unregister"));
+            isRegistered = true;
+        }
+        else
+        {
+            ui->btnRegistration->setText(tr("Register"));
+            isRegistered = false;
+        }
         // Fill the form with all information from project
         ui->txtProjDescription->setText(project->getDescription());
         ui->txtProjTitle->setText(project->getTitle());
@@ -61,11 +71,6 @@ void ProjectDetails::viewWillAppear()
         ui->btnRegistration->setHidden(false);
         ui->btnEditProject->setHidden(true);
         ui->btnStartAlgo->setHidden(true);
-        if(((StudentUser *)CupidSession::getInstance()->getCurrentUser())->isRegisteredInProject(project))
-        {
-            ui->btnRegistration->setText(tr("Unregister"));
-            isRegistered = true;
-        }
     }
 
     updateUI();
@@ -73,6 +78,16 @@ void ProjectDetails::viewWillAppear()
 
 void ProjectDetails::viewWillDisappear()
 {
+    ui->btnRegistration->setHidden(false);
+    ui->btnEditProject->setHidden(false);
+    ui->btnStartAlgo->setHidden(false);
+    ui->btnRegistration->setText(tr("Register"));
+
+    ui->txtProjDescription->setText("");
+    ui->txtProjTitle->setText("");
+    ui->lblRegisteredStudents->setText("");
+
+    isRegistered = false;
     project = NULL;
 }
 
@@ -109,9 +124,7 @@ void ProjectDetails::on_btnRegistration_clicked()
         {
             // Refresh the current UI
             qDebug() << "UnRegistration Successful";
-            project->unRegisterPPP(currentUser->getProfile());
-            ui->btnRegistration->setText(tr("Register"));
-            isRegistered = false;
+            project->unRegisterPPP(*(currentUser->getProfile()));
             updateUI();
             QMessageBox messageBox;
             messageBox.information(0,"Success","You're now unregistered from this project!");
@@ -131,7 +144,7 @@ void ProjectDetails::on_btnRegistration_clicked()
         else
         {
             qDebug() << "Registration Successful";
-            project->registerPPP(currentUser->getProfile());
+            project->registerPPP(*(currentUser->getProfile()));
             ui->btnRegistration->setText(tr("Unregister"));
             isRegistered = true;
             updateUI();

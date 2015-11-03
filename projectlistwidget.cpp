@@ -10,6 +10,7 @@ ProjectListWidget::ProjectListWidget(QWidget *parent) :
     projectCells = NULL;
     items = NULL;
     listSize = 0;
+    listType = noList;
     this->setLayout(new QHBoxLayout);
     viewWillAppear();
 }
@@ -25,11 +26,13 @@ void ProjectListWidget::viewWillAppear()
 
 void ProjectListWidget::viewWillDisappear()
 {
+    listType = noList;
     cleanUpList();
 }
 
 void ProjectListWidget::cleanUpList()
 {
+
     if(projectList.size() != 0)
     {
         Project *currentProjectInSession = CupidSession::getInstance()->getCurrentProject();
@@ -61,16 +64,24 @@ void ProjectListWidget::setUpList()
     /* Clean up first */
     cleanUpList();
 
-    //TODO: Query DB here!!!
-    User *currentUser = CupidSession::getInstance()->getCurrentUser();
-    if(Storage::defaultStorage().executeActionForProject(discoverProjects, *currentUser, projectList) != 0)
+
+    if (listType != noList)
     {
-        //ERROR:
-        qDebug() << "Error occured on fetch";
+        //TODO: Query DB here!!!
+        User *currentUser = CupidSession::getInstance()->getCurrentUser();
+        if(Storage::defaultStorage().executeActionForProject((listType == discoverProjectsList ? discoverProjects : fetchUsersProjects), *currentUser, projectList) != 0)
+        {
+            //ERROR:
+            qDebug() << "Error occured on fetch";
+        }
+        else
+        {
+            displayList();
+        }
     }
     else
     {
-        displayList();
+        //Should only be the case on first load by cuPID window.
     }
 }
 
@@ -119,6 +130,12 @@ void ProjectListWidget::handleUserContextSwitch(DetailViewType type)
     if (type == DiscoverProjets)
     {
         //entering view
+        this->listType = discoverProjectsList;
+        viewWillAppear();
+    }
+    else if (type == MyProjects)
+    {
+        this->listType = myProjectsList;
         viewWillAppear();
     }
     else
