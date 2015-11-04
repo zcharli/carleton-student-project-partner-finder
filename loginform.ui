@@ -32,7 +32,10 @@
         <bool>true</bool>
        </property>
        <property name="text">
-        <string>cuPID</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Images/Images.qrc">:/Images/Drawing.png/logo2.svg</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -267,6 +270,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="Images/Images.qrc"/>
+ </resources>
  <connections/>
 </ui>
