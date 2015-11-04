@@ -117,7 +117,9 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
                     if(Storage::defaultStorage().executeActionForPPP(fetchPPP, *((StudentUser*)(*currentUser)), *profile) != 0)
                     {
                         // Error occurred on retrieving PPP
+                        delete *currentUser;
                         delete profile;
+                        *currentUser = NULL;
                         profile = NULL;
                         QMessageBox messageBox;
                         messageBox.critical(0,"Error","An error occured while trying to fetch your profile");

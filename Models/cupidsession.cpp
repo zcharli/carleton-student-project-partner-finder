@@ -34,7 +34,7 @@ void CupidSession::setCurrentProject(Project* projectToSet)
 
 void CupidSession::deleteCurrentUser()
 {
-    if(currentUser)
+    if(currentUser != NULL)
     {
         delete currentUser;
         currentUser = NULL;
@@ -43,7 +43,7 @@ void CupidSession::deleteCurrentUser()
 
 void CupidSession::deleteCurrentProject()
 {
-    if(currentProject)
+    if(currentProject != NULL)
     {
         delete currentProject;
         currentProject = NULL;

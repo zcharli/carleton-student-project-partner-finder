@@ -14,7 +14,7 @@ Project::Project(QString& title, QString& desc)
 
 Project::~Project()
 {
-    delete[] projectConfigurations;
+    delete projectConfigurations;
     projectConfigurations = NULL;
 }
 
@@ -91,7 +91,7 @@ int Project::getProjectId()
     return id;
 }
 
-void Project::addPPPtoProject(ProjectPartnerProfile* ppp)
+void Project::addPPPtoProject(ProjectPartnerProfile*)
 {
 
 }

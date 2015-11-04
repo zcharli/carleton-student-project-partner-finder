@@ -16,7 +16,7 @@ SettingsWidget::~SettingsWidget()
 
 void SettingsWidget::handleUserContextSwitch(DetailViewType type)
 {
-    if (type = Settings)
+    if (type == Settings)
     {
         //entering view
     }

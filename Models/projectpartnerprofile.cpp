@@ -22,7 +22,7 @@ ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore
 ProjectPartnerProfile::~ProjectPartnerProfile()
 {
     user.profile = NULL;
-    delete[] qualifications;
+    delete qualifications;
     qualifications = NULL;
 }
 

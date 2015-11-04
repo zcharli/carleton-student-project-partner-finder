@@ -178,30 +178,46 @@ void ProjectDetails::on_btnEditProject_clicked()
 {
     EditTeamConfigurationsDialog dialog(this);
     dialog.getUi().teamSizeSpinBox->setValue(project->getProjectConfiguration(TeamSize).getValue());
+    dialog.getUi().txtDescription->setText(project->getDescription());
+    dialog.getUi().txtTitle->setText(project->getTitle());
     dialog.exec();
     if(dialog.result() == QDialog::Accepted)
     {
         int newTeamConfiguration =  dialog.getUi().teamSizeSpinBox->value();
-        project->changeConfiguration(Configuration(TeamSize, newTeamConfiguration));
-        QVector<Project*> projects;
-        projects.append(project);
-
-        //Save Configurations
-        if(Storage::defaultStorage().executeActionForProject(updatedProject, *(CupidSession::getInstance()->getCurrentUser()), projects) != 0)
+        QString newTitle = dialog.getUi().txtTitle->text();
+        QString newDescription = dialog.getUi().txtDescription->toPlainText();
+        if(newTitle == "" || newDescription == "")
         {
-            // update error
-            qDebug() << "Error occured on update" + project->getProjectId();
             QMessageBox messageBox;
-            messageBox.critical(0,"Error","An error occured while attempting to fufill your request");
+            messageBox.critical(0,"Error","You must fill out all fields");
             messageBox.setFixedSize(500,200);
         }
         else
         {
-            // notify update succeeded
-            qDebug() << "Success";
-            QMessageBox messageBox;
-            messageBox.information(0,"Success","Your project has been successfulyl updated!");
-            messageBox.setFixedSize(500,200);
+            project->changeConfiguration(Configuration(TeamSize, newTeamConfiguration));
+            project->setDescription(newDescription);
+            project->setTitle(newTitle);
+            QVector<Project*> projects;
+            projects.append(project);
+
+            //Save Configurations
+            if(Storage::defaultStorage().executeActionForProject(updatedProject, *(CupidSession::getInstance()->getCurrentUser()), projects) != 0)
+            {
+                // update error
+                qDebug() << "Error occured on update" + project->getProjectId();
+                QMessageBox messageBox;
+                messageBox.critical(0,"Error","An error occured while attempting to fufill your request");
+                messageBox.setFixedSize(500,200);
+            }
+            else
+            {
+                // notify update succeeded
+                qDebug() << "Success";
+                QMessageBox messageBox;
+                messageBox.information(0,"Success","Your project has been successfulyl updated!");
+                messageBox.setFixedSize(500,200);
+                updateUI();
+            }
         }
     }
 }

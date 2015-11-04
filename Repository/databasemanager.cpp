@@ -1,15 +1,19 @@
 #include "databasemanager.h"
 #include "QDebug"
 #include "QDir"
+#include <QtSql>
 //#include "QSqlQuery"
 //#include "QSqlQueryModel"
 
 DatabaseManager::DatabaseManager()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    //QString dbPath = QDir::currentPath() + "/Data/cuPIDdb";
-    QString dbPath = "/home/student/cuPIDdb";
-    db.setDatabaseName(dbPath);
+    //QString path = QDir::currentPath();
+    //path.append("/../cuPID/Data/cuPIDdb");
+    //QString dbPath = "/cuPID/Data/cuPIDdb";
+    //QString dbPath = "/home/student/cuPIDdb";
+    QString dbPath = "Data/cuPIDdb";
+    db.setDatabaseName("../"+dbPath);
     db.open();
     if(db.isOpen())
     {
@@ -21,7 +25,9 @@ DatabaseManager::DatabaseManager()
     }
 }
 
-DatabaseManager::~DatabaseManager() {}
+DatabaseManager::~DatabaseManager()
+{
+}
 
 QSqlDatabase& DatabaseManager::getDB()
 {
