@@ -38,10 +38,10 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="Images/Images.qrc">:/Images/Drawing.png/Drawing.png</pixmap>
+      <pixmap resource="Images/Images.qrc">:/Images/Drawing.png/logo2.svg</pixmap>
      </property>
      <property name="scaledContents">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

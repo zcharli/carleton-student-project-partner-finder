@@ -43,7 +43,13 @@
         </font>
        </property>
        <property name="text">
-        <string>cuPid</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="Images/Images.qrc">:/Images/Drawing.png/logo2.svg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -270,6 +276,8 @@ border-bottom: 1px solid black;
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="Images/Images.qrc"/>
+ </resources>
  <connections/>
 </ui>
