@@ -5,7 +5,7 @@
 #include "projectcellwidget.h"
 
 //  Subsystem dependencies
-#include "DataAccessLayer/Models/project.h"
+#include "DataAccessLayer/project.h"
 
 #include <QScrollArea>
 #include <QLabel>

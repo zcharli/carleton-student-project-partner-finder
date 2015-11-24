@@ -6,7 +6,7 @@
 #include "sidebarwidget.h"
 
 //  Subsystem dependencies
-#include "DataAccessLayer/Models/projectpartnerprofile.h"
+#include "DataAccessLayer/projectpartnerprofile.h"
 
 #include <QWidget>
 

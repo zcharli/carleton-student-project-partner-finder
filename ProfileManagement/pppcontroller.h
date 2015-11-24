@@ -4,8 +4,8 @@
 #include "profilewidget.h"
 
 //  Subsystem dependencies
-#include "DataAccessLayer/Models/qualification.h"
-#include "DataAccessLayer/Models/projectpartnerprofile.h"
+#include "DataAccessLayer/qualification.h"
+#include "DataAccessLayer/projectpartnerprofile.h"
 
 #include <QObject>
 

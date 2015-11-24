@@ -2,10 +2,10 @@
 #include "ui_cupidwindow.h"
 
 // Subsystem dependencies
-#include "DataAccessLayer/Models/administratoruser.h"
-#include "DataAccessLayer/Models/studentuser.h"
-#include "DataAccessLayer/Models/cupidsession.h"
-#include "DataAccessLayer/Models/qualification.h"
+#include "DataAccessLayer/administratoruser.h"
+#include "DataAccessLayer/studentuser.h"
+#include "DataAccessLayer/cupidsession.h"
+#include "DataAccessLayer/qualification.h"
 
 #include <QLayout>
 

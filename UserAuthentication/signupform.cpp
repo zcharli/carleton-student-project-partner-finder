@@ -2,8 +2,8 @@
 #include "ui_signupform.h"
 
 // Subsystem dependencies
-#include "DataAccessLayer/Models/studentuser.h"
-#include "DataAccessLayer/Models/administratoruser.h"
+#include "DataAccessLayer/studentuser.h"
+#include "DataAccessLayer/administratoruser.h"
 #include "Repository/storage.h"
 
 #include <QMessageBox>

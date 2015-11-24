@@ -8,7 +8,7 @@
 //  Subsystem dependencies
 #include "ProfileManagement/profilewidget.h"
 #include "ProjectManagement/createprojectwidget.h"
-#include "DataAccessLayer/Models/user.h"
+#include "DataAccessLayer/user.h"
 #include "ProjectManagement/projectlistwidget.h"
 #include "ProfileManagement/pppcontroller.h"
 #include "ProjectManagement/projectdetails.h"

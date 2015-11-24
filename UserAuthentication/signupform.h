@@ -2,7 +2,7 @@
 #define SIGNUPFORM_H
 
 //  Subsystem dependencies
-#include "DataAccessLayer/Models/user.h"
+#include "DataAccessLayer/user.h"
 
 #include <QWidget>
 
