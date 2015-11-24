@@ -1,10 +1,12 @@
 #ifndef LOGINFORM_H
 #define LOGINFORM_H
 
-#include <QWidget>
 #include "signupform.h"
 
-#include "Models/user.h"
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/user.h"
+
+#include <QWidget>
 
 namespace Ui {
 class LoginForm;

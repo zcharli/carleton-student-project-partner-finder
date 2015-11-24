@@ -1,8 +1,9 @@
 #ifndef STUDENTUSER_H
 #define STUDENTUSER_H
 
-#include <QVector>
 #include "user.h"
+
+#include <QVector>
 
 //forward declarations
 class ProjectPartnerProfile;

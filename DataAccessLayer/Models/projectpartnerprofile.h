@@ -1,8 +1,9 @@
 #ifndef PROJECTPARTNERPROFILE_H
 #define PROJECTPARTNERPROFILE_H
 
+#include "qualification.h"
+
 #include <QString>
-#include "Models/qualification.h"
 
 //forward declarations
 class StudentUser;

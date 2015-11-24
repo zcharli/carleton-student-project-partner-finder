@@ -1,8 +1,9 @@
 #ifndef EDITTEAMCONFIGURATIONSDIALOG_H
 #define EDITTEAMCONFIGURATIONSDIALOG_H
 
-#include <QDialog>
 #include "ui_editteamconfigurationsdialog.h"
+
+#include <QDialog>
 
 namespace Ui {
 class EditTeamConfigurationsDialog;

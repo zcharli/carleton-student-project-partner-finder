@@ -1,7 +1,5 @@
 #include "sidebarwidget.h"
 
-
-
 SideBarWidget::SideBarWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SideBarWidget)

@@ -1,8 +1,9 @@
 #ifndef USER_H
 #define USER_H
 
+#include "project.h"
+
 #include <QString>
-#include "Models/project.h"
 
 enum UserType {
     Administrator = 0,

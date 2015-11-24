@@ -1,8 +1,11 @@
 #include "createprojectwidget.h"
 #include "ui_createprojectwidget.h"
+
+//  Subsystem dependencies
 #include "Repository/storage.h"
-#include "Models/user.h"
-#include "Models/cupidsession.h"
+#include "DataAccessLayer/Models/user.h"
+#include "DataAccessLayer/Models/cupidsession.h"
+
 #include <QDebug>
 #include <QMessageBox>
 
@@ -121,4 +124,3 @@ void CreateProjectWidget::handleUserContextSwitch(DetailViewType type)
 
 
 }
-

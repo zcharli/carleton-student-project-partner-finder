@@ -1,10 +1,13 @@
 #ifndef PPPCONTROLLER_H
 #define PPPCONTROLLER_H
 
-#include <QObject>
 #include "profilewidget.h"
-#include "Models/qualification.h"
-#include "Models/projectpartnerprofile.h"
+
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/qualification.h"
+#include "DataAccessLayer/Models/projectpartnerprofile.h"
+
+#include <QObject>
 
 enum ProfileState
 {

@@ -1,14 +1,17 @@
 #include "userrepository.h"
-#include "Models/user.h"
-#include "Models/studentuser.h"
-#include "Models/projectpartnerprofile.h"
+
+// Subsystem dependencies
+#include "DataAccessLayer/Models/user.h"
+#include "DataAccessLayer/Models/studentuser.h"
+#include "DataAccessLayer/Models/projectpartnerprofile.h"
+#include "DataAccessLayer/Models/qualification.h"
+
+#include <QDebug>
+#include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QStringBuilder>
 #include <QVector>
-#include "Models/qualification.h"
-#include "QDebug"
-#include <QSqlError>
 
 /*!
  * \brief UserRepository::UserRepository

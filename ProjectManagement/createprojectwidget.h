@@ -1,10 +1,13 @@
 #ifndef CREATEPROJECTWIDGET_H
 #define CREATEPROJECTWIDGET_H
 
+#include "sidebarwidget.h"
+
+// Subsystem dependencies
+#include "DataAccessLayer/Models/project.h"
+
 #include <QWidget>
 #include <QString>
-#include "Models/project.h"
-#include "sidebarwidget.h"
 
 namespace Ui {
 class CreateProjectWidget;

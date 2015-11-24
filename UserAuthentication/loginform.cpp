@@ -1,12 +1,15 @@
 #include "loginform.h"
-#include <QDebug>
 #include "ui_loginform.h"
-#include "Models/administratoruser.h"
-#include "Models/studentuser.h"
-#include "Models/cupidsession.h"
+
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/administratoruser.h"
+#include "DataAccessLayer/Models/studentuser.h"
+#include "DataAccessLayer/Models/cupidsession.h"
+#include "DataAccessLayer/Models/projectpartnerprofile.h"
 #include "Repository/storage.h"
+
 #include <QMessageBox>
-#include "Models/projectpartnerprofile.h"
+#include <QDebug>
 
 #define PROG_BAR_DEFAULT_VALUE 0
 

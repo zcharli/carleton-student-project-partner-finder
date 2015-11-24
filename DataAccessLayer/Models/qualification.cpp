@@ -1,5 +1,6 @@
 #include "qualification.h"
 #include "projectpartnerprofile.h"
+
 #include <QDebug>
 
 Qualification::Qualification(QualificationType type, int value)

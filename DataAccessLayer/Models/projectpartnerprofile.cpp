@@ -91,6 +91,3 @@ void ProjectPartnerProfile::setWorkEthicByte(char meThic)
 {
     workEthic = meThic;
 }
-
-
-

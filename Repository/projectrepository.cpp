@@ -1,15 +1,18 @@
 #include "projectrepository.h"
-#include "Models/project.h"
-#include "Models/user.h"
+#include "userrepository.h"
+
+// Subsystem dependencies
+#include "DataAccessLayer/Models/project.h"
+#include "DataAccessLayer/Models/user.h"
+#include "DataAccessLayer/Models/projectpartnerprofile.h"
+#include "DataAccessLayer/Models/qualification.h"
+#include "DataAccessLayer/Models/studentuser.h"
+#include "DataAccessLayer/Models/configuration.h"
+
 #include <QSqlQuery>
 #include <QVector>
 #include "QDebug"
 #include <QSqlError>
-#include "userrepository.h"
-#include "Models/projectpartnerprofile.h"
-#include "Models/qualification.h"
-#include "Models/studentuser.h"
-#include "Models/configuration.h"
 
 ProjectRepository::ProjectRepository(QSqlDatabase& db)
 {

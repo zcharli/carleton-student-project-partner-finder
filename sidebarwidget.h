@@ -1,8 +1,9 @@
 #ifndef SIDEBARWIDGET_H
 #define SIDEBARWIDGET_H
 
-#include <QWidget>
 #include "ui_sidebarwidget.h"  //Side effect of creating a getter to the ui element of the class, but this makes things easier
+
+#include <QWidget>
 
 enum DetailViewType
 {

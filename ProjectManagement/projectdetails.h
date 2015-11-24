@@ -1,9 +1,12 @@
 #ifndef PROJECTDETAILS_H
 #define PROJECTDETAILS_H
 
-#include <QWidget>
-#include "Models/project.h"
 #include "sidebarwidget.h"
+
+// Subsystem dependencies
+#include "DataAccessLayer/Models/project.h"
+
+#include <QWidget>
 
 namespace Ui {
 class ProjectDetails;

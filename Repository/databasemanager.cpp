@@ -1,6 +1,7 @@
 #include "databasemanager.h"
-#include "QDebug"
-#include "QDir"
+
+#include <QDebug>
+#include <QDir>
 #include <QtSql>
 //#include "QSqlQuery"
 //#include "QSqlQueryModel"

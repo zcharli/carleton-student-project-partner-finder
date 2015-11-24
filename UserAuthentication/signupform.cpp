@@ -1,8 +1,11 @@
 #include "signupform.h"
 #include "ui_signupform.h"
-#include "Models/studentuser.h"
-#include "Models/administratoruser.h"
+
+// Subsystem dependencies
+#include "DataAccessLayer/Models/studentuser.h"
+#include "DataAccessLayer/Models/administratoruser.h"
 #include "Repository/storage.h"
+
 #include <QMessageBox>
 
 #define INCOMPLETE_INFORMATION_ERROR "Please fill out all fields"
