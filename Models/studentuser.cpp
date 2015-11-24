@@ -12,8 +12,11 @@ StudentUser::StudentUser(QString& fName, QString& lName, QString& userName, int 
 
 StudentUser::~StudentUser()
 {
-    delete profile;
-    profile = NULL;
+    if(profile != NULL)
+    {
+        delete profile;
+        profile = NULL;
+    }
 }
 
 void StudentUser::setFetchIDForPPP(int fetchID)
