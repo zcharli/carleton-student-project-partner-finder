@@ -3,8 +3,8 @@
 
 //  Subsystem dependencies
 #include "Repository/storage.h"
-#include "DataAccessLayer/Models/user.h"
-#include "DataAccessLayer/Models/cupidsession.h"
+#include "DataAccessLayer/user.h"
+#include "DataAccessLayer/cupidsession.h"
 
 #include <QDebug>
 #include <QMessageBox>

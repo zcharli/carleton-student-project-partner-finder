@@ -4,8 +4,8 @@
 #include "databasemanager.h"
 
 // Subsystem dependencies
-#include "DataAccessLayer/Models/user.h"
-#include "DataAccessLayer/Models/project.h"
+#include "DataAccessLayer/user.h"
+#include "DataAccessLayer/project.h"
 
 #define SUCCESS 0
 #define INVALID_ACTION -1

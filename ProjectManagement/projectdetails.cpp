@@ -3,12 +3,12 @@
 #include "editteamconfigurationsdialog.h"
 
 //  Subsystem dependencies
-#include "DataAccessLayer/Models/cupidsession.h"
-#include "DataAccessLayer/Models/user.h"
-#include "DataAccessLayer/Models/administratoruser.h"
-#include "DataAccessLayer/Models/studentuser.h"
+#include "DataAccessLayer/cupidsession.h"
+#include "DataAccessLayer/user.h"
+#include "DataAccessLayer/administratoruser.h"
+#include "DataAccessLayer/studentuser.h"
 #include "Repository/storage.h"
-#include "DataAccessLayer/Models/projectpartnerprofile.h"
+#include "DataAccessLayer/projectpartnerprofile.h"
 
 #include <QMessageBox>
 #include <QDebug>

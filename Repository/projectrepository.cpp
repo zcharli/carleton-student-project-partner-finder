@@ -2,12 +2,12 @@
 #include "userrepository.h"
 
 // Subsystem dependencies
-#include "DataAccessLayer/Models/project.h"
-#include "DataAccessLayer/Models/user.h"
-#include "DataAccessLayer/Models/projectpartnerprofile.h"
-#include "DataAccessLayer/Models/qualification.h"
-#include "DataAccessLayer/Models/studentuser.h"
-#include "DataAccessLayer/Models/configuration.h"
+#include "DataAccessLayer/project.h"
+#include "DataAccessLayer/user.h"
+#include "DataAccessLayer/projectpartnerprofile.h"
+#include "DataAccessLayer/qualification.h"
+#include "DataAccessLayer/studentuser.h"
+#include "DataAccessLayer/configuration.h"
 
 #include <QSqlQuery>
 #include <QVector>

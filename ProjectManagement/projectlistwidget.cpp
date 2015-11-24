@@ -2,7 +2,7 @@
 #include "projectcellwidget.h"
 
 //  Subsystem dependencies
-#include "DataAccessLayer/Models/cupidsession.h"
+#include "DataAccessLayer/cupidsession.h"
 #include "Repository/storage.h"
 
 #include <QDebug>

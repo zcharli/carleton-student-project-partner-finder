@@ -4,8 +4,8 @@
 #include <QDebug>
 
 //  Subsystem dependencies
-#include "DataAccessLayer/Models/cupidsession.h"
-#include "DataAccessLayer/Models/studentuser.h"
+#include "DataAccessLayer/cupidsession.h"
+#include "DataAccessLayer/studentuser.h"
 #include "Repository/storage.h"
 
 PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :

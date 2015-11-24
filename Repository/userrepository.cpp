@@ -1,10 +1,10 @@
 #include "userrepository.h"
 
 // Subsystem dependencies
-#include "DataAccessLayer/Models/user.h"
-#include "DataAccessLayer/Models/studentuser.h"
-#include "DataAccessLayer/Models/projectpartnerprofile.h"
-#include "DataAccessLayer/Models/qualification.h"
+#include "DataAccessLayer/user.h"
+#include "DataAccessLayer/studentuser.h"
+#include "DataAccessLayer/projectpartnerprofile.h"
+#include "DataAccessLayer/qualification.h"
 
 #include <QDebug>
 #include <QSqlError>

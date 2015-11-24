@@ -17,14 +17,14 @@ SOURCES += \
     Repository/userrepository.cpp \
     Repository/databasemanager.cpp \
     Repository/storage.cpp \
-    DataAccessLayer/Models/user.cpp \
-    DataAccessLayer/Models/studentuser.cpp \
-    DataAccessLayer/Models/administratoruser.cpp \
-    DataAccessLayer/Models/projectpartnerprofile.cpp \
-    DataAccessLayer/Models/qualification.cpp \
-    DataAccessLayer/Models/project.cpp \
-    DataAccessLayer/Models/configuration.cpp \
-    DataAccessLayer/Models/cupidsession.cpp \
+    DataAccessLayer/user.cpp \
+    DataAccessLayer/studentuser.cpp \
+    DataAccessLayer/administratoruser.cpp \
+    DataAccessLayer/projectpartnerprofile.cpp \
+    DataAccessLayer/qualification.cpp \
+    DataAccessLayer/project.cpp \
+    DataAccessLayer/configuration.cpp \
+    DataAccessLayer/cupidsession.cpp \
     UserAuthentication/loginform.cpp \
     UserAuthentication/signupform.cpp \
     ProjectManagement/projectdetails.cpp \
@@ -47,14 +47,14 @@ HEADERS  += \
     Repository/userrepository.h \
     Repository/databasemanager.h \
     Repository/storage.h \
-    DataAccessLayer/Models/cupidsession.h \
-    DataAccessLayer/Models/user.h \
-    DataAccessLayer/Models/studentuser.h \
-    DataAccessLayer/Models/administratoruser.h \
-    DataAccessLayer/Models/projectpartnerprofile.h \
-    DataAccessLayer/Models/qualification.h \
-    DataAccessLayer/Models/project.h \
-    DataAccessLayer/Models/configuration.h \
+    DataAccessLayer/cupidsession.h \
+    DataAccessLayer/user.h \
+    DataAccessLayer/studentuser.h \
+    DataAccessLayer/administratoruser.h \
+    DataAccessLayer/projectpartnerprofile.h \
+    DataAccessLayer/qualification.h \
+    DataAccessLayer/project.h \
+    DataAccessLayer/configuration.h \
     UserAuthentication/signupform.h \
     UserAuthentication/loginform.h \
     ProjectManagement/createprojectwidget.h \
