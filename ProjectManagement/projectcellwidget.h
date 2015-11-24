@@ -2,6 +2,7 @@
 #define PROJECTCELLWIDGET_H
 
 #include "ui_projectcellwidget.h"
+
 #include <QWidget>
 
 namespace Ui {

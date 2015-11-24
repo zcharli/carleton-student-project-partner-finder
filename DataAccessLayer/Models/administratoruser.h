@@ -1,8 +1,9 @@
 #ifndef ADMINISTRATORUSER_H
 #define ADMINISTRATORUSER_H
 
-#include <QVector>
 #include "user.h"
+
+#include <QVector>
 
 //forward declarations
 class Project;

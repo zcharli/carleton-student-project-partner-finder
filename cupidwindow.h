@@ -1,16 +1,19 @@
 #ifndef CUPIDWINDOW_H
 #define CUPIDWINDOW_H
 
-#include <QMainWindow>
-#include "sidebarwidget.h"
-#include "profilewidget.h"
-#include "settingswidget.h"
-#include "createprojectwidget.h"
-#include "Models/user.h"
-#include "projectlistwidget.h"
-#include "Controllers/pppcontroller.h"
-#include "projectdetails.h"
 #include "homewidget.h"
+#include "sidebarwidget.h"
+#include "settingswidget.h"
+
+//  Subsystem dependencies
+#include "ProfileManagement/profilewidget.h"
+#include "ProjectManagement/createprojectwidget.h"
+#include "DataAccessLayer/Models/user.h"
+#include "ProjectManagement/projectlistwidget.h"
+#include "ProfileManagement/pppcontroller.h"
+#include "ProjectManagement/projectdetails.h"
+
+#include <QMainWindow>
 
 namespace Ui {
 class cuPIDWindow;

@@ -1,9 +1,10 @@
 #ifndef PROJECT_H
 #define PROJECT_H
 
+#include "configuration.h"
+
 #include <QVector>
 #include <QString>
-#include "configuration.h"
 #include <QSet>
 
 //forward declarations

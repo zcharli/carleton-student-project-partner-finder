@@ -1,15 +1,18 @@
 #include "projectdetails.h"
 #include "ui_projectdetails.h"
-#include "Models/cupidsession.h"
-#include "Models/user.h"
-#include <QPushButton>
-#include "Models/administratoruser.h"
-#include "Models/studentuser.h"
 #include "editteamconfigurationsdialog.h"
+
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/cupidsession.h"
+#include "DataAccessLayer/Models/user.h"
+#include "DataAccessLayer/Models/administratoruser.h"
+#include "DataAccessLayer/Models/studentuser.h"
 #include "Repository/storage.h"
+#include "DataAccessLayer/Models/projectpartnerprofile.h"
+
+#include <QMessageBox>
 #include <QDebug>
-#include "QMessageBox"
-#include "Models/projectpartnerprofile.h"
+#include <QPushButton>
 
 ProjectDetails::ProjectDetails(QWidget *parent) :
     QWidget(parent),

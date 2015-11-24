@@ -1,8 +1,9 @@
 #ifndef SETTINGSWIDGET_H
 #define SETTINGSWIDGET_H
 
-#include <QWidget>
 #include "sidebarwidget.h"
+
+#include <QWidget>
 
 namespace Ui {
 class SettingsWidget;

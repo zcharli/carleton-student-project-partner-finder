@@ -12,75 +12,76 @@ TARGET = cuPID
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-    cupidwindow.cpp \
-    loginform.cpp \
-    sidebarwidget.cpp \
-    profilewidget.cpp \
-    cupidslider.cpp \
-    Models/user.cpp \
-    Models/studentuser.cpp \
-    Models/administratoruser.cpp \
-    Models/projectpartnerprofile.cpp \
-    Models/qualification.cpp \
-    Models/project.cpp \
-    Models/configuration.cpp \
-    projectlistwidget.cpp \
-    settingswidget.cpp \
+SOURCES += \
     Repository/projectrepository.cpp \
     Repository/userrepository.cpp \
     Repository/databasemanager.cpp \
-    projectdetails.cpp \
-    Models/cupidsession.cpp \
     Repository/storage.cpp \
-    Controllers/pppcontroller.cpp \
-    signupform.cpp \
-    createprojectwidget.cpp \
-    editteamconfigurationsdialog.cpp \
-    projectcellwidget.cpp \
+    DataAccessLayer/Models/user.cpp \
+    DataAccessLayer/Models/studentuser.cpp \
+    DataAccessLayer/Models/administratoruser.cpp \
+    DataAccessLayer/Models/projectpartnerprofile.cpp \
+    DataAccessLayer/Models/qualification.cpp \
+    DataAccessLayer/Models/project.cpp \
+    DataAccessLayer/Models/configuration.cpp \
+    DataAccessLayer/Models/cupidsession.cpp \
+    UserAuthentication/loginform.cpp \
+    UserAuthentication/signupform.cpp \
+    ProjectManagement/projectdetails.cpp \
+    ProjectManagement/createprojectwidget.cpp \
+    ProjectManagement/editteamconfigurationsdialog.cpp \
+    ProjectManagement/projectcellwidget.cpp \
+    ProjectManagement/projectlistwidget.cpp \
+    ProfileManagement/profilewidget.cpp \
+    ProfileManagement/cupidslider.cpp \
+    ProfileManagement/pppcontroller.cpp \
+    main.cpp \
+    sidebarwidget.cpp \
+    settingswidget.cpp \
+    cupidwindow.cpp \
     homewidget.cpp
 
+
 HEADERS  += \
-    cupidwindow.h \
-    loginform.h \
-    sidebarwidget.h \
-    profilewidget.h \
-    cupidslider.h \
-    Models/user.h \
-    Models/studentuser.h \
-    Models/administratoruser.h \
-    Models/projectpartnerprofile.h \
-    Models/qualification.h \
-    Models/project.h \
-    Models/configuration.h \
-    projectlistwidget.h \
-    settingswidget.h \
     Repository/projectrepository.h \
     Repository/userrepository.h \
     Repository/databasemanager.h \
-    projectdetails.h \
-    Models/cupidsession.h \
     Repository/storage.h \
-    Repository/errorcodes.h \
-    Controllers/pppcontroller.h \
-    signupform.h \
-    createprojectwidget.h \
-    editteamconfigurationsdialog.h \
-    projectcellwidget.h \
+    DataAccessLayer/Models/cupidsession.h \
+    DataAccessLayer/Models/user.h \
+    DataAccessLayer/Models/studentuser.h \
+    DataAccessLayer/Models/administratoruser.h \
+    DataAccessLayer/Models/projectpartnerprofile.h \
+    DataAccessLayer/Models/qualification.h \
+    DataAccessLayer/Models/project.h \
+    DataAccessLayer/Models/configuration.h \
+    UserAuthentication/signupform.h \
+    UserAuthentication/loginform.h \
+    ProjectManagement/createprojectwidget.h \
+    ProjectManagement/editteamconfigurationsdialog.h \
+    ProjectManagement/projectcellwidget.h \
+    ProjectManagement/projectlistwidget.h \
+    ProjectManagement/projectdetails.h \
+    ProfileManagement/profilewidget.h \
+    ProfileManagement/cupidslider.h \
+    ProfileManagement/pppcontroller.h \
+    errorcodes.h \
+    sidebarwidget.h \
+    settingswidget.h \
+    cupidwindow.h \
     homewidget.h
 
 FORMS    += \
+    UserAuthentication/loginform.ui \
+    UserAuthentication/signupform.ui \
+    ProjectManagement/createprojectwidget.ui \
+    ProjectManagement/editteamconfigurationsdialog.ui \
+    ProjectManagement/projectcellwidget.ui \
+    ProfileManagement/profilewidget.ui \
+    ProjectManagement/projectdetails.ui \
     cupidwindow.ui \
-    loginform.ui \
-    sidebarwidget.ui \
-    profilewidget.ui \
-    projectdetails.ui \
-    profilewidget.ui \
     settingswidget.ui \
-    signupform.ui \
-    createprojectwidget.ui \
-    editteamconfigurationsdialog.ui \
-    projectcellwidget.ui \
+    sidebarwidget.ui \
     homewidget.ui
 
 RESOURCES += \

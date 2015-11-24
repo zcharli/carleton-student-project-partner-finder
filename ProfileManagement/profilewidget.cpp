@@ -1,5 +1,7 @@
 #include "profilewidget.h"
-#include "Models/qualification.h"
+
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/qualification.h"
 
 #define DEFAULT_VALUE 0
 

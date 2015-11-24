@@ -1,11 +1,12 @@
 #include "pppcontroller.h"
-#include "Models/cupidsession.h"
-#include "Models/studentuser.h"
-#include "Repository/storage.h"
-#include "QMessageBox"
 
+#include <QMessageBox>
 #include <QDebug>
 
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/cupidsession.h"
+#include "DataAccessLayer/Models/studentuser.h"
+#include "Repository/storage.h"
 
 PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
     QObject(parent)

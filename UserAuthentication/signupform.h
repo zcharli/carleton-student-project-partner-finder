@@ -1,8 +1,10 @@
 #ifndef SIGNUPFORM_H
 #define SIGNUPFORM_H
 
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/user.h"
+
 #include <QWidget>
-#include "Models/user.h"
 
 namespace Ui {
 class SignUpForm;

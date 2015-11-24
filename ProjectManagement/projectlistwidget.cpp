@@ -1,7 +1,10 @@
 #include "projectlistwidget.h"
 #include "projectcellwidget.h"
-#include "Models/cupidsession.h"
+
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/cupidsession.h"
 #include "Repository/storage.h"
+
 #include <QDebug>
 
 ProjectListWidget::ProjectListWidget(QWidget *parent) :

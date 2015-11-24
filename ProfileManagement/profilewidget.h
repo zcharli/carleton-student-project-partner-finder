@@ -1,11 +1,14 @@
 #ifndef PROFILEWIDGET_H
 #define PROFILEWIDGET_H
 
-#include <QWidget>
 #include "cupidslider.h"
 #include "ui_profilewidget.h"
-#include "Models/projectpartnerprofile.h"
 #include "sidebarwidget.h"
+
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/projectpartnerprofile.h"
+
+#include <QWidget>
 
 
 namespace Ui {

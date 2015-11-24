@@ -1,9 +1,12 @@
 #include "cupidwindow.h"
 #include "ui_cupidwindow.h"
-#include "Models/administratoruser.h"
-#include "Models/studentuser.h"
-#include "Models/cupidsession.h"
-#include "Models/qualification.h"
+
+// Subsystem dependencies
+#include "DataAccessLayer/Models/administratoruser.h"
+#include "DataAccessLayer/Models/studentuser.h"
+#include "DataAccessLayer/Models/cupidsession.h"
+#include "DataAccessLayer/Models/qualification.h"
+
 #include <QLayout>
 
 #define WINDOW_MAX_WIDTH 1000

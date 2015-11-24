@@ -1,6 +1,12 @@
 #ifndef PROJECTLISTWIDGET_H
 #define PROJECTLISTWIDGET_H
 
+#include "sidebarwidget.h"
+#include "projectcellwidget.h"
+
+//  Subsystem dependencies
+#include "DataAccessLayer/Models/project.h"
+
 #include <QScrollArea>
 #include <QLabel>
 #include <QPushButton>
@@ -8,9 +14,6 @@
 #include <QHBoxLayout>
 #include <QString>
 #include <QVector>
-#include "Models/project.h"
-#include "sidebarwidget.h"
-#include "projectcellwidget.h"
 
 enum ListType
 {

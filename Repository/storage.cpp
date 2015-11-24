@@ -1,9 +1,11 @@
 #include "storage.h"
-#include "Repository/userrepository.h"
-#include "Repository/projectrepository.h"
-#include "Models/user.h"
-#include "Models/project.h"
-#include "Repository/databasemanager.h"
+#include "userrepository.h"
+#include "projectrepository.h"
+#include "databasemanager.h"
+
+// Subsystem dependencies
+#include "DataAccessLayer/Models/user.h"
+#include "DataAccessLayer/Models/project.h"
 
 #define SUCCESS 0
 #define INVALID_ACTION -1
