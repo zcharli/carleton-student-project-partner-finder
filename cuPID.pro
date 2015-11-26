@@ -39,7 +39,9 @@ SOURCES += \
     sidebarwidget.cpp \
     settingswidget.cpp \
     cupidwindow.cpp \
-    homewidget.cpp
+    homewidget.cpp \
+    Repository/dataaccessdispatcher.cpp \
+    DataAccessLayer/jsonserializer.cpp
 
 
 HEADERS  += \
@@ -55,6 +57,7 @@ HEADERS  += \
     DataAccessLayer/qualification.h \
     DataAccessLayer/project.h \
     DataAccessLayer/configuration.h \
+    DataAccessLayer/imappable.h \
     UserAuthentication/signupform.h \
     UserAuthentication/loginform.h \
     ProjectManagement/createprojectwidget.h \
@@ -69,7 +72,10 @@ HEADERS  += \
     sidebarwidget.h \
     settingswidget.h \
     cupidwindow.h \
-    homewidget.h
+    homewidget.h \
+    Repository/dataaccessdispatcher.h \
+    DataAccessLayer/jsonserializer.h
+
 
 FORMS    += \
     UserAuthentication/loginform.ui \

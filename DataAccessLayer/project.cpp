@@ -1,6 +1,7 @@
 #include "project.h"
 #include "projectpartnerprofile.h"
 #include "studentuser.h"
+#include <QJsonArray>
 
 Project::Project(QString& title, QString& desc)
 {
@@ -34,14 +35,14 @@ void Project::changeConfiguration(Configuration config)
 void Project::registerPPP(ProjectPartnerProfile& profile)
 {
     //Database updates the numberOfRegistered Users so dont worry about it here
-    registeredPPPs.insert(profile.getPPPID());
+    registeredPPPs.insert(profile);
     profile.getStudentUser().addProjectToUser(this->id);
 }
 
 void Project::unRegisterPPP(ProjectPartnerProfile& profile)
 {
     //Database updates the numberOfRegistered Users so dont worry about it here
-    registeredPPPs.remove(profile.getPPPID());
+    registeredPPPs.remove(profile);
     profile.getStudentUser().removeProjectFromUser(this->id);
 }
 
@@ -58,7 +59,7 @@ void Project::setNumberOfRegisteredUsers(int newNum)
 
 bool Project::isPPPRegistered(ProjectPartnerProfile& profile)
 {
-    return registeredPPPs.contains(profile.getPPPID());
+    return registeredPPPs.contains(profile);
 }
 
 QString& Project::getTitle()
@@ -94,4 +95,46 @@ int Project::getProjectId()
 void Project::addPPPtoProject(ProjectPartnerProfile*)
 {
 
+}
+
+bool Project::serializeJSONForSave(QJsonObject& projectJSON)
+{
+    int i;
+
+    projectJSON["project_id"] = id;
+    projectJSON["title"] = title;
+    projectJSON["description"] = description;
+    projectJSON["numberOfRegisteredUsers"] = numberOfRegisteredUsers;
+
+    // We dont' need to save PPPs but we do need to save configurations
+    QJsonArray configArray;
+    for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
+    {
+        QJsonObject config;
+        projectConfigurations[i].serializeJSONForSave(config);
+        configArray.append(config);
+    }
+
+    projectJSON["configurations"] = configArray;
+
+    return true;
+}
+
+bool Project::deserializeJSONFromRetrieve(const QJsonObject& projectJSON)
+{
+    int i;
+
+    id = projectJSON.value("project_id").toInt();
+    title = projectJSON.value("title").toString();
+    description = projectJSON.value("description").toString();
+    numberOfRegisteredUsers = projectJSON.value("numberOfRegisteredUsers").toInt();
+    QJsonArray configArray = projectJSON["configurations"].toArray();
+    for(i=0;i<configArray.size();++i)
+    {
+        QJsonObject config = configArray[i].toObject();
+
+        projectConfigurations[i].deserializeJSONFromRetrieve(config);
+    }
+
+    return true;
 }

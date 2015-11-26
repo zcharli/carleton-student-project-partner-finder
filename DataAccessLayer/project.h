@@ -6,15 +6,17 @@
 #include <QVector>
 #include <QString>
 #include <QSet>
+#include "imappable.h"
 
 //forward declarations
 class Configuration;
 class ProjectPartnerProfile;
+class QJsonObject;
 
-class Project
+class Project : public IMappable
 {
     Configuration *projectConfigurations;
-    QSet<int> registeredPPPs;
+    QSet<ProjectPartnerProfile> registeredPPPs;
     int numberOfRegisteredUsers;
     QString title;
     QString description;
@@ -125,6 +127,21 @@ public:
      *      @return: none
      */
     void addPPPtoProject(ProjectPartnerProfile*);
+
+    /*!
+     *       @param: empty Json Object: QJsonObject&
+     *        @desc: serializes the object implementing into JSON
+     *      @return: success or failure: bool
+     */
+    virtual bool serializeJSONForSave(QJsonObject&);
+
+    /*!
+     *       @param: objectToDeSerialize: QJsonObject&
+     *        @desc: deserializes the the JSON object to create the object back
+     *      @return: success or failure: bool
+     */
+    virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
+
 };
 
 #endif // PROJECT_H

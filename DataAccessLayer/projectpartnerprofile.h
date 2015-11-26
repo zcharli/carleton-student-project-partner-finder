@@ -57,6 +57,13 @@ public:
      *        @desc: get the project partner id
      *      @return: pppID: int
      */
+    int getPPPID() const;
+
+    /*!
+     *       @param: none
+     *        @desc: get the project partner id
+     *      @return: pppID: int
+     */
     int getPPPID();
 
     /*!
@@ -113,6 +120,22 @@ public:
     void setWorkEthicByte(char);
 
 
+//    /*!
+//     *       @param: ppp: ProjectPartnerProfile
+//     *        @desc: used to compare two PPPs that are the same (hashing)
+//     *      @return: true or false : bool
+//     */
+//    bool operator==(const ProjectPartnerProfile & other);
 };
+
+inline bool operator==(const ProjectPartnerProfile &e1, const ProjectPartnerProfile &e2)
+{
+    return e1.getPPPID() == e2.getPPPID();
+}
+
+inline uint qHash(const ProjectPartnerProfile &key, uint seed)
+{
+    return qHash(key.getPPPID(), seed);
+}
 
 #endif // PROJECTPARTNERPROFILE_H

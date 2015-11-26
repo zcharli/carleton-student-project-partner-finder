@@ -36,6 +36,11 @@ int ProjectPartnerProfile::getPPPID()
     return pppID;
 }
 
+int ProjectPartnerProfile::getPPPID() const
+{
+    return pppID;
+}
+
 void ProjectPartnerProfile::setPPPID(int id)
 {
     this->pppID = id;
