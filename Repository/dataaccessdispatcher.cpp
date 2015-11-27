@@ -31,7 +31,7 @@ void DataAccessDispatcher::clearJsonObject(QJsonObject& cleanMe)
     }
 }
 
-bool DataAccessDispatcher::retrieveAllProjects(QJsonObject& fillMeUp)
+int DataAccessDispatcher::retrieveAllProjects(QJsonObject& fillMeUp)
 {
     if(!fillMeUp.isEmpty())
     {
@@ -40,69 +40,70 @@ bool DataAccessDispatcher::retrieveAllProjects(QJsonObject& fillMeUp)
 
     if(repoProject->fetchAllProjects(fillMeUp) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
 
-    return true;
+    return SUCCESS;
 }
 
-bool DataAccessDispatcher::retrieveProjectUsingID(QJsonObject& inProjectOutProjects)
+int DataAccessDispatcher::retrieveProjectUsingID(QJsonObject& inProjectOutProjects)
 {
     // Not used currently since all projects are loaded at once
     int projectId;
 
     if((projectId = getProjectIdFromJson(inProjectOutProjects)) == 0)
     {
-        return false;
+        return NO_PROJECT_ID;
     }
 
     clearJsonObject(inProjectOutProjects);
 
     if(repoProject->fetchProjectForUser(inProjectOutProjects, projectId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
 
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::retrieveProjectsForUser(QJsonObject& inUserOutProjects)
+int DataAccessDispatcher::retrieveProjectsForUser(QJsonObject& inUserOutProjects)
 {
     int userId;
 
     if((userId = getUserIdFromJson(inUserOutProjects)) == 0)
     {
-        return false;
+        return NO_USER_ID;
     }
 
     clearJsonObject(inUserOutProjects);
 
     if(repoProject->fetchProjectsForUser(inUserOutProjects, userId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
 
-    return true;
+    return SUCCESS;
 }
 
-bool DataAccessDispatcher::retrievePPPsForProject(QJsonObject& inUserOutPPP)
+int DataAccessDispatcher::retrievePPPsForProject(QJsonObject& inUserOutPPP)
 {
     int projectId;
     if((projectId = getProjectIdFromJson(inUserOutPPP)) == 0)
     {
-        return false;
+        return NO_PROJECT_ID;
     }
 
     clearJsonObject(inUserOutPPP);
 
     if(repoProject->fetchPPPsForProject(inUserOutPPP, projectId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::retrieveUserWithUsername(QJsonObject& inUserOutUser)
+int DataAccessDispatcher::retrieveUserWithUsername(QJsonObject& inUserOutUser)
 {
     QString userName;
+    int type;
     if(inUserOutUser.contains("userName"))
     {
         userName = inUserOutUser.value("userName").toString();
@@ -113,114 +114,113 @@ bool DataAccessDispatcher::retrieveUserWithUsername(QJsonObject& inUserOutUser)
     }
     else
     {
-        return false;
+        return NO_USERNAME;
     }
+
+    if(!inUserOutUser.contains("type"))
+    {
+        return NO_USER_TYPE;
+    }
+
+    type = inUserOutUser["type"].toInt();
 
     clearJsonObject(inUserOutUser);
 
-    if(repoUser->retrieveUserWithUsername(inUserOutUser, userName) != SUCCESS)
+    if(repoUser->retrieveUserWithUsername(inUserOutUser, userName, type) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::retrievePPPForUser(QJsonObject& inUserOutPPP)
+int DataAccessDispatcher::retrievePPPForUser(QJsonObject& inUserOutPPP)
 {
-    int userId;
+    int pppId;
 
-    if((userId = getUserIdFromJson(inUserOutPPP)) == 0)
+    if((pppId = getPPPIdFromJson(inUserOutPPP)) == 0)
     {
-        return false;
+        return NO_PPP_ID;
     }
 
-    clearJsonObject(inUserOutPPP);
-
-    if(repoUser->fetchPPPForUser(inUserOutPPP, userId) != SUCCESS)
+    if(repoUser->fetchPPPForUser(inUserOutPPP, pppId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
-    return true;
+    return SUCCESS;
 }
 
-bool DataAccessDispatcher::userCreatedPPP(QJsonObject& inUserinPPP)
+int DataAccessDispatcher::userCreatedPPP(QJsonObject& inUserinPPP)
 {
     int userId;
     if((userId = getUserIdFromJson(inUserinPPP)) == 0)
     {
-        return false;
+        return NO_USER_ID;
     }
 
     if(repoUser->userCreatedPPP(inUserinPPP,userId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::userUpdatedPPP(QJsonObject& inUserinPPP)
+int DataAccessDispatcher::userUpdatedPPP(QJsonObject& inUserinPPP)
+{
+    if(repoUser->userUpdatedPPP(inUserinPPP) != SUCCESS)
+    {
+        return DATABASE_QUERY_ERROR;
+    }
+    return SUCCESS;
+}
+int DataAccessDispatcher::userDeletedPPP(QJsonObject& inUserinPPP)
 {
     int userId;
     if((userId = getUserIdFromJson(inUserinPPP)) == 0)
     {
-        return false;
+        return NO_USER_ID;
     }
 
-    if(repoUser->userUpdatedPPP(inUserinPPP,userId) != SUCCESS)
+    if(repoUser->userDeletedPPP(userId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::userDeletedPPP(QJsonObject& inUserinPPP)
-{
-    int userId;
-    if((userId = getUserIdFromJson(inUserinPPP)) == 0)
-    {
-        return false;
-    }
-
-    if(repoUser->userDeletedPPP(inUserinPPP,userId) != SUCCESS)
-    {
-        return false;
-    }
-    return true;
-}
-bool DataAccessDispatcher::createUser(QJsonObject& inUser)
+int DataAccessDispatcher::createUser(QJsonObject& inUser)
 {
     if(repoUser->createUser(inUser) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::userCreatedProject(QJsonObject& inProjectinUser)
+int DataAccessDispatcher::userCreatedProject(QJsonObject& inProjectinUser)
 {
     int userId;
     if((userId = getUserIdFromJson(inProjectinUser)) == 0)
     {
-        return false;
+        return NO_USER_ID;
     }
 
     if(repoProject->userCreatedProject(inProjectinUser,userId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::userUpdatedProject(QJsonObject& inProjectinUser)
+int DataAccessDispatcher::userUpdatedProject(QJsonObject& inProjectinUser)
 {
     int userId;
     if((userId = getUserIdFromJson(inProjectinUser)) == 0)
     {
-        return false;
+        return NO_USER_ID;
     }
 
     if(repoProject->userUpdatedProject(inProjectinUser,userId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::userRegisteredInProject(QJsonObject& inProjectinUser)
+int DataAccessDispatcher::userRegisteredInProject(QJsonObject& inProjectinUser)
 {
     int userId;
     int projectId;
@@ -229,21 +229,21 @@ bool DataAccessDispatcher::userRegisteredInProject(QJsonObject& inProjectinUser)
             ((projectId = getProjectIdFromJson(inProjectinUser)) == 0) ||
             ((userId = getUserIdFromJson(inProjectinUser)) == 0))
     {
-        return false;
+        return UNKNOWN_ERROR;
     }
 
     if(repoProject->userRegisteredInProject(projectId,userId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
     // We know its succesful now so we can add num user registered
     QJsonObject project = inProjectinUser.value("project").toObject();
 
     inProjectinUser["project"].toObject()["numberOfRegisteredUsers"] = project.value("numberOfRegisteredUsers").toInt() + 1;
 
-    return true;
+    return SUCCESS;
 }
-bool DataAccessDispatcher::userUnRegisteredInProject(QJsonObject& inProjectinUser)
+int DataAccessDispatcher::userUnRegisteredInProject(QJsonObject& inProjectinUser)
 {
     int userId;
     int projectId;
@@ -253,24 +253,24 @@ bool DataAccessDispatcher::userUnRegisteredInProject(QJsonObject& inProjectinUse
             ((projectId = getProjectIdFromJson(inProjectinUser)) == 0) ||
             ((userId = getUserIdFromJson(inProjectinUser)) == 0))
     {
-        return false;
+        return UNKNOWN_ERROR;
     }
 
     QJsonObject project = inProjectinUser.value("project").toObject();
 
     if(project["numberOfRegisteredUsers"].toInt() == 0)
     {
-        return false;
+        return NO_REGISTERED_STUDENTS;
     }
 
     if(repoProject->userUnregisteredFromProject(projectId,userId) != SUCCESS)
     {
-        return false;
+        return DATABASE_QUERY_ERROR;
     }
     // We know its succesful now so we can add num user registered
     inProjectinUser["project"].toObject()["numberOfRegisteredUsers"] = project.value("numberOfRegisteredUsers").toInt() - 1;
 
-    return true;
+    return SUCCESS;
 }
 
 int DataAccessDispatcher::getUserIdFromJson(QJsonObject& json)
@@ -303,6 +303,26 @@ int DataAccessDispatcher::getProjectIdFromJson(QJsonObject& json)
     else if(json.contains("project"))
     {
         return json["project"].toObject()["id"].toInt();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int DataAccessDispatcher::getPPPIdFromJson(QJsonObject& json)
+{
+    if(json.contains("pppID"))
+    {
+        return json.value("pppID").toInt();
+    }
+    else if(json.contains("user"))
+    {
+        return json["user"].toObject()["ppp"].toObject()["pppID"].toInt();
+    }
+    else if(json.contains("ppp"))
+    {
+        return json["ppp"].toObject()["pppID"].toInt();
     }
     else
     {

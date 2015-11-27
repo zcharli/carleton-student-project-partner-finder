@@ -111,7 +111,7 @@ int ProjectRepository::userUpdatedProject(QJsonObject& projectToUpdate, int user
     updateProject.prepare(updateProjQuery);
     updateProject.bindValue(":title",projectToSave["title"].toString());
     updateProject.bindValue(":desc",projectToSave["description"].toString());
-    updateProject.bindValue(":id",projectToSave["project_id"].toString());
+    updateProject.bindValue(":id",projectToSave["id"].toString());
     if(!updateProject.exec())
     {
         qDebug() << "updateProject error:  "<< updateProject.lastError();
@@ -170,10 +170,10 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
 
             QString projectTitle = QString(fetchAllProjects.value(1).toString());
             QString projectDescription = QString(fetchAllProjects.value(2).toString());
-            QString projectId = fetchAllProjects.value(0).toString();
+            int projectId = fetchAllProjects.value(0).toInt();
 
             // Add project to JSON
-            project["project_id"] = projectId;
+            project["id"] = projectId;
             project["title"] = projectTitle;
             project["description"] = projectDescription;
 
@@ -256,7 +256,7 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
 
             project["title"] = projTitle;
             project["decription"] = projDesc;
-            project["project_id"] = projectId;
+            project["id"] = projectId;
 
             // Fetch the number of registered users in this project
             QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registration where project_id=:pid";
@@ -339,7 +339,7 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
             QString projectTitle = QString(fetchProject.value(1).toString());
             QString projectDescription = QString(fetchProject.value(2).toString());
             int projectId = fetchProject.value(0).toInt();
-            project["project_id"] = projectId;
+            project["id"] = projectId;
             project["title"] = projectTitle;
             project["description"] = projectDescription;
 

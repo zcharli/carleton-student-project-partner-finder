@@ -110,3 +110,20 @@ int Qualification::getType()
 {
     return type;
 }
+
+bool Qualification::serializeJSONForSave(QJsonObject& qualificationJSON)
+{
+
+    qualificationJSON["type"] = (int)type;
+    qualificationJSON["value"] = value;
+
+    return true;
+}
+
+bool Qualification::deserializeJSONFromRetrieve(const QJsonObject& qualificationJSON)
+{
+    type = (QualificationType) (qualificationJSON.value("type").toInt());
+    value = qualificationJSON.value("value").toInt();
+    return true;
+}
+

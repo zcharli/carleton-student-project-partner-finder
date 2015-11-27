@@ -39,24 +39,24 @@ Storage& Storage::defaultStorage()
 int Storage::executeActionForPPP(ActionType action, User& user, ProjectPartnerProfile& ppp)
 {
     int successStatus = SUCCESS;
-    switch (action)
-    {
-        case createdPPP:
-            successStatus = repoUser->userCreatedPPP(user, ppp);
-            break;
-        case fetchPPP:
-            successStatus = repoUser->fetchPPPForUser(user, ppp);
-            break;
-        case updatedPPP:
-            successStatus = repoUser->userUpdatedPPP(user, ppp);
-            break;
-        case deletedPPP:
-            successStatus = repoUser->userDeletedPPP(user, ppp);
-            break;
-        default:
-            successStatus = INVALID_ACTION;
-            break;
-    }
+//    switch (action)
+//    {
+//        case createdPPP:
+//            successStatus = repoUser->userCreatedPPP(user, ppp);
+//            break;
+//        case fetchPPP:
+//            successStatus = repoUser->fetchPPPForUser(user, ppp);
+//            break;
+//        case updatedPPP:
+//            successStatus = repoUser->userUpdatedPPP(user, ppp);
+//            break;
+//        case deletedPPP:
+//            successStatus = repoUser->userDeletedPPP(user, ppp);
+//            break;
+//        default:
+//            successStatus = INVALID_ACTION;
+//            break;
+//    }
     return successStatus;
 }
 
@@ -67,7 +67,8 @@ int Storage::executeActionForPPP(ActionType action, User& user, ProjectPartnerPr
  */
 int Storage::loginUserWithUsername(QString& username, User& user)
 {
-    return repoUser->retrieveUserWithUsername(username, user, user.getUserType());
+    //return repoUser->retrieveUserWithUsername(username, user, user.getUserType());
+    return 0; // Just to be able to compile
 }
 
 /*   @input: signedupUser: User&
@@ -76,7 +77,8 @@ int Storage::loginUserWithUsername(QString& username, User& user)
  */
 int Storage::signupUser(User& user)
 {
-    return repoUser->createUser(user);
+    //return repoUser->createUser(user);
+    return 0; // just to be able to comile
 }
 
 int Storage::executeActionForProject(ActionType action, User& user, QVector<Project*>& projects)

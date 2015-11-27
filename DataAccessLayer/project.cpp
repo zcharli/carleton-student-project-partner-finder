@@ -8,8 +8,15 @@ Project::Project(QString& title, QString& desc)
     this->title = title;
     this->description = desc;
     numberOfRegisteredUsers = 0;
-
+    id = 0;
     //initialize configurations array
+    projectConfigurations = Configuration::DefaultConfigurations();
+}
+
+Project::Project()
+{
+    numberOfRegisteredUsers = 0;
+    id = 0;
     projectConfigurations = Configuration::DefaultConfigurations();
 }
 
@@ -100,8 +107,11 @@ void Project::addPPPtoProject(ProjectPartnerProfile*)
 bool Project::serializeJSONForSave(QJsonObject& projectJSON)
 {
     int i;
+    if(id != 0)
+    {
+        projectJSON["id"] = id;
+    }
 
-    projectJSON["project_id"] = id;
     projectJSON["title"] = title;
     projectJSON["description"] = description;
     projectJSON["numberOfRegisteredUsers"] = numberOfRegisteredUsers;
@@ -124,7 +134,7 @@ bool Project::deserializeJSONFromRetrieve(const QJsonObject& projectJSON)
 {
     int i;
 
-    id = projectJSON.value("project_id").toInt();
+    id = projectJSON.value("id").toInt();
     title = projectJSON.value("title").toString();
     description = projectJSON.value("description").toString();
     numberOfRegisteredUsers = projectJSON.value("numberOfRegisteredUsers").toInt();

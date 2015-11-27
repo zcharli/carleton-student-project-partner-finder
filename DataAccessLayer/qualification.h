@@ -2,6 +2,7 @@
 #define QUALIFICATION_H
 
 #include "studentuser.h"
+#include "imappable.h"
 
 #define NUMBER_OF_WORK_ETHICS_QUALIFICATIONS 8
 #define NUMBER_OF_QUALIFICATIONS 24
@@ -47,7 +48,7 @@ enum WorkEthicQualificationMapping
     hardworkingBit
 };
 
-class Qualification
+class Qualification : public IMappable
 {
     int value;
     QualificationType type;
@@ -129,6 +130,20 @@ public:
      *      @return: value: int
      */
     int getType();
+
+    /*!
+     *       @param: empty Json Object: QJsonObject&
+     *        @desc: serializes the object implementing into JSON
+     *      @return: success or failure: bool
+     */
+    virtual bool serializeJSONForSave(QJsonObject&);
+
+    /*!
+     *       @param: objectToDeSerialize: QJsonObject&
+     *        @desc: deserializes the the JSON object to create the object back
+     *      @return: success or failure: bool
+     */
+    virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
 };
 
 #endif // QUALIFICATION_H

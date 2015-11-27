@@ -30,6 +30,13 @@ public:
      */
     ProjectPartnerProfile* getProfile();
 
+    /*!
+     *       @param: none
+     *        @desc: sets the ProjectPartnerProfile Associated with the StudentUser
+     *      @return: studentUserPPP: ProjectPartnerProfile&
+     */
+    void setProfile(ProjectPartnerProfile*);
+
 
     /*!
      *       @param: pppID of the StudentUser if he/she has one
@@ -44,6 +51,21 @@ public:
      *      @return: fetchIDForUsersPPP: int
      */
     int getFetchIDForPPP();
+
+    /*!
+     *       @param: empty Json Object: QJsonObject&
+     *        @desc: serializes the object implementing into JSON
+     *      @return: success or failure: bool
+     */
+    virtual bool serializeJSONForSave(QJsonObject&);
+
+    /*!
+     *       @param: objectToDeSerialize: QJsonObject&
+     *        @desc: deserializes the the JSON object to create the object back
+     *      @return: success or failure: bool
+     */
+    virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
+
 };
 
 #endif // STUDENTUSER_H

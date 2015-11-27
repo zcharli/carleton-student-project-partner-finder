@@ -11,6 +11,11 @@
 #include <QMessageBox>
 #include <QDebug>
 
+#include "Repository/dataaccessdispatcher.h"
+#include "DataAccessLayer/project.h"
+#include <QJsonObject>
+#include <QJsonArray>
+
 #define PROG_BAR_DEFAULT_VALUE 0
 
 #define DEBUG_USER "Leonidas"
@@ -31,6 +36,33 @@ LoginForm::LoginForm(QWidget *parent) :
     connect(&signUpForm, &SignUpForm::signUpAccepted, this, &LoginForm::signUpSucceeded);
 
     viewWillAppear();
+
+//    QString fname = ("fname");
+//    QString lname = ("lname");
+//    QString uname = ("username");
+
+//    StudentUser user(fname, lname, uname,1);
+//    ProjectPartnerProfile* ppp = new ProjectPartnerProfile(user,10,10,'A');
+//    user.setProfile(ppp);
+//    user.setFetchIDForPPP(1);
+    QJsonObject json;
+//    user.serializeJSONForSave(json);
+
+    DataAccessDispatcher disp;
+    disp.retrieveAllProjects(json);
+    QString title = ("title");
+    QString desc = ("desc");
+
+    int count = json["count"].toInt();
+    QJsonArray projects = json["projects"].toArray();
+    for(int i=0;i<count;i++)
+    {
+        Project project;
+        project.deserializeJSONFromRetrieve(projects[i].toObject());
+    }
+
+
+    //project.serializeJSONForSave(json);
 }
 
 void LoginForm::viewWillAppear()

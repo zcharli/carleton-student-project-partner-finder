@@ -1,7 +1,7 @@
 #include "projectpartnerprofile.h"
 #include "studentuser.h"
 #include "qualification.h"
-
+#include <QJsonArray>
 ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
     user(studentUser)
 {
@@ -17,7 +17,9 @@ ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
 
 ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore,int tscore,char we) :
     user(studentUser), personalTechnicalScore(pscore), teammateTechnicalScore(tscore), workEthic(we)
-{}
+{
+    qualifications = Qualification::DefaultQualifications();
+}
 
 ProjectPartnerProfile::~ProjectPartnerProfile()
 {
@@ -95,4 +97,55 @@ char ProjectPartnerProfile::getWorkEthicByte()
 void ProjectPartnerProfile::setWorkEthicByte(char meThic)
 {
     workEthic = meThic;
+}
+
+bool ProjectPartnerProfile::serializeJSONForSave(QJsonObject& pppJSON)
+{
+    int i;
+    if(pppID != 0)
+    {
+        pppJSON["pppID"] = pppID;
+    }
+
+    pppJSON["personalTechnicalScore"] = personalTechnicalScore;
+    pppJSON["teammateTechnicalScore"] = teammateTechnicalScore;
+    pppJSON["workEthic"] = workEthic;
+
+    QJsonArray qualificationsArray;
+
+    for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
+    {
+       QJsonObject qualification;
+       qualifications[i].serializeJSONForSave(qualification);
+       qualificationsArray.append(qualification);
+    }
+
+    pppJSON["qualifications"] = qualificationsArray;
+
+    return true;
+}
+
+
+bool ProjectPartnerProfile::deserializeJSONFromRetrieve(const QJsonObject& pppJSON)
+{
+    int i;
+    pppID = pppJSON["pppID"].toInt();
+    if(pppJSON.contains("personalTechnicalScore"))
+    {
+        personalTechnicalScore = pppJSON["personalTechnicalScore"].toInt();
+        teammateTechnicalScore = pppJSON["teammateTechnicalScore"].toInt();
+        workEthic = (char)pppJSON[""].toInt();
+    }
+
+    if(pppJSON.contains("qualifications"))
+    {
+        QJsonArray qualificationsArray = pppJSON["qualifications"].toArray();
+        for(i=0;i<qualificationsArray.size();++i)
+        {
+            QJsonObject qualification = qualificationsArray[i].toObject();
+            qualifications[i].deserializeJSONFromRetrieve(qualification);
+        }
+    }
+
+    return true;
 }

@@ -2,13 +2,13 @@
 #define PROJECTPARTNERPROFILE_H
 
 #include "qualification.h"
-
+#include "imappable.h"
 #include <QString>
 
 //forward declarations
 class StudentUser;
 
-class ProjectPartnerProfile
+class ProjectPartnerProfile : public IMappable
 {
     StudentUser& user;
     Qualification *qualifications;
@@ -119,13 +119,20 @@ public:
      */
     void setWorkEthicByte(char);
 
+    /*!
+     *       @param: empty Json Object: QJsonObject&
+     *        @desc: serializes the object implementing into JSON
+     *      @return: success or failure: bool
+     */
+    virtual bool serializeJSONForSave(QJsonObject&);
 
-//    /*!
-//     *       @param: ppp: ProjectPartnerProfile
-//     *        @desc: used to compare two PPPs that are the same (hashing)
-//     *      @return: true or false : bool
-//     */
-//    bool operator==(const ProjectPartnerProfile & other);
+    /*!
+     *       @param: objectToDeSerialize: QJsonObject&
+     *        @desc: deserializes the the JSON object to create the object back
+     *      @return: success or failure: bool
+     */
+    virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
+
 };
 
 inline bool operator==(const ProjectPartnerProfile &e1, const ProjectPartnerProfile &e2)

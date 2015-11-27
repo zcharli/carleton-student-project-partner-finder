@@ -3,9 +3,11 @@
 
 #include <QVector>
 #include <QtSql/QSqlDatabase>
+#include <QJsonObject>
 
 class User;
 class ProjectPartnerProfile;
+class QJsonObject;
 
 class UserRepository
 {
@@ -14,46 +16,46 @@ public:
     ~UserRepository();
 
     /*!
-     *       @param: user: User&, ppp: ProjectPartnerProfile&
+     *       @param: user: QJsonObject&, userId: int
      *        @desc: handles the database actions necessary when a user creates a ppp
      *      @return: success or failure: bool
      */
-    int userCreatedPPP(User&, ProjectPartnerProfile&);
+    int userCreatedPPP(QJsonObject& user, int userId);
 
     /*!
-     *       @param: user: User&, ppp: ProjectPartnerProfile&
+     *       @param: user: QJsonObject&, user id: int
      *        @desc: handles the database actions necessary for retrieving the PPP for a User
      *      @return: success or failure: bool
      */
-    int fetchPPPForUser(User&, ProjectPartnerProfile&);
+    int fetchPPPForUser(QJsonObject&, int);
 
     /*!
-     *       @param: user: User&, ppp: ProjectPartnerProfile&
+     *       @param: user: QJsonObject&
      *        @desc: handles the database actions necessary for when a user updates his/her ppp
      *      @return: success or failure: bool
      */
-    int userUpdatedPPP(User&, ProjectPartnerProfile&);
+    int userUpdatedPPP(QJsonObject& user);
 
     /*!
-     *       @param: user: User&, ppp: ProjectPartnerProfile&
+     *       @param: userId: int
      *        @desc: handles the database actions necessary for when the user has deleted his/her ppp
      *      @return: success or failure: bool
      */
-    int userDeletedPPP(User&, ProjectPartnerProfile&);
+    int userDeletedPPP(int userId);
 
     /*!
-     *       @param: username: QString&, user, userType: User&, int
+     *       @param: user: QJsonObject&, user, username: QString&, type: int
      *        @desc: handles the database actions necessary for when a user attempts to login
      *      @return: success or failure: bool
      */
-    int retrieveUserWithUsername(QString& username, User& user, int);
+    int retrieveUserWithUsername(QJsonObject& user, QString& username, int type);
 
     /*!
-     *       @param: user: User&
+     *       @param: user: QJsonObject&
      *        @desc: handles the database actions necessary for when a user creates a new Account
      *      @return: success or failure: bool
      */
-    int createUser(User& user);
+    int createUser(QJsonObject& user);
 
 
 private:

@@ -6,6 +6,18 @@ class ProjectRepository;
 class UserRepository;
 class QJsonObject;
 
+enum ReturnMessage {
+    SUCCESS = 0,
+    NO_PPP_ID,
+    NO_USER_ID,
+    NO_PROJECT_ID,
+    NO_USERNAME,
+    NO_REGISTERED_STUDENTS,
+    NO_USER_TYPE,
+    DATABASE_QUERY_ERROR,
+    UNKNOWN_ERROR
+};
+
 class DataAccessDispatcher
 {
     DatabaseManager *dbManager;
@@ -23,44 +35,44 @@ public:
     /*!  @input: empty map reference: QJsonObject&
      *    @desc: retreives all projects from the database and builds
      *           a maps to represent the objects returned
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool retrieveAllProjects(QJsonObject&);
+    int retrieveAllProjects(QJsonObject&);
 
     /*!  @input: single mappable project object with id: QJsonObject&
      *    @desc: retreives a projects from the database by id and builds
      *           a maps to represent the objects returned
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool retrieveProjectUsingID(QJsonObject&);
+    int retrieveProjectUsingID(QJsonObject&);
 
     /*!  @input: single user mappable object with id: QJsonObject&
      *    @desc: retreives projects from the database that is associated to
      *           this user and builds a maps to represent the objects returned
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool retrieveProjectsForUser(QJsonObject&);
+    int retrieveProjectsForUser(QJsonObject&);
 
     /*!  @input: single project mappable object with id: QJsonObject&
      *    @desc: retreives all PPPs registered to this project from the database
      *           and builds a maps to represent the objects returned
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool retrievePPPsForProject(QJsonObject&);
+    int retrievePPPsForProject(QJsonObject&);
 
     /*!  @input: single object with username: QJsonObject&
      *    @desc: retreives all PPPs registered to this project from the database
      *           and builds a maps to represent the objects returned
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool retrieveUserWithUsername(QJsonObject&);
+    int retrieveUserWithUsername(QJsonObject&);
 
     /*!  @input: single mappable user object: QJsonObject&
      *    @desc: retreives the user's PPPs from the database
      *           and builds a maps to represent the objects returned
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool retrievePPPForUser(QJsonObject&);
+    int retrievePPPForUser(QJsonObject&);
 
     /*!
      *  Data Storage Services
@@ -68,51 +80,51 @@ public:
 
     /*!   @input: a mappable user and PPP object: QJsonObject&
      *    @desc: saves the new PPP for the user into the database
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool userCreatedPPP(QJsonObject&);
+    int userCreatedPPP(QJsonObject&);
 
     /*!  @input: a mappable user and PPP object: QJsonObject&
      *    @desc: updates the existing PPP for the user into the database
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool userUpdatedPPP(QJsonObject&);
+    int userUpdatedPPP(QJsonObject&);
 
     /*!  @input: a mappable user and PPP object: QJsonObject&
      *    @desc: deletes the PPP for the user into the database
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool userDeletedPPP(QJsonObject&);
+    int userDeletedPPP(QJsonObject&);
 
     /*!  @input: a mappable user object: QJsonObject&
      *    @desc: saves the new user into the database
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool createUser(QJsonObject&);
+    int createUser(QJsonObject&);
 
     /*!  @input: a mappable user and project object: QJsonObject&
      *    @desc: saves the new project for the user into the database
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool userCreatedProject(QJsonObject&);
+    int userCreatedProject(QJsonObject&);
 
     /*!  @input: a mappable user and project object: QJsonObject&
      *    @desc: updates the existing project for the user into the database
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool userUpdatedProject(QJsonObject&);
+    int userUpdatedProject(QJsonObject&);
 
     /*!  @input: a mappable user and project object: QJsonObject&
      *    @desc: registered user into the project saves the record into the database
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool userRegisteredInProject(QJsonObject&);
+    int userRegisteredInProject(QJsonObject&);
 
     /*!  @input: a mappable user and project object: QJsonObject&
      *    @desc: unregistered user from the project saves the record into the database
-     *  @output: status: bool (success or failure)
+     *  @output: status: int (success or failure)
      */
-    bool userUnRegisteredInProject(QJsonObject&);
+    int userUnRegisteredInProject(QJsonObject&);
 
 private:
 
@@ -133,6 +145,12 @@ private:
      *  @output: id: int (success->id or failure->0)
      */
     int getProjectIdFromJson(QJsonObject&);
+
+    /*!  @input: a JSON request object: QJsonObject&
+     *    @desc: searches through the request object to try to find a ppp id
+     *  @output: id: int (success->id or failure->0)
+     */
+    int getPPPIdFromJson(QJsonObject&);
 };
 
 #endif // DATAACCESSDISPATCHER_H

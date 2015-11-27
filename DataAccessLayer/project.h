@@ -24,6 +24,7 @@ class Project : public IMappable
 
 public:
     Project(QString&, QString&);
+    Project();
     ~Project();
 
     //accessor Functions

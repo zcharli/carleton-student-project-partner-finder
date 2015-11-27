@@ -7,6 +7,8 @@
 #include "DataAccessLayer/qualification.h"
 
 #include <QDebug>
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
@@ -26,17 +28,20 @@ UserRepository::UserRepository(QSqlDatabase& db)
 
 UserRepository::~UserRepository() {}
 
-int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
+int UserRepository::userCreatedPPP(QJsonObject& user, int userId)
 {
+    QJsonObject userJSON = user["user"].toObject();
+    QJsonObject pppJSON = userJSON["ppp"].toObject();
+    QJsonArray qualificationArrayJSON = pppJSON["qualifications"].toArray();
+
     QSqlQuery insertPPP(this->db);
 
-    float personalScore = 0;
-    float teamMateScore = 0;
-    Qualification::TechnicalScoreForStudentUser(static_cast<StudentUser&>(user), personalScore, teamMateScore);
+
+    //Qualification::TechnicalScoreForStudentUser(static_cast<StudentUser&>(user), personalScore, teamMateScore);
     insertPPP.prepare("INSERT INTO ppp (personal_tech_score, we_bs, teammate_tech_score) VALUES (:personal_tech_score, :we_bs, :teammate_tech_score)");
-    insertPPP.bindValue(":personal_tech_score", personalScore);
-    insertPPP.bindValue(":we_bs", ppp.getQualification(userWorkEthic).getValue());
-    insertPPP.bindValue(":teammate_tech_score", teamMateScore);
+    insertPPP.bindValue(":personal_tech_score", pppJSON["personalTechnicalScore"].toInt());
+    insertPPP.bindValue(":we_bs", pppJSON["workEthic"].toInt());
+    insertPPP.bindValue(":teammate_tech_score", pppJSON["teammateTechnicalScore"].toInt());
     if(!insertPPP.exec())
     {
         qDebug() << "userCreatedPPP error:  "<< insertPPP.lastError();
@@ -60,41 +65,15 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
     }
 
     // Set the PPP since its been created
-    ppp.setPPPID(pppID);
-    static_cast<StudentUser&>(user).setFetchIDForPPP(pppID);
+    pppJSON["pppID"] = pppID;
+    userJSON["ppp"] = pppJSON;
 
-    // Now start the big transaction to save Qualifications
-    //  Proper way to do this!!!!!
-    /*QString qualificationQuery;
-    int i;
-    qualificationQuery += "begin transaction;";
-    for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
-    {
-        //  have to convert args to string first!!
-        qualificationQuery += QString("Insert into ppp_qualifications (qualification_id,ppp_id,value) values (%1,%2,%3);").
-                arg(QString::number(i),QString::number(pppID),QString::number(ppp.getQualification(i).getValue()));
-    }
-    qualificationQuery += QString("Update users set ppp_id=%1 where user_id=%2;").
-            arg(QString::number(pppID),QString::number(user.getUserId()));
-    qualificationQuery += "commit;";
-
-    QSqlQuery insertQualifications(this->db);
-    insertQualifications.prepare(qualificationQuery);
-    if(!insertQualifications.exec())
-    {
-        qDebug() << "insertQualifications error:  "<< insertQualifications.lastError();
-        qDebug() << qualificationQuery;
-        return insertQualifications.lastError().number();
-    }*/
-
-
-    //  Bad but woks! ######################################
     QString qualificationQuery;
     int i;
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
         qualificationQuery = QString("Insert into ppp_qualifications (qualification_id,ppp_id,value) values (%1,%2,%3);").
-                arg(QString::number(i + 1),QString::number(pppID),QString::number(ppp.getQualification(i).getValue()));
+                arg(QString::number(i + 1),QString::number(pppID),qualificationArrayJSON[i].toObject()["value"].toString());
                 QSqlQuery insertQualifications(this->db);
                 insertQualifications.prepare(qualificationQuery);
                 if(!insertQualifications.exec())
@@ -105,7 +84,7 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
                 }
     }
     qualificationQuery = QString("Update users set ppp_id=%1 where user_id=%2;").
-            arg(QString::number(pppID),QString::number(user.getUserId()));
+            arg(QString::number(pppID),QString::number(userId));
 
     QSqlQuery insertQualifications(this->db);
     insertQualifications.prepare(qualificationQuery);
@@ -115,20 +94,26 @@ int UserRepository::userCreatedPPP(User &user, ProjectPartnerProfile& ppp)
         qDebug() << qualificationQuery;
         return insertQualifications.lastError().number();
     }
-    //#######################################################
 
-    //success;
+    user["user"] = userJSON;
+
     return 0;
 }
 
-int UserRepository::fetchPPPForUser(User &user, ProjectPartnerProfile& ppp)
+int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId)
 {
+    QJsonObject userJSON = user["user"].toObject();
+
+    QJsonObject pppJSON;
+    QJsonArray qualificationArrayJSON;
+
+
     // This join will ensure we only return PPP qualifications if the user has a PPP
     // This also helps ensure that after a student deletes their profile, then nothing will return
-    StudentUser& student= static_cast<StudentUser&>(user);
-    QString fetchQuery = "Select * from ppp_qualifications p join users u on u.ppp_id = p.ppp_id where p.ppp_id = " + QString::number(student.getFetchIDForPPP());
+    QString fetchQuery = "Select * from ppp_qualifications p join users u on u.ppp_id = p.ppp_id where p.ppp_id = :pppid";
     QSqlQuery fetchPPP(this->db);
     fetchPPP.prepare(fetchQuery);
+    fetchPPP.bindValue(":pppid",pppId);
     //fetchPPP.bindValue(":id", (static_cast<StudentUser&>(user)).getFetchIDForPPP());
     // Execute this fetch and populate the ppp's qualifications
     if(fetchPPP.exec())
@@ -139,13 +124,14 @@ int UserRepository::fetchPPPForUser(User &user, ProjectPartnerProfile& ppp)
             //  0 -> qualification_id (also qualification type)
             //  1 -> ppp_id
             //  2 -> value (int)
-
+            QJsonObject qualification;
             // Qualification returned will be copied to the PPP
-            Qualification returnedQualification((QualificationType)(fetchPPP.value(0).toInt() - 1),fetchPPP.value(2).toInt());
-            ppp.changeQualification(returnedQualification);
-        }
-        ppp.setPPPID(student.getFetchIDForPPP());
+            qualification["type"] = fetchPPP.value(0).toInt() - 1;
+            qualification["value"] = fetchPPP.value(2).toInt();
 
+            qualificationArrayJSON.append(qualification);
+        }
+        pppJSON["pppID"] = pppId;
     }
     else
     {
@@ -154,43 +140,31 @@ int UserRepository::fetchPPPForUser(User &user, ProjectPartnerProfile& ppp)
         return fetchPPP.lastError().number();
     }
     //success
+    pppJSON["qualifications"] = qualificationArrayJSON;
+    user["ppp"] = pppJSON;
     return 0;
 }
 
-int UserRepository::userUpdatedPPP(User &user, ProjectPartnerProfile &ppp)
+int UserRepository::userUpdatedPPP(QJsonObject& user)
 {
-    /*  Correct Way to do this but not working for some reason
-     *  Best bet is to loop over every insert -> This is slower
-     *
-    // Create a big transaction to speed up the query
-    // We update all qualification whether or not they changed
-    QString massUpdateQuery = "begin transaction;";
-    QSqlQuery updatePPPQuery(this->db);
-    int i;
-    for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
+    QJsonObject userJSON = user["user"].toObject();
+    if(!userJSON.contains("ppp"))
     {
-        massUpdateQuery += QString("Update ppp_qualifications set value=%1 where ppp_id=%2 and qualification_id=%3;").arg(
-                    QString::number(ppp.getQualification(i).getValue()), QString::number(ppp.getPPPID()), QString::number(ppp.getQualification(i).getType()));
+        return -1;
     }
-    massUpdateQuery += "commit;";
-
-    updatePPPQuery.prepare(massUpdateQuery);
-    if(!updatePPPQuery.exec())
+    QJsonObject pppJSON = userJSON["ppp"].toObject();
+    if(!pppJSON.contains("qualifications"))
     {
-        qDebug() << "userUpdatedPPP error:  "<< updatePPPQuery.lastError();
-        return updatePPPQuery.lastError().number();
+        return -1;
     }
-    // Successful
-    return 0;*/
-
-    //  BAD!!!!! BUT WORKS ##########################################
+    QJsonArray qualificationArrayJSON = pppJSON["qualifications"].toArray();
     QString massUpdateQuery;
     QSqlQuery updatePPPQuery(this->db);
     int i;
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
         massUpdateQuery = QString("Update ppp_qualifications set value=%1 where ppp_id=%2 and qualification_id=%3;").arg(
-                    QString::number(ppp.getQualification(i).getValue()), QString::number(ppp.getPPPID()), QString::number(ppp.getQualification(i).getType() + 1));
+                    qualificationArrayJSON[i].toObject()["value"].toInt(), pppJSON["pppID"].toInt(), qualificationArrayJSON[i].toObject()["type"].toInt());
         updatePPPQuery.prepare(massUpdateQuery);
 
         if(!updatePPPQuery.exec())
@@ -202,17 +176,16 @@ int UserRepository::userUpdatedPPP(User &user, ProjectPartnerProfile &ppp)
 
     // Successful
     return 0;
-    //##########################################
 }
 
-int UserRepository::userDeletedPPP(User &user, ProjectPartnerProfile &ppp)
+int UserRepository::userDeletedPPP(int userId)
 {
     // Deleting a PPP is the same as deleting the association of a ppp to user
     // This method of deletion can enable a user to get his PPP back.
     // However once deleted, he can create a new PPP
     QString removePPPfromUserQueryStr = "Update users set ppp_id=0 where user_id=:id";
     QSqlQuery deleteQuery(this->db);
-    deleteQuery.bindValue(":id", user.getUserId());
+    deleteQuery.bindValue(":id", userId);
     deleteQuery.prepare(removePPPfromUserQueryStr);
 
     if(!deleteQuery.exec())
@@ -225,7 +198,7 @@ int UserRepository::userDeletedPPP(User &user, ProjectPartnerProfile &ppp)
     return 0;
 }
 
-int UserRepository::retrieveUserWithUsername(QString& username, User& user, int type)
+int UserRepository::retrieveUserWithUsername(QJsonObject& user, QString& username, int type)
 {
     // Will retrive User and all it's PPP
     QString checkUsernameQueryStr = "Select * from users where type=:type and username=:usrnm";
@@ -249,16 +222,17 @@ int UserRepository::retrieveUserWithUsername(QString& username, User& user, int 
             QString fname = QString(loginQuery.value(2).toString());
             QString lname = QString(loginQuery.value(3).toString());
 
-            user.setUserId(id);
-            user.setFirstName(fname);
-            user.setLastName(lname);
-            user.setUserName(username);
+            user["id"] = id;
+            user["firstName"] = fname;
+            user["lastName"] = lname;
+            user["userName"] = username;
+
 
            // Going to get PPP only when needed so we won't populate that now.
            if(loginQuery.value(4).toInt() == Student)
            {
               //set the pppIDForFetch for the StudentUser
-              static_cast<StudentUser&>(user).setFetchIDForPPP(loginQuery.value(5).toInt());
+               user["pppIDforFetch"] = loginQuery.value(5).toInt();
            }
         }
         else
@@ -274,7 +248,7 @@ int UserRepository::retrieveUserWithUsername(QString& username, User& user, int 
     return 0;
 }
 
-int UserRepository::createUser(User& user)
+int UserRepository::createUser(QJsonObject& user)
 {
     // Inserts a row in users table
     QString createUserQueryStr = "Insert into users (username,fname,lname,type) values (:u,:f,:l,:t)";
@@ -282,10 +256,10 @@ int UserRepository::createUser(User& user)
     if(this->db.isOpen())
     {
         createQuery.prepare(createUserQueryStr);
-        createQuery.bindValue(":u",user.getUserName());
-        createQuery.bindValue(":f",user.getFirstName());
-        createQuery.bindValue(":l", user.getLastName());
-        createQuery.bindValue(":t", (int)user.getUserType());
+        createQuery.bindValue(":u",user["userName"].toString());
+        createQuery.bindValue(":f",user["firstName"].toString());
+        createQuery.bindValue(":l", user["lastName"].toString());
+        createQuery.bindValue(":t", user["type"].toInt());
         if(!createQuery.exec())
         {
             qDebug() << "createUser error:  " << this->db.lastError();

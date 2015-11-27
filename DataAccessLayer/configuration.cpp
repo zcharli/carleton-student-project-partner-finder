@@ -37,16 +37,13 @@ Configuration* Configuration::DefaultConfigurations()
 
 bool Configuration::serializeJSONForSave(QJsonObject& configJSON)
 {
-
-    configJSON["type"] = type;
+    configJSON["type"] = (int)type;
     configJSON["value"] = value;
-
     return true;
 }
 
 bool Configuration::deserializeJSONFromRetrieve(const QJsonObject& configJSON)
 {
-    QJsonValue res = configJSON.value("type");
     type = (ConfigurationType) (configJSON.value("type").toInt());
     value = configJSON.value("value").toInt();
     return true;
