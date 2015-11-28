@@ -2,11 +2,9 @@
 #include "projectpartnerprofile.h"
 #include "project.h"
 
-//DEBUG
-#include <QJsonArray>
 
-StudentUser::StudentUser(QString& fName, QString& lName, QString& userName, int id):
-    User(fName, lName, userName, id)
+StudentUser::StudentUser(QString& fName, QString& lName, QString& userName):
+    User(fName, lName, userName)
 {
     profile = NULL;
     userType = Student;
@@ -106,13 +104,13 @@ bool StudentUser::deserializeJSONFromRetrieve(const QJsonObject& userJSON)
 
     if(userJSON.contains("ppp"))
     {
-        // Note that this call to the
-        if(profile == NULL)
-        {
-            profile = new ProjectPartnerProfile(*this);
-        }
-        QJsonObject ppp = userJSON["ppp"].toObject();
-        profile->deserializeJSONFromRetrieve(ppp);
+//        // Note that this call to the
+//        if(profile == NULL)
+//        {
+//            profile = new ProjectPartnerProfile(*this);
+//        }
+//        QJsonObject ppp = userJSON["ppp"].toObject();
+//        profile->deserializeJSONFromRetrieve(ppp);
     }
 
     return true;

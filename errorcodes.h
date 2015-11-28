@@ -1,7 +1,6 @@
 #ifndef ERRORCODES_H
 #define ERRORCODES_H
 
-
 enum DatabaseReturnMessage {
     SUCCESS = 0,
     NO_PPP_ID,

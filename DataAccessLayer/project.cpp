@@ -5,7 +5,7 @@
 
 #define NUMBER_OF_CONFIGURATIONS 1
 
-Project::Project(QString& title, QString& desc)
+Project::Project(QString title, QString desc)
 {
     this->title = title;
     this->description = desc;

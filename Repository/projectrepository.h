@@ -1,11 +1,8 @@
 #ifndef PROJECTREPOSITORY_H
 #define PROJECTREPOSITORY_H
 
-#include <QMap>
 #include <QtSql/QSqlDatabase>
 
-class User;
-class Project;
 class QJsonObject;
 
 class ProjectRepository

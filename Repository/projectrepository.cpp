@@ -510,4 +510,3 @@ int ProjectRepository::fetchPPPsForProject(QJsonObject& pppsToReturn, int projec
 
     return 0;
 }
-

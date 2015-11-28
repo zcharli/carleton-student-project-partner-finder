@@ -11,12 +11,12 @@ enum UserType {
     Student = 1
 };
 
-class User : public IMappable
+class User : private IMappable
 {
 public:
-    User(QString&, QString&, QString&, int);
-    User();
-    virtual ~User();
+  User(QString&, QString&, QString&);
+  User();
+  virtual ~User();
 
     //accessor Functions
     //getters

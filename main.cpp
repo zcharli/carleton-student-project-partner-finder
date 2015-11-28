@@ -1,13 +1,20 @@
 #include "cupidwindow.h"
-
+#include <QFile>
 // Subsystem dependencies
 #include "UserAuthentication/loginform.h"
-
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QFile file("../cupid/Stylesheets/style.qss");
+
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        a.setStyleSheet(file.readAll());
+        file.close();
+    }
 
     LoginForm cuPIDLoginForm;
     cuPIDWindow cuPIDWindow;

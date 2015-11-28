@@ -3,11 +3,10 @@
 #include "editteamconfigurationsdialog.h"
 
 //  Subsystem dependencies
-#include "DataAccessLayer/cupidsession.h"
 #include "DataAccessLayer/user.h"
 #include "DataAccessLayer/administratoruser.h"
 #include "DataAccessLayer/studentuser.h"
-#include "Repository/storage.h"
+#include "DataAccessLayer/dataaccessfacade.h"
 #include "DataAccessLayer/projectpartnerprofile.h"
 
 #include <QMessageBox>
@@ -43,7 +42,7 @@ void ProjectDetails::updateUI()
 {
     if(project != NULL)
     {
-        if(CupidSession::getInstance()->getCurrentUser()->containsProject(*project))
+        if(DataAccessFacade::managedDataAccess().getCurrentUser()->containsProject(*project))
         {
             ui->btnRegistration->setText(tr("Unregister"));
             isRegistered = true;
@@ -63,13 +62,13 @@ void ProjectDetails::updateUI()
 void ProjectDetails::viewWillAppear()
 {
     //  check what kind of user we are and make the nessesary changes to the UI
-    if (dynamic_cast<AdministratorUser *>(CupidSession::getInstance()->getCurrentUser()))
+    if (dynamic_cast<AdministratorUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
     {
         ui->btnRegistration->setHidden(true);
         ui->btnEditProject->setHidden(false);
         ui->btnStartAlgo->setHidden(false);
     }
-    else if (dynamic_cast<StudentUser *>(CupidSession::getInstance()->getCurrentUser()))
+    else if (dynamic_cast<StudentUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
     {
         ui->btnRegistration->setHidden(false);
         ui->btnEditProject->setHidden(true);
@@ -96,7 +95,7 @@ void ProjectDetails::viewWillDisappear()
 
 void ProjectDetails::on_btnRegistration_clicked()
 {
-    StudentUser* currentUser = (StudentUser *)CupidSession::getInstance()->getCurrentUser();
+    StudentUser* currentUser = (StudentUser *)DataAccessFacade::managedDataAccess().getCurrentUser();
 
     if(currentUser->getFetchIDForPPP() == 0)
     {
@@ -108,14 +107,14 @@ void ProjectDetails::on_btnRegistration_clicked()
         return;
     }
 
-    QVector<Project*> projects;
-    projects.append(project);
+    //QVector<Project*> projects;
+    //projects.append(project);
 
     if(isRegistered)
     {
 
         // Unregister this student
-        if(Storage::defaultStorage().executeActionForProject(unregisteredFromProject,*currentUser,projects))
+        if(DataAccessFacade::managedDataAccess().execute(unregisteredFromProject,*currentUser,project))
         {
             // Error occured
             qDebug() << "UnRegistration failed";
@@ -136,7 +135,7 @@ void ProjectDetails::on_btnRegistration_clicked()
     }
     else
     {
-        if(Storage::defaultStorage().executeActionForProject(registeredInProject,*currentUser, projects))
+        if(DataAccessFacade::managedDataAccess().execute(registeredInProject,*currentUser, project))
         {
             // Error occured
             qDebug() << "Registration failed";
@@ -164,7 +163,7 @@ void ProjectDetails::on_btnRegistration_clicked()
 
 void ProjectDetails::userToViewProject()
 {
-    this->project = CupidSession::getInstance()->getCurrentProject();
+    this->project = DataAccessFacade::managedDataAccess().getCurrentProject();
     if(project != NULL)
         didSetProject();
 
@@ -204,7 +203,7 @@ void ProjectDetails::on_btnEditProject_clicked()
             projects.append(project);
 
             //Save Configurations
-            if(Storage::defaultStorage().executeActionForProject(updatedProject, *(CupidSession::getInstance()->getCurrentUser()), projects) != 0)
+            if(DataAccessFacade::managedDataAccess().execute(updatedProject, *(DataAccessFacade::managedDataAccess().getCurrentUser()), project) != 0)
             {
                 // update error
                 qDebug() << "Error occured on update" + project->getProjectId();

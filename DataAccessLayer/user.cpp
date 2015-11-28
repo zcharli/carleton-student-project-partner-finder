@@ -1,16 +1,20 @@
 #include "user.h"
 
-User::User(QString& firstName, QString& lastName, QString& userName, int id)
+User::User(QString& firstName, QString& lastName, QString& userName)
 {
     this->firstName = firstName;
     this->lastName = lastName;
     this->userName = userName;
-    this->id = id;
+    this->id = 0;
 }
 
 User::User()
 {
 
+  this->firstName = "";
+  this->lastName = "";
+  this->userName = "";
+  this->id = 0;
 }
 
 User::~User()

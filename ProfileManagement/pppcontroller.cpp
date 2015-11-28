@@ -4,9 +4,8 @@
 #include <QDebug>
 
 //  Subsystem dependencies
-#include "DataAccessLayer/cupidsession.h"
+#include "DataAccessLayer/dataaccessfacade.h"
 #include "DataAccessLayer/studentuser.h"
-#include "Repository/storage.h"
 
 PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
     QObject(parent)
@@ -28,14 +27,14 @@ void PPPController::retrievePPP()
 {
     profile = NULL;
 
-    StudentUser *currentUser = (StudentUser*)CupidSession::getInstance()->getCurrentUser();
+    StudentUser *currentUser = (StudentUser*)DataAccessFacade::managedDataAccess().getCurrentUser();
     //try checking the session to see if the profile has been retrieved
     profile = currentUser->getProfile();
     if(!profile && ((StudentUser*)currentUser)->getFetchIDForPPP() != 0)
     {
         //User has a profile in the database so we need to fetch it.
-        profile = new ProjectPartnerProfile(*currentUser);
-        if(Storage::defaultStorage().executeActionForPPP(fetchPPP, *currentUser, *profile) != 0)
+        profile = DataAccessFacade::defaultProfile(*currentUser);
+        if(DataAccessFacade::managedDataAccess().execute(fetchPPP, *currentUser, *profile) != 0)
         {
             // Error occurred on retrieving PPP
             delete profile;
@@ -279,13 +278,12 @@ void PPPController::savePPP()
 {
     updatePPP();
 
-    StudentUser *user = (StudentUser*)CupidSession::getInstance()->getCurrentUser();
+    StudentUser *user = (StudentUser*)DataAccessFacade::managedDataAccess().getCurrentUser();
 
-    //TODO: SavePPP
     if(profile->getPPPID() == 0)
     {
         //new PPP account
-        if(Storage::defaultStorage().executeActionForPPP(createdPPP, *user, *profile) == 0)
+        if(DataAccessFacade::managedDataAccess().execute(createdPPP, *user, *profile) == 0)
         {
             // SAVE SUCCESSFUL Message
             QMessageBox messageBox;
@@ -303,11 +301,11 @@ void PPPController::savePPP()
     else
     {
         //updated PPP
-        if(Storage::defaultStorage().executeActionForPPP(updatedPPP, *user, *profile) == 0)
+        if(DataAccessFacade::managedDataAccess().execute(updatedPPP, *user, *profile) == 0)
         {
             // UPDATE SUCCESSFUL MESSAGE
             QMessageBox messageBox;
-            messageBox.information(0,"Success","We've just successfully update your profile!");
+            messageBox.information(0,"Success","We've just successfully updated your profile!");
             messageBox.setFixedSize(500,200);
         }
         else
@@ -325,8 +323,8 @@ void PPPController::savePPP()
 
 void PPPController::createPPP()
 {
-    StudentUser *currentUser = (StudentUser *)CupidSession::getInstance()->getCurrentUser();
-    profile = new ProjectPartnerProfile(*currentUser);
+    StudentUser *currentUser = (StudentUser *)DataAccessFacade::managedDataAccess().getCurrentUser();
+    profile = DataAccessFacade::defaultProfile(*currentUser);
 
     setupUIForState(Editing);
 }

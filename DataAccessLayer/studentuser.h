@@ -14,13 +14,16 @@ class StudentUser : public User
 {
 
     friend class ProjectPartnerProfile;
+    friend class ProjectPartnerProfileProxy;
+    friend class ProjectPartnerProfileReal;
     ProjectPartnerProfile *profile;
     //Keep track of if the StudentUser currently has a ppp
     int pppIDForFetch;
 
 public:
-    StudentUser(QString&, QString&, QString&, int);
     StudentUser();
+    StudentUser(QString&, QString&, QString&);
+
     virtual ~StudentUser();
 
     //accessor functions

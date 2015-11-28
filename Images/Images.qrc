@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/Images/Drawing.png">
-        <file>Drawing.png</file>
-        <file>logo.svg</file>
-        <file>logo2.svg</file>
-    </qresource>
-</RCC>

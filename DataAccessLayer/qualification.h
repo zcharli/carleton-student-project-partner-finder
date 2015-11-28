@@ -48,7 +48,7 @@ enum WorkEthicQualificationMapping
     hardworkingBit
 };
 
-class Qualification : public IMappable
+class Qualification : private IMappable
 {
     int value;
     QualificationType type;

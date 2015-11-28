@@ -4,9 +4,10 @@
 //  Subsystem dependencies
 #include "DataAccessLayer/administratoruser.h"
 #include "DataAccessLayer/studentuser.h"
-#include "DataAccessLayer/cupidsession.h"
-#include "DataAccessLayer/projectpartnerprofile.h"
-#include "Repository/storage.h"
+#include "DataAccessLayer/projectpartnerprofileproxy.h"
+#include "AlgorithmExecution/insomniamatchingalgorithm.h"
+
+#include "DataAccessLayer/dataaccessfacade.h"
 
 #include <QMessageBox>
 #include <QDebug>
@@ -29,7 +30,7 @@ LoginForm::LoginForm(QWidget *parent) :
     connect(ui->btnStudent, &QPushButton::clicked, this, &LoginForm::slotStudentUserLogin);
     connect(ui->btnSignUp, &QPushButton::clicked, this, &LoginForm::slotCreateNewAccount);
     connect(&signUpForm, &SignUpForm::signUpAccepted, this, &LoginForm::signUpSucceeded);
-
+    InsomniaMatchingAlgorithm algo;
     viewWillAppear();
 }
 
@@ -54,9 +55,9 @@ LoginForm::~LoginForm()
 
 void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, User **currentUser)
 {
-    QString firstname;
-    QString lastname;
-    int     id;
+    QString firstname = "";
+    QString  lastname = "";
+    int            id = -1;
 
     //##########################################################################################################
     /*  Debug flow  Username: Leonidas will get you through login   */
@@ -65,20 +66,22 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
         // create debug firstname, lastname and id
         firstname = "Jack";
         lastname = "Brown";
-        id = 7;
 
         switch(type)
         {
-        case Administrator:
-            (*currentUser) = new AdministratorUser(firstname, lastname, username, id);
-            break;
-        case Student:
-            (*currentUser) = new StudentUser(firstname, lastname, username, id);
-            break;
+
+            case Administrator:
+                (*currentUser) = new AdministratorUser(firstname, lastname, username);
+                break;
+            case Student:
+                (*currentUser) = new StudentUser(firstname, lastname, username);
+                break;
         }
 
         // Add the current user to the session after successful login
-        CupidSession::getInstance()->setCurrentUser(*currentUser);
+        DataAccessFacade::managedDataAccess().setCurrentUser(*currentUser);
+
+        return;
     }
 
     //##########################################################################################################
@@ -89,18 +92,10 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
         return;
     } else
     {
-        switch(type)
-        {
-        case Administrator:
-            (*currentUser) = new AdministratorUser(firstname, lastname, username, id);
-            break;
-        case Student:
-            (*currentUser) = new StudentUser(firstname, lastname, username, id);
-            break;
-        }
+        *currentUser = DataAccessFacade::defaultUser(type);
 
         /*  Query DB for user log in information   */
-        if(Storage::defaultStorage().loginUserWithUsername(username, **currentUser) != 0)
+        if(DataAccessFacade::managedDataAccess().execute(login, **currentUser) != 0)
         {
             //error occured
             delete *currentUser;
@@ -116,8 +111,8 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
                 //User has a profile in the database so we need to fetch it.
                 if (((StudentUser *)*currentUser)->getFetchIDForPPP() != 0)
                 {
-                    ProjectPartnerProfile *profile = new ProjectPartnerProfile(*((StudentUser*)(*currentUser)));
-                    if(Storage::defaultStorage().executeActionForPPP(fetchPPP, *((StudentUser*)(*currentUser)), *profile) != 0)
+                    ProjectPartnerProfile* profile = DataAccessFacade::defaultProfile(*((StudentUser*)*currentUser));
+                    if(DataAccessFacade::managedDataAccess().execute(fetchPPP, *((StudentUser*)(*currentUser)), *((ProjectPartnerProfile*)profile)) != 0)
                     {
                         // Error occurred on retrieving PPP
                         delete *currentUser;
@@ -127,6 +122,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
                         QMessageBox messageBox;
                         messageBox.critical(0,"Error","An error occured while trying to fetch your profile");
                         messageBox.setFixedSize(500,200);
+                        return;
                     }
                     else
                     {
@@ -142,13 +138,13 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
     }
 
     // Add the current user to the session after successful login
-    CupidSession::getInstance()->setCurrentUser(*currentUser);
+    DataAccessFacade::managedDataAccess().setCurrentUser(*currentUser);
 }
 
 void LoginForm::populateUserProjects(User *user)
 {
     QVector<Project *> userProjects;
-    if(Storage::defaultStorage().executeActionForProject(fetchUsersProjects, *user, userProjects))
+    if(DataAccessFacade::managedDataAccess().execute(fetchUsersProjects, *user, userProjects))
     {
         QMessageBox messageBox;
         messageBox.warning(0,"Error","Failed to retrieve Project information");

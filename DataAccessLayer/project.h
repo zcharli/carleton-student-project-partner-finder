@@ -13,7 +13,7 @@ class Configuration;
 class ProjectPartnerProfile;
 class QJsonObject;
 
-class Project : public IMappable
+class Project : private IMappable
 {
     Configuration *projectConfigurations;
     QSet<ProjectPartnerProfile> registeredPPPs;
@@ -23,8 +23,8 @@ class Project : public IMappable
     int id;
 
 public:
-    Project(QString&, QString&);
     Project();
+    Project(QString, QString);
     ~Project();
 
     //accessor Functions

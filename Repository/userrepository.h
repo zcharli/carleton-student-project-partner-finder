@@ -1,13 +1,8 @@
 #ifndef USERREPOSITORY_H
 #define USERREPOSITORY_H
 
-#include <QVector>
 #include <QtSql/QSqlDatabase>
 #include <QJsonObject>
-
-class User;
-class ProjectPartnerProfile;
-class QJsonObject;
 
 class UserRepository
 {
@@ -56,7 +51,6 @@ public:
      *      @return: success or failure: bool
      */
     int createUser(QJsonObject& user);
-
 
 private:
     QSqlDatabase db;

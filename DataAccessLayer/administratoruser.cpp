@@ -1,8 +1,8 @@
 #include "administratoruser.h"
 #include "project.h"
 
-AdministratorUser::AdministratorUser(QString& fName, QString& lName, QString& userName, int id):
-    User(fName, lName, userName, id)
+AdministratorUser::AdministratorUser(QString& fName, QString& lName, QString& userName):
+    User(fName, lName, userName)
 {
     userType = Administrator;
 }

@@ -11,7 +11,7 @@ enum ConfigurationType
     NoType
 };
 
-class Configuration : public IMappable
+class Configuration : private IMappable
 {
     ConfigurationType type;
     int value;

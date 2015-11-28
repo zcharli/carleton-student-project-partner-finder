@@ -16,7 +16,6 @@ SOURCES += \
     Repository/projectrepository.cpp \
     Repository/userrepository.cpp \
     Repository/databasemanager.cpp \
-    Repository/storage.cpp \
     DataAccessLayer/user.cpp \
     DataAccessLayer/studentuser.cpp \
     DataAccessLayer/administratoruser.cpp \
@@ -24,7 +23,9 @@ SOURCES += \
     DataAccessLayer/qualification.cpp \
     DataAccessLayer/project.cpp \
     DataAccessLayer/configuration.cpp \
-    DataAccessLayer/cupidsession.cpp \
+    DataAccessLayer/dataaccessfacade.cpp \
+    DataAccessLayer/projectpartnerprofilereal.cpp \
+    DataAccessLayer/projectpartnerprofileproxy.cpp \
     UserAuthentication/loginform.cpp \
     UserAuthentication/signupform.cpp \
     ProjectManagement/projectdetails.cpp \
@@ -40,19 +41,23 @@ SOURCES += \
     settingswidget.cpp \
     cupidwindow.cpp \
     homewidget.cpp \
-    Repository/dataaccessdispatcher.cpp
+    Repository/dataaccessdispatcher.cpp \
+    AlgorithmExecution/insomniamatchingalgorithm.cpp \
+    AlgorithmExecution/matchreportview.cpp \
+    AlgorithmExecution/team.cpp
 
 
 HEADERS  += \
     Repository/projectrepository.h \
     Repository/userrepository.h \
     Repository/databasemanager.h \
-    Repository/storage.h \
-    DataAccessLayer/cupidsession.h \
     DataAccessLayer/user.h \
     DataAccessLayer/studentuser.h \
     DataAccessLayer/administratoruser.h \
     DataAccessLayer/projectpartnerprofile.h \
+    DataAccessLayer/dataaccessfacade.h \
+    DataAccessLayer/projectpartnerprofilereal.h \
+    DataAccessLayer/projectpartnerprofileproxy.h \
     DataAccessLayer/qualification.h \
     DataAccessLayer/project.h \
     DataAccessLayer/configuration.h \
@@ -73,8 +78,9 @@ HEADERS  += \
     cupidwindow.h \
     homewidget.h \
     Repository/dataaccessdispatcher.h \
-    DataAccessLayer/jsonserializer.h
-
+    AlgorithmExecution/insomniamatchingalgorithm.h \
+    AlgorithmExecution/matchreportview.h \
+    AlgorithmExecution/team.h
 
 FORMS    += \
     UserAuthentication/loginform.ui \
@@ -90,4 +96,6 @@ FORMS    += \
     homewidget.ui
 
 RESOURCES += \
-    Images/Images.qrc
+    stylesheet.qrc
+
+OTHER_FILES +=
