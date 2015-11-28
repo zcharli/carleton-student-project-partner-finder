@@ -2,22 +2,13 @@
 #include "studentuser.h"
 #include "qualification.h"
 
-ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
-    user(studentUser)
+ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore,int tscore,unsigned char we, Qualification* qualifications) :
+    user(studentUser), personalTechnicalScore(pscore), teammateTechnicalScore(tscore), workEthic(we)
 {
-    if(studentUser.profile)
-    {
-        delete studentUser.profile;
-        studentUser.profile = NULL;
-    }
-    studentUser.profile = this;
-    qualifications = Qualification::DefaultQualifications();
+    this->qualifications = qualifications;
     pppID = 0;
 }
 
-ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore,int tscore,char we) :
-    user(studentUser), personalTechnicalScore(pscore), teammateTechnicalScore(tscore), workEthic(we)
-{}
 
 ProjectPartnerProfile::~ProjectPartnerProfile()
 {
@@ -41,17 +32,6 @@ void ProjectPartnerProfile::setPPPID(int id)
     this->pppID = id;
 }
 
-void ProjectPartnerProfile::changeQualification(Qualification newQualification)
-{
-    qualifications[newQualification.getType()] = newQualification;
-}
-
-Qualification ProjectPartnerProfile::getQualification(int index)
-{
-    //TODO: Need to do error checking here.
-    return qualifications[index];
-}
-
 bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
 {
     if(!Qualification::GetWorkEthicBitForWorkEthicQualification(bitPosition, qualifications[userWorkEthic]))
@@ -59,6 +39,16 @@ bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPositi
         return false;
     }
     return true;
+}
+
+unsigned char ProjectPartnerProfile::getWorkEthicByte()
+{
+    return workEthic;
+}
+
+void ProjectPartnerProfile::setWorkEthicByte(unsigned char meThic)
+{
+    workEthic = meThic;
 }
 
 int ProjectPartnerProfile::getPersonalTechnicalScore()
@@ -79,15 +69,4 @@ int ProjectPartnerProfile::getTeammateTechnicalScore()
 void ProjectPartnerProfile::setTeammateTechnicalScore(int tScore)
 {
     teammateTechnicalScore = tScore;
-}
-
-
-char ProjectPartnerProfile::getWorkEthicByte()
-{
-    return workEthic;
-}
-
-void ProjectPartnerProfile::setWorkEthicByte(char meThic)
-{
-    workEthic = meThic;
 }

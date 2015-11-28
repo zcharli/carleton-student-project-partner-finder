@@ -13,7 +13,7 @@ enum UserType {
 class User
 {
 public:
-  User(QString&, QString&, QString&, int);
+  User(QString&, QString&, QString&);
   virtual ~User();
 
   //accessor Functions

@@ -2,8 +2,7 @@
 #include "projectcellwidget.h"
 
 //  Subsystem dependencies
-#include "DataAccessLayer/cupidsession.h"
-#include "Repository/storage.h"
+#include "DataAccessLayer/dataaccessfacade.h"
 
 #include <QDebug>
 
@@ -38,7 +37,7 @@ void ProjectListWidget::cleanUpList()
 
     if(projectList.size() != 0)
     {
-        Project *currentProjectInSession = CupidSession::getInstance()->getCurrentProject();
+        Project *currentProjectInSession = DataAccessFacade::managedDataAccess().getCurrentProject();
         for(int i = 0; i < listSize; i++)
         {
             if(currentProjectInSession != NULL && projectList[i] != currentProjectInSession)
@@ -71,8 +70,8 @@ void ProjectListWidget::setUpList()
     if (listType != noList)
     {
         //TODO: Query DB here!!!
-        User *currentUser = CupidSession::getInstance()->getCurrentUser();
-        if(Storage::defaultStorage().executeActionForProject((listType == discoverProjectsList ? discoverProjects : fetchUsersProjects), *currentUser, projectList) != 0)
+        User *currentUser = DataAccessFacade::managedDataAccess().getCurrentUser();
+        if(DataAccessFacade::managedDataAccess().execute((listType == discoverProjectsList ? discoverProjects : fetchUsersProjects), *currentUser, projectList) != 0)
         {
             //ERROR:
             qDebug() << "Error occured on fetch";
@@ -122,8 +121,8 @@ void ProjectListWidget::displayList()
 
 void ProjectListWidget::viewProjectSelected(int index)
 {
-    CupidSession::getInstance()->deleteCurrentProject();
-    CupidSession::getInstance()->setCurrentProject(projectList[index]);
+    DataAccessFacade::managedDataAccess().deleteCurrentProject();
+    DataAccessFacade::managedDataAccess().setCurrentProject(projectList[index]);
     emit userToViewProject();
     viewWillDisappear();
 }

@@ -4,7 +4,7 @@
 // Subsystem dependencies
 #include "DataAccessLayer/studentuser.h"
 #include "DataAccessLayer/administratoruser.h"
-#include "Repository/storage.h"
+#include "DataAccessLayer/dataaccessfacade.h"
 
 #include <QMessageBox>
 
@@ -64,18 +64,10 @@ void SignUpForm::attemptSignUpForUser(UserType type, User **currentUser)
         return;
     }
 
-    switch(type)
-    {
-        case Administrator:
-            (*currentUser) = new AdministratorUser(fName, lName, username, 0);
-            break;
-        case Student:
-            (*currentUser) = new StudentUser(fName, lName, username, 0);
-            break;
-    }
+    *currentUser = DataAccessFacade::defaultUser(type);
 
     //Do database signup attempt here
-    int successStatus = Storage::defaultStorage().signupUser(**currentUser);
+    int successStatus = DataAccessFacade::managedDataAccess().execute(createAccount, **currentUser);
     if(successStatus == 0)
         return;
     else

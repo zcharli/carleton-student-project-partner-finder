@@ -5,7 +5,7 @@
 
 //  Subsystem dependencies
 #include "DataAccessLayer/qualification.h"
-#include "DataAccessLayer/projectpartnerprofile.h"
+#include "DataAccessLayer/projectpartnerprofileproxy.h"
 
 #include <QObject>
 

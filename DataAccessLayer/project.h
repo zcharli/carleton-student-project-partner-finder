@@ -21,7 +21,7 @@ class Project
     int id;
 
 public:
-    Project(QString&, QString&);
+    Project(QString, QString);
     ~Project();
 
     //accessor Functions

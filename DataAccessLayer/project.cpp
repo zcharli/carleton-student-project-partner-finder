@@ -2,7 +2,7 @@
 #include "projectpartnerprofile.h"
 #include "studentuser.h"
 
-Project::Project(QString& title, QString& desc)
+Project::Project(QString title, QString desc)
 {
     this->title = title;
     this->description = desc;
