@@ -2,8 +2,18 @@
 #include "projectpartnerprofile.h"
 #include "project.h"
 
+//DEBUG
+#include <QJsonArray>
+
 StudentUser::StudentUser(QString& fName, QString& lName, QString& userName, int id):
     User(fName, lName, userName, id)
+{
+    profile = NULL;
+    userType = Student;
+    pppIDForFetch = 0;
+}
+
+StudentUser::StudentUser() : User()
 {
     profile = NULL;
     userType = Student;
@@ -72,7 +82,8 @@ bool StudentUser::serializeJSONForSave(QJsonObject& userJSON)
     if(profile != NULL)
     {
         QJsonObject pppJSON;
-        userJSON["ppp"] = profile->serializeJSONForSave(pppJSON);
+        profile->serializeJSONForSave(pppJSON);
+        userJSON["ppp"] = pppJSON;
     }
 
     return true;
@@ -86,6 +97,7 @@ bool StudentUser::deserializeJSONFromRetrieve(const QJsonObject& userJSON)
     firstName = userJSON["firstName"].toString();
     lastName = userJSON["lastName"].toString();
     userName = userJSON["userName"].toString();
+
     userType = (UserType)userJSON["userType"].toInt();
     if(userJSON.contains("pppIDForFetch"))
     {
@@ -95,8 +107,13 @@ bool StudentUser::deserializeJSONFromRetrieve(const QJsonObject& userJSON)
     if(userJSON.contains("ppp"))
     {
         // Note that this call to the
+        if(profile == NULL)
+        {
+            profile = new ProjectPartnerProfile(*this);
+        }
         QJsonObject ppp = userJSON["ppp"].toObject();
         profile->deserializeJSONFromRetrieve(ppp);
     }
+
     return true;
 }

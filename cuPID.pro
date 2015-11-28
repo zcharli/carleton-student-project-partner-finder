@@ -40,8 +40,7 @@ SOURCES += \
     settingswidget.cpp \
     cupidwindow.cpp \
     homewidget.cpp \
-    Repository/dataaccessdispatcher.cpp \
-    DataAccessLayer/jsonserializer.cpp
+    Repository/dataaccessdispatcher.cpp
 
 
 HEADERS  += \

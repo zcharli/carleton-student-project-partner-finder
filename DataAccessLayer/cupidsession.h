@@ -68,11 +68,11 @@ public:
     ~CupidSession();
 
 private:
-  CupidSession();
-  static CupidSession *singleton;
-  User* currentUser;
-  ProjectPartnerProfile* currentPPP;
-  Project* currentProject;
+    CupidSession();
+    static CupidSession *singleton;
+    User* currentUser;
+    ProjectPartnerProfile* currentPPP;
+    Project* currentProject;
 
 };
 

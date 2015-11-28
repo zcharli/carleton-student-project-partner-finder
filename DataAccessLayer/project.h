@@ -66,6 +66,13 @@ public:
     void registerPPP(ProjectPartnerProfile&);
 
     /*!
+     *       @param: pppList: QVector<ProjectPartnerProfile*>&
+     *        @desc: returns the list of PPPs that are registered into the project
+     *      @return: void
+     */
+    void getRegisteredPPPs(QVector<ProjectPartnerProfile*>&);
+
+    /*!
      *       @param: profileToUnregister: ProjectPartnerProfile&
      *        @desc: unregister the given PPP from the project
      *               (if the PPP is registered). Does nothing otherwise.
@@ -127,7 +134,7 @@ public:
      *        @desc: adds the ppp to the collection of profiles for this project
      *      @return: none
      */
-    void addPPPtoProject(ProjectPartnerProfile*);
+    void addPPPtoProject(ProjectPartnerProfile&);
 
     /*!
      *       @param: empty Json Object: QJsonObject&
@@ -138,10 +145,24 @@ public:
 
     /*!
      *       @param: objectToDeSerialize: QJsonObject&
-     *        @desc: deserializes the the JSON object to create the object back
+     *        @desc: deserializes the JSON object to create the object back
      *      @return: success or failure: bool
      */
     virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
+
+    /*!
+     *       @param: Json objectToSerialize: QJsonObject&, projectList: QVector<Project&>&
+     *        @desc: serializes the list of projects into a JSON object
+     *      @return: success or failure: bool
+     */
+    static bool serializeJSONFromCollection(QJsonObject&, const QVector<Project*>&);
+
+    /*!
+     *       @param: Json objectToDeSerialize: QJsonObject&, projectList to fill: QVector<Project&>&
+     *        @desc: deserializes JSON object into a list of projects
+     *      @return: success or failure: bool
+     */
+    static bool deserializeJSONFromCollection(const QJsonObject&, QVector<Project*>&);
 
 };
 

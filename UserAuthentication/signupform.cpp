@@ -66,12 +66,12 @@ void SignUpForm::attemptSignUpForUser(UserType type, User **currentUser)
 
     switch(type)
     {
-        case Administrator:
-            (*currentUser) = new AdministratorUser(fName, lName, username, 0);
-            break;
-        case Student:
-            (*currentUser) = new StudentUser(fName, lName, username, 0);
-            break;
+    case Administrator:
+        (*currentUser) = new AdministratorUser(fName, lName, username, 0);
+        break;
+    case Student:
+        (*currentUser) = new StudentUser(fName, lName, username, 0);
+        break;
     }
 
     //Do database signup attempt here

@@ -104,7 +104,7 @@ public:
      *   @desc:   clears the workEthic bit of the given qualification
      *  @retuns:  void
      */
-    static void TechnicalScoreForStudentUser(StudentUser&, float&, float&);
+    static void TechnicalScoreForProfile(ProjectPartnerProfile&, float&, float&);
 
 
     //overloaded == operator

@@ -2,6 +2,7 @@
 #include "studentuser.h"
 #include "qualification.h"
 #include <QJsonArray>
+
 ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser):
     user(studentUser)
 {
@@ -99,6 +100,14 @@ void ProjectPartnerProfile::setWorkEthicByte(char meThic)
     workEthic = meThic;
 }
 
+void ProjectPartnerProfile::updateProfileScores()
+{
+    float teamScore;
+    float personalScore;
+
+    Qualification::TechnicalScoreForProfile(*this, personalScore, teamScore);
+}
+
 bool ProjectPartnerProfile::serializeJSONForSave(QJsonObject& pppJSON)
 {
     int i;
@@ -111,23 +120,28 @@ bool ProjectPartnerProfile::serializeJSONForSave(QJsonObject& pppJSON)
     pppJSON["teammateTechnicalScore"] = teammateTechnicalScore;
     pppJSON["workEthic"] = workEthic;
 
-    QJsonArray qualificationsArray;
-
-    for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
+    if(qualifications != NULL)
     {
-       QJsonObject qualification;
-       qualifications[i].serializeJSONForSave(qualification);
-       qualificationsArray.append(qualification);
-    }
+        QJsonArray qualificationsArray;
 
-    pppJSON["qualifications"] = qualificationsArray;
+        for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
+        {
+            QJsonObject qualification;
+            qualifications[i].serializeJSONForSave(qualification);
+            qualificationsArray.append(qualification);
+        }
+
+        pppJSON["qualifications"] = qualificationsArray;
+    }
 
     return true;
 }
 
-
 bool ProjectPartnerProfile::deserializeJSONFromRetrieve(const QJsonObject& pppJSON)
 {
+    // There are some cases where perosnal and teammate tech scores are NOT
+    // pulled in for the logged in user
+    // tech score are pulled in for when the algorithm needs them
     int i;
     pppID = pppJSON["pppID"].toInt();
     if(pppJSON.contains("personalTechnicalScore"))

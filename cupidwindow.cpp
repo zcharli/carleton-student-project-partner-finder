@@ -76,8 +76,8 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     QObject::connect(this, SIGNAL(userToViewProject()),
                      &projectDetailsWidget, SLOT(userToViewProject()));
 
-//    QObject::connect(&projectDetailsWidget,SIGNAL(registrationClicked()),
-//                     &projectDetailsWidget,SLOT(on_btnRegistration_clicked));
+    //    QObject::connect(&projectDetailsWidget,SIGNAL(registrationClicked()),
+    //                     &projectDetailsWidget,SLOT(on_btnRegistration_clicked));
 
     QObject::connect(&projectsWidget, SIGNAL(userToViewProject()), this, SLOT(generateProjectDetailsPage()));
     QObject::connect(this, SIGNAL(userToViewProject()), &projectDetailsWidget, SLOT(userToViewProject()));

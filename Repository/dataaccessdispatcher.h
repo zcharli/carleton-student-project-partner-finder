@@ -6,18 +6,6 @@ class ProjectRepository;
 class UserRepository;
 class QJsonObject;
 
-enum ReturnMessage {
-    SUCCESS = 0,
-    NO_PPP_ID,
-    NO_USER_ID,
-    NO_PROJECT_ID,
-    NO_USERNAME,
-    NO_REGISTERED_STUDENTS,
-    NO_USER_TYPE,
-    DATABASE_QUERY_ERROR,
-    UNKNOWN_ERROR
-};
-
 class DataAccessDispatcher
 {
     DatabaseManager *dbManager;
@@ -127,12 +115,6 @@ public:
     int userUnRegisteredInProject(QJsonObject&);
 
 private:
-
-    /*!  @input: a JSON request object: QJsonObject&
-     *    @desc: cleares the JSON object of all its key value mappings
-     *  @output: n/a: void
-     */
-    void clearJsonObject(QJsonObject&);
 
     /*!  @input: a JSON request object: QJsonObject&
      *    @desc: searches through the request object to try to find a user id

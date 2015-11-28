@@ -25,7 +25,7 @@ class cuPIDWindow : public QMainWindow
 
 
 public:
-        Ui::cuPIDWindow *ui;
+    Ui::cuPIDWindow *ui;
     explicit cuPIDWindow(QWidget *parent = 0);
     ~cuPIDWindow();
     void displayProfile(ProfileWidget*);

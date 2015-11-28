@@ -119,6 +119,15 @@ public:
      */
     void setWorkEthicByte(char);
 
+
+    /*!
+     *       @param: none
+     *        @desc: uses the static Qualification class to update the
+     *               technical scores
+     *      @return: none
+     */
+    void updateProfileScores();
+
     /*!
      *       @param: empty Json Object: QJsonObject&
      *        @desc: serializes the object implementing into JSON
@@ -133,14 +142,28 @@ public:
      */
     virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
 
+//    /*!
+//     *       @param: Json objectToSerialize: QJsonObject&, projectList: QSet<ProjectPartnerProfile&>&
+//     *        @desc: serializes the list of ProjectPartnerProfile into a JSON object
+//     *      @return: success or failure: bool
+//     */
+//    static bool serializeJSONFromCollection(QJsonObject&, const QVector<ProjectPartnerProfile*>&);
+
+//    /*!
+//     *       @param: Json objectToDeSerialize: QJsonObject&, projectList to fill: QSet<ProjectPartnerProfile&>&
+//     *        @desc: deserializes JSON object into a list of ProjectPartnerProfile
+//     *      @return: success or failure: bool
+//     */
+//    static bool deserializeJSONFromCollection(const QJsonObject&, QVector<ProjectPartnerProfile*>&);
+
 };
 
-inline bool operator==(const ProjectPartnerProfile &e1, const ProjectPartnerProfile &e2)
+inline bool operator==(const ProjectPartnerProfile& e1, const ProjectPartnerProfile& e2)
 {
     return e1.getPPPID() == e2.getPPPID();
 }
 
-inline uint qHash(const ProjectPartnerProfile &key, uint seed)
+inline uint qHash(const ProjectPartnerProfile& key, uint seed)
 {
     return qHash(key.getPPPID(), seed);
 }

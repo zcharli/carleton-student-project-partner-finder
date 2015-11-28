@@ -21,7 +21,7 @@ Qualification* Qualification::DefaultQualifications()
     return array;
 }
 
-void Qualification::TechnicalScoreForStudentUser(StudentUser& user, float& personal, float& teammate)
+void Qualification::TechnicalScoreForProfile(ProjectPartnerProfile& ppp, float& personal, float& teammate)
 {
     //TODO: NORMALIZE THE STUDENTUSERS SCORE WITH CGPA AND CODING QUESTION
 
@@ -29,11 +29,11 @@ void Qualification::TechnicalScoreForStudentUser(StudentUser& user, float& perso
     {
         if (i >= 1 && i <= 11)
         {
-            personal += user.getProfile()->getQualification(i).getValue();
+            personal += ppp.getQualification(i).getValue();
         }
         else if(i >= 13 && i <= 23)
         {
-            teammate += user.getProfile()->getQualification(i).getValue();
+            teammate += ppp.getQualification(i).getValue();
         }
     }
 }
@@ -46,7 +46,7 @@ Qualification Qualification::WorkEthicQualificationFromMapping(int mapping[])
     {
         if (mapping[i])
         {
-          SetWorkEthicBitForWorkEthicQualification((WorkEthicQualificationMapping)i, qualification);
+            SetWorkEthicBitForWorkEthicQualification((WorkEthicQualificationMapping)i, qualification);
         }
     }
 
@@ -55,19 +55,19 @@ Qualification Qualification::WorkEthicQualificationFromMapping(int mapping[])
 
 void Qualification::WorkEthicMappingFromQualification(Qualification qualification, int **mapping)
 {
-  *mapping = new int[NUMBER_OF_WORK_ETHICS_QUALIFICATIONS];
+    *mapping = new int[NUMBER_OF_WORK_ETHICS_QUALIFICATIONS];
 
-  for (int i = 0; i < NUMBER_OF_WORK_ETHICS_QUALIFICATIONS; i++)
-  {
-      if (GetWorkEthicBitForWorkEthicQualification((WorkEthicQualificationMapping)i, qualification))
-      {
-        (*mapping)[i] = true;
-      }
-      else
-      {
-        (*mapping)[i] = false;
-      }
-  }
+    for (int i = 0; i < NUMBER_OF_WORK_ETHICS_QUALIFICATIONS; i++)
+    {
+        if (GetWorkEthicBitForWorkEthicQualification((WorkEthicQualificationMapping)i, qualification))
+        {
+            (*mapping)[i] = true;
+        }
+        else
+        {
+            (*mapping)[i] = false;
+        }
+    }
 
 }
 
@@ -86,9 +86,9 @@ void Qualification::SetWorkEthicBitForWorkEthicQualification(WorkEthicQualificat
 
 void Qualification::ClearWorkEthicBitForWorkEthicQualification(WorkEthicQualificationMapping workEthicBit, Qualification& qualification)
 {
-  unsigned char newValue = ((unsigned char)qualification.getValue()) & (~(1 << workEthicBit));
+    unsigned char newValue = ((unsigned char)qualification.getValue()) & (~(1 << workEthicBit));
 
-  qualification.setValue(newValue);
+    qualification.setValue(newValue);
 }
 
 bool Qualification::operator ==(Qualification const qualification)

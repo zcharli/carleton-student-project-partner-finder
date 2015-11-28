@@ -111,30 +111,30 @@ void ProfileWidget::setUpDefault()
 
         switch(i)
         {
-            case dependableBit:
-                currentChkBox = ui->chkDependable;
-                break;
-            case organizedBit:
-                currentChkBox = ui->chkOrganized;
-                break;
-            case proactiveBit:
-                currentChkBox = ui->chkProactive;
-                break;
-            case efficientBit:
-                currentChkBox = ui->chkEfficient;
-                break;
-            case humorBit:
-                currentChkBox = ui->chkHumour;
-                break;
-            case impulsiveBit:
-                currentChkBox = ui->chkImpulsive;
-                break;
-            case flexibleBit:
-                currentChkBox = ui->chkFlexible;
-                break;
-            case hardworkingBit:
-                currentChkBox = ui->chkHardworking;
-                break;
+        case dependableBit:
+            currentChkBox = ui->chkDependable;
+            break;
+        case organizedBit:
+            currentChkBox = ui->chkOrganized;
+            break;
+        case proactiveBit:
+            currentChkBox = ui->chkProactive;
+            break;
+        case efficientBit:
+            currentChkBox = ui->chkEfficient;
+            break;
+        case humorBit:
+            currentChkBox = ui->chkHumour;
+            break;
+        case impulsiveBit:
+            currentChkBox = ui->chkImpulsive;
+            break;
+        case flexibleBit:
+            currentChkBox = ui->chkFlexible;
+            break;
+        case hardworkingBit:
+            currentChkBox = ui->chkHardworking;
+            break;
         }
 
         currentChkBox->setChecked(isChecked);

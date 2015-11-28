@@ -11,11 +11,6 @@
 #include <QMessageBox>
 #include <QDebug>
 
-#include "Repository/dataaccessdispatcher.h"
-#include "DataAccessLayer/project.h"
-#include <QJsonObject>
-#include <QJsonArray>
-
 #define PROG_BAR_DEFAULT_VALUE 0
 
 #define DEBUG_USER "Leonidas"
@@ -36,33 +31,6 @@ LoginForm::LoginForm(QWidget *parent) :
     connect(&signUpForm, &SignUpForm::signUpAccepted, this, &LoginForm::signUpSucceeded);
 
     viewWillAppear();
-
-//    QString fname = ("fname");
-//    QString lname = ("lname");
-//    QString uname = ("username");
-
-//    StudentUser user(fname, lname, uname,1);
-//    ProjectPartnerProfile* ppp = new ProjectPartnerProfile(user,10,10,'A');
-//    user.setProfile(ppp);
-//    user.setFetchIDForPPP(1);
-    QJsonObject json;
-//    user.serializeJSONForSave(json);
-
-    DataAccessDispatcher disp;
-    disp.retrieveAllProjects(json);
-    QString title = ("title");
-    QString desc = ("desc");
-
-    int count = json["count"].toInt();
-    QJsonArray projects = json["projects"].toArray();
-    for(int i=0;i<count;i++)
-    {
-        Project project;
-        project.deserializeJSONFromRetrieve(projects[i].toObject());
-    }
-
-
-    //project.serializeJSONForSave(json);
 }
 
 void LoginForm::viewWillAppear()
@@ -90,7 +58,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
     QString lastname;
     int     id;
 
-//##########################################################################################################
+    //##########################################################################################################
     /*  Debug flow  Username: Leonidas will get you through login   */
     if(username.compare(QString(DEBUG_USER)) == 0)
     {
@@ -101,19 +69,19 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
 
         switch(type)
         {
-            case Administrator:
-                (*currentUser) = new AdministratorUser(firstname, lastname, username, id);
-                break;
-            case Student:
-                (*currentUser) = new StudentUser(firstname, lastname, username, id);
-                break;
+        case Administrator:
+            (*currentUser) = new AdministratorUser(firstname, lastname, username, id);
+            break;
+        case Student:
+            (*currentUser) = new StudentUser(firstname, lastname, username, id);
+            break;
         }
 
         // Add the current user to the session after successful login
         CupidSession::getInstance()->setCurrentUser(*currentUser);
     }
 
-//##########################################################################################################
+    //##########################################################################################################
 
     if(username == "")
     {
@@ -123,12 +91,12 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
     {
         switch(type)
         {
-            case Administrator:
-                (*currentUser) = new AdministratorUser(firstname, lastname, username, id);
-                break;
-            case Student:
-                (*currentUser) = new StudentUser(firstname, lastname, username, id);
-                break;
+        case Administrator:
+            (*currentUser) = new AdministratorUser(firstname, lastname, username, id);
+            break;
+        case Student:
+            (*currentUser) = new StudentUser(firstname, lastname, username, id);
+            break;
         }
 
         /*  Query DB for user log in information   */

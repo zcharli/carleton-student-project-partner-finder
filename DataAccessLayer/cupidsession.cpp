@@ -62,5 +62,5 @@ Project* CupidSession::getCurrentProject()
 
 CupidSession::~CupidSession()
 {
-  delete currentUser;
+    delete currentUser;
 }

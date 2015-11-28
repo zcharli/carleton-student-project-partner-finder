@@ -39,24 +39,24 @@ Storage& Storage::defaultStorage()
 int Storage::executeActionForPPP(ActionType action, User& user, ProjectPartnerProfile& ppp)
 {
     int successStatus = SUCCESS;
-//    switch (action)
-//    {
-//        case createdPPP:
-//            successStatus = repoUser->userCreatedPPP(user, ppp);
-//            break;
-//        case fetchPPP:
-//            successStatus = repoUser->fetchPPPForUser(user, ppp);
-//            break;
-//        case updatedPPP:
-//            successStatus = repoUser->userUpdatedPPP(user, ppp);
-//            break;
-//        case deletedPPP:
-//            successStatus = repoUser->userDeletedPPP(user, ppp);
-//            break;
-//        default:
-//            successStatus = INVALID_ACTION;
-//            break;
-//    }
+    //    switch (action)
+    //    {
+    //        case createdPPP:
+    //            successStatus = repoUser->userCreatedPPP(user, ppp);
+    //            break;
+    //        case fetchPPP:
+    //            successStatus = repoUser->fetchPPPForUser(user, ppp);
+    //            break;
+    //        case updatedPPP:
+    //            successStatus = repoUser->userUpdatedPPP(user, ppp);
+    //            break;
+    //        case deletedPPP:
+    //            successStatus = repoUser->userDeletedPPP(user, ppp);
+    //            break;
+    //        default:
+    //            successStatus = INVALID_ACTION;
+    //            break;
+    //    }
     return successStatus;
 }
 
@@ -85,35 +85,35 @@ int Storage::executeActionForProject(ActionType action, User& user, QVector<Proj
 {
     int successStatus = SUCCESS;
 
-//    switch(action)
-//    {
-//        case createdProject:
-//            successStatus = repoProject->userCreatedProject(user, *(projects[0]));
-//            break;
-//        case fetchProject:
-//            successStatus = repoProject->fetchProjectForUser(user, *(projects[0]));
-//            break;
-//        case updatedProject:
-//            successStatus = repoProject->userUpdatedProject(user, *(projects[0]));
-//            break;
-//        case discoverProjects:
-//            successStatus = repoProject->fetchAllProjects(user, projects);
-//            break;
-//        case fetchUsersProjects:
-//            successStatus = repoProject->fetchProjectsForUser(user, projects);
-//            break;
-//        case registeredInProject:
-//            successStatus = repoProject->userRegisteredInProject(user, *(projects[0]));
-//            break;
-//        case unregisteredFromProject:
-//            successStatus = repoProject->userUnregisteredFromProject(user, *(projects[0]));
-//            break;
-//        case fetchPPPsForProject:
-//            successStatus = repoProject->fetchPPPsForProject(user, *(projects[0]));
-//            break;
-//        default:
-//            successStatus = INVALID_ACTION;
-//    }
+    //    switch(action)
+    //    {
+    //        case createdProject:
+    //            successStatus = repoProject->userCreatedProject(user, *(projects[0]));
+    //            break;
+    //        case fetchProject:
+    //            successStatus = repoProject->fetchProjectForUser(user, *(projects[0]));
+    //            break;
+    //        case updatedProject:
+    //            successStatus = repoProject->userUpdatedProject(user, *(projects[0]));
+    //            break;
+    //        case discoverProjects:
+    //            successStatus = repoProject->fetchAllProjects(user, projects);
+    //            break;
+    //        case fetchUsersProjects:
+    //            successStatus = repoProject->fetchProjectsForUser(user, projects);
+    //            break;
+    //        case registeredInProject:
+    //            successStatus = repoProject->userRegisteredInProject(user, *(projects[0]));
+    //            break;
+    //        case unregisteredFromProject:
+    //            successStatus = repoProject->userUnregisteredFromProject(user, *(projects[0]));
+    //            break;
+    //        case fetchPPPsForProject:
+    //            successStatus = repoProject->fetchPPPsForProject(user, *(projects[0]));
+    //            break;
+    //        default:
+    //            successStatus = INVALID_ACTION;
+    //    }
 
     return successStatus;
 }

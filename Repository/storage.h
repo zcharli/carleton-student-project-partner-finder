@@ -4,7 +4,7 @@
 /*  This class acts as Facade to handle all
  *  request to the database from other controll objects
  */
- #include <QVector>
+#include <QVector>
 
 //  Forward declarations
 class UserRepository;
