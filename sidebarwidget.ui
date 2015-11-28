@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>259</width>
+    <width>600</width>
     <height>595</height>
    </rect>
   </property>
@@ -14,8 +14,23 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>9</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="horizontalSpacing">
+    <number>9</number>
+   </property>
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
      <item>
       <widget class="QLabel" name="lblAppname">
        <property name="enabled">
@@ -35,24 +50,33 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>30</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>Sans Serif</family>
+         <pointsize>36</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
          <underline>false</underline>
          <stylestrategy>PreferAntialias</stylestrategy>
         </font>
        </property>
        <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="Images/Images.qrc">:/Images/Drawing.png/logo2.svg</pixmap>
+        <string>Carleton 
+University</string>
        </property>
        <property name="scaledContents">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -81,13 +105,6 @@
       </widget>
      </item>
      <item>
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -106,14 +123,14 @@
      <item>
       <widget class="QPushButton" name="btnHome">
        <property name="text">
-        <string>Home</string>
+        <string>HOME</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btnDiscoverProjects">
        <property name="text">
-        <string>Discover Projects</string>
+        <string>DISCOVER PROJECTS</string>
        </property>
       </widget>
      </item>
@@ -127,12 +144,15 @@
      <item>
       <widget class="QPushButton" name="btnCreateProject">
        <property name="text">
-        <string>Create Project</string>
+        <string>CREATE PROJECT</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="dividerCreateProject">
+       <property name="frameShadow">
+        <enum>QFrame::Sunken</enum>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -141,12 +161,15 @@
      <item>
       <widget class="QPushButton" name="btnMyProjects">
        <property name="text">
-        <string>My Projects</string>
+        <string>MY PROJECTS</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Line" name="dividerMyProjects">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -181,6 +204,11 @@
          <width>0</width>
          <height>16</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Recent projects</string>
@@ -224,7 +252,7 @@ border-bottom: 1px solid black;
      <item>
       <widget class="QPushButton" name="btnProfile">
        <property name="text">
-        <string>Profile</string>
+        <string>PROFILE</string>
        </property>
       </widget>
      </item>
@@ -238,7 +266,7 @@ border-bottom: 1px solid black;
      <item>
       <widget class="QPushButton" name="btnSettings">
        <property name="text">
-        <string>Settings</string>
+        <string>SETTINGS</string>
        </property>
       </widget>
      </item>
@@ -252,7 +280,7 @@ border-bottom: 1px solid black;
      <item>
       <widget class="QPushButton" name="btnLogOut">
        <property name="text">
-        <string>Log Out</string>
+        <string>LOG OUT</string>
        </property>
       </widget>
      </item>
@@ -276,8 +304,6 @@ border-bottom: 1px solid black;
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="Images/Images.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

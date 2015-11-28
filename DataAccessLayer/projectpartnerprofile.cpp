@@ -6,6 +6,7 @@ ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore
     user(studentUser), personalTechnicalScore(pscore), teammateTechnicalScore(tscore), workEthic(we)
 {
     this->qualifications = qualifications;
+    pppID = 0;
 }
 
 

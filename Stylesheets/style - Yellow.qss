@@ -1,0 +1,41 @@
+/* Button Styling*/
+QPushButton, QPushButton *{
+    border:none;
+    padding:10 10 10 10;
+    font-family: "Sans Serif", Times, serif;
+    outline:0;
+    width:100%;
+}
+#sideBar{
+    color:black;
+}
+
+QPushButton:hover, #sideBar QPushButton:hover {
+    background-color: #F8F7B8;
+    color:black;
+}
+
+#sideBar{
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
+                                        stop:0 #DFD900, stop:1  #E7E100);
+}
+
+#centralwidget {
+  border: 1px solid #978b88;
+  background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
+                                      stop:0 #E6E0FA, stop:1  #ffffff);
+}
+
+#sideBar QPushButton, #sideBar QLabel {
+    color: black;
+}
+
+#LoginForm, #LoginForm QLabel {
+ background-color: #FAF9C1;
+}
+
+#LoginForm QPushButton:hover{
+    background-color: #E7E100;
+}

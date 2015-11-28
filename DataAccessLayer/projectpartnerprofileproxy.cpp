@@ -1,17 +1,11 @@
 #include "projectpartnerprofileproxy.h"
 
-ProjectPartnerProfileProxy::ProjectPartnerProfileProxy(StudentUser& user):
-ProjectPartnerProfile(user, 0, 0, 0)
+ProjectPartnerProfileProxy::ProjectPartnerProfileProxy(StudentUser& user, int pScore, int tScore, unsigned char we):
+ProjectPartnerProfile(user, pScore, tScore, we, NULL)
 {
-  if(user.profile)
-  {
-      delete user.profile;
-      user.profile = NULL;
-  }
-  user.profile = this;
-  qualifications = Qualification::DefaultQualifications();
-  pppID = 0;
-  ppp = NULL;
+    user.profile = this;
+    pppID = 0;
+    ppp = NULL;
 }
 
 
@@ -20,7 +14,7 @@ ProjectPartnerProfileReal& ProjectPartnerProfileProxy::loadPPP()
     if (ppp == NULL)
     {
         //  Load PPP from database here!
-        ppp = new ProjectPartnerProfileReal(user, 0, 0, 0);
+        ppp = new ProjectPartnerProfileReal(user, 0, 0, 0, NULL);
     }
 
     return *ppp;
@@ -33,5 +27,5 @@ void ProjectPartnerProfileProxy::changeQualification(Qualification qualification
 
 Qualification ProjectPartnerProfileProxy::getQualification(int index)
 {
-    loadPPP().getQualification(index);
+    return loadPPP().getQualification(index);
 }

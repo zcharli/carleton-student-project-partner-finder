@@ -11,7 +11,7 @@ class ProjectPartnerProfileProxy : public ProjectPartnerProfile
     ProjectPartnerProfileReal& loadPPP();
 
 public:
-    ProjectPartnerProfileProxy(StudentUser&);
+    ProjectPartnerProfileProxy(StudentUser&,int,int,unsigned char);
 
     /*!
      *       @param: qualificationToChange: Qualification

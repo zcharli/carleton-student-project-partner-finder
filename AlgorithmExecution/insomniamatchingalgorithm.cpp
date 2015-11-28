@@ -12,7 +12,7 @@ bool compare(ProjectPartnerProfile* first, ProjectPartnerProfile* second)
     return first->getPersonalTechnicalScore() > second->getPersonalTechnicalScore();
 }
 
-InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
+InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm()//(Project* project)
 {
     this->project = project;
 
@@ -25,7 +25,7 @@ InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
         int pscore = qrand() % ((100) - 60) + 60;
         int tscore = qrand() % ((100) - 60) + 60;
         unsigned char we = i % 2 == 0 ? 218 : 155;
-        ProjectPartnerProfile *profile = new ProjectPartnerProfileReal(testUser, pscore, tscore, we);
+        ProjectPartnerProfile *profile = new ProjectPartnerProfileReal(testUser, pscore, tscore, we, NULL);
 
         profiles.append(profile);
     }
@@ -37,7 +37,7 @@ InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
 int InsomniaMatchingAlgorithm::setUpAlgorithmForLaunch()
 {
     //TODO: WIll have to do querying for PPPs registered in project here
-    foreach (ProjectPartnerProfile* profile, projects)
+    foreach (ProjectPartnerProfile* profile, profiles)
     {
         int key = profile->getPersonalTechnicalScore()/10 * 10;
 
@@ -277,7 +277,7 @@ int InsomniaMatchingAlgorithm::launch()
 {
     int teamSize = 5;
     //TODO: Do preprocess team configuration here
-    QVector<int> teamSizeConfigurations = getTeamSizeConfigurations(projects.size(), teamSize);
+    QVector<int> teamSizeConfigurations = getTeamSizeConfigurations(profiles.size(), teamSize);
     while(!teamSizeConfigurations.empty())
     {
         Team *team = new Team();

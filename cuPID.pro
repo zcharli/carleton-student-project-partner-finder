@@ -94,4 +94,6 @@ FORMS    += \
     homewidget.ui
 
 RESOURCES += \
-    Images/Images.qrc
+    stylesheet.qrc
+
+OTHER_FILES +=

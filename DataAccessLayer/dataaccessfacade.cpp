@@ -61,7 +61,7 @@ Project* DataAccessFacade::getCurrentProject()
 ProjectPartnerProfile* DataAccessFacade::defaultProfile(StudentUser& user)
 {
 
-    ProjectPartnerProfileProxy* profile = new ProjectPartnerProfileProxy(user);
+    ProjectPartnerProfileProxy* profile = new ProjectPartnerProfileProxy(user, 0, 0, 0);
     allocatedProfiles.append(profile);
     return profile;
 }

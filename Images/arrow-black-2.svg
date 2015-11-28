@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+  <g display="none" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_1"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+  <g id="svg_44" transform="matrix(2.99898, 0, 0, 2.99898, -53.7832, -861.803)">
+   <title>Layer 1</title>
+   <g id="svg_15" transform="translate(125, -209)">
+    <g transform="matrix(0.172414, 0, 0, 0.172414, 0, 0)" id="svg_40">
+     <title>background</title>
+     <g transform="translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(-348, -1769) translate(-121.841) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, -1.93399) translate(-301.702, 1.93399) translate(369.563, 209.133) translate(-1068.58, -326.591) translate(0, 4041.52) translate(0, 804.473)" display="none" id="svg_41">
+      <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_42"/>
+     </g>
+    </g>
+    <g transform="matrix(0.172414, 0, 0, 0.172414, 0, 0)" id="svg_31">
+     <title>Layer 1</title>
+     <path fill="#bf0000" stroke="#000" stroke-width="1.5" stroke-opacity="null" d="m-375.703125,3063.435303l64.497559,0l21.499512,24.500977l-21.499512,24.500977l-64.497559,0l21.499268,-24.500977l-21.499268,-24.500977z" id="svg_39"/>
+     <rect stroke="#000" id="svg_38" height="11" width="497.999986" y="3082.373103" x="-366.063936" stroke-width="1.5" fill="#000000"/>
+     <path transform="rotate(-90, 147.018, 3086.87)" id="svg_37" d="m147.018555,3074.186279c8.438599,-28.875 41.5,0 0,37.125c-41.5,-37.125 -8.438599,-66 0,-37.125z" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#bf0000"/>
+     <text fill="#ff0000" stroke="#000" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="-284.56395" y="3001.373103" id="svg_36" font-size="24" font-family="Georgia, Times, 'Times New Roman', serif" text-anchor="left" xml:space="preserve"/>
+    </g>
+    <g transform="matrix(0.172414, 0, 0, 0.172414, 0, 0)" id="svg_16">
+     <title>background</title>
+     <rect x="-1471.562607" y="2960.47298" width="582" height="402" id="svg_25" fill="none"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
