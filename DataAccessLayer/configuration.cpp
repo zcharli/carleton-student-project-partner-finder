@@ -1,4 +1,5 @@
 #include "configuration.h"
+#include <QJsonObject>
 
 Configuration::Configuration(ConfigurationType type, int value) :
     type(type), value(value)
@@ -32,4 +33,18 @@ Configuration* Configuration::DefaultConfigurations()
         configs[i] = Configuration();
 
     return configs;
+}
+
+bool Configuration::serializeJSONForSave(QJsonObject& configJSON)
+{
+    configJSON["type"] = (int)type;
+    configJSON["value"] = value;
+    return true;
+}
+
+bool Configuration::deserializeJSONFromRetrieve(const QJsonObject& configJSON)
+{
+    type = (ConfigurationType) (configJSON.value("type").toInt());
+    value = configJSON.value("value").toInt();
+    return true;
 }

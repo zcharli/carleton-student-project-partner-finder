@@ -6,21 +6,24 @@
 #include <QVector>
 #include <QString>
 #include <QSet>
+#include "imappable.h"
 
 //forward declarations
 class Configuration;
 class ProjectPartnerProfile;
+class QJsonObject;
 
-class Project
+class Project : private IMappable
 {
     Configuration *projectConfigurations;
-    QSet<int> registeredPPPs;
+    QSet<ProjectPartnerProfile> registeredPPPs;
     int numberOfRegisteredUsers;
     QString title;
     QString description;
     int id;
 
 public:
+    Project();
     Project(QString, QString);
     ~Project();
 
@@ -61,6 +64,13 @@ public:
      *      @return: void
      */
     void registerPPP(ProjectPartnerProfile&);
+
+    /*!
+     *       @param: pppList: QVector<ProjectPartnerProfile*>&
+     *        @desc: returns the list of PPPs that are registered into the project
+     *      @return: void
+     */
+    void getRegisteredPPPs(QVector<ProjectPartnerProfile*>&);
 
     /*!
      *       @param: profileToUnregister: ProjectPartnerProfile&
@@ -124,7 +134,36 @@ public:
      *        @desc: adds the ppp to the collection of profiles for this project
      *      @return: none
      */
-    void addPPPtoProject(ProjectPartnerProfile*);
+    void addPPPtoProject(ProjectPartnerProfile&);
+
+    /*!
+     *       @param: empty Json Object: QJsonObject&
+     *        @desc: serializes the object implementing into JSON
+     *      @return: success or failure: bool
+     */
+    virtual bool serializeJSONForSave(QJsonObject&);
+
+    /*!
+     *       @param: objectToDeSerialize: QJsonObject&
+     *        @desc: deserializes the JSON object to create the object back
+     *      @return: success or failure: bool
+     */
+    virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
+
+    /*!
+     *       @param: Json objectToSerialize: QJsonObject&, projectList: QVector<Project&>&
+     *        @desc: serializes the list of projects into a JSON object
+     *      @return: success or failure: bool
+     */
+    static bool serializeJSONFromCollection(QJsonObject&, const QVector<Project*>&);
+
+    /*!
+     *       @param: Json objectToDeSerialize: QJsonObject&, projectList to fill: QVector<Project&>&
+     *        @desc: deserializes JSON object into a list of projects
+     *      @return: success or failure: bool
+     */
+    static bool deserializeJSONFromCollection(const QJsonObject&, QVector<Project*>&);
+
 };
 
 #endif // PROJECT_H

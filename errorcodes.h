@@ -1,7 +1,16 @@
 #ifndef ERRORCODES_H
 #define ERRORCODES_H
 
-#define SUCCESS 0
-
+enum DatabaseReturnMessage {
+    SUCCESS = 0,
+    NO_PPP_ID,
+    NO_USER_ID,
+    NO_PROJECT_ID,
+    NO_USERNAME,
+    NO_REGISTERED_STUDENTS,
+    NO_USER_TYPE,
+    DATABASE_QUERY_ERROR,
+    UNKNOWN_ERROR
+};
 
 #endif // ERRORCODES_H

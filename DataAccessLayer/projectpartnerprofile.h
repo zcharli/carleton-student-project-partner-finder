@@ -2,6 +2,8 @@
 #define PROJECTPARTNERPROFILE_H
 
 #include "qualification.h"
+#include "imappable.h"
+
 #include <QString>
 
 /** Abstract class!!!!
@@ -14,7 +16,7 @@
 //forward declarations
 class StudentUser;
 
-class ProjectPartnerProfile
+class ProjectPartnerProfile : private IMappable
 {
 protected:
     StudentUser& user;
@@ -44,14 +46,14 @@ public:
      *        @desc: changes the value of the given qualification
      *      @return: void
      */
-    virtual void changeQualification(Qualification) = 0;
+    virtual void changeQualification(Qualification);
 
     /*!
      *       @param: qualificationIndex: int
      *        @desc: gets the given qualification for the specified index
      *      @return: Qualification
      */
-    virtual Qualification getQualification(int) = 0;
+    virtual Qualification getQualification(int);
     /****************************************************************************/
 
     /*!
@@ -66,7 +68,14 @@ public:
      *        @desc: get the project partner id
      *      @return: pppID: int
      */
-     int getPPPID();
+    int getPPPID() const;
+
+    /*!
+     *       @param: none
+     *        @desc: get the project partner id
+     *      @return: pppID: int
+     */
+    int getPPPID();
 
     /*!
      *       @param: ppp id: int
@@ -120,6 +129,52 @@ public:
      */
      void setTeammateTechnicalScore(int);
 
+    /*!
+     *       @param: none
+     *        @desc: uses the static Qualification class to update the
+     *               technical scores
+     *      @return: none
+     */
+    void updateProfileScores();
+
+    /*!
+     *       @param: empty Json Object: QJsonObject&
+     *        @desc: serializes the object implementing into JSON
+     *      @return: success or failure: bool
+     */
+    virtual bool serializeJSONForSave(QJsonObject&);
+
+    /*!
+     *       @param: objectToDeSerialize: QJsonObject&
+     *        @desc: deserializes the the JSON object to create the object back
+     *      @return: success or failure: bool
+     */
+    virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
+
+//    /*!
+//     *       @param: Json objectToSerialize: QJsonObject&, projectList: QSet<ProjectPartnerProfile&>&
+//     *        @desc: serializes the list of ProjectPartnerProfile into a JSON object
+//     *      @return: success or failure: bool
+//     */
+//    static bool serializeJSONFromCollection(QJsonObject&, const QVector<ProjectPartnerProfile*>&);
+
+//    /*!
+//     *       @param: Json objectToDeSerialize: QJsonObject&, projectList to fill: QSet<ProjectPartnerProfile&>&
+//     *        @desc: deserializes JSON object into a list of ProjectPartnerProfile
+//     *      @return: success or failure: bool
+//     */
+//    static bool deserializeJSONFromCollection(const QJsonObject&, QVector<ProjectPartnerProfile*>&);
+
 };
+
+inline bool operator==(const ProjectPartnerProfile& e1, const ProjectPartnerProfile& e2)
+{
+    return e1.getPPPID() == e2.getPPPID();
+}
+
+inline uint qHash(const ProjectPartnerProfile& key, uint seed)
+{
+    return qHash(key.getPPPID(), seed);
+}
 
 #endif // PROJECTPARTNERPROFILE_H

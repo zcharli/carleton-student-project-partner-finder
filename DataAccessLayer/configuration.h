@@ -3,13 +3,15 @@
 
 #define NUMBER_OF_CONFIGURATIONS 1
 
+#include "imappable.h"
+
 enum ConfigurationType
 {
     TeamSize = 0,
     NoType
 };
 
-class Configuration
+class Configuration : private IMappable
 {
     ConfigurationType type;
     int value;
@@ -53,6 +55,20 @@ public:
      *      @return: bool
      */
     bool isUsed();
+    
+    /*!
+     *       @param: empty Json Object: QJsonObject&
+     *        @desc: serializes the object implementing into JSON
+     *      @return: success or failure: bool
+     */
+    virtual bool serializeJSONForSave(QJsonObject&);
+
+    /*!
+     *       @param: objectToDeSerialize: QJsonObject&
+     *        @desc: deserializes the the JSON object to create the object back
+     *      @return: success or failure: bool
+     */
+    virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
 };
 
 #endif // CONFIGURATION_H

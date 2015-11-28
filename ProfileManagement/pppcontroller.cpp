@@ -94,49 +94,49 @@ void PPPController::setupUIForState(ProfileState state)
 
     switch(state)
     {
-        case Viewing:
-            //choose which main view to display
-            profileView->getUI().noProfileView->setHidden(true);
-            profileView->getUI().myProfileWidget->setHidden(false);
+    case Viewing:
+        //choose which main view to display
+        profileView->getUI().noProfileView->setHidden(true);
+        profileView->getUI().myProfileWidget->setHidden(false);
 
-            //hide all other buttons except edit
-            profileView->getUI().btnSave->setHidden(true);
-            profileView->getUI().btnEditPPP->setHidden(false);
-            profileView->getUI().btnCreatePPP->setHidden(true);
-            populateProfileView();
+        //hide all other buttons except edit
+        profileView->getUI().btnSave->setHidden(true);
+        profileView->getUI().btnEditPPP->setHidden(false);
+        profileView->getUI().btnCreatePPP->setHidden(true);
+        populateProfileView();
 
-            //disableAllInteractions
-            enableInteractions(false);
-            break;
-        case Editing:
-            //choose which main view to display
-            profileView->getUI().noProfileView->setHidden(true);
-            profileView->getUI().myProfileWidget->setHidden(false);
+        //disableAllInteractions
+        enableInteractions(false);
+        break;
+    case Editing:
+        //choose which main view to display
+        profileView->getUI().noProfileView->setHidden(true);
+        profileView->getUI().myProfileWidget->setHidden(false);
 
-            //hide all other buttons except save
-            profileView->getUI().btnSave->setHidden(false);
-            profileView->getUI().btnEditPPP->setHidden(true);
-            profileView->getUI().btnCreatePPP->setHidden(true);
-            populateProfileView();
+        //hide all other buttons except save
+        profileView->getUI().btnSave->setHidden(false);
+        profileView->getUI().btnEditPPP->setHidden(true);
+        profileView->getUI().btnCreatePPP->setHidden(true);
+        populateProfileView();
 
-            //disableAllInteractions
-            enableInteractions(true);
-            break;
-        case NoProfile:
-            //choose which main view to display
-            profileView->getUI().noProfileView->setHidden(false);
-            profileView->getUI().myProfileWidget->setHidden(true);
+        //disableAllInteractions
+        enableInteractions(true);
+        break;
+    case NoProfile:
+        //choose which main view to display
+        profileView->getUI().noProfileView->setHidden(false);
+        profileView->getUI().myProfileWidget->setHidden(true);
 
-            //hide all other buttons except save
-            profileView->getUI().btnSave->setHidden(true);
-            profileView->getUI().btnEditPPP->setHidden(true);
-            profileView->getUI().btnCreatePPP->setHidden(false);
+        //hide all other buttons except save
+        profileView->getUI().btnSave->setHidden(true);
+        profileView->getUI().btnEditPPP->setHidden(true);
+        profileView->getUI().btnCreatePPP->setHidden(false);
 
-            //enableAllInteractions
-            enableInteractions(true);
-            break;
-        default:
-            break;
+        //enableAllInteractions
+        enableInteractions(true);
+        break;
+    default:
+        break;
     }
 
 }
@@ -168,38 +168,38 @@ void PPPController::populateProfileView()
 
             switch(i)
             {
-                case dependableBit:
-                    isChecked = profile->hasWorkEthic(dependableBit);
-                    currentChkBox = profileView->getUI().chkDependable;
-                    break;
-                case organizedBit:
-                    isChecked = profile->hasWorkEthic(organizedBit);
-                    currentChkBox = profileView->getUI().chkOrganized;
-                    break;
-                case proactiveBit:
-                    isChecked = profile->hasWorkEthic(proactiveBit);
-                    currentChkBox = profileView->getUI().chkProactive;
-                    break;
-                case efficientBit:
-                    isChecked = profile->hasWorkEthic(efficientBit);
-                    currentChkBox = profileView->getUI().chkEfficient;
-                    break;
-                case humorBit:
-                    isChecked = profile->hasWorkEthic(humorBit);
-                    currentChkBox = profileView->getUI().chkHumour;
-                    break;
-                case impulsiveBit:
-                    isChecked = profile->hasWorkEthic(impulsiveBit);
-                    currentChkBox = profileView->getUI().chkImpulsive;
-                    break;
-                case flexibleBit:
-                    isChecked = profile->hasWorkEthic(flexibleBit);
-                    currentChkBox = profileView->getUI().chkFlexible;
-                    break;
-                case hardworkingBit:
-                    isChecked = profile->hasWorkEthic(hardworkingBit);
-                    currentChkBox = profileView->getUI().chkHardworking;
-                    break;
+            case dependableBit:
+                isChecked = profile->hasWorkEthic(dependableBit);
+                currentChkBox = profileView->getUI().chkDependable;
+                break;
+            case organizedBit:
+                isChecked = profile->hasWorkEthic(organizedBit);
+                currentChkBox = profileView->getUI().chkOrganized;
+                break;
+            case proactiveBit:
+                isChecked = profile->hasWorkEthic(proactiveBit);
+                currentChkBox = profileView->getUI().chkProactive;
+                break;
+            case efficientBit:
+                isChecked = profile->hasWorkEthic(efficientBit);
+                currentChkBox = profileView->getUI().chkEfficient;
+                break;
+            case humorBit:
+                isChecked = profile->hasWorkEthic(humorBit);
+                currentChkBox = profileView->getUI().chkHumour;
+                break;
+            case impulsiveBit:
+                isChecked = profile->hasWorkEthic(impulsiveBit);
+                currentChkBox = profileView->getUI().chkImpulsive;
+                break;
+            case flexibleBit:
+                isChecked = profile->hasWorkEthic(flexibleBit);
+                currentChkBox = profileView->getUI().chkFlexible;
+                break;
+            case hardworkingBit:
+                isChecked = profile->hasWorkEthic(hardworkingBit);
+                currentChkBox = profileView->getUI().chkHardworking;
+                break;
             }
 
             currentChkBox->setChecked(isChecked);
@@ -303,7 +303,7 @@ void PPPController::savePPP()
         //updated PPP
         if(DataAccessFacade::managedDataAccess().execute(updatedPPP, *user, *profile) == 0)
         {
-             // UPDATE SUCCESSFUL MESSAGE
+            // UPDATE SUCCESSFUL MESSAGE
             QMessageBox messageBox;
             messageBox.information(0,"Success","We've just successfully updated your profile!");
             messageBox.setFixedSize(500,200);
@@ -356,30 +356,30 @@ void PPPController::updatePPP()
 
             switch(i)
             {
-                case dependableBit:
-                    isChecked = profileView->getUI().chkDependable->isChecked();
-                    break;
-                case organizedBit:
-                    isChecked = profileView->getUI().chkOrganized->isChecked();
-                    break;
-                case proactiveBit:
-                    isChecked = profileView->getUI().chkProactive->isChecked();
-                    break;
-                case efficientBit:
-                    isChecked = profileView->getUI().chkEfficient->isChecked();
-                    break;
-                case humorBit:
-                    isChecked = profileView->getUI().chkHumour->isChecked();
-                    break;
-                case impulsiveBit:
-                    isChecked = profileView->getUI().chkImpulsive->isChecked();
-                    break;
-                case flexibleBit:
-                    isChecked = profileView->getUI().chkFlexible->isChecked();
-                    break;
-                case hardworkingBit:
-                    isChecked = profileView->getUI().chkHardworking->isChecked();
-                    break;
+            case dependableBit:
+                isChecked = profileView->getUI().chkDependable->isChecked();
+                break;
+            case organizedBit:
+                isChecked = profileView->getUI().chkOrganized->isChecked();
+                break;
+            case proactiveBit:
+                isChecked = profileView->getUI().chkProactive->isChecked();
+                break;
+            case efficientBit:
+                isChecked = profileView->getUI().chkEfficient->isChecked();
+                break;
+            case humorBit:
+                isChecked = profileView->getUI().chkHumour->isChecked();
+                break;
+            case impulsiveBit:
+                isChecked = profileView->getUI().chkImpulsive->isChecked();
+                break;
+            case flexibleBit:
+                isChecked = profileView->getUI().chkFlexible->isChecked();
+                break;
+            case hardworkingBit:
+                isChecked = profileView->getUI().chkHardworking->isChecked();
+                break;
             }
 
             workEthics[i] = isChecked ? 1 : 0;
@@ -399,5 +399,7 @@ void PPPController::updatePPP()
         profile->changeQualification(Qualification(teamMateNetworkComputing, profileView->sliderTeammateNetworkComputing->getValue()));
         profile->changeQualification(Qualification(teamMateVersionControl, profileView->sliderTeammateVersionControl->getValue()));
         profile->changeQualification(Qualification(teamMateWebDevelopment, profileView->sliderTeammateWebDevelopment->getValue()));
+
+        profile->updateProfileScores();
     }
 }

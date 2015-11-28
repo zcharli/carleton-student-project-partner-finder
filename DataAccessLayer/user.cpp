@@ -2,9 +2,18 @@
 
 User::User(QString& firstName, QString& lastName, QString& userName)
 {
-  this->firstName = firstName;
-  this->lastName = lastName;
-  this->userName = userName;
+    this->firstName = firstName;
+    this->lastName = lastName;
+    this->userName = userName;
+    this->id = 0;
+}
+
+User::User()
+{
+
+  this->firstName = "";
+  this->lastName = "";
+  this->userName = "";
   this->id = 0;
 }
 
@@ -15,32 +24,32 @@ User::~User()
 
 QString& User::getFirstName()
 {
-  return firstName;
+    return firstName;
 }
 
 QString& User::getLastName()
 {
-  return lastName;
+    return lastName;
 }
 
 QString& User::getUserName()
 {
-  return userName;
+    return userName;
 }
 
 void User::setFirstName(QString& newFirstName)
 {
-  firstName = newFirstName;
+    firstName = newFirstName;
 }
 
 void User::setLastName(QString& newLastName)
 {
-  lastName = newLastName;
+    lastName = newLastName;
 }
 
 void User::setUserName(QString& newUserName)
 {
-  userName = newUserName;
+    userName = newUserName;
 }
 
 void User::setUserId(int newID)

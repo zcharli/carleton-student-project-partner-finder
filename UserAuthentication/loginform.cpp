@@ -59,7 +59,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
     QString  lastname = "";
     int            id = -1;
 
-//##########################################################################################################
+    //##########################################################################################################
     /*  Debug flow  Username: Leonidas will get you through login   */
     if(username.compare(QString(DEBUG_USER)) == 0)
     {
@@ -69,6 +69,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
 
         switch(type)
         {
+
             case Administrator:
                 (*currentUser) = new AdministratorUser(firstname, lastname, username);
                 break;
@@ -83,7 +84,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
         return;
     }
 
-//##########################################################################################################
+    //##########################################################################################################
 
     if(username == "")
     {

@@ -50,7 +50,7 @@ QPushButton:hover, #sideBar QPushButton:hover {
 
 
 /* Main Widget */
-#centralwidget{ background-image:url(../cuPID/Images/background-blur.jpg); }
+#centralwidget{ background-image:url(../cupid/Images/background-blur.jpg); }
 
 
 
@@ -68,8 +68,8 @@ QPushButton:hover, #sideBar QPushButton:hover {
 
 
 /* cuPID Logo Images set to a QLabel */
-#lblLogo{ background-image:url(../cuPID/Images/arrow-white-2.svg); }
-#lblheader { background-image:url(../cuPID/Images/arrow-black-2.svg); }
+#lblLogo{ background-image:url(../cupid/Images/arrow-white-2.svg); }
+#lblheader { background-image:url(../cupid/Images/arrow-black-2.svg); }
 
 /* cuPID Logo End */
 

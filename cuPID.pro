@@ -41,10 +41,10 @@ SOURCES += \
     settingswidget.cpp \
     cupidwindow.cpp \
     homewidget.cpp \
+    Repository/dataaccessdispatcher.cpp \
     AlgorithmExecution/insomniamatchingalgorithm.cpp \
     AlgorithmExecution/matchreportview.cpp \
     AlgorithmExecution/team.cpp
-
 
 
 HEADERS  += \
@@ -61,6 +61,7 @@ HEADERS  += \
     DataAccessLayer/qualification.h \
     DataAccessLayer/project.h \
     DataAccessLayer/configuration.h \
+    DataAccessLayer/imappable.h \
     UserAuthentication/signupform.h \
     UserAuthentication/loginform.h \
     ProjectManagement/createprojectwidget.h \
@@ -76,6 +77,7 @@ HEADERS  += \
     settingswidget.h \
     cupidwindow.h \
     homewidget.h \
+    Repository/dataaccessdispatcher.h \
     AlgorithmExecution/insomniamatchingalgorithm.h \
     AlgorithmExecution/matchreportview.h \
     AlgorithmExecution/team.h
