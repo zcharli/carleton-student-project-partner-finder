@@ -1,4 +1,4 @@
-/* Button Styling*/
+/* Button Styling
 QPushButton, QPushButton *{
     border:none;
     padding:10 10 10 10;
@@ -7,52 +7,101 @@ QPushButton, QPushButton *{
     width:100%;
 }
 #sideBar{
-    color:white;
+    color:black;
 }
 
-QPushButton:hover {
-    background-color: #fc000d;
+QPushButton:hover, #sideBar QPushButton:hover {
+    background-color: #99B0E5;
     color:white;
 }
 
 #sideBar{
-    border-radius: 5px;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
     background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
-                                        stop:0 #840b11, stop:1  #c0010b);
+                                        stop:0 #6482C7, stop:1  #02788E);
 }
 
-#centralwidget{
-    border: 1px solid #978b88;
-    background-image:url(../cupid/Images/background.jpg);
-}
-#mainContentStackedWidget *{
- color:white;
+#centralwidget {
+  border: 1px solid #978b88;
+  background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
+                                      stop:0 #E6E0FA, stop:1  #ffffff);
 }
 
 #sideBar QPushButton, #sideBar QLabel {
-    color: white;
+    color: black;
 }
 
+
+#LoginForm QPushButton:hover{
+    background-color: #729399;
+}
+*/
+
+
+/* Sidebar */
+#sideBar {
+    color:white;
+    background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
+                                        stop:0 #840b11, stop:1  #c0010b);
+}
+#sideBar QPushButton, #sideBar QLabel { color: white; }
+/* Sidebar End */
+
+
+/* Main Widget */
+#centralwidget{ background-image:url(../cupid/Images/background-blur.jpg); }
+
+
+/* Content Widget */
+#mainContentStackedWidget QLabel, #mainContentStackedWidget QPushButton{ color:white; }
+#mainContentStackedWidget { background: rgba(0, 0, 0, 60%);}
+/* Content Widget End */
+
+
+/* Login Widget */
 #LoginForm QLabel {
-background:transparent;
-color:black;
+    background:transparent;
+    color:black;
+} /* Login Widget End */
+
+
+/* cuPID Logo Images set to a QLabel */
+#lblLogo{ background-image:url(../cupid/Images/arrow-white-2.svg); }
+#lblheader { background-image:url(../cupid/Images/arrow-black-2.svg); }
+/* cuPID Logo End */
+
+/* Formatting for all QT Elements */
+
+/* All Widgets */
+QWidget *{ background:transparent; }
+
+/* Label */
+QLabel{ margin:0 10 0 10; }
+
+/* Button */
+QPushButton, QPushButton *{
+    border:none;
+    padding:10 10 10 10;
+    font-family: "Sans Serif", Times, serif;
+    outline:0;
+    width:100%;
 }
-
-
-QTabWidget::pane { /* The tab widget frame */
-    border-top: 2px solid transparent;
+QPushButton:hover {
+    background-color: #550000;
+    color:white;
 }
+/* Button End */
 
-/* Style the tab using the tab sub-control. Note that
-    it reads QTabBar _not_ QTabWidget */
+/* QTabbedWidget Configurations */
+QTabWidget::pane { border-top: 2px solid transparent; }
 QTabBar::tab {
     background: transparent;
-
+    color: white;
 }
-QWidget *{background:transparent;}
-
-#mainContentStackedWidget {
-    background: rgba(0, 0, 0, 50%);
-    border-bottom-right-radius:20px;
-    border-top-right-radius:20px;
+QTabBar::tab:selected {
+    color: grey;
 }
+/* QTabbedWidget End */
+
+/* Formatting End */

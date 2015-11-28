@@ -17,9 +17,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui(new Ui::cuPIDWindow)
 {
     ui->setupUi(this);
-
     pppController = NULL;
-
     // Initialize side bar widget (child of left pane)
     ui->sideBar->layout()->addWidget(&projectSidebar);
     projectSidebar.show();
@@ -87,7 +85,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 void cuPIDWindow::viewWillAppear()
 {
     this->setFixedSize(WINDOW_MAX_WIDTH, WINDOW_MAX_HEIGHT);
-    ui->txtWelcome->setText("<h1>Welcome " + CupidSession::getInstance()->getCurrentUser()->getUserName() + "</h1>");
+
 
     /*  configure Sidebar options based on user     */
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
@@ -121,14 +119,12 @@ void cuPIDWindow::viewWillDisappear()
     //show all hidden elements
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
     sideBarUi->btnDiscoverProjects->show();
-    sideBarUi->dividerDiscoverProject->show();
+    //sideBarUi->dividerDiscoverProject->show();
     sideBarUi->btnProfile->show();
-    sideBarUi->dividerProfile->show();
+    //sideBarUi->dividerProfile->show();
     sideBarUi->btnCreateProject->show();
-    sideBarUi->dividerCreateProject->show();
+    //sideBarUi->dividerCreateProject->show();
 
-    //TODO: restore user back to home screen.
-    ui->txtWelcome->show();
 }
 
 void cuPIDWindow::acceptUserLogin()

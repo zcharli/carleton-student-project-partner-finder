@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>673</width>
-    <height>341</height>
+    <height>591</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,6 +17,21 @@
    <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QLabel" name="lblLogo">
      <property name="sizePolicy">
@@ -25,26 +40,110 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>200</height>
+      </size>
+     </property>
      <property name="maximumSize">
       <size>
        <width>700</width>
        <height>16777215</height>
       </size>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>65</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true"/>
      </property>
-     <property name="text">
-      <string/>
+     <property name="lineWidth">
+      <number>0</number>
      </property>
-     <property name="pixmap">
-      <pixmap resource="Images/Images.qrc">:/Images/Drawing.png/logo2.svg</pixmap>
+     <property name="text">
+      <string>cuPID</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignHCenter|Qt::AlignTop</set>
+     </property>
+     <property name="margin">
+      <number>40</number>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblAdmin">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>As an administrator, you can Create a new project as well as view your created projects.
+
+</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblStudent">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>As a student, you can view projects as well 
+as manage your Project Partner Profile, PPP for short.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblSelect">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Please select one of the following:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnCreateProject">
+     <property name="text">
+      <string>CREATE PROJECT</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnDiscoverProjects">
+     <property name="text">
+      <string>DISCOVER PROJECTS</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnManageProjectPartnerProfile">
+     <property name="text">
+      <string>MANAGE PROJECT PARTNER PROFILE</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnEditSettings">
+     <property name="text">
+      <string>EDIT SETTINGS</string>
      </property>
     </widget>
    </item>
@@ -58,9 +157,10 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>14</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <kerning>false</kerning>
       </font>
      </property>
      <property name="lineWidth">
@@ -70,83 +170,12 @@
       <string>Brought to you by the Insomnia Team©</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblAdmin">
-     <property name="text">
-      <string>As an administrator, you can Create a new project as well as view your created projects.
-
-</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblStudent">
-     <property name="text">
-      <string>As a student, you can view projects as well as manage your Project Partner Profile, PPP for short.
-
-</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblSelect">
-     <property name="text">
-      <string>Please select one of the following:</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="Line" name="line">
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <property name="lineWidth">
-      <number>5</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="btnCreateProject">
-     <property name="text">
-      <string>Create Project</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="btnDiscoverProjects">
-     <property name="text">
-      <string>Discover Projects</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="btnManageProjectPartnerProfile">
-     <property name="text">
-      <string>Manage Project Partner Profile</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="btnEditSettings">
-     <property name="text">
-      <string>Edit Settings</string>
+      <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="Images/Images.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
