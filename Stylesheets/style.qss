@@ -1,0 +1,58 @@
+/* Button Styling*/
+QPushButton, QPushButton *{
+    border:none;
+    padding:10 10 10 10;
+    font-family: "Sans Serif", Times, serif;
+    outline:0;
+    width:100%;
+}
+#sideBar{
+    color:white;
+}
+
+QPushButton:hover {
+    background-color: #fc000d;
+    color:white;
+}
+
+#sideBar{
+    border-radius: 5px;
+    background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
+                                        stop:0 #840b11, stop:1  #c0010b);
+}
+
+#centralwidget{
+    border: 1px solid #978b88;
+    background-image:url(../cupid/Images/background.jpg);
+}
+#mainContentStackedWidget *{
+ color:white;
+}
+
+#sideBar QPushButton, #sideBar QLabel {
+    color: white;
+}
+
+#LoginForm QLabel {
+background:transparent;
+color:black;
+}
+
+
+QTabWidget::pane { /* The tab widget frame */
+    border-top: 2px solid transparent;
+}
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+    background: transparent;
+
+}
+QWidget *{background:transparent;}
+
+#mainContentStackedWidget {
+    background: rgba(0, 0, 0, 50%);
+    border-bottom-right-radius:20px;
+    border-top-right-radius:20px;
+}

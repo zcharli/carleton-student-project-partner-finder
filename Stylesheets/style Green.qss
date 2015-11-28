@@ -1,0 +1,31 @@
+/* Button Styling*/
+QPushButton, QPushButton *{
+    border:none;
+    color: #112d24;
+    padding:10 10 10 10;
+    font-family: "Sans Serif", Times, serif;
+    outline:0;
+    width:100%;
+}
+#sideBar{
+    color:white;
+}
+
+QPushButton:hover {
+    background-color: #008358;
+    color:white;
+}
+
+#sideBar{
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color: qlineargradient(spread:pad, x1:0 y1:0, x2:1 y2:0, stop:0 #2c352d, stop:1  #3c5a3f);
+}
+
+#centralwidget {
+  border: 1px solid #978b88;
+  background: white;
+}
+#sideBar QPushButton, #sideBar QLabel {
+    color: white;
+}
