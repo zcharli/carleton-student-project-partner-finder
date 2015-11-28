@@ -2,9 +2,8 @@
 #include "ui_createprojectwidget.h"
 
 //  Subsystem dependencies
-#include "Repository/storage.h"
+#include "DataAccessLayer/dataaccessfacade.h"
 #include "DataAccessLayer/user.h"
-#include "DataAccessLayer/cupidsession.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -66,11 +65,11 @@ void CreateProjectWidget::saveNewProject()
     project->changeConfiguration(Configuration(TeamSize, sizeConfiguration));
 
     //Save project to database
-    User *user = CupidSession::getInstance()->getCurrentUser();
-    QVector<Project*> projects;
-    projects.append(project);
+    User *user = DataAccessFacade::managedDataAccess().getCurrentUser();
+    //QVector<Project*> projects;
+    //projects.append(project);
 
-    if (Storage::defaultStorage().executeActionForProject(createdProject, *user, projects) != 0)
+    if (DataAccessFacade::managedDataAccess().execute(createdProject, *user, project) != 0)
     {
         // Error occurred
         qDebug() << "Save failed";
@@ -85,7 +84,7 @@ void CreateProjectWidget::saveNewProject()
         // Save successfule
         //  Should transiotion user to viewing newly created Prject
         qDebug() << "Save Successful";
-        CupidSession::getInstance()->setCurrentProject(project);
+        DataAccessFacade::managedDataAccess().setCurrentProject(project);
         QMessageBox messageBox;
         messageBox.information(0,"Success","Your project has been successfully created, students can now join");
         messageBox.setFixedSize(500,200);

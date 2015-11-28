@@ -4,7 +4,7 @@
 // Subsystem dependencies
 #include "DataAccessLayer/administratoruser.h"
 #include "DataAccessLayer/studentuser.h"
-#include "DataAccessLayer/cupidsession.h"
+#include "DataAccessLayer/dataaccessfacade.h"
 #include "DataAccessLayer/qualification.h"
 
 #include <QLayout>
@@ -87,14 +87,14 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 void cuPIDWindow::viewWillAppear()
 {
     this->setFixedSize(WINDOW_MAX_WIDTH, WINDOW_MAX_HEIGHT);
-    ui->txtWelcome->setText("<h1>Welcome " + CupidSession::getInstance()->getCurrentUser()->getUserName() + "</h1>");
+    ui->txtWelcome->setText("<h1>Welcome " + DataAccessFacade::managedDataAccess().getCurrentUser()->getUserName() + "</h1>");
 
     /*  configure Sidebar options based on user     */
     Ui::SideBarWidget *sideBarUi = projectSidebar.getUI();
-    sideBarUi->lblUsername->setText(CupidSession::getInstance()->getCurrentUser()->getFirstName() + " " +CupidSession::getInstance()->getCurrentUser()->getLastName());
+    sideBarUi->lblUsername->setText(DataAccessFacade::managedDataAccess().getCurrentUser()->getFirstName() + " " +DataAccessFacade::managedDataAccess().getCurrentUser()->getLastName());
 
     //  check what kind of user we are
-    if (dynamic_cast<AdministratorUser *>(CupidSession::getInstance()->getCurrentUser()))
+    if (dynamic_cast<AdministratorUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
     {
         sideBarUi->btnDiscoverProjects->hide();
         sideBarUi->dividerDiscoverProject->hide();
@@ -102,7 +102,7 @@ void cuPIDWindow::viewWillAppear()
         sideBarUi->dividerProfile->hide();
         homeWidget.setAdmin();
     }
-    else if (dynamic_cast<StudentUser *>(CupidSession::getInstance()->getCurrentUser()))
+    else if (dynamic_cast<StudentUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
     {
         sideBarUi->btnCreateProject->hide();
         sideBarUi->dividerCreateProject->hide();
@@ -112,8 +112,8 @@ void cuPIDWindow::viewWillAppear()
 
 void cuPIDWindow::viewWillDisappear()
 {
-    CupidSession::getInstance()->deleteCurrentUser();
-    CupidSession::getInstance()->deleteCurrentProject();
+    //DataAccessFacade::managedDataAccess().deleteCurrentUser();
+    //DataAccessFacade::managedDataAccess().deleteCurrentProject();
 
     delete pppController;
     pppController = NULL;
@@ -128,7 +128,7 @@ void cuPIDWindow::viewWillDisappear()
     sideBarUi->dividerCreateProject->show();
 
     //TODO: restore user back to home screen.
-    ui->txtWelcome->show();
+    ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
 }
 
 void cuPIDWindow::acceptUserLogin()
@@ -141,7 +141,6 @@ void cuPIDWindow::logCurrentUserOut()
 {
     viewWillDisappear();
     hide();
-    ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
     emit userLoggedOut();
 }
 

@@ -2,7 +2,6 @@
 
 // Subsystem dependencies
 #include "UserAuthentication/loginform.h"
-
 #include <QApplication>
 
 int main(int argc, char *argv[])
