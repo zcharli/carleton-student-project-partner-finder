@@ -31,7 +31,7 @@
 #define QUALIFICATIONS_KEY "qualifications"
 #define CONFIGURATIONS_KEY "configurations"
 #define COUNT_KEY "count"
-#define PPP_KEY "PPP"
+#define PPP_KEY "ppp"
 #define FLOATING_USR_ID "user_id"
 #define FLOATING_PRJ_ID "project_id"
 #define GENERIC_OBJ_ID "id"

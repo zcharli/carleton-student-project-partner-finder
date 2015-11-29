@@ -25,6 +25,13 @@ public:
     int fetchPPPForUser(QJsonObject&, int);
 
     /*!
+     *       @param: user: QJsonObject&, user id: int
+     *        @desc: handles the database actions necessary for retrieving partial (no qualifations) PPP for a User
+     *      @return: success or failure: bool
+     */
+    int fetchPartialPPP(QJsonObject& user, int pppId);
+
+    /*!
      *       @param: user: QJsonObject&
      *        @desc: handles the database actions necessary for when a user updates his/her ppp
      *      @return: success or failure: bool

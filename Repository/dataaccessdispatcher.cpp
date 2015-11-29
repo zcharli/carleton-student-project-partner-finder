@@ -112,6 +112,7 @@ int DataAccessDispatcher::retrieveUserWithUsername(QJsonObject& inUserOutUser)
     }
     return SUCCESS;
 }
+
 int DataAccessDispatcher::retrievePPPForUser(QJsonObject& inUserOutPPP)
 {
     int pppId;
@@ -127,6 +128,23 @@ int DataAccessDispatcher::retrievePPPForUser(QJsonObject& inUserOutPPP)
     }
     return SUCCESS;
 }
+
+int DataAccessDispatcher::retrievePartialPPPForUser(QJsonObject& inUserOutPPP)
+{
+    int pppId;
+
+    if((pppId = getPPPIdFromJson(inUserOutPPP)) == 0)
+    {
+        return NO_PPP_ID;
+    }
+
+    if(repoUser->fetchPartialPPP(inUserOutPPP, pppId) != SUCCESS)
+    {
+        return DATABASE_QUERY_ERROR;
+    }
+    return SUCCESS;
+}
+
 
 int DataAccessDispatcher::userCreatedPPP(QJsonObject& inUserinPPP)
 {

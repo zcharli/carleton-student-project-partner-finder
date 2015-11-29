@@ -27,7 +27,7 @@ UserRepository::~UserRepository() {}
 
 int UserRepository::userCreatedPPP(QJsonObject& user, int userId)
 {
-    //QJsonObject userJSON = user[USER_userType].toObject();
+    //QJsonObject userJSON = user[USER_KEY].toObject();
     QJsonObject pppJSON = user[PPP_KEY].toObject();
     QJsonArray qualificationArrayJSON = pppJSON[QUALIFICATIONS_KEY].toArray();
     qDebug() << qualificationArrayJSON.size();
@@ -97,8 +97,6 @@ int UserRepository::userCreatedPPP(QJsonObject& user, int userId)
 
 int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId)
 {
-    QJsonObject userJSON = user[USER_userType].toObject();
-
     QJsonObject pppJSON;
     QJsonArray qualificationArrayJSON;
 
@@ -136,14 +134,81 @@ int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId)
     }
     //success
     pppJSON[QUALIFICATIONS_KEY] = qualificationArrayJSON;
+
+    QString fetchPPPProxyQuery = "select we_bs, teammate_tech_score, personal_tech_score from ppp where ppp_id=:pppid";
+    QSqlQuery fetchPPPProxy(this->db);
+    fetchPPPProxy.prepare(fetchPPPProxyQuery);
+    fetchPPPProxy.bindValue(":pppid",pppId);
+    if(fetchPPPProxy.exec())
+    {
+        if(fetchPPPProxy.next())
+        {
+            // Indexes
+            //  0 -> web_bs
+            //  1 -> teammate_tech_score
+            //  2 -> personal_tech_score
+
+            char workEthic = (char)fetchPPPProxy.value(0).toInt();
+            int teamScore = fetchPPPProxy.value(1).toInt();
+            int personalScore = fetchPPPProxy.value(2).toInt();
+
+            pppJSON[PPP_personalTechnicalScore] = personalScore;
+            pppJSON[PPP_teammateTechnicalScore] = teamScore;
+            pppJSON[PPP_workEthic] = workEthic;
+        }
+    }
+    else
+    {
+        qDebug() << "fetchPPPProxy error:  "<< fetchPPPProxy.lastError();
+        return fetchPPPProxy.lastError().number();
+    }
+
     user[PPP_KEY] = pppJSON;
 
     return 0;
 }
 
+int UserRepository::fetchPartialPPP(QJsonObject& user, int pppId)
+{
+    QJsonObject pppJSON;
+
+    pppJSON[PPP_pppID] = pppId;
+
+    QString fetchPPPProxyQuery = "select we_bs, teammate_tech_score, personal_tech_score from ppp where ppp_id=:pppid";
+    QSqlQuery fetchPPPProxy(this->db);
+    fetchPPPProxy.prepare(fetchPPPProxyQuery);
+    fetchPPPProxy.bindValue(":pppid",pppId);
+    if(fetchPPPProxy.exec())
+    {
+        if(fetchPPPProxy.next())
+        {
+            // Indexes
+            //  0 -> web_bs
+            //  1 -> teammate_tech_score
+            //  2 -> personal_tech_score
+
+            char workEthic = (char)fetchPPPProxy.value(0).toInt();
+            int teamScore = fetchPPPProxy.value(1).toInt();
+            int personalScore = fetchPPPProxy.value(2).toInt();
+
+            pppJSON[PPP_personalTechnicalScore] = personalScore;
+            pppJSON[PPP_teammateTechnicalScore] = teamScore;
+            pppJSON[PPP_workEthic] = workEthic;
+        }
+    }
+    else
+    {
+        qDebug() << "fetchPPPProxy error:  "<< fetchPPPProxy.lastError();
+        return fetchPPPProxy.lastError().number();
+    }
+
+    user[PPP_KEY] = pppJSON;
+    return 0;
+}
+
 int UserRepository::userUpdatedPPP(QJsonObject& user)
 {
-    QJsonObject userJSON = user[USER_userType].toObject();
+    QJsonObject userJSON = user[USER_KEY].toObject();
     if(!userJSON.contains(PPP_KEY))
     {
         return -1;
