@@ -172,14 +172,8 @@ int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId, bool full)
     return 0;
 }
 
-int UserRepository::userUpdatedPPP(QJsonObject& user)
+int UserRepository::userUpdatedPPP(QJsonObject& pppJSON)
 {
-    QJsonObject userJSON = user[USER_KEY].toObject();
-    if(!userJSON.contains(PPP_KEY))
-    {
-        return -1;
-    }
-    QJsonObject pppJSON = userJSON[PPP_KEY].toObject();
     if(!pppJSON.contains(QUALIFICATIONS_KEY))
     {
         return -1;
@@ -199,6 +193,19 @@ int UserRepository::userUpdatedPPP(QJsonObject& user)
             qDebug() << "userUpdatedPPP error:  "<< updatePPPQuery.lastError();
             return updatePPPQuery.lastError().number();
         }
+    }
+
+    QString updatePPPScore = "update ppp set we_bs=:wb,teammate_tech_score=:ts,personal_tech_score=ps where ppp_id=:pppid";
+    QSqlQuery updatePPPScoreQuery(this->db);
+    updatePPPScoreQuery.prepare(updatePPPScore);
+    updatePPPScoreQuery.bindValue(":pppid",pppJSON[PPP_pppID].toInt());
+    updatePPPScoreQuery.bindValue(":wb", pppJSON[PPP_workEthic].toInt());
+    updatePPPScoreQuery.bindValue(":ts", pppJSON[PPP_teammateTechnicalScore].toInt());
+    updatePPPScoreQuery.bindValue(":ps", pppJSON[PPP_personalTechnicalScore].toInt());
+    if(!updatePPPScoreQuery.exec())
+    {
+        qDebug() << "fetchPPPProxy error:  "<< updatePPPScoreQuery.lastError();
+        return updatePPPScoreQuery.lastError().number();
     }
 
     // Successful
