@@ -10,7 +10,7 @@
 #include <QSqlError>
 #
 
-#define NUMBER_OF_CONFIGURATIONS_KEY 1
+#define NUMBER_OF_CONFIGURATIONS 1
 
 ProjectRepository::ProjectRepository(QSqlDatabase& db)
 {
@@ -59,11 +59,11 @@ int ProjectRepository::userCreatedProject(QJsonObject& projectToInsert, int user
 
     // Insert CONFIGURATIONS_KEY
     int i;
-    for(i=0;i<NUMBER_OF_CONFIGURATIONS_KEY;++i)
+    for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
     {
         qDebug() << projectConfigs[i].toObject()[CONFIGURATION_value].toInt();
         // Maybe not all CONFIGURATIONS_KEY are set
-        QString insertConfigurationQuery = "Insert into project_CONFIGURATIONS_KEY (config_id,project_id,value) values (:cid, :pid, :val)";
+        QString insertConfigurationQuery = "Insert into project_configurations (config_id,project_id,value) values (:cid, :pid, :val)";
         QSqlQuery insertConfiguration(this->db);
         insertConfiguration.prepare(insertConfigurationQuery);
         insertConfiguration.bindValue(":cid", i + 1);
@@ -119,10 +119,10 @@ int ProjectRepository::userUpdatedProject(QJsonObject& projectToUpdate, int user
 
     // Update all CONFIGURATIONS_KEY
     int i;
-    for(i=0;i<NUMBER_OF_CONFIGURATIONS_KEY;++i)
+    for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
     {
 
-        QString updateProjConfigQuery = "Update project_CONFIGURATIONS_KEY set value=:val where config_id=:cid and project_id=:pid";
+        QString updateProjConfigQuery = "Update project_configurations set value=:val where config_id=:cid and project_id=:pid";
         QSqlQuery updateProjConfig(this->db);
         updateProjConfig.prepare(updateProjConfigQuery);
         updateProjConfig.bindValue(":val", projectConfigs[i].toObject()[CONFIGURATION_value].toInt());
@@ -194,9 +194,9 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
             }
 
             // As there may be more than one CONFIGURATIONS_KEY per project, we need to do a seperate query :(
-            QString fetchProjectCONFIGURATIONS_KEYQuery = "Select config_id, value from project_CONFIGURATIONS_KEY where project_id=:pid";
+            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
             QSqlQuery fetchProjectConfiguration(this->db);
-            fetchProjectConfiguration.prepare(fetchProjectCONFIGURATIONS_KEYQuery);
+            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
             fetchProjectConfiguration.bindValue(":pid",projectId);
             if(fetchProjectConfiguration.exec())
             {
@@ -280,9 +280,9 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
             }
 
             // As there may be more than one CONFIGURATIONS_KEY per project, we need to do a seperate query :(
-            QString fetchProjectCONFIGURATIONS_KEYQuery = "Select config_id, value from project_CONFIGURATIONS_KEY where project_id=:pid";
+            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
             QSqlQuery fetchProjectConfiguration(this->db);
-            fetchProjectConfiguration.prepare(fetchProjectCONFIGURATIONS_KEYQuery);
+            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
             fetchProjectConfiguration.bindValue(":pid",projectId);
             if(fetchProjectConfiguration.exec())
             {
@@ -369,9 +369,9 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
             }
 
             // As there may be more than one CONFIGURATIONS_KEY per project, we need to do a seperate query :(
-            QString fetchProjectCONFIGURATIONS_KEYQuery = "Select config_id, value from project_CONFIGURATIONS_KEY where project_id=:pid";
+            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
             QSqlQuery fetchProjectConfiguration(this->db);
-            fetchProjectConfiguration.prepare(fetchProjectCONFIGURATIONS_KEYQuery);
+            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
             fetchProjectConfiguration.bindValue(":pid",projectId);
             if(fetchProjectConfiguration.exec())
             {
