@@ -48,6 +48,13 @@ public:
      */
     int retrievePPPsForProject(QJsonObject&);
 
+    /*!  @input: single mappable user object: QJsonObject&
+     *    @desc: retreives partially the user's PPPs from the database
+     *           and builds a maps to represent the objects returned
+     *  @output: status: int (success or failure)
+     */
+    int retrievePartialPPPForUser(QJsonObject&);
+
     /*!  @input: single object with username: QJsonObject&
      *    @desc: retreives all PPPs registered to this project from the database
      *           and builds a maps to represent the objects returned
