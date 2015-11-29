@@ -103,15 +103,6 @@ HEADERS  += \
     settingswidget.h \
     cupidwindow.h \
     homewidget.h \
-<<<<<<< HEAD
-=======
-    Repository/dataaccessdispatcher.h \
-    AlgorithmExecution/insomniamatchingalgorithm.h \
-    AlgorithmExecution/matchreportview.h \
-    AlgorithmExecution/team.h \
-    DataAccessLayer/mapconfigs.h \
-    ProfileManagement/codingwidget.h \
->>>>>>> master
     highlighter.h
 
 FORMS    += \

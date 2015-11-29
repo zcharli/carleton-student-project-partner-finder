@@ -46,12 +46,9 @@ private:
     SettingsWidget settingsWidget;
     HomeWidget homeWidget;
     CodingWidget code;
-<<<<<<< HEAD
 
     //ProjectManagement
 
-=======
->>>>>>> master
 
     //Other views to be managed by the window
     ProjectDetailsView projectDetailsWidget;
