@@ -51,7 +51,7 @@ int DataAccessDispatcher::retrieveProjectUsingID(QJsonObject& inProjectOutProjec
 
     return SUCCESS;
 }
-int DataAccessDispatcher::retrieveProjectsForUser(QJsonObject& inUserOutProjects, int limit = 0)
+int DataAccessDispatcher::retrieveProjectsForUser(QJsonObject& inUserOutProjects, int limit)
 {
     int userId;
 
@@ -112,7 +112,8 @@ int DataAccessDispatcher::retrieveUserWithUsername(QJsonObject& inUserOutUser)
     }
     return SUCCESS;
 }
-int DataAccessDispatcher::retrievePPPForUser(QJsonObject& inUserOutPPP)
+
+int DataAccessDispatcher::retrievePPPForUser(QJsonObject& inUserOutPPP, bool full)
 {
     int pppId;
 
@@ -121,7 +122,7 @@ int DataAccessDispatcher::retrievePPPForUser(QJsonObject& inUserOutPPP)
         return NO_PPP_ID;
     }
 
-    if(repoUser->fetchPPPForUser(inUserOutPPP, pppId) != SUCCESS)
+    if(repoUser->fetchPPPForUser(inUserOutPPP, pppId, full) != SUCCESS)
     {
         return DATABASE_QUERY_ERROR;
     }

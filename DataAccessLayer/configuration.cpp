@@ -42,14 +42,14 @@ Configuration* Configuration::DefaultConfigurations()
 
 bool Configuration::serializeJSONForSave(QJsonObject& configJSON)
 {
-    configJSON[CONFIURATION_type] = (int)type;
-    configJSON[CONFIURATION_value] = value;
+    configJSON[CONFIGURATION_type] = (int)type;
+    configJSON[CONFIGURATION_value] = value;
     return true;
 }
 
 bool Configuration::deserializeJSONFromRetrieve(const QJsonObject& configJSON)
 {
-    type = (ConfigurationType) (configJSON.value(CONFIURATION_type).toInt());
-    value = configJSON.value(CONFIURATION_value).toInt();
+    type = (ConfigurationType) (configJSON.value(CONFIGURATION_type).toInt());
+    value = configJSON.value(CONFIGURATION_value).toInt();
     return true;
 }

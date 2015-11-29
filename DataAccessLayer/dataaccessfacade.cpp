@@ -116,6 +116,7 @@ int DataAccessFacade::execute(ActionType action, User& user, ProjectPartnerProfi
     int successStatus = SUCCESS;
     QJsonObject profileJson;
     profile.serializeJSONForSave(profileJson);
+    profileJson[FLOATING_USR_ID] = user.getUserId();
     switch (action)
     {
         case createdPPP:

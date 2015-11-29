@@ -1,6 +1,7 @@
 #include "projectpartnerprofilereal.h"
 #include "DataAccessLayer/mapconfigs.h"
 #include <QJsonArray>
+#include <QDebug>
 
 ProjectPartnerProfileReal::ProjectPartnerProfileReal(StudentUser& user, int pscore, int tscore, unsigned char we, Qualification* qualifications):
 ProjectPartnerProfile(user, pscore, tscore, we, qualifications)
@@ -89,7 +90,7 @@ bool ProjectPartnerProfileReal::deserializeJSONFromRetrieve(const QJsonObject& p
     {
         personalTechnicalScore = pppJSON[PPP_personalTechnicalScore].toInt();
         teammateTechnicalScore = pppJSON[PPP_teammateTechnicalScore].toInt();
-        workEthic = (unsigned char)pppJSON[""].toInt();
+        workEthic = (unsigned char)pppJSON[PPP_workEthic].toInt();
     }
 
     if(pppJSON.contains(QUALIFICATIONS_KEY))

@@ -16,6 +16,7 @@
 #include "ProjectManagement/createprojectmanagerfactory.h"
 #include "ProjectManagement/projectdetailsmanagerfactory.h"
 #include "ProjectManagement/projectlistmanagerfactory.h"
+#include "ProfileManagement/codingwidget.h"
 
 #include <QMainWindow>
 
@@ -43,6 +44,7 @@ private:
     ProjectListView projectsWidget;
     SettingsWidget settingsWidget;
     HomeWidget homeWidget;
+    CodingWidget code;
 
     //ProjectManagement
 

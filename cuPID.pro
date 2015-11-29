@@ -37,6 +37,7 @@ SOURCES += \
     ProfileManagement/profilewidget.cpp \
     ProfileManagement/cupidslider.cpp \
     ProfileManagement/pppcontroller.cpp \
+    ProfileManagement/codingwidget.cpp \
     ProjectManagement/projectlistmanagerfactory.cpp \
     ProjectManagement/abstractprojectmanagerfactory.cpp \
     ProjectManagement/projectdetailsmanagerfactory.cpp \
@@ -53,7 +54,8 @@ SOURCES += \
     sidebarwidget.cpp \
     settingswidget.cpp \
     cupidwindow.cpp \
-    homewidget.cpp
+    homewidget.cpp \
+    highlighter.cpp
 
 
 HEADERS  += \
@@ -83,6 +85,7 @@ HEADERS  += \
     ProfileManagement/profilewidget.h \
     ProfileManagement/cupidslider.h \
     ProfileManagement/pppcontroller.h \
+    ProfileManagement/codingwidget.h \
     ProjectManagement/projectlistmanagerfactory.h \
     ProjectManagement/abstractprojectmanagerfactory.h \
     ProjectManagement/projectdetailsmanagerfactory.h \
@@ -99,7 +102,8 @@ HEADERS  += \
     sidebarwidget.h \
     settingswidget.h \
     cupidwindow.h \
-    homewidget.h
+    homewidget.h \
+    highlighter.h
 
 FORMS    += \
     UserAuthentication/loginform.ui \
@@ -112,7 +116,8 @@ FORMS    += \
     cupidwindow.ui \
     settingswidget.ui \
     sidebarwidget.ui \
-    homewidget.ui
+    homewidget.ui \
+    ProfileManagement/codingwidget.ui
 
 RESOURCES += \
     stylesheet.qrc

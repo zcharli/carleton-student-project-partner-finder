@@ -39,7 +39,7 @@ public:
      *           this user and builds a maps to represent the objects returned
      *  @output: status: int (success or failure)
      */
-    int retrieveProjectsForUser(QJsonObject&,int);
+    int retrieveProjectsForUser(QJsonObject&,int=0);
 
     /*!  @input: single project mappable object with id: QJsonObject&, limitOfProjects: int
      *    @desc: retreives all PPPs registered to this project from the database
@@ -60,7 +60,7 @@ public:
      *           and builds a maps to represent the objects returned
      *  @output: status: int (success or failure)
      */
-    int retrievePPPForUser(QJsonObject&);
+    int retrievePPPForUser(QJsonObject&,bool=false);
 
     /*!
      *  Data Storage Services

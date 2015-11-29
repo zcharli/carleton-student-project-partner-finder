@@ -20,8 +20,8 @@
 #define PPP_workEthic "workEthic"
 #define PPP_teammateTechnicalScore "teammateTechnicalScore"
 #define PPP_qualifications "qualifications"
-#define CONFIURATION_type "type"
-#define CONFIURATION_value "value"
+#define CONFIGURATION_type "type"
+#define CONFIGURATION_value "value"
 #define QUALIFICATION_type "type"
 #define QUALIFICATION_value "value"
 
