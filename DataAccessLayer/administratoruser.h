@@ -7,12 +7,14 @@
 
 //forward declarations
 class Project;
+class QJsonObject;
 
 class AdministratorUser : public User
 {
 
 public:
     AdministratorUser(QString&, QString&, QString&);
+    AdministratorUser(const QJsonObject&);
     virtual ~AdministratorUser();
 
     //accessor functions

@@ -1,7 +1,8 @@
 #include "studentuser.h"
 #include "projectpartnerprofile.h"
 #include "project.h"
-
+#include "mapconfigs.h"
+#include "dataaccessfacade.h"
 
 StudentUser::StudentUser(QString& fName, QString& lName, QString& userName):
     User(fName, lName, userName)
@@ -11,11 +12,12 @@ StudentUser::StudentUser(QString& fName, QString& lName, QString& userName):
     pppIDForFetch = 0;
 }
 
-StudentUser::StudentUser() : User()
+StudentUser::StudentUser(const QJsonObject& studentJSON)
 {
     profile = NULL;
     userType = Student;
     pppIDForFetch = 0;
+    deserializeJSONFromRetrieve(studentJSON);
 }
 
 StudentUser::~StudentUser()
@@ -64,24 +66,24 @@ bool StudentUser::serializeJSONForSave(QJsonObject& userJSON)
     int i;
     if(id != 0)
     {
-        userJSON["id"] = id;
+        userJSON[USER_id] = id;
     }
 
     if(pppIDForFetch != 0)
     {
-        userJSON["pppIDForFetch"] = pppIDForFetch;
+        userJSON[STUDENT_pppIDForFetch] = pppIDForFetch;
     }
 
-    userJSON["firstName"] = firstName;
-    userJSON["lastName"] = lastName;
-    userJSON["userName"] = userName;
-    userJSON["userType"] = (int)userType;
+    userJSON[USER_firstName] = firstName;
+    userJSON[USER_lastName] = lastName;
+    userJSON[USER_userName] = userName;
+    userJSON[USER_userType] = (int)userType;
 
     if(profile != NULL)
     {
         QJsonObject pppJSON;
         profile->serializeJSONForSave(pppJSON);
-        userJSON["ppp"] = pppJSON;
+        userJSON[STUDENT_ppp] = pppJSON;
     }
 
     return true;
@@ -91,26 +93,27 @@ bool StudentUser::serializeJSONForSave(QJsonObject& userJSON)
 bool StudentUser::deserializeJSONFromRetrieve(const QJsonObject& userJSON)
 {
     int i;
-    id = userJSON["id"].toInt();
-    firstName = userJSON["firstName"].toString();
-    lastName = userJSON["lastName"].toString();
-    userName = userJSON["userName"].toString();
+    id = userJSON[USER_id].toInt();
+    firstName = userJSON[USER_firstName].toString();
+    lastName = userJSON[USER_lastName].toString();
+    userName = userJSON[USER_userName].toString();
 
-    userType = (UserType)userJSON["userType"].toInt();
-    if(userJSON.contains("pppIDForFetch"))
+    userType = (UserType)userJSON[USER_userType].toInt();
+    if(userJSON.contains(STUDENT_pppIDForFetch))
     {
-        pppIDForFetch = userJSON["pppIDForFetch"].toInt();
+        pppIDForFetch = userJSON[STUDENT_pppIDForFetch].toInt();
     }
 
-    if(userJSON.contains("ppp"))
+    if(userJSON.contains(STUDENT_ppp))
     {
-//        // Note that this call to the
-//        if(profile == NULL)
-//        {
-//            profile = new ProjectPartnerProfile(*this);
-//        }
-//        QJsonObject ppp = userJSON["ppp"].toObject();
-//        profile->deserializeJSONFromRetrieve(ppp);
+       // Note that this call to the
+       if(profile == NULL)
+       {
+            profile = DataAccessFacade::defaultProfile(*this);
+           //profile = new ProjectPartnerProfile(*this);
+       }
+       QJsonObject ppp = userJSON[STUDENT_ppp].toObject();
+       profile->deserializeJSONFromRetrieve(ppp);
     }
 
     return true;

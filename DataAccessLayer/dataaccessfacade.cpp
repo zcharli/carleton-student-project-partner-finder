@@ -1,6 +1,7 @@
 #include "dataaccessfacade.h"
 #include "studentuser.h"
 #include "administratoruser.h"
+#include "DataAccessLayer/mapconfigs.h"
 
 #include <QDebug>
 
@@ -143,10 +144,11 @@ int DataAccessFacade::execute(ActionType action, User& user, Project* project)
     int successStatus = SUCCESS;
     QJsonObject inUserIDInProjectJson;
     QJsonObject userJson;
-    project->serializeJSONForSave(inUserIDInProjectJson);
+    QJsonObject projectJson;
+    project->serializeJSONForSave(projectJson);
     user.serializeJSONForSave(userJson);
-    inUserIDInProjectJson["user"] = userJson;
-    qDebug() << inUserIDInProjectJson["user"].toString();
+    inUserIDInProjectJson[USER_KEY] = userJson;
+    inUserIDInProjectJson[PROJECT_KEY] = projectJson;
     switch(action)
     {
         case createdProject:
@@ -171,7 +173,7 @@ int DataAccessFacade::execute(ActionType action, User& user, Project* project)
             successStatus = INVALID_ACTION;
     }
     if (successStatus == SUCCESS)
-        project->deserializeJSONFromRetrieve(inUserIDInProjectJson);
+        project->deserializeJSONFromRetrieve(inUserIDInProjectJson[PROJECT_KEY].toObject());
 
     return successStatus;
 }

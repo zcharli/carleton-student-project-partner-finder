@@ -2,6 +2,8 @@
 #include "dataaccessfacade.h"
 #include <QJsonObject>
 #include "errorcodes.h"
+#include <QJsonObject>
+#include "DataAccessLayer/mapconfigs.h"
 
 ProjectPartnerProfileProxy::ProjectPartnerProfileProxy(StudentUser& user, int pScore, int tScore, unsigned char we):
 ProjectPartnerProfile(user, pScore, tScore, we, NULL)
@@ -17,7 +19,6 @@ ProjectPartnerProfileProxy::~ProjectPartnerProfileProxy()
         delete ppp;
 }
 
-
 ProjectPartnerProfileReal& ProjectPartnerProfileProxy::loadPPP()
 {
     if (ppp == NULL)
@@ -30,8 +31,9 @@ ProjectPartnerProfileReal& ProjectPartnerProfileProxy::loadPPP()
         ppp->serializeJSONForSave(realPPPJson);
         SUCCESS_STATUS = DataAccessFacade::managedDataAccess().getDispatcher().retrievePPPForUser(realPPPJson);
         if(SUCCESS_STATUS == SUCCESS)
-            ppp->deserializeJSONFromRetrieve(realPPPJson["ppp"].toObject());
-
+        {
+            ppp->deserializeJSONFromRetrieve(realPPPJson[PPP_K].toObject());
+        }
     }
 
     return *ppp;
@@ -59,4 +61,15 @@ void ProjectPartnerProfileProxy::updateProfileScores()
     this->workEthic = loadPPP().getWorkEthicByte();
     this->personalTechnicalScore = loadPPP().getPersonalTechnicalScore();
     this->teammateTechnicalScore = loadPPP().getTeammateTechnicalScore();
+}
+
+bool ProjectPartnerProfileProxy::serializeJSONForSave(QJsonObject& pppJSON)
+{
+    return loadPPP().serializeJSONForSave(pppJSON);
+}
+
+
+bool ProjectPartnerProfileProxy::deserializeJSONFromRetrieve(const QJsonObject& pppJSON)
+{
+    return loadPPP().deserializeJSONFromRetrieve(pppJSON);
 }

@@ -33,10 +33,18 @@ SOURCES += \
     ProjectManagement/createprojectwidget.cpp \
     ProjectManagement/editteamconfigurationsdialog.cpp \
     ProjectManagement/projectcellwidget.cpp \
-    ProjectManagement/projectlistview.cpp \
+    ProjectManagement/projectlistwidget.cpp \
     ProfileManagement/profilewidget.cpp \
     ProfileManagement/cupidslider.cpp \
     ProfileManagement/pppcontroller.cpp \
+    AlgorithmExecution/insomniamatchingalgorithm.cpp \
+    AlgorithmExecution/matchreportview.cpp \
+    AlgorithmExecution/team.cpp \
+    main.cpp \
+    sidebarwidget.cpp \
+    settingswidget.cpp \
+    cupidwindow.cpp \
+    homewidget.cpp \
     ProjectManagement/projectlistmanagerfactory.cpp \
     ProjectManagement/abstractprojectmanagerfactory.cpp \
     ProjectManagement/projectdetailsmanagerfactory.cpp \
@@ -45,15 +53,7 @@ SOURCES += \
     ProjectManagement/projectlistcontroller.cpp \
     ProjectManagement/projectdetailscontroller.cpp \
     ProjectManagement/createprojectcontroller.cpp \
-    ProjectManagement/abstractprojectview.cpp \
-    AlgorithmExecution/insomniamatchingalgorithm.cpp \
-    AlgorithmExecution/matchreportview.cpp \
-    AlgorithmExecution/team.cpp \
-    main.cpp \
-    sidebarwidget.cpp \
-    settingswidget.cpp \
-    cupidwindow.cpp \
-    homewidget.cpp
+    ProjectManagement/abstractprojectview.cpp
 
 
 HEADERS  += \
@@ -72,17 +72,24 @@ HEADERS  += \
     DataAccessLayer/project.h \
     DataAccessLayer/configuration.h \
     DataAccessLayer/imappable.h \
-    DataAccessLayer/mapconfigs.h \
     UserAuthentication/signupform.h \
     UserAuthentication/loginform.h \
     ProjectManagement/createprojectwidget.h \
     ProjectManagement/editteamconfigurationsdialog.h \
     ProjectManagement/projectcellwidget.h \
-    ProjectManagement/projectlistview.h \
+    ProjectManagement/projectlistwidget.h \
     ProjectManagement/projectdetailsview.h \
     ProfileManagement/profilewidget.h \
     ProfileManagement/cupidslider.h \
     ProfileManagement/pppcontroller.h \
+    AlgorithmExecution/insomniamatchingalgorithm.h \
+    AlgorithmExecution/matchreportview.h \
+    AlgorithmExecution/team.h \
+    errorcodes.h \
+    sidebarwidget.h \
+    settingswidget.h \
+    cupidwindow.h \
+    homewidget.h \
     ProjectManagement/projectlistmanagerfactory.h \
     ProjectManagement/abstractprojectmanagerfactory.h \
     ProjectManagement/projectdetailsmanagerfactory.h \
@@ -92,14 +99,8 @@ HEADERS  += \
     ProjectManagement/projectdetailscontroller.h \
     ProjectManagement/createprojectcontroller.h \
     ProjectManagement/abstractprojectview.h \
-    AlgorithmExecution/insomniamatchingalgorithm.h \
-    AlgorithmExecution/matchreportview.h \
-    AlgorithmExecution/team.h \
-    errorcodes.h \
-    sidebarwidget.h \
-    settingswidget.h \
-    cupidwindow.h \
-    homewidget.h
+    ProjectManagement/projectlistview.h
+
 
 FORMS    += \
     UserAuthentication/loginform.ui \

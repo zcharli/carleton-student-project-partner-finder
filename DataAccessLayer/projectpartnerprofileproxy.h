@@ -4,6 +4,8 @@
 #include "projectpartnerprofile.h"
 #include "projectpartnerprofilereal.h"
 
+class QJsoneObject;
+
 class ProjectPartnerProfileProxy : public ProjectPartnerProfile
 {
     ProjectPartnerProfileReal *ppp;
@@ -42,6 +44,20 @@ public:
      *      @return: none
      */
     virtual void updateProfileScores();
+
+    /*!
+     *       @param: empty Json Object: QJsonObject&
+     *        @desc: serializes the object implementing into JSON
+     *      @return: success or failure: bool
+     */
+    virtual bool serializeJSONForSave(QJsonObject&);
+
+    /*!
+     *       @param: objectToDeSerialize: QJsonObject&
+     *        @desc: deserializes the the JSON object to create the object back
+     *      @return: success or failure: bool
+     */
+    virtual bool deserializeJSONFromRetrieve(const QJsonObject&);
 };
 
 #endif // PROJECTPARTNERPROFILEPROXY_H

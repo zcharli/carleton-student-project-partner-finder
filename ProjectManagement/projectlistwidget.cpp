@@ -6,8 +6,7 @@
 
 #include <QDebug>
 
-ProjectListView::ProjectListView(QWidget *parent) :
-    AbstractProjectView(parent)
+ProjectListWidget::ProjectListWidget(QWidget *parent) : AbstractProjectView(parent)
 {
     projectCells = NULL;
     items = NULL;
@@ -18,23 +17,23 @@ ProjectListView::ProjectListView(QWidget *parent) :
     scrollArea.setLayout(new QHBoxLayout);
     viewWillAppear();
 }
-ProjectListView::~ProjectListView()
+ProjectListWidget::~ProjectListWidget()
 {
     cleanUpList();
 }
 
-void ProjectListView::viewWillAppear()
+void ProjectListWidget::viewWillAppear()
 {
     setUpList();
 }
 
-void ProjectListView::viewWillDisappear()
+void ProjectListWidget::viewWillDisappear()
 {
     listType = noList;
     cleanUpList();
 }
 
-void ProjectListView::cleanUpList()
+void ProjectListWidget::cleanUpList()
 {
 
     if(projectList.size() != 0)
@@ -63,7 +62,7 @@ void ProjectListView::cleanUpList()
 
 }
 
-void ProjectListView::setUpList()
+void ProjectListWidget::setUpList()
 {
     /* Clean up first */
     cleanUpList();
@@ -89,7 +88,7 @@ void ProjectListView::setUpList()
     }
 }
 
-void ProjectListView::displayList()
+void ProjectListWidget::displayList()
 {
     /*
      * creates a widget with all of the projects in it as projectCellWidgets
@@ -121,7 +120,7 @@ void ProjectListView::displayList()
 
 }
 
-void ProjectListView::viewProjectSelected(int index)
+void ProjectListWidget::viewProjectSelected(int index)
 {
     DataAccessFacade::managedDataAccess().deleteCurrentProject();
     DataAccessFacade::managedDataAccess().setCurrentProject(projectList[index]);
@@ -129,7 +128,7 @@ void ProjectListView::viewProjectSelected(int index)
     viewWillDisappear();
 }
 
-void ProjectListView::handleUserContextSwitch(DetailViewType type)
+void ProjectListWidget::handleUserContextSwitch(DetailViewType type)
 {
     if (type == DiscoverProjets)
     {

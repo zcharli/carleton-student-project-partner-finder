@@ -15,6 +15,7 @@
 
 //forward declarations
 class StudentUser;
+class QJsonObject;
 
 class ProjectPartnerProfile : private IMappable
 {
@@ -28,7 +29,8 @@ protected:
 
 public:
     ProjectPartnerProfile(StudentUser&,int,int,unsigned char, Qualification*);
-
+    ProjectPartnerProfile(StudentUser&, const QJsonObject&);
+    
     virtual ~ProjectPartnerProfile();
 
     //accessor Functions

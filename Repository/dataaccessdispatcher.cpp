@@ -2,7 +2,7 @@
 #include "userrepository.h"
 #include "projectrepository.h"
 #include "databasemanager.h"
-
+#include "DataAccessLayer/mapconfigs.h"
 #include "errorcodes.h"
 #include <QJsonObject>
 #include <QDebug>
@@ -51,7 +51,7 @@ int DataAccessDispatcher::retrieveProjectUsingID(QJsonObject& inProjectOutProjec
 
     return SUCCESS;
 }
-int DataAccessDispatcher::retrieveProjectsForUser(QJsonObject& inUserOutProjects)
+int DataAccessDispatcher::retrieveProjectsForUser(QJsonObject& inUserOutProjects, int limit = 0)
 {
     int userId;
 
@@ -60,7 +60,7 @@ int DataAccessDispatcher::retrieveProjectsForUser(QJsonObject& inUserOutProjects
         return NO_USER_ID;
     }
 
-    if(repoProject->fetchProjectsForUser(inUserOutProjects, userId) != SUCCESS)
+    if(repoProject->fetchProjectsForUser(inUserOutProjects, userId, limit) != SUCCESS)
     {
         return DATABASE_QUERY_ERROR;
     }
@@ -86,25 +86,25 @@ int DataAccessDispatcher::retrieveUserWithUsername(QJsonObject& inUserOutUser)
 {
     QString userName;
     int type;
-    if(inUserOutUser.contains("userName"))
+    if(inUserOutUser.contains(USER_userName))
     {
-        userName = inUserOutUser.value("userName").toString();
+        userName = inUserOutUser.value(USER_userName).toString();
     }
-    else if(inUserOutUser.contains("user"))
+    else if(inUserOutUser.contains(USER_KEY))
     {
-        userName = inUserOutUser["user"].toObject()["userName"].toString();
+        userName = inUserOutUser[USER_KEY].toObject()[USER_userName].toString();
     }
     else
     {
         return NO_USERNAME;
     }
 
-    if(!inUserOutUser.contains("userType"))
+    if(!inUserOutUser.contains(USER_userType))
     {
         return NO_USER_TYPE;
     }
 
-    type = inUserOutUser["userType"].toInt();
+    type = inUserOutUser[USER_userType].toInt();
 
     if(repoUser->retrieveUserWithUsername(inUserOutUser, userName, type) != SUCCESS)
     {
@@ -206,7 +206,7 @@ int DataAccessDispatcher::userRegisteredInProject(QJsonObject& inProjectinUser)
     int userId;
     int projectId;
 
-    if(!inProjectinUser.contains("project") || !inProjectinUser.contains("user") ||
+    if(!inProjectinUser.contains(PROJECT_KEY) || !inProjectinUser.contains(USER_KEY) ||
             ((projectId = getProjectIdFromJson(inProjectinUser)) == 0) ||
             ((userId = getUserIdFromJson(inProjectinUser)) == 0))
     {
@@ -226,16 +226,16 @@ int DataAccessDispatcher::userUnRegisteredInProject(QJsonObject& inProjectinUser
     int userId;
     int projectId;
 
-    if(!inProjectinUser.contains("project") ||
+    if(!inProjectinUser.contains(PROJECT_KEY) ||
             ((projectId = getProjectIdFromJson(inProjectinUser)) == 0) ||
             ((userId = getUserIdFromJson(inProjectinUser)) == 0))
     {
         return UNKNOWN_ERROR;
     }
 
-    QJsonObject project = inProjectinUser.value("project").toObject();
+    QJsonObject project = inProjectinUser.value(PROJECT_KEY).toObject();
 
-    if(project["numberOfRegisteredUsers"].toInt() == 0)
+    if(project[PROJECT_numberOfRegisteredUsers].toInt() == 0)
     {
         return NO_REGISTERED_STUDENTS;
     }
@@ -250,21 +250,21 @@ int DataAccessDispatcher::userUnRegisteredInProject(QJsonObject& inProjectinUser
 
 int DataAccessDispatcher::getUserIdFromJson(QJsonObject& json)
 {
-    if(json.contains("user_id"))
+    if(json.contains(FLOATING_USR_ID))
     {
-        return json.value("user_id").toInt();
+        return json.value(FLOATING_USR_ID).toInt();
     }
-    else if(json.contains("id"))
+    else if(json.contains(GENERIC_OBJ_ID))
     {
-        return json.value("id").toInt();
+        return json.value(GENERIC_OBJ_ID).toInt();
     }
-    else if(json.contains("user"))
+    else if(json.contains(USER_KEY))
     {
-        return json["user"].toObject()["id"].toInt();
+        return json[USER_KEY].toObject()[GENERIC_OBJ_ID].toInt();
     }
-    else if(json.contains("ppp"))
+    else if(json.contains(PPP_pppID))
     {
-        return json["ppp"].toObject()["user"].toObject()["id"].toInt();
+        return json[PPP_pppID].toObject()[USER_KEY].toObject()[GENERIC_OBJ_ID].toInt();
     }
     else
     {
@@ -274,17 +274,17 @@ int DataAccessDispatcher::getUserIdFromJson(QJsonObject& json)
 
 int DataAccessDispatcher::getProjectIdFromJson(QJsonObject& json)
 {
-    if(json.contains("project_id"))
+    if(json.contains(FLOATING_PRJ_ID))
     {
-        return json.value("project_id").toInt();
+        return json.value(FLOATING_PRJ_ID).toInt();
     }
-    else if(json.contains("id"))
+    else if(json.contains(GENERIC_OBJ_ID))
     {
-        return json.value("id").toInt();
+        return json.value(GENERIC_OBJ_ID).toInt();
     }
-    else if(json.contains("project"))
+    else if(json.contains(PROJECT_KEY))
     {
-        return json["project"].toObject()["id"].toInt();
+        return json[PROJECT_KEY].toObject()[GENERIC_OBJ_ID].toInt();
     }
     else
     {
@@ -294,21 +294,21 @@ int DataAccessDispatcher::getProjectIdFromJson(QJsonObject& json)
 
 int DataAccessDispatcher::getPPPIdFromJson(QJsonObject& json)
 {
-    if(json.contains("pppID"))
+    if(json.contains(PPP_pppID))
     {
-        return json.value("pppID").toInt();
+        return json.value(PPP_pppID).toInt();
     }
-    else if(json.contains("pppIDForFetch"))
+    else if(json.contains(STUDENT_pppIDForFetch))
     {
-        return json["pppIDForFetch"].toInt();
+        return json[STUDENT_pppIDForFetch].toInt();
     }
-    else if(json.contains("user"))
+    else if(json.contains(USER_KEY))
     {
-        return json["user"].toObject()["ppp"].toObject()["pppIDForFetch"].toInt();
+        return json[USER_KEY].toObject()[PPP_pppID].toObject()[STUDENT_pppIDForFetch].toInt();
     }
-    else if(json.contains("ppp"))
+    else if(json.contains(PPP_pppID))
     {
-        return json["ppp"].toObject()["pppIDForFetch"].toInt();
+        return json[PPP_pppID].toObject()[STUDENT_pppIDForFetch].toInt();
     }
     else
     {
