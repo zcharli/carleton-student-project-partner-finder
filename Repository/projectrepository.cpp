@@ -61,14 +61,14 @@ int ProjectRepository::userCreatedProject(QJsonObject& projectToInsert, int user
     int i;
     for(i=0;i<NUMBER_OF_CONFIGURATIONS_KEY;++i)
     {
-        qDebug() << projectConfigs[i].toObject()[CONFIURATION_value].toInt();
+        qDebug() << projectConfigs[i].toObject()[CONFIGURATION_value].toInt();
         // Maybe not all CONFIGURATIONS_KEY are set
         QString insertConfigurationQuery = "Insert into project_CONFIGURATIONS_KEY (config_id,project_id,value) values (:cid, :pid, :val)";
         QSqlQuery insertConfiguration(this->db);
         insertConfiguration.prepare(insertConfigurationQuery);
         insertConfiguration.bindValue(":cid",i + 1);
         insertConfiguration.bindValue(":pid", projectID);
-        insertConfiguration.bindValue(":val",projectConfigs[i].toObject()[CONFIURATION_value].toInt());
+        insertConfiguration.bindValue(":val",projectConfigs[i].toObject()[CONFIGURATION_value].toInt());
         if(!insertConfiguration.exec())
         {
             qDebug() << "insertConfiguration error:  "<< this->db.lastError();
@@ -125,7 +125,7 @@ int ProjectRepository::userUpdatedProject(QJsonObject& projectToUpdate, int user
         QString updateProjConfigQuery = "Update project_CONFIGURATIONS_KEY set value=:val where config_id=:cid and project_id=:pid";
         QSqlQuery updateProjConfig(this->db);
         updateProjConfig.prepare(updateProjConfigQuery);
-        updateProjConfig.bindValue(":val", projectConfigs[i].toObject()[CONFIURATION_value].toInt());
+        updateProjConfig.bindValue(":val", projectConfigs[i].toObject()[CONFIGURATION_value].toInt());
         updateProjConfig.bindValue(":cid",i + 1);
         updateProjConfig.bindValue(":pid",projectToSave[PROJECT_id].toString());
 
@@ -203,8 +203,8 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
                 while(fetchProjectConfiguration.next())
                 {
                     QJsonObject projectConfig;
-                    projectConfig[CONFIURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
-                    projectConfig[CONFIURATION_value] = fetchProjectConfiguration.value(1).toInt();
+                    projectConfig[CONFIGURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
+                    projectConfig[CONFIGURATION_value] = fetchProjectConfiguration.value(1).toInt();
                     projectConfigs.append(projectConfig);
                 }
                 project[CONFIGURATIONS_KEY] = projectConfigs;
@@ -289,8 +289,8 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
                 while(fetchProjectConfiguration.next())
                 {
                     QJsonObject projectConfig;
-                    projectConfig[CONFIURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
-                    projectConfig[CONFIURATION_value] = fetchProjectConfiguration.value(1).toInt();
+                    projectConfig[CONFIGURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
+                    projectConfig[CONFIGURATION_value] = fetchProjectConfiguration.value(1).toInt();
                     projectConfigs.append(projectConfig);
                 }
                 project[CONFIGURATIONS_KEY] = projectConfigs;
@@ -378,8 +378,8 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
                 while(fetchProjectConfiguration.next())
                 {
                     QJsonObject projectConfig;
-                    projectConfig[CONFIURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
-                    projectConfig[CONFIURATION_value] = fetchProjectConfiguration.value(1).toInt();
+                    projectConfig[CONFIGURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
+                    projectConfig[CONFIGURATION_value] = fetchProjectConfiguration.value(1).toInt();
                     projectConfigs.append(projectConfig);
                 }
                 project[CONFIGURATIONS_KEY] = projectConfigs;
