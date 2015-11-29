@@ -13,7 +13,7 @@
 #define PROJECT_title "title"
 #define PROJECT_description "description"
 #define PROJECT_numberOfRegisteredUsers "numberOfRegisteredUsers"
-#define PROJECT_configuration "configuration"
+#define PROJECT_configuration "configurations"
 #define PROJECT_ppp "ppp"
 #define PPP_pppID "pppID"
 #define PPP_personalTechnicalScore "personalTechnicalScore"

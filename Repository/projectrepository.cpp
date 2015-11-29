@@ -24,7 +24,7 @@ int ProjectRepository::userCreatedProject(QJsonObject& projectToInsert, int user
 {
     // Structure is projects -> List of projects
     QJsonObject projectToSave = projectToInsert[PROJECT_KEY].toObject();
-    QJsonArray projectConfigs = projectToSave[CONFIGURATIONS_KEY].toArray();
+    QJsonArray projectConfigs = projectToSave[PROJECT_configuration].toArray();
     // An Admin is "registered" to a project by the DB
     QString createProjectQuery = "Insert into project (project_title, project_description) values (:title,:desc)";
     QSqlQuery createProject(this->db);
@@ -66,7 +66,7 @@ int ProjectRepository::userCreatedProject(QJsonObject& projectToInsert, int user
         QString insertConfigurationQuery = "Insert into project_CONFIGURATIONS_KEY (config_id,project_id,value) values (:cid, :pid, :val)";
         QSqlQuery insertConfiguration(this->db);
         insertConfiguration.prepare(insertConfigurationQuery);
-        insertConfiguration.bindValue(":cid",i + 1);
+        insertConfiguration.bindValue(":cid", i + 1);
         insertConfiguration.bindValue(":pid", projectID);
         insertConfiguration.bindValue(":val",projectConfigs[i].toObject()[CONFIGURATION_value].toInt());
         if(!insertConfiguration.exec())
