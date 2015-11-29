@@ -29,3 +29,15 @@ Qualification ProjectPartnerProfileProxy::getQualification(int index)
 {
     return loadPPP().getQualification(index);
 }
+
+
+bool ProjectPartnerProfileProxy::serializeJSONForSave(QJsonObject& pppJSON)
+{
+    return loadPPP().serializeJSONForSave(pppJSON);
+}
+
+
+bool ProjectPartnerProfileProxy::deserializeJSONFromRetrieve(const QJsonObject& pppJSON)
+{
+    return loadPPP().deserializeJSONFromRetrieve(pppJSON);
+}

@@ -315,12 +315,17 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
     return 0;
 }
 
-int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int userId)
+int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int userId, int limit = 0)
 {
     QJsonArray projectsReturned;
 
     // Dump the projects that belong to a user
     QString fetchProjectsQuery = "Select p.project_id, p.project_title, p.project_description from project p join project_registration r on p.project_id=r.project_id where r.user_id=:uid";
+    if(limit > 0)
+    {
+        QString orderByDateLimitQuery = QString(" order by date(p.date_created) limit %1").arg(QString::number(limit));
+        fetchProjectsQuery += orderByDateLimitQuery;
+    }
     QSqlQuery fetchProject(this->db);
     fetchProject.prepare(fetchProjectsQuery);
     fetchProject.bindValue(":uid",userId);

@@ -44,10 +44,10 @@ public:
      *        @desc: handles the database actions necessary for fetching projects for the user
      *      @return: success or failure: bool
      */
-    int fetchProjectsForUser(QJsonObject& projectsReturn, int userId);
+    int fetchProjectsForUser(QJsonObject& projectsReturn, int userId, int limit);
 
     /*!
-     *       @param: projectId : int, userId : int
+     *       @param: projectId : int, userId : int, limitOfProjects: int
      *        @desc: handles the database actions necessary for when the user registers in a project
      *      @return: success or failure: bool
      */
