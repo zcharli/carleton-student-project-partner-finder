@@ -11,6 +11,7 @@
 #include "DataAccessLayer/user.h"
 #include "ProjectManagement/projectlistwidget.h"
 #include "ProfileManagement/pppcontroller.h"
+#include "ProfileManagement/codingwidget.h"
 #include "ProjectManagement/projectdetails.h"
 
 #include <QMainWindow>
@@ -39,6 +40,7 @@ private:
     ProjectListWidget projectsWidget;
     SettingsWidget settingsWidget;
     HomeWidget homeWidget;
+    CodingWidget code;
 
     //Other views to be managed by the window
     ProjectDetails projectDetailsWidget;

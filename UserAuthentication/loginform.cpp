@@ -36,9 +36,7 @@ LoginForm::LoginForm(QWidget *parent) :
 
 void LoginForm::viewWillAppear()
 {
-    ui->progBarLogin->hide();
     ui->eLabel->hide();
-    ui->progBarLogin->setValue(PROG_BAR_DEFAULT_VALUE);
 }
 
 void LoginForm::viewWillDisappear()
