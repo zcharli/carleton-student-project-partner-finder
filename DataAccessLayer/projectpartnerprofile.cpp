@@ -13,18 +13,31 @@ ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore
 ProjectPartnerProfile::~ProjectPartnerProfile()
 {
     user.profile = NULL;
-    delete qualifications;
+    delete[] qualifications;
     qualifications = NULL;
 }
 
 void ProjectPartnerProfile::changeQualification(Qualification qualification)
 {
+    // subclasses must implement this
     return;
 }
 
 Qualification ProjectPartnerProfile::getQualification(int)
 {
+    // subclasses must implement this
     return noneType;
+}
+
+bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
+{
+    //  Subclasses must implement this
+    return false;
+}
+
+void ProjectPartnerProfile::updateProfileScores()
+{
+    //Subclasses must implement this function
 }
 
 StudentUser& ProjectPartnerProfile::getStudentUser()
@@ -45,15 +58,6 @@ int ProjectPartnerProfile::getPPPID() const
 void ProjectPartnerProfile::setPPPID(int id)
 {
     this->pppID = id;
-}
-
-bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
-{
-    if(!Qualification::GetWorkEthicBitForWorkEthicQualification(bitPosition, qualifications[userWorkEthic]))
-    {
-        return false;
-    }
-    return true;
 }
 
 unsigned char ProjectPartnerProfile::getWorkEthicByte()
@@ -84,15 +88,6 @@ int ProjectPartnerProfile::getTeammateTechnicalScore()
 void ProjectPartnerProfile::setTeammateTechnicalScore(int tScore)
 {
     teammateTechnicalScore = tScore;
-}
-
-
-void ProjectPartnerProfile::updateProfileScores()
-{
-    float teamScore;
-    float personalScore;
-
-    Qualification::TechnicalScoreForProfile(*this, personalScore, teamScore);
 }
 
 bool ProjectPartnerProfile::serializeJSONForSave(QJsonObject& pppJSON)

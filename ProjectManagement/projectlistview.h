@@ -1,5 +1,5 @@
-#ifndef PROJECTLISTWIDGET_H
-#define PROJECTLISTWIDGET_H
+#ifndef PROJECTLISTVIEW_H
+#define PROJECTLISTVIEW_H
 
 #include "sidebarwidget.h"
 #include "projectcellwidget.h"
@@ -23,12 +23,12 @@ enum ListType
 };
 
 
-class ProjectListWidget : public QScrollArea
+class ProjectListView : public QScrollArea
 {
     Q_OBJECT
 public:
-    explicit ProjectListWidget(QWidget *parent = 0);
-    ~ProjectListWidget();
+    explicit ProjectListView(QWidget *parent = 0);
+    ~ProjectListView();
     int listSize;
     ListType listType;
 
@@ -69,4 +69,4 @@ public slots:
     void viewProjectSelected(int index);
 };
 
-#endif // PROJECTLISTWIDGET_H
+#endif // PROJECTLISTVIEW_H

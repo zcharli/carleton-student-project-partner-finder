@@ -9,9 +9,13 @@
 #include "ProfileManagement/profilewidget.h"
 #include "ProjectManagement/createprojectwidget.h"
 #include "DataAccessLayer/user.h"
-#include "ProjectManagement/projectlistwidget.h"
+#include "ProjectManagement/projectlistview.h"
 #include "ProfileManagement/pppcontroller.h"
-#include "ProjectManagement/projectdetails.h"
+#include "ProjectManagement/projectdetailsview.h"
+
+#include "ProjectManagement/createprojectmanagerfactory.h"
+#include "ProjectManagement/projectdetailsmanagerfactory.h"
+#include "ProjectManagement/projectlistmanagerfactory.h"
 
 #include <QMainWindow>
 
@@ -36,12 +40,15 @@ private:
     SideBarWidget projectSidebar;
     ProfileWidget profileWidget;
     CreateProjectWidget createProjectWidget;
-    ProjectListWidget projectsWidget;
+    ProjectListView projectsWidget;
     SettingsWidget settingsWidget;
     HomeWidget homeWidget;
 
+    //ProjectManagement
+
+
     //Other views to be managed by the window
-    ProjectDetails projectDetailsWidget;
+    ProjectDetailsView projectDetailsWidget;
 
     /*!
      *       @param: none

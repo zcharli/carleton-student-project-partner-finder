@@ -254,7 +254,7 @@ int UserRepository::createUser(QJsonObject& user)
         createQuery.bindValue(":u",user["userName"].toString());
         createQuery.bindValue(":f",user["firstName"].toString());
         createQuery.bindValue(":l", user["lastName"].toString());
-        createQuery.bindValue(":t", user["type"].toInt());
+        createQuery.bindValue(":t", user["userType"].toInt());
         if(!createQuery.exec())
         {
             qDebug() << "createUser error:  " << this->db.lastError();

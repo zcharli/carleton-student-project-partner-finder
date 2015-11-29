@@ -16,6 +16,7 @@ SOURCES += \
     Repository/projectrepository.cpp \
     Repository/userrepository.cpp \
     Repository/databasemanager.cpp \
+    Repository/dataaccessdispatcher.cpp \
     DataAccessLayer/user.cpp \
     DataAccessLayer/studentuser.cpp \
     DataAccessLayer/administratoruser.cpp \
@@ -28,29 +29,39 @@ SOURCES += \
     DataAccessLayer/projectpartnerprofileproxy.cpp \
     UserAuthentication/loginform.cpp \
     UserAuthentication/signupform.cpp \
-    ProjectManagement/projectdetails.cpp \
+    ProjectManagement/projectdetailsview.cpp \
     ProjectManagement/createprojectwidget.cpp \
     ProjectManagement/editteamconfigurationsdialog.cpp \
     ProjectManagement/projectcellwidget.cpp \
-    ProjectManagement/projectlistwidget.cpp \
+    ProjectManagement/projectlistview.cpp \
     ProfileManagement/profilewidget.cpp \
     ProfileManagement/cupidslider.cpp \
     ProfileManagement/pppcontroller.cpp \
+    AlgorithmExecution/insomniamatchingalgorithm.cpp \
+    AlgorithmExecution/matchreportview.cpp \
+    AlgorithmExecution/team.cpp \
     main.cpp \
     sidebarwidget.cpp \
     settingswidget.cpp \
     cupidwindow.cpp \
     homewidget.cpp \
-    Repository/dataaccessdispatcher.cpp \
-    AlgorithmExecution/insomniamatchingalgorithm.cpp \
-    AlgorithmExecution/matchreportview.cpp \
-    AlgorithmExecution/team.cpp
+    ProjectManagement/projectlistmanagerfactory.cpp \
+    ProjectManagement/abstractprojectmanagerfactory.cpp \
+    ProjectManagement/projectdetailsmanagerfactory.cpp \
+    ProjectManagement/createprojectmanagerfactory.cpp \
+    ProjectManagement/abstractprojectcontroller.cpp \
+    ProjectManagement/projectlistcontroller.cpp \
+    ProjectManagement/projectdetailscontroller.cpp \
+    ProjectManagement/createprojectcontroller.cpp \
+    ProjectManagement/abstractprojectview.cpp \
+    ProjectManagement/projectlistview.cpp
 
 
 HEADERS  += \
     Repository/projectrepository.h \
     Repository/userrepository.h \
     Repository/databasemanager.h \
+    Repository/dataaccessdispatcher.h \
     DataAccessLayer/user.h \
     DataAccessLayer/studentuser.h \
     DataAccessLayer/administratoruser.h \
@@ -67,20 +78,30 @@ HEADERS  += \
     ProjectManagement/createprojectwidget.h \
     ProjectManagement/editteamconfigurationsdialog.h \
     ProjectManagement/projectcellwidget.h \
-    ProjectManagement/projectlistwidget.h \
-    ProjectManagement/projectdetails.h \
+    ProjectManagement/projectlistview.h \
+    ProjectManagement/projectdetailsview.h \
     ProfileManagement/profilewidget.h \
     ProfileManagement/cupidslider.h \
     ProfileManagement/pppcontroller.h \
+    AlgorithmExecution/insomniamatchingalgorithm.h \
+    AlgorithmExecution/matchreportview.h \
+    AlgorithmExecution/team.h \
     errorcodes.h \
     sidebarwidget.h \
     settingswidget.h \
     cupidwindow.h \
     homewidget.h \
-    Repository/dataaccessdispatcher.h \
-    AlgorithmExecution/insomniamatchingalgorithm.h \
-    AlgorithmExecution/matchreportview.h \
-    AlgorithmExecution/team.h
+    ProjectManagement/projectlistmanagerfactory.h \
+    ProjectManagement/abstractprojectmanagerfactory.h \
+    ProjectManagement/projectdetailsmanagerfactory.h \
+    ProjectManagement/createprojectmanagerfactory.h \
+    ProjectManagement/abstractprojectcontroller.h \
+    ProjectManagement/projectlistcontroller.h \
+    ProjectManagement/projectdetailscontroller.h \
+    ProjectManagement/createprojectcontroller.h \
+    ProjectManagement/abstractprojectview.h \
+    ProjectManagement/projectlistview.h
+
 
 FORMS    += \
     UserAuthentication/loginform.ui \
@@ -89,7 +110,7 @@ FORMS    += \
     ProjectManagement/editteamconfigurationsdialog.ui \
     ProjectManagement/projectcellwidget.ui \
     ProfileManagement/profilewidget.ui \
-    ProjectManagement/projectdetails.ui \
+    ProjectManagement/projectdetailsview.ui \
     cupidwindow.ui \
     settingswidget.ui \
     sidebarwidget.ui \

@@ -24,7 +24,7 @@ Project::Project()
 
 Project::~Project()
 {
-    delete projectConfigurations;
+    delete[] projectConfigurations;
     projectConfigurations = NULL;
 }
 

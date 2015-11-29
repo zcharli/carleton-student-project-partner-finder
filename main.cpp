@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QFile file("../cupid/Stylesheets/style.qss");
+    QFile file("../cuPID/Stylesheets/style.qss");
 
     if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

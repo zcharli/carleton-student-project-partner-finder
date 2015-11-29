@@ -1,6 +1,7 @@
 #ifndef CREATEPROJECTWIDGET_H
 #define CREATEPROJECTWIDGET_H
 
+#include "ProjectManagement/abstractprojectview.h"
 #include "sidebarwidget.h"
 
 // Subsystem dependencies
@@ -13,7 +14,7 @@ namespace Ui {
 class CreateProjectWidget;
 }
 
-class CreateProjectWidget : public QWidget
+class CreateProjectWidget : public AbstractProjectView
 {
     Q_OBJECT
     void presentError(QString* errorMessage);

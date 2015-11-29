@@ -1,4 +1,5 @@
 #include "insomniamatchingalgorithm.h"
+#include "errorcodes.h"
 #include "DataAccessLayer/projectpartnerprofilereal.h"
 #include "DataAccessLayer/projectpartnerprofile.h"
 #include "DataAccessLayer/studentuser.h"
@@ -63,7 +64,10 @@ int InsomniaMatchingAlgorithm::setUpAlgorithmForLaunch()
     {
         qSort(list->begin(), list->end(), compare);
     }
+
     launch();
+
+    return SUCCESS;
 }
 
 QVector<ProjectPartnerProfile*>* InsomniaMatchingAlgorithm::getHighestBucket()
@@ -248,7 +252,6 @@ QVector<int> InsomniaMatchingAlgorithm::getTeamSizeConfigurations(int numberOfRe
     if (abnormalTeamSize > 0)
     {
         int numberNormal = numberOfRegisteredProfiles/teamSize;
-        int numberAbnormal = 1;
         for(int i = 0; i < numberNormal; i++)
             configurations.append(normalSize);
 
@@ -300,7 +303,7 @@ int InsomniaMatchingAlgorithm::launch()
                 if (nextMember == NULL)
                 {
                     //TODO: Couldn't find anyone compatible for the team here!! need to do something
-                    return -1;
+                    return ALGORITHM_EXECUTE_ERROR;
                 }
                 team->addProfileToTeam(nextMember);
             }
@@ -309,7 +312,7 @@ int InsomniaMatchingAlgorithm::launch()
         else
         {
             //Ran out of members
-            break;
+            return ALGORITHM_EXECUTE_ERROR;
         }
     }
 
@@ -328,4 +331,6 @@ int InsomniaMatchingAlgorithm::launch()
         i++;
 
     }
+
+    return SUCCESS;
 }
