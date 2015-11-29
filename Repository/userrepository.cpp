@@ -27,7 +27,7 @@ UserRepository::~UserRepository() {}
 
 int UserRepository::userCreatedPPP(QJsonObject& user, int userId)
 {
-    //QJsonObject userJSON = user[USER_userType].toObject();
+    //QJsonObject userJSON = user[USER_KEY].toObject();
     QJsonObject pppJSON = user[PPP_KEY].toObject();
     QJsonArray qualificationArrayJSON = pppJSON[QUALIFICATIONS_KEY].toArray();
     qDebug() << qualificationArrayJSON.size();
@@ -95,47 +95,78 @@ int UserRepository::userCreatedPPP(QJsonObject& user, int userId)
     return 0;
 }
 
-int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId)
+int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId, bool full)
 {
-    QJsonObject userJSON = user[USER_userType].toObject();
-
     QJsonObject pppJSON;
-    QJsonArray qualificationArrayJSON;
+
 
     // This join will ensure we only return PPP qualifications if the user has a PPP
     // This also helps ensure that after a student deletes their profile, then nothing will return
-    QString fetchQuery = "Select * from ppp_qualifications p join users u on u.ppp_id = p.ppp_id where p.ppp_id = :pppid";
-    QSqlQuery fetchPPP(this->db);
-    fetchPPP.prepare(fetchQuery);
-    fetchPPP.bindValue(":pppid",pppId);
-    //fetchPPP.bindValue(":id", (static_cast<StudentUser&>(user)).getFetchIDForPPP());
-    // Execute this fetch and populate the ppp's qualifications
-    if(fetchPPP.exec())
+    if(full)
     {
-        while(fetchPPP.next())
+        QJsonArray qualificationArrayJSON;
+        QString fetchQuery = "Select * from ppp_qualifications p join users u on u.ppp_id = p.ppp_id where p.ppp_id = :pppid";
+        QSqlQuery fetchPPP(this->db);
+        fetchPPP.prepare(fetchQuery);
+        fetchPPP.bindValue(":pppid",pppId);
+        //fetchPPP.bindValue(":id", (static_cast<StudentUser&>(user)).getFetchIDForPPP());
+        // Execute this fetch and populate the ppp's qualifications
+        if(fetchPPP.exec())
+        {
+            while(fetchPPP.next())
+            {
+                // Indexes
+                //  0 -> qualification_id (also qualification type)
+                //  1 -> ppp_id
+                //  2 -> value (int)
+                QJsonObject qualification;
+                // Qualification returned will be copied to the PPP
+                qualification[QUALIFICATION_type] = fetchPPP.value(0).toInt() - 1;
+                qualification[QUALIFICATION_value] = fetchPPP.value(2).toInt();
+
+                qualificationArrayJSON.append(qualification);
+            }
+            pppJSON[PPP_pppID] = pppId;
+            user[STUDENT_pppIDForFetch] = pppId;
+        }
+        else
+        {
+            qDebug() << "fetchPPPForUser error:  "<< fetchPPP.lastError();
+            qDebug() << fetchQuery;
+            return fetchPPP.lastError().number();
+        }
+        //success
+        pppJSON[QUALIFICATIONS_KEY] = qualificationArrayJSON;
+    }
+
+    QString fetchPPPProxyQuery = "select we_bs, teammate_tech_score, personal_tech_score from ppp where ppp_id=:pppid";
+    QSqlQuery fetchPPPProxy(this->db);
+    fetchPPPProxy.prepare(fetchPPPProxyQuery);
+    fetchPPPProxy.bindValue(":pppid",pppId);
+    if(fetchPPPProxy.exec())
+    {
+        if(fetchPPPProxy.next())
         {
             // Indexes
-            //  0 -> qualification_id (also qualification type)
-            //  1 -> ppp_id
-            //  2 -> value (int)
-            QJsonObject qualification;
-            // Qualification returned will be copied to the PPP
-            qualification[QUALIFICATION_type] = fetchPPP.value(0).toInt() - 1;
-            qualification[QUALIFICATION_value] = fetchPPP.value(2).toInt();
+            //  0 -> web_bs
+            //  1 -> teammate_tech_score
+            //  2 -> personal_tech_score
 
-            qualificationArrayJSON.append(qualification);
+            char workEthic = (char)fetchPPPProxy.value(0).toInt();
+            int teamScore = fetchPPPProxy.value(1).toInt();
+            int personalScore = fetchPPPProxy.value(2).toInt();
+
+            pppJSON[PPP_personalTechnicalScore] = personalScore;
+            pppJSON[PPP_teammateTechnicalScore] = teamScore;
+            pppJSON[PPP_workEthic] = workEthic;
         }
-        pppJSON[PPP_pppID] = pppId;
-        user[STUDENT_pppIDForFetch] = pppId;
     }
     else
     {
-        qDebug() << "fetchPPPForUser error:  "<< fetchPPP.lastError();
-        qDebug() << fetchQuery;
-        return fetchPPP.lastError().number();
+        qDebug() << "fetchPPPProxy error:  "<< fetchPPPProxy.lastError();
+        return fetchPPPProxy.lastError().number();
     }
-    //success
-    pppJSON[QUALIFICATIONS_KEY] = qualificationArrayJSON;
+
     user[PPP_KEY] = pppJSON;
 
     return 0;
@@ -143,7 +174,7 @@ int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId)
 
 int UserRepository::userUpdatedPPP(QJsonObject& user)
 {
-    QJsonObject userJSON = user[USER_userType].toObject();
+    QJsonObject userJSON = user[USER_KEY].toObject();
     if(!userJSON.contains(PPP_KEY))
     {
         return -1;

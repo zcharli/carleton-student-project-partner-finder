@@ -60,7 +60,7 @@ public:
      *           and builds a maps to represent the objects returned
      *  @output: status: int (success or failure)
      */
-    int retrievePPPForUser(QJsonObject&);
+    int retrievePPPForUser(QJsonObject&,bool);
 
     /*!
      *  Data Storage Services
