@@ -25,6 +25,9 @@ public:
      */
     virtual bool deserializeJSONFromRetrieve(const QJsonObject&) = 0;
 
+    /*! Just to keep the compiler happy */
+    virtual ~IMappable(){};
+
 };
 
 #endif // IMAPPABLE_H

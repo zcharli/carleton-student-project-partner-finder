@@ -9,7 +9,7 @@
 #include <QMessageBox>
 
 CreateProjectWidget::CreateProjectWidget(QWidget *parent) :
-    QWidget(parent),
+    AbstractProjectView(parent),
     ui(new Ui::CreateProjectWidget)
 {
     ui->setupUi(this);
@@ -61,13 +61,13 @@ void CreateProjectWidget::saveNewProject()
         return;
     }
 
-    project = new Project(title, description);
+    project = DataAccessFacade::defaultProject();
+    project->setTitle(title);
+    project->setDescription(description);
     project->changeConfiguration(Configuration(TeamSize, sizeConfiguration));
 
     //Save project to database
     User *user = DataAccessFacade::managedDataAccess().getCurrentUser();
-    //QVector<Project*> projects;
-    //projects.append(project);
 
     if (DataAccessFacade::managedDataAccess().execute(createdProject, *user, project) != 0)
     {
@@ -81,7 +81,7 @@ void CreateProjectWidget::saveNewProject()
     }
     else
     {
-        // Save successfule
+        // Save successful
         //  Should transiotion user to viewing newly created Prject
         qDebug() << "Save Successful";
         DataAccessFacade::managedDataAccess().setCurrentProject(project);

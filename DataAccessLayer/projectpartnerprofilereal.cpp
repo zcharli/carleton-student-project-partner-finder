@@ -1,9 +1,14 @@
 #include "projectpartnerprofilereal.h"
 #include "DataAccessLayer/mapconfigs.h"
 #include <QJsonArray>
+#include <QDebug>
 
 ProjectPartnerProfileReal::ProjectPartnerProfileReal(StudentUser& user, int pscore, int tscore, unsigned char we, Qualification* qualifications):
 ProjectPartnerProfile(user, pscore, tscore, we, qualifications)
+{
+}
+
+ProjectPartnerProfileReal::~ProjectPartnerProfileReal()
 {
 }
 
@@ -16,6 +21,28 @@ Qualification ProjectPartnerProfileReal::getQualification(int index)
 {
     //TODO: Need to do error checking here.
     return qualifications[index];
+}
+
+bool ProjectPartnerProfileReal::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
+{
+    if(!Qualification::GetWorkEthicBitForWorkEthicQualification(bitPosition, qualifications[userWorkEthic]))
+    {
+        return false;
+    }
+    return true;
+}
+
+void ProjectPartnerProfileReal::updateProfileScores()
+{
+    float teamScore;
+    float personalScore;
+
+    Qualification::TechnicalScoreForProfile(*this, personalScore, teamScore);
+    personalTechnicalScore = personalScore;
+    teammateTechnicalScore = teamScore;
+    workEthic = (unsigned char)(this->qualifications[userWorkEthic].getValue());
+
+    //TODO: technical normalizations for profile
 }
 
 bool ProjectPartnerProfileReal::serializeJSONForSave(QJsonObject& pppJSON)
@@ -63,7 +90,7 @@ bool ProjectPartnerProfileReal::deserializeJSONFromRetrieve(const QJsonObject& p
     {
         personalTechnicalScore = pppJSON[PPP_personalTechnicalScore].toInt();
         teammateTechnicalScore = pppJSON[PPP_teammateTechnicalScore].toInt();
-        workEthic = (char)pppJSON[""].toInt();
+        workEthic = (unsigned char)pppJSON[PPP_workEthic].toInt();
     }
 
     if(pppJSON.contains(QUALIFICATIONS_KEY))

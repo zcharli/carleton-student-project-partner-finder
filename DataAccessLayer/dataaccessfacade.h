@@ -4,6 +4,7 @@
 #include "projectpartnerprofile.h"
 #include "projectpartnerprofileproxy.h"
 #include "project.h"
+#include "Repository/dataaccessdispatcher.h"
 
 #include <QVector>
 
@@ -39,9 +40,12 @@ class DataAccessFacade
 
     static QVector<ProjectPartnerProfile*> allocatedProfiles;
     static QVector<Project*> allocatedProjects;
+    static QVector<User*> allocatedUsers;
 
     User *currentUser;
     Project *currentProject;
+    DataAccessDispatcher *dispatcher;
+
 
 public:
     DataAccessFacade();
@@ -55,6 +59,13 @@ public:
     static ProjectPartnerProfile* defaultProfile(StudentUser&);
     static Project* defaultProject();
     static User* defaultUser(UserType);
+
+    /*!
+     *       @param: none
+     *        @desc: returns the Database Dispatcher of the Data Access facade
+     *      @return: dispatcher: DataAccessDispatcher&
+     */
+    DataAccessDispatcher& getDispatcher();
 
     /*!
      *       @param: none

@@ -55,7 +55,6 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
 {
     QString firstname = "";
     QString  lastname = "";
-    int            id = -1;
 
     //##########################################################################################################
     /*  Debug flow  Username: Leonidas will get you through login   */
@@ -91,6 +90,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
     } else
     {
         *currentUser = DataAccessFacade::defaultUser(type);
+        (*currentUser)->setUserName(username);
 
         /*  Query DB for user log in information   */
         if(DataAccessFacade::managedDataAccess().execute(login, **currentUser) != 0)
@@ -110,6 +110,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
                 if (((StudentUser *)*currentUser)->getFetchIDForPPP() != 0)
                 {
                     ProjectPartnerProfile* profile = DataAccessFacade::defaultProfile(*((StudentUser*)*currentUser));
+                    profile->setPPPID((*(StudentUser*)*currentUser).getFetchIDForPPP());
                     if(DataAccessFacade::managedDataAccess().execute(fetchPPP, *((StudentUser*)(*currentUser)), *((ProjectPartnerProfile*)profile)) != 0)
                     {
                         // Error occurred on retrieving PPP

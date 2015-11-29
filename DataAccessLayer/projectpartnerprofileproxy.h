@@ -14,6 +14,7 @@ class ProjectPartnerProfileProxy : public ProjectPartnerProfile
 
 public:
     ProjectPartnerProfileProxy(StudentUser&,int,int,unsigned char);
+    virtual ~ProjectPartnerProfileProxy();
 
     /*!
      *       @param: qualificationToChange: Qualification
@@ -28,6 +29,21 @@ public:
      *      @return: Qualification
      */
     virtual Qualification getQualification(int);
+
+    /*!
+     *       @param: qualificationIndex: int
+     *        @desc: gets the given qualification for the specified index
+     *      @return: Qualification
+     */
+     virtual bool hasWorkEthic(WorkEthicQualificationMapping);
+
+    /*!
+     *       @param: none
+     *        @desc: uses the static Qualification class to update the
+     *               technical scores
+     *      @return: none
+     */
+    virtual void updateProfileScores();
 
     /*!
      *       @param: empty Json Object: QJsonObject&

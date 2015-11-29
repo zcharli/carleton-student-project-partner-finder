@@ -65,6 +65,9 @@ void SignUpForm::attemptSignUpForUser(UserType type, User **currentUser)
     }
 
     *currentUser = DataAccessFacade::defaultUser(type);
+    (*currentUser)->setUserName(username);
+    (*currentUser)->setFirstName(fName);
+    (*currentUser)->setLastName(lName);
 
     //Do database signup attempt here
     int successStatus = DataAccessFacade::managedDataAccess().execute(createAccount, **currentUser);

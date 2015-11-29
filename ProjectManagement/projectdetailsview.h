@@ -1,7 +1,8 @@
-#ifndef PROJECTDETAILS_H
-#define PROJECTDETAILS_H
+#ifndef PROJECTDETAILSVIEW_H
+#define PROJECTDETAILSVIEW_H
 
 #include "sidebarwidget.h"
+#include "ProjectManagement/abstractprojectview.h"
 
 // Subsystem dependencies
 #include "DataAccessLayer/project.h"
@@ -9,16 +10,16 @@
 #include <QWidget>
 
 namespace Ui {
-class ProjectDetails;
+class ProjectDetailsView;
 }
 
-class ProjectDetails : public QWidget
+class ProjectDetailsView : public AbstractProjectView
 {
     Q_OBJECT
 
 public:
-    ProjectDetails(QWidget *parent = 0);
-    ~ProjectDetails();
+    ProjectDetailsView(QWidget *parent = 0);
+    ~ProjectDetailsView();
 
     /*!
      *  @param: none
@@ -71,7 +72,7 @@ private slots:
     void userToViewProject();
 
 private:
-    Ui::ProjectDetails *ui;
+    Ui::ProjectDetailsView *ui;
     Project* project;
     bool isRegistered;
     QPushButton *btnRegister;
@@ -80,4 +81,4 @@ private:
     void updateUI();
 };
 
-#endif // PROJECTDETAILS_H
+#endif // PROJECTDETAILSVIEW_H

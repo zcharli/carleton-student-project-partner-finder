@@ -1,6 +1,7 @@
-#include "projectdetails.h"
-#include "ui_projectdetails.h"
+#include "projectdetailsview.h"
+#include "ui_projectdetailsview.h"
 #include "editteamconfigurationsdialog.h"
+#include "errorcodes.h"
 
 //  Subsystem dependencies
 #include "DataAccessLayer/user.h"
@@ -13,9 +14,9 @@
 #include <QDebug>
 #include <QPushButton>
 
-ProjectDetails::ProjectDetails(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ProjectDetails)
+ProjectDetailsView::ProjectDetailsView(QWidget *parent) :
+    AbstractProjectView(parent),
+    ui(new Ui::ProjectDetailsView)
 {
     ui->setupUi(this);
     this->project = NULL;
@@ -27,18 +28,18 @@ ProjectDetails::ProjectDetails(QWidget *parent) :
     isRegistered = false;
 }
 
-ProjectDetails::~ProjectDetails()
+ProjectDetailsView::~ProjectDetailsView()
 {
     delete ui;
 }
 
 
-void ProjectDetails::didSetProject()
+void ProjectDetailsView::didSetProject()
 {
     updateUI();
 }
 
-void ProjectDetails::updateUI()
+void ProjectDetailsView::updateUI()
 {
     if(project != NULL)
     {
@@ -59,7 +60,7 @@ void ProjectDetails::updateUI()
     }
 }
 
-void ProjectDetails::viewWillAppear()
+void ProjectDetailsView::viewWillAppear()
 {
     //  check what kind of user we are and make the nessesary changes to the UI
     if (dynamic_cast<AdministratorUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
@@ -78,7 +79,7 @@ void ProjectDetails::viewWillAppear()
     updateUI();
 }
 
-void ProjectDetails::viewWillDisappear()
+void ProjectDetailsView::viewWillDisappear()
 {
     ui->btnRegistration->setHidden(false);
     ui->btnEditProject->setHidden(false);
@@ -93,7 +94,7 @@ void ProjectDetails::viewWillDisappear()
     project = NULL;
 }
 
-void ProjectDetails::on_btnRegistration_clicked()
+void ProjectDetailsView::on_btnRegistration_clicked()
 {
     StudentUser* currentUser = (StudentUser *)DataAccessFacade::managedDataAccess().getCurrentUser();
 
@@ -114,7 +115,7 @@ void ProjectDetails::on_btnRegistration_clicked()
     {
 
         // Unregister this student
-        if(DataAccessFacade::managedDataAccess().execute(unregisteredFromProject,*currentUser,project))
+        if(DataAccessFacade::managedDataAccess().execute(unregisteredFromProject,*currentUser,project) != SUCCESS)
         {
             // Error occured
             qDebug() << "UnRegistration failed";
@@ -135,7 +136,7 @@ void ProjectDetails::on_btnRegistration_clicked()
     }
     else
     {
-        if(DataAccessFacade::managedDataAccess().execute(registeredInProject,*currentUser, project))
+        if(DataAccessFacade::managedDataAccess().execute(registeredInProject,*currentUser, project) != SUCCESS)
         {
             // Error occured
             qDebug() << "Registration failed";
@@ -161,7 +162,7 @@ void ProjectDetails::on_btnRegistration_clicked()
 
 
 
-void ProjectDetails::userToViewProject()
+void ProjectDetailsView::userToViewProject()
 {
     this->project = DataAccessFacade::managedDataAccess().getCurrentProject();
     if(project != NULL)
@@ -170,13 +171,13 @@ void ProjectDetails::userToViewProject()
     viewWillAppear();
 }
 
-void ProjectDetails::on_btnStartAlgo_clicked()
+void ProjectDetailsView::on_btnStartAlgo_clicked()
 {
     // Start the matching algorithm
     emit startAlgoClicked();
 }
 
-void ProjectDetails::on_btnEditProject_clicked()
+void ProjectDetailsView::on_btnEditProject_clicked()
 {
     EditTeamConfigurationsDialog dialog(this);
     dialog.getUi().teamSizeSpinBox->setValue(project->getProjectConfiguration(TeamSize).getValue());
@@ -224,7 +225,7 @@ void ProjectDetails::on_btnEditProject_clicked()
     }
 }
 
-void ProjectDetails::handleUserContextSwitch(DetailViewType type)
+void ProjectDetailsView::handleUserContextSwitch(DetailViewType type)
 {
     if (type == ProjectDetailType)
     {

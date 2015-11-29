@@ -1,13 +1,12 @@
-#ifndef PROJECTLISTWIDGET_H
-#define PROJECTLISTWIDGET_H
+#ifndef PROJECTLISTVIEW_H
+#define PROJECTLISTVIEW_H
 
 #include "sidebarwidget.h"
 #include "projectcellwidget.h"
+#include "ProjectManagement/abstractprojectview.h"
 
 //  Subsystem dependencies
 #include "DataAccessLayer/project.h"
-
-#include "abstractprojectview.h"
 
 #include <QScrollArea>
 #include <QLabel>
@@ -17,8 +16,6 @@
 #include <QString>
 #include <QVector>
 
-#include "abstractprojectview.h"
-
 enum ListType
 {
     discoverProjectsList = 0,
@@ -27,15 +24,13 @@ enum ListType
 };
 
 
-class ProjectListWidget : public AbstractProjectView
+class ProjectListView : public AbstractProjectView
 {
-    Q_OBJECT
-
     QScrollArea scrollArea;
-
+    Q_OBJECT
 public:
-    explicit ProjectListWidget(QWidget *parent = 0);
-    ~ProjectListWidget();
+    explicit ProjectListView(QWidget *parent = 0);
+    ~ProjectListView();
     int listSize;
     ListType listType;
 
@@ -76,4 +71,4 @@ public slots:
     void viewProjectSelected(int index);
 };
 
-#endif // PROJECTLISTWIDGET_H
+#endif // PROJECTLISTVIEW_H

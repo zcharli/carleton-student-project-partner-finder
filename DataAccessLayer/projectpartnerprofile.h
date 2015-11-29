@@ -30,6 +30,7 @@ protected:
 public:
     ProjectPartnerProfile(StudentUser&,int,int,unsigned char, Qualification*);
     ProjectPartnerProfile(StudentUser&, const QJsonObject&);
+    
     virtual ~ProjectPartnerProfile();
 
     //accessor Functions
@@ -41,7 +42,7 @@ public:
      StudentUser& getStudentUser();
 
     /****************************************************************************/
-    //                    Pure Virtual Functions                                //
+    //                    Virtual Functions                                     //
     /****************************************************************************/
     /*!
      *       @param: qualificationToChange: Qualification
@@ -56,14 +57,22 @@ public:
      *      @return: Qualification
      */
     virtual Qualification getQualification(int);
-    /****************************************************************************/
 
-    /*!
-     *       @param: qualificationIndex: int
-     *        @desc: gets the given qualification for the specified index
-     *      @return: Qualification
-     */
-     bool hasWorkEthic(WorkEthicQualificationMapping);
+     /*!
+      *       @param: qualificationIndex: int
+      *        @desc: gets the given qualification for the specified index
+      *      @return: Qualification
+      */
+      virtual bool hasWorkEthic(WorkEthicQualificationMapping);
+
+     /*!
+      *       @param: none
+      *        @desc: uses the static Qualification class to update the
+      *               technical scores
+      *      @return: none
+      */
+     virtual void updateProfileScores();
+    /****************************************************************************/
 
     /*!
      *       @param: none
@@ -130,14 +139,6 @@ public:
      *      @return: none
      */
      void setTeammateTechnicalScore(int);
-
-    /*!
-     *       @param: none
-     *        @desc: uses the static Qualification class to update the
-     *               technical scores
-     *      @return: none
-     */
-    void updateProfileScores();
 
     /*!
      *       @param: empty Json Object: QJsonObject&

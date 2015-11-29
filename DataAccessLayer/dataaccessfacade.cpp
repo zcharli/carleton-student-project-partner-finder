@@ -1,6 +1,9 @@
 #include "dataaccessfacade.h"
 #include "studentuser.h"
 #include "administratoruser.h"
+#include "DataAccessLayer/mapconfigs.h"
+
+#include <QDebug>
 
 #define SUCCESS 0
 #define INVALID_ACTION -1
@@ -8,16 +11,20 @@
 DataAccessFacade* DataAccessFacade::dataInstance = 0;
 QVector<Project*> DataAccessFacade::allocatedProjects;
 QVector<ProjectPartnerProfile*> DataAccessFacade::allocatedProfiles;
+QVector<User*> DataAccessFacade::allocatedUsers;
 
 DataAccessFacade::DataAccessFacade()
 {
-  // Create singleton instance
-  currentUser = NULL;
+    // Create singleton instance
+    dispatcher = new DataAccessDispatcher();
+    currentProject = NULL;
+    currentUser = NULL;
 }
 
 DataAccessFacade::~DataAccessFacade()
 {
   //  Clean up
+  delete dispatcher;
 }
 
 void DataAccessFacade::setCurrentUser(User* userToSet)
@@ -66,6 +73,11 @@ ProjectPartnerProfile* DataAccessFacade::defaultProfile(StudentUser& user)
     return profile;
 }
 
+DataAccessDispatcher& DataAccessFacade::getDispatcher()
+{
+    return *dispatcher;
+}
+
 Project* DataAccessFacade::defaultProject()
 {
     Project* project = new Project(QString(""), QString(""));
@@ -86,6 +98,7 @@ User* DataAccessFacade::defaultUser(UserType type)
             user = new StudentUser(fname, lname, username);
             break;
     }
+    allocatedUsers.append(user);
     return user;
 }
 
@@ -101,16 +114,19 @@ DataAccessFacade& DataAccessFacade::managedDataAccess()
 int DataAccessFacade::execute(ActionType action, User& user, ProjectPartnerProfile& profile)
 {
     int successStatus = SUCCESS;
+    QJsonObject profileJson;
+    profile.serializeJSONForSave(profileJson);
+    profileJson[FLOATING_USR_ID] = user.getUserId();
     switch (action)
     {
         case createdPPP:
-            //successStatus = repoUser->userCreatedPPP(user, ppp);
+            successStatus = dispatcher->userCreatedPPP(profileJson);
             break;
         case fetchPPP:
-            //successStatus = repoUser->fetchPPPForUser(user, ppp);
+            successStatus = dispatcher->retrievePPPForUser(profileJson);
             break;
         case updatedPPP:
-            //successStatus = repoUser->userUpdatedPPP(user, ppp);
+            successStatus = dispatcher->userUpdatedPPP(profileJson);
             break;
         case deletedPPP:
             //successStatus = repoUser->userDeletedPPP(user, ppp);
@@ -119,29 +135,37 @@ int DataAccessFacade::execute(ActionType action, User& user, ProjectPartnerProfi
             successStatus = INVALID_ACTION;
             break;
     }
+    if(successStatus == SUCCESS)
+        profile.deserializeJSONFromRetrieve(profileJson);
     return successStatus;
 }
 
 int DataAccessFacade::execute(ActionType action, User& user, Project* project)
 {
     int successStatus = SUCCESS;
-
+    QJsonObject inUserIDInProjectJson;
+    QJsonObject userJson;
+    QJsonObject projectJson;
+    project->serializeJSONForSave(projectJson);
+    user.serializeJSONForSave(userJson);
+    inUserIDInProjectJson[USER_KEY] = userJson;
+    inUserIDInProjectJson[PROJECT_KEY] = projectJson;
     switch(action)
     {
         case createdProject:
-            //successStatus = repoProject->userCreatedProject(user, *(projects[0]));
+            successStatus = dispatcher->userCreatedProject(inUserIDInProjectJson);
             break;
         case fetchProject:
-            //successStatus = repoProject->fetchProjectForUser(user, *(projects[0]));
+            successStatus = dispatcher->retrieveProjectUsingID(inUserIDInProjectJson);
             break;
         case updatedProject:
-            //successStatus = repoProject->userUpdatedProject(user, *(projects[0]));
+            successStatus = dispatcher->userUpdatedProject(inUserIDInProjectJson);
             break;
         case registeredInProject:
-            //successStatus = repoProject->userRegisteredInProject(user, *(projects[0]));
+            successStatus = dispatcher->userRegisteredInProject(inUserIDInProjectJson);
             break;
         case unregisteredFromProject:
-            //successStatus = repoProject->userUnregisteredFromProject(user, *(projects[0]));
+            successStatus = dispatcher->userUnRegisteredInProject(inUserIDInProjectJson);
             break;
         case fetchPPPsForProject:
             //successStatus = repoProject->fetchPPPsForProject(user, *(projects[0]));
@@ -149,6 +173,8 @@ int DataAccessFacade::execute(ActionType action, User& user, Project* project)
         default:
             successStatus = INVALID_ACTION;
     }
+    if (successStatus == SUCCESS)
+        project->deserializeJSONFromRetrieve(inUserIDInProjectJson[PROJECT_KEY].toObject());
 
     return successStatus;
 }
@@ -176,17 +202,22 @@ int DataAccessFacade::execute(ActionType action, User& user, QVector<Project*> p
 int DataAccessFacade::execute(ActionType action, User& user)
 {
   int successStatus = SUCCESS;
+  QJsonObject userJson;
+  user.serializeJSONForSave(userJson);
   switch (action)
   {
       case createAccount:
-          //successStatus = repoUser->userCreatedPPP(user, ppp);
+          successStatus = dispatcher->createUser(userJson);
           break;
       case login:
-          //successStatus = repoUser->fetchPPPForUser(user, ppp);
+          successStatus = dispatcher->retrieveUserWithUsername(userJson);
           break;
       default:
           successStatus = INVALID_ACTION;
           break;
   }
+
+  if (successStatus == SUCCESS)
+      user.deserializeJSONFromRetrieve(userJson);
   return successStatus;
 }

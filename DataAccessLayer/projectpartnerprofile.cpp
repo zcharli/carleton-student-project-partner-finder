@@ -20,20 +20,45 @@ ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser, const QJs
 ProjectPartnerProfile::~ProjectPartnerProfile()
 {
     user.profile = NULL;
-    delete qualifications;
+    delete[] qualifications;
     qualifications = NULL;
     // Added deleting users since we allocated this when populating
 }
 
 void ProjectPartnerProfile::changeQualification(Qualification qualification)
 {
+    // subclasses must implement this
     return;
 }
 
 Qualification ProjectPartnerProfile::getQualification(int)
 {
+    // subclasses must implement this
     return noneType;
 }
+
+bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
+{
+    //  Subclasses must implement this
+    return false;
+}
+
+void ProjectPartnerProfile::updateProfileScores()
+{
+    //Subclasses must implement this function
+}
+
+bool ProjectPartnerProfile::serializeJSONForSave(QJsonObject&)
+{
+    return false;
+}
+
+
+bool ProjectPartnerProfile::deserializeJSONFromRetrieve(const QJsonObject&)
+{
+    return false;
+}
+
 
 StudentUser& ProjectPartnerProfile::getStudentUser()
 {
@@ -53,15 +78,6 @@ int ProjectPartnerProfile::getPPPID() const
 void ProjectPartnerProfile::setPPPID(int id)
 {
     this->pppID = id;
-}
-
-bool ProjectPartnerProfile::hasWorkEthic(WorkEthicQualificationMapping bitPosition)
-{
-    if(!Qualification::GetWorkEthicBitForWorkEthicQualification(bitPosition, qualifications[userWorkEthic]))
-    {
-        return false;
-    }
-    return true;
 }
 
 unsigned char ProjectPartnerProfile::getWorkEthicByte()
@@ -92,26 +108,4 @@ int ProjectPartnerProfile::getTeammateTechnicalScore()
 void ProjectPartnerProfile::setTeammateTechnicalScore(int tScore)
 {
     teammateTechnicalScore = tScore;
-}
-
-
-void ProjectPartnerProfile::updateProfileScores()
-{
-    float teamScore;
-    float personalScore;
-
-    Qualification::TechnicalScoreForProfile(*this, personalScore, teamScore);
-
-}
-
-
-bool ProjectPartnerProfile::serializeJSONForSave(QJsonObject&)
-{
-    return false;
-}
-
-
-bool ProjectPartnerProfile::deserializeJSONFromRetrieve(const QJsonObject&)
-{
-    return false;
 }

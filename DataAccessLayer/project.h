@@ -25,7 +25,7 @@ class Project : private IMappable
 public:
     Project(const QJsonObject&);
     Project(QString, QString);
-    ~Project();
+    virtual ~Project();
 
     //accessor Functions
     /*!

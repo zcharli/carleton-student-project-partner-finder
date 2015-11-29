@@ -70,7 +70,7 @@ int UserRepository::userCreatedPPP(QJsonObject& user, int userId)
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
         qualificationQuery = QString("Insert into ppp_qualifications (qualification_id,ppp_id,value) values (%1,%2,%3);").
-                arg(QString::number(i),QString::number(pppID),QString::number(qualificationArrayJSON[i].toObject()[QUALIFICATION_value].toInt()));
+                arg(QString::number(i+1),QString::number(pppID),QString::number(qualificationArrayJSON[i].toObject()[QUALIFICATION_value].toInt()));
         QSqlQuery insertQualifications(this->db);
         insertQualifications.prepare(qualificationQuery);
         if(!insertQualifications.exec())
@@ -165,6 +165,7 @@ int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId, bool full)
         qDebug() << "fetchPPPProxy error:  "<< fetchPPPProxy.lastError();
         return fetchPPPProxy.lastError().number();
     }
+
     pppJSON[PPP_pppID] = pppId;
     user[PPP_KEY] = pppJSON;
 
@@ -184,7 +185,8 @@ int UserRepository::userUpdatedPPP(QJsonObject& pppJSON)
     for(i=0;i<NUMBER_OF_QUALIFICATIONS;++i)
     {
         massUpdateQuery = QString("Update ppp_qualifications set value=%1 where ppp_id=%2 and qualification_id=%3;").arg(
-                    qualificationArrayJSON[i].toObject()[QUALIFICATION_value].toInt(), pppJSON[PPP_pppID].toInt(), qualificationArrayJSON[i].toObject()[QUALIFICATION_type].toInt());
+                    QString::number(qualificationArrayJSON[i].toObject()[QUALIFICATION_value].toInt()), QString::number(pppJSON[PPP_pppID].toInt()),
+                    QString::number(qualificationArrayJSON[i].toObject()[QUALIFICATION_type].toInt() + 1));
         updatePPPQuery.prepare(massUpdateQuery);
 
         if(!updatePPPQuery.exec())
@@ -194,7 +196,7 @@ int UserRepository::userUpdatedPPP(QJsonObject& pppJSON)
         }
     }
 
-    QString updatePPPScore = "update ppp set we_bs=:wb,teammate_tech_score=:ts,personal_tech_score=ps where ppp_id=:pppid";
+    QString updatePPPScore = "update ppp set we_bs=:wb,teammate_tech_score=:ts,personal_tech_score=:ps where ppp_id=:pppid";
     QSqlQuery updatePPPScoreQuery(this->db);
     updatePPPScoreQuery.prepare(updatePPPScore);
     updatePPPScoreQuery.bindValue(":pppid",pppJSON[PPP_pppID].toInt());
@@ -293,6 +295,7 @@ int UserRepository::createUser(QJsonObject& user)
         createQuery.bindValue(":f",user[USER_firstName].toString());
         createQuery.bindValue(":l", user[USER_lastName].toString());
         createQuery.bindValue(":t", user[USER_userType].toInt());
+
         if(!createQuery.exec())
         {
             qDebug() << "createUser error:  " << this->db.lastError();

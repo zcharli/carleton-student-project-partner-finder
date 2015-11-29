@@ -34,6 +34,7 @@ void PPPController::retrievePPP()
     {
         //User has a profile in the database so we need to fetch it.
         profile = DataAccessFacade::defaultProfile(*currentUser);
+        profile->setPPPID(currentUser->getFetchIDForPPP());
         if(DataAccessFacade::managedDataAccess().execute(fetchPPP, *currentUser, *profile) != 0)
         {
             // Error occurred on retrieving PPP
