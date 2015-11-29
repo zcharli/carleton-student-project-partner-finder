@@ -15,7 +15,7 @@ QPushButton:hover, #sideBar QPushButton:hover {
     color:white;
 }
 
-#sideBar{
+#LoginForm, #sideBar{
     border-bottom-right-radius: 2px;
     border-top-right-radius: 2px;
     background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
@@ -40,36 +40,49 @@ QPushButton:hover, #sideBar QPushButton:hover {
 
 
 /* Sidebar */
-#sideBar {
+#LoginForm, #SignUpForm, #sideBar {
     color:white;
     background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
                                         stop:0 #840b11, stop:1  #c0010b);
 }
-#sideBar QPushButton, #sideBar QLabel { color: white; }
+#LoginForm QPushButton, #SignUpForm QPushButton, #sideBar QPushButton, #LoginForm QLabel, #SignUpForm QLabel, #sideBar QLabel {
+    color: white;
+    background: transparent;
+    border:none;
+}
+
+#LoginForm QPushButton, #SignUpForm QPushButton{
+    background:rgba(255, 255, 255, 10%);
+    border-bottom: 1px solid rgba(0, 0, 0, 30%);
+    border-left: 1px solid rgba(0, 0, 0, 30%);
+}
+
+
+#LoginForm QPushButton:hover, #SignUpForm QPushButton:hover, #sideBar QPushButton:hover {
+    background-color: #550000;
+    color:white;
+}
 /* Sidebar End */
 
 
 /* Main Widget */
-#centralwidget{ background-image:url(../cupid/Images/background-blur.jpg); }
+#centralwidget{ background-image:url(../cuPID/Images/background-blur.jpg); }
 
 
 
 /* Content Widget */
 #mainContentStackedWidget QLabel, #mainContentStackedWidget QPushButton{ color:white; }
 #mainContentStackedWidget { background: rgba(0, 0, 0, 60%);}
+/* Label */
+#mainContentStackedWidget QLabel, #sideBar QLabel{ padding: 10 10 10 10; }
 /* Content Widget End */
 
 
-/* Login Widget */
-#LoginForm QLabel {
-    background:transparent;
-    color:black;
-} /* Login Widget End */
 
 
 /* cuPID Logo Images set to a QLabel */
-#lblLogo{ background-image:url(../cupid/Images/arrow-white-2.svg); }
-#lblheader { background-image:url(../cupid/Images/arrow-black-2.svg); }
+#lblLogo{ background-image:url(../cuPID/Images/arrow-white-2.svg); }
+#lblheader { background-image:url(../cuPID/Images/arrow-black-2.svg); }
 
 /* cuPID Logo End */
 
@@ -77,18 +90,23 @@ QPushButton:hover, #sideBar QPushButton:hover {
 
 /* All Widgets */
 QWidget *{ background:transparent; }
-
-/* Label */
-QLabel{ margin:0 10 0 10; }
-
+QTextEdit, QLineEdit, QSpinBox {
+    background: rgba(0, 0, 0, 70%);
+    border:none;
+    color: white;
+}
+QRadioButton, QCheckBox, QGroupBox { color: white; }
 /* Button */
 QPushButton, QPushButton *{
     border:none;
+    border-bottom: 1px solid rgba(0, 0, 0, 30%);
     padding:10 10 10 10;
     font-family: "Sans Serif", Times, serif;
     outline:0;
     width:100%;
+    background:rgba(255, 255, 255, 10%);
 }
+
 QPushButton:hover {
     background-color: #550000;
     color:white;
@@ -96,14 +114,28 @@ QPushButton:hover {
 /* Button End */
 
 /* QTabbedWidget Configurations */
-QTabWidget::pane { border-top: 2px solid transparent; }
-QTabBar::tab {
-    background: transparent;
-    color: white;
+QTabWidget::pane {
+    border-top: 2px solid transparent;
 }
-QTabBar::tab:selected {
-    color: grey;
+QTabBar {
+    background: rgba(255, 255, 255, 10%);
+    color: black;
+    margin:20;
+}
+
+QTabBar:hover {
+    background: rgba(255, 255, 255, 70%);
+    color: black;
+}
+
+QTabBar:selected {
+    background: rgba(255, 255, 255, 70%);
+    color: black;
 }
 /* QTabbedWidget End */
+
+
+
+
 
 /* Formatting End */

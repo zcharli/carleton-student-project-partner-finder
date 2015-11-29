@@ -5,9 +5,6 @@
  <g>
   <title>background</title>
   <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
-  <g display="none" id="canvasGrid">
-   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_1"/>
-  </g>
  </g>
  <g>
   <title>Layer 1</title>
@@ -19,7 +16,6 @@
     <g transform="matrix(0.172414, 0, 0, 0.172414, 0, 0)" id="svg_40">
      <title>background</title>
      <g transform="translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(-348, -1769) translate(-121.841) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, -1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, 1.93399) translate(0, -1.93399) translate(-301.702, 1.93399) translate(369.563, 209.133) translate(-1068.58, -326.591) translate(0, 4041.52) translate(0, 804.473)" display="none" id="svg_41">
-      <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_42"/>
      </g>
     </g>
     <g transform="matrix(0.172414, 0, 0, 0.172414, 0, 0)" id="svg_31">
