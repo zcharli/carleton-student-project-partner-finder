@@ -32,7 +32,7 @@ ProjectPartnerProfileReal& ProjectPartnerProfileProxy::loadPPP()
         SUCCESS_STATUS = DataAccessFacade::managedDataAccess().getDispatcher().retrievePPPForUser(realPPPJson);
         if(SUCCESS_STATUS == SUCCESS)
         {
-            ppp->deserializeJSONFromRetrieve(realPPPJson[PPP_K].toObject());
+            ppp->deserializeJSONFromRetrieve(realPPPJson[PPP_KEY].toObject());
         }
     }
 

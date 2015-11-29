@@ -161,10 +161,10 @@ int DataAccessFacade::execute(ActionType action, User& user, Project* project)
             successStatus = dispatcher->userUpdatedProject(inUserIDInProjectJson);
             break;
         case registeredInProject:
-            //successStatus = repoProject->userRegisteredInProject(user, *(projects[0]));
+            successStatus = dispatcher->userRegisteredInProject(inUserIDInProjectJson);
             break;
         case unregisteredFromProject:
-            //successStatus = repoProject->userUnregisteredFromProject(user, *(projects[0]));
+            successStatus = dispatcher->userUnRegisteredInProject(inUserIDInProjectJson);
             break;
         case fetchPPPsForProject:
             //successStatus = repoProject->fetchPPPsForProject(user, *(projects[0]));

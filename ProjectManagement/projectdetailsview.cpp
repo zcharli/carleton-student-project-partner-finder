@@ -1,6 +1,7 @@
 #include "projectdetailsview.h"
 #include "ui_projectdetailsview.h"
 #include "editteamconfigurationsdialog.h"
+#include "errorcodes.h"
 
 //  Subsystem dependencies
 #include "DataAccessLayer/user.h"
@@ -114,7 +115,7 @@ void ProjectDetailsView::on_btnRegistration_clicked()
     {
 
         // Unregister this student
-        if(DataAccessFacade::managedDataAccess().execute(unregisteredFromProject,*currentUser,project))
+        if(DataAccessFacade::managedDataAccess().execute(unregisteredFromProject,*currentUser,project) != SUCCESS)
         {
             // Error occured
             qDebug() << "UnRegistration failed";
@@ -135,7 +136,7 @@ void ProjectDetailsView::on_btnRegistration_clicked()
     }
     else
     {
-        if(DataAccessFacade::managedDataAccess().execute(registeredInProject,*currentUser, project))
+        if(DataAccessFacade::managedDataAccess().execute(registeredInProject,*currentUser, project) != SUCCESS)
         {
             // Error occured
             qDebug() << "Registration failed";
