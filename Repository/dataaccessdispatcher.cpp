@@ -2,7 +2,7 @@
 #include "userrepository.h"
 #include "projectrepository.h"
 #include "databasemanager.h"
-
+#include "DataAccessLayer/mapconfigs.h"
 #include "errorcodes.h"
 #include <QJsonObject>
 #include <QDebug>

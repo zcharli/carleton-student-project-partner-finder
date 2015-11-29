@@ -7,6 +7,11 @@ Configuration::Configuration(ConfigurationType type, int value) :
 
 }
 
+Configuration::Configuration(const QJsonObject& configJSON)
+{
+    deserializeJSONFromRetrieve(configJSON);
+}
+
 ConfigurationType Configuration::getType()
 {
     return type;
@@ -23,7 +28,6 @@ void Configuration::setValue(int newValue)
 {
     value = newValue;
 }
-
 
 Configuration* Configuration::DefaultConfigurations()
 {

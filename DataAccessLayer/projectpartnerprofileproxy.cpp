@@ -1,4 +1,5 @@
 #include "projectpartnerprofileproxy.h"
+#include <QJsonObject>
 
 ProjectPartnerProfileProxy::ProjectPartnerProfileProxy(StudentUser& user, int pScore, int tScore, unsigned char we):
 ProjectPartnerProfile(user, pScore, tScore, we, NULL)
@@ -7,7 +8,6 @@ ProjectPartnerProfile(user, pScore, tScore, we, NULL)
     pppID = 0;
     ppp = NULL;
 }
-
 
 ProjectPartnerProfileReal& ProjectPartnerProfileProxy::loadPPP()
 {

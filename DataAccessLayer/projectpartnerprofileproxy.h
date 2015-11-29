@@ -4,6 +4,8 @@
 #include "projectpartnerprofile.h"
 #include "projectpartnerprofilereal.h"
 
+class QJsoneObject;
+
 class ProjectPartnerProfileProxy : public ProjectPartnerProfile
 {
     ProjectPartnerProfileReal *ppp;
