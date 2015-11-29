@@ -6,7 +6,6 @@
 #include "DataAccessLayer/studentuser.h"
 #include "DataAccessLayer/dataaccessfacade.h"
 #include "DataAccessLayer/qualification.h"
-
 #include <QLayout>
 
 #define WINDOW_MAX_WIDTH 1000
@@ -29,7 +28,10 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&createProjectWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&projectDetailsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&homeWidget);
-    ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&code);
+    //ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
+    ui->mainContentStackedWidget->setCurrentWidget(&code);
+
     //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
                      this, SLOT(generateProfilePage()));

@@ -44,7 +44,9 @@ SOURCES += \
     Repository/dataaccessdispatcher.cpp \
     AlgorithmExecution/insomniamatchingalgorithm.cpp \
     AlgorithmExecution/matchreportview.cpp \
-    AlgorithmExecution/team.cpp
+    AlgorithmExecution/team.cpp \
+    ProfileManagement/codingwidget.cpp \
+    highlighter.cpp
 
 
 HEADERS  += \
@@ -81,7 +83,9 @@ HEADERS  += \
     AlgorithmExecution/insomniamatchingalgorithm.h \
     AlgorithmExecution/matchreportview.h \
     AlgorithmExecution/team.h \
-    DataAccessLayer/mapconfigs.h
+    DataAccessLayer/mapconfigs.h \
+    ProfileManagement/codingwidget.h \
+    highlighter.h
 
 FORMS    += \
     UserAuthentication/loginform.ui \
@@ -94,7 +98,8 @@ FORMS    += \
     cupidwindow.ui \
     settingswidget.ui \
     sidebarwidget.ui \
-    homewidget.ui
+    homewidget.ui \
+    ProfileManagement/codingwidget.ui
 
 RESOURCES += \
     stylesheet.qrc
