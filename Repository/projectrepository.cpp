@@ -315,7 +315,7 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
     return 0;
 }
 
-int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int userId, int limit = 0)
+int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int userId, int limit)
 {
     QJsonArray projectsReturned;
 
