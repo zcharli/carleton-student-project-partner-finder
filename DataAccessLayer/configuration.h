@@ -5,6 +5,8 @@
 
 #include "imappable.h"
 
+class QJsonObject;
+
 enum ConfigurationType
 {
     TeamSize = 0,
@@ -18,6 +20,7 @@ class Configuration : private IMappable
 
 public:
     Configuration(ConfigurationType=NoType, int=0);
+    Configuration(const QJsonObject&);
 
     static Configuration* DefaultConfigurations();
 

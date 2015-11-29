@@ -1,14 +1,16 @@
 #include "projectrepository.h"
 #include "userrepository.h"
 
+#include "DataAccessLayer/mapconfigs.h"
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QSqlQuery>
 #include <QVector>
 #include "QDebug"
 #include <QSqlError>
+#
 
-#define NUMBER_OF_CONFIGURATIONS 1
+#define NUMBER_OF_CONFIGURATIONS_KEY 1
 
 ProjectRepository::ProjectRepository(QSqlDatabase& db)
 {
@@ -21,14 +23,14 @@ ProjectRepository::~ProjectRepository()
 int ProjectRepository::userCreatedProject(QJsonObject& projectToInsert, int userId)
 {
     // Structure is projects -> List of projects
-    QJsonObject projectToSave = projectToInsert["project"].toObject();
-    QJsonArray projectConfigs = projectToSave["configurations"].toArray();
+    QJsonObject projectToSave = projectToInsert[PROJECT_KEY].toObject();
+    QJsonArray projectConfigs = projectToSave[CONFIGURATIONS_KEY].toArray();
     // An Admin is "registered" to a project by the DB
     QString createProjectQuery = "Insert into project (project_title, project_description) values (:title,:desc)";
     QSqlQuery createProject(this->db);
     createProject.prepare(createProjectQuery);
-    createProject.bindValue(":title", projectToSave["title"].toString());
-    createProject.bindValue(":desc",projectToSave["description"].toString());
+    createProject.bindValue(":title", projectToSave[PROJECT_title].toString());
+    createProject.bindValue(":desc",projectToSave[PROJECT_description].toString());
 
     if(!createProject.exec())
     {
@@ -52,24 +54,24 @@ int ProjectRepository::userCreatedProject(QJsonObject& projectToInsert, int user
         return getProjectID.lastError().number();
     }
 
-    projectToSave["id"] = projectID;
+    projectToSave[PROJECT_id] = projectID;
     qDebug() << "Project ID" + QString::number(projectID);
 
-    // Insert configurations
+    // Insert CONFIGURATIONS_KEY
     int i;
-    for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
+    for(i=0;i<NUMBER_OF_CONFIGURATIONS_KEY;++i)
     {
-        qDebug() << projectConfigs[i].toObject()["value"].toInt();
-        // Maybe not all configurations are set
-        QString insertQualificationQuery = "Insert into project_configurations (config_id,project_id,value) values (:cid, :pid, :val)";
-        QSqlQuery insertQualification(this->db);
-        insertQualification.prepare(insertQualificationQuery);
-        insertQualification.bindValue(":cid",i + 1);
-        insertQualification.bindValue(":pid", projectID);
-        insertQualification.bindValue(":val",projectConfigs[i].toObject()["value"].toInt());
-        if(!insertQualification.exec())
+        qDebug() << projectConfigs[i].toObject()[CONFIURATION_value].toInt();
+        // Maybe not all CONFIGURATIONS_KEY are set
+        QString insertConfigurationQuery = "Insert into project_CONFIGURATIONS_KEY (config_id,project_id,value) values (:cid, :pid, :val)";
+        QSqlQuery insertConfiguration(this->db);
+        insertConfiguration.prepare(insertConfigurationQuery);
+        insertConfiguration.bindValue(":cid",i + 1);
+        insertConfiguration.bindValue(":pid", projectID);
+        insertConfiguration.bindValue(":val",projectConfigs[i].toObject()[CONFIURATION_value].toInt());
+        if(!insertConfiguration.exec())
         {
-            qDebug() << "insertQualification error:  "<< this->db.lastError();
+            qDebug() << "insertConfiguration error:  "<< this->db.lastError();
             return this->db.lastError().number();
         }
     }
@@ -87,17 +89,17 @@ int ProjectRepository::userCreatedProject(QJsonObject& projectToInsert, int user
     }
 
     // Need to replace the copied project object
-    projectToInsert["project"] = projectToSave;
+    projectToInsert[PROJECT_KEY] = projectToSave;
 
     return 0;
 }
 
 int ProjectRepository::userUpdatedProject(QJsonObject& projectToUpdate, int userId)
 {
-    QJsonObject projectToSave = projectToUpdate["project"].toObject();
-    QJsonArray projectConfigs = projectToSave["configurations"].toArray();
+    QJsonObject projectToSave = projectToUpdate[PROJECT_KEY].toObject();
+    QJsonArray projectConfigs = projectToSave[CONFIGURATIONS_KEY].toArray();
 
-    if(!projectToSave.contains("id"))
+    if(!projectToSave.contains(PROJECT_id))
     {
         return userCreatedProject(projectToUpdate, userId);
     }
@@ -106,26 +108,26 @@ int ProjectRepository::userUpdatedProject(QJsonObject& projectToUpdate, int user
     QString updateProjQuery = "Update project set project_title=:title , project_description=:desc where project_id=:pid";
     QSqlQuery updateProject(this->db);
     updateProject.prepare(updateProjQuery);
-    updateProject.bindValue(":title",projectToSave["title"].toString());
-    updateProject.bindValue(":desc",projectToSave["description"].toString());
-    updateProject.bindValue(":id",projectToSave["id"].toString());
+    updateProject.bindValue(":title",projectToSave[PROJECT_title].toString());
+    updateProject.bindValue(":desc",projectToSave[PROJECT_description].toString());
+    updateProject.bindValue(":id",projectToSave[PROJECT_id].toString());
     if(!updateProject.exec())
     {
         qDebug() << "updateProject error:  "<< updateProject.lastError();
         return updateProject.lastError().number();
     }
 
-    // Update all configurations
+    // Update all CONFIGURATIONS_KEY
     int i;
-    for(i=0;i<NUMBER_OF_CONFIGURATIONS;++i)
+    for(i=0;i<NUMBER_OF_CONFIGURATIONS_KEY;++i)
     {
 
-        QString updateProjConfigQuery = "Update project_configurations set value=:val where config_id=:cid and project_id=:pid";
+        QString updateProjConfigQuery = "Update project_CONFIGURATIONS_KEY set value=:val where config_id=:cid and project_id=:pid";
         QSqlQuery updateProjConfig(this->db);
         updateProjConfig.prepare(updateProjConfigQuery);
-        updateProjConfig.bindValue(":val", projectConfigs[i].toObject()["value"].toInt());
+        updateProjConfig.bindValue(":val", projectConfigs[i].toObject()[CONFIURATION_value].toInt());
         updateProjConfig.bindValue(":cid",i + 1);
-        updateProjConfig.bindValue(":pid",projectToSave["id"].toString());
+        updateProjConfig.bindValue(":pid",projectToSave[PROJECT_id].toString());
 
         if(!updateProjConfig.exec())
         {
@@ -136,7 +138,7 @@ int ProjectRepository::userUpdatedProject(QJsonObject& projectToUpdate, int user
     }
 
     // Need to replace the copied project object
-    projectToUpdate["project"] = projectToSave;
+    projectToUpdate[PROJECT_KEY] = projectToSave;
     return 0;
 }
 
@@ -157,7 +159,7 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
         {
             QJsonObject project;
             QJsonArray projectConfigs;
-
+            QJsonObject ppp;
             // Index
             //  0 -> project_id
             //  1 -> project_title
@@ -168,9 +170,9 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
             int projectId = fetchAllProjects.value(0).toInt();
 
             // Add project to JSON
-            project["id"] = projectId;
-            project["title"] = projectTitle;
-            project["description"] = projectDescription;
+            project[PROJECT_id] = projectId;
+            project[PROJECT_title] = projectTitle;
+            project[PROJECT_description] = projectDescription;
 
             // Fetch the number of registered users in this project
             QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registration where project_id=:pid";
@@ -182,7 +184,7 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
                 if(fetchNumRegistered.next())
                 {
                     // Negate the AdministratorUser from the count
-                    project["numberOfRegisteredUsers"] = fetchNumRegistered.value(0).toInt() - 1;
+                    project[PROJECT_numberOfRegisteredUsers] = fetchNumRegistered.value(0).toInt() - 1;
                 }
             }
             else
@@ -191,21 +193,21 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
                 return fetchNumRegistered.lastError().number();
             }
 
-            // As there may be more than one configurations per project, we need to do a seperate query :(
-            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
+            // As there may be more than one CONFIGURATIONS_KEY per project, we need to do a seperate query :(
+            QString fetchProjectCONFIGURATIONS_KEYQuery = "Select config_id, value from project_CONFIGURATIONS_KEY where project_id=:pid";
             QSqlQuery fetchProjectConfiguration(this->db);
-            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
+            fetchProjectConfiguration.prepare(fetchProjectCONFIGURATIONS_KEYQuery);
             fetchProjectConfiguration.bindValue(":pid",projectId);
             if(fetchProjectConfiguration.exec())
             {
                 while(fetchProjectConfiguration.next())
                 {
                     QJsonObject projectConfig;
-                    projectConfig["type"] = fetchProjectConfiguration.value(0).toInt() - 1;
-                    projectConfig["value"] = fetchProjectConfiguration.value(1).toInt();
+                    projectConfig[CONFIURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
+                    projectConfig[CONFIURATION_value] = fetchProjectConfiguration.value(1).toInt();
                     projectConfigs.append(projectConfig);
                 }
-                project["configurations"] = projectConfigs;
+                project[CONFIGURATIONS_KEY] = projectConfigs;
             }
             else
             {
@@ -214,6 +216,10 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
             }
 
             ++tracker;
+
+            // Fetch all dat phat PPPs for dis projak.
+            fetchPPPsForProject(ppp,projectId);
+            project[PPP_KEY] = ppp;
             projectsReturned.append(project);
         }
     }
@@ -222,8 +228,8 @@ int ProjectRepository::fetchAllProjects(QJsonObject& allProjectsReturns)
         qDebug() << "fetchAllProjects error:  "<< fetchAllProjects.lastError();
         return fetchAllProjects.lastError().number();
     }
-    allProjectsReturns["projects"] = projectsReturned;
-    allProjectsReturns["count"] = projectsReturned.count();
+    allProjectsReturns[PROJECTS_KEY] = projectsReturned;
+    allProjectsReturns[COUNT_KEY] = projectsReturned.count();
     return 0;
 }
 
@@ -250,9 +256,9 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
             QString projTitle = QString(fetchProject.value(1).toString());
             QString projDesc = QString(fetchProject.value(2).toString());
 
-            project["title"] = projTitle;
-            project["decription"] = projDesc;
-            project["id"] = projectId;
+            project[PROJECT_title] = projTitle;
+            project[PROJECT_description] = projDesc;
+            project[PROJECT_id] = projectId;
 
             // Fetch the number of registered users in this project
             QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registration where project_id=:pid";
@@ -264,7 +270,7 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
                 if(fetchNumRegistered.next())
                 {
                     // Negate the AdministratorUser from the count
-                    project["numberOfRegisteredUsers"] = fetchNumRegistered.value(0).toInt() - 1;
+                    project[PROJECT_numberOfRegisteredUsers] = fetchNumRegistered.value(0).toInt() - 1;
                 }
             }
             else
@@ -273,21 +279,21 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
                 return fetchNumRegistered.lastError().number();
             }
 
-            // As there may be more than one configurations per project, we need to do a seperate query :(
-            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
+            // As there may be more than one CONFIGURATIONS_KEY per project, we need to do a seperate query :(
+            QString fetchProjectCONFIGURATIONS_KEYQuery = "Select config_id, value from project_CONFIGURATIONS_KEY where project_id=:pid";
             QSqlQuery fetchProjectConfiguration(this->db);
-            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
+            fetchProjectConfiguration.prepare(fetchProjectCONFIGURATIONS_KEYQuery);
             fetchProjectConfiguration.bindValue(":pid",projectId);
             if(fetchProjectConfiguration.exec())
             {
                 while(fetchProjectConfiguration.next())
                 {
                     QJsonObject projectConfig;
-                    projectConfig["type"] = fetchProjectConfiguration.value(0).toInt() - 1;
-                    projectConfig["value"] = fetchProjectConfiguration.value(1).toInt();
+                    projectConfig[CONFIURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
+                    projectConfig[CONFIURATION_value] = fetchProjectConfiguration.value(1).toInt();
                     projectConfigs.append(projectConfig);
                 }
-                project["configurations"] = projectConfigs;
+                project[CONFIGURATIONS_KEY] = projectConfigs;
             }
             else
             {
@@ -303,18 +309,23 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
         qDebug() << "fetchProject error:  "<< fetchProject.lastError();
         return fetchProject.lastError().number();
     }
-    projectReturn["projects"] = projectArrayWithSingleProject;
-    projectReturn["count"] = projectArrayWithSingleProject.count();
+    projectReturn[PROJECT_KEY] = projectArrayWithSingleProject;
+    projectReturn[COUNT_KEY] = projectArrayWithSingleProject.count();
 
     return 0;
 }
 
-int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int userId)
+int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int userId, int limit = 0)
 {
     QJsonArray projectsReturned;
 
     // Dump the projects that belong to a user
     QString fetchProjectsQuery = "Select p.project_id, p.project_title, p.project_description from project p join project_registration r on p.project_id=r.project_id where r.user_id=:uid";
+    if(limit > 0)
+    {
+        QString orderByDateLimitQuery = QString(" order by date(p.date_created) limit %1").arg(QString::number(limit));
+        fetchProjectsQuery += orderByDateLimitQuery;
+    }
     QSqlQuery fetchProject(this->db);
     fetchProject.prepare(fetchProjectsQuery);
     fetchProject.bindValue(":uid",userId);
@@ -334,9 +345,9 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
             QString projectTitle = QString(fetchProject.value(1).toString());
             QString projectDescription = QString(fetchProject.value(2).toString());
             int projectId = fetchProject.value(0).toInt();
-            project["id"] = projectId;
-            project["title"] = projectTitle;
-            project["description"] = projectDescription;
+            project[PROJECT_id] = projectId;
+            project[PROJECT_title] = projectTitle;
+            project[PROJECT_description] = projectDescription;
 
             // Fetch the number of registered users in this project
             QString fetchRegisteredUsersInProjectQuery = "Select count(user_id) from project_registration where project_id=:pid";
@@ -348,7 +359,7 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
                 if(fetchNumRegistered.next())
                 {
                     // Negate 1 for the AdministratorUser
-                    project["numberOfRegisteredUsers"] = fetchNumRegistered.value(0).toInt() - 1;
+                    project[PROJECT_numberOfRegisteredUsers] = fetchNumRegistered.value(0).toInt() - 1;
                 }
             }
             else
@@ -357,21 +368,21 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
                 return fetchNumRegistered.lastError().number();
             }
 
-            // As there may be more than one configurations per project, we need to do a seperate query :(
-            QString fetchProjectConfigurationsQuery = "Select config_id, value from project_configurations where project_id=:pid";
+            // As there may be more than one CONFIGURATIONS_KEY per project, we need to do a seperate query :(
+            QString fetchProjectCONFIGURATIONS_KEYQuery = "Select config_id, value from project_CONFIGURATIONS_KEY where project_id=:pid";
             QSqlQuery fetchProjectConfiguration(this->db);
-            fetchProjectConfiguration.prepare(fetchProjectConfigurationsQuery);
+            fetchProjectConfiguration.prepare(fetchProjectCONFIGURATIONS_KEYQuery);
             fetchProjectConfiguration.bindValue(":pid",projectId);
             if(fetchProjectConfiguration.exec())
             {
                 while(fetchProjectConfiguration.next())
                 {
                     QJsonObject projectConfig;
-                    projectConfig["type"] = fetchProjectConfiguration.value(0).toInt() - 1;
-                    projectConfig["value"] = fetchProjectConfiguration.value(1).toInt();
+                    projectConfig[CONFIURATION_type] = fetchProjectConfiguration.value(0).toInt() - 1;
+                    projectConfig[CONFIURATION_value] = fetchProjectConfiguration.value(1).toInt();
                     projectConfigs.append(projectConfig);
                 }
-                project["configurations"] = projectConfigs;
+                project[CONFIGURATIONS_KEY] = projectConfigs;
             }
             else
             {
@@ -389,8 +400,8 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
         return fetchProject.lastError().number();
     }
 
-    projectsForUser["projects"] = projectsReturned;
-    projectsForUser["count"] = projectsReturned.count();
+    projectsForUser[PROJECTS_KEY] = projectsReturned;
+    projectsForUser[COUNT_KEY] = projectsReturned.count();
 
     return 0;
 }
@@ -481,18 +492,18 @@ int ProjectRepository::fetchPPPsForProject(QJsonObject& pppsToReturn, int projec
             unsigned char workEthic = (unsigned char)fetchUsersRegistered.value(7).toInt();
 
             // Build this student
-            student["firstName"] = fname;
-            student["lastName"] = lname;
-            student["userName"] = username;
-            student["id"] = user_id;
-            student["userType"] = 1;
+            student[USER_firstName] = fname;
+            student[USER_lastName] = lname;
+            student[USER_userName] = username;
+            student[PROJECT_id] = user_id;
+            student[USER_userType] = 1;
 
             // Build this Student's PPP
-            ppp["pppID"] = ppp_id;
-            ppp["personalTechnicalScore"] = personalScore;
-            ppp["teammateTechnicalScore"] = teammateScore;
-            ppp["workEthic"] = workEthic;
-            ppp["user"] = student;
+            ppp[PPP_pppID] = ppp_id;
+            ppp[PPP_personalTechnicalScore] = personalScore;
+            ppp[PPP_teammateTechnicalScore] = teammateScore;
+            ppp[PPP_workEthic] = workEthic;
+            ppp[USER_KEY] = student;
 
             pppList.append(ppp);
 
@@ -505,8 +516,8 @@ int ProjectRepository::fetchPPPsForProject(QJsonObject& pppsToReturn, int projec
         return fetchUsersRegistered.lastError().number();
     }
 
-    pppsToReturn["ppp"] = pppList;
-    pppsToReturn["count"] = pppList.count();
+    pppsToReturn[PPP_KEY] = pppList;
+    pppsToReturn[COUNT_KEY] = pppList.count();
 
     return 0;
 }

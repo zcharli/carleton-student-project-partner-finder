@@ -21,7 +21,7 @@ class StudentUser : public User
     int pppIDForFetch;
 
 public:
-    StudentUser();
+    StudentUser(const QJsonObject&);
     StudentUser(QString&, QString&, QString&);
 
     virtual ~StudentUser();

@@ -2,11 +2,17 @@
 #include "projectpartnerprofile.h"
 
 #include <QDebug>
+#include <QJsonObject>
 
 Qualification::Qualification(QualificationType type, int value)
 {
     this->type = type;
     this->value = value;
+}
+
+Qualification::Qualification(const QJsonObject& qualificationJSON)
+{
+    deserializeJSONFromRetrieve(qualificationJSON);
 }
 
 Qualification* Qualification::DefaultQualifications()

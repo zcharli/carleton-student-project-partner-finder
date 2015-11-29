@@ -80,7 +80,8 @@ HEADERS  += \
     Repository/dataaccessdispatcher.h \
     AlgorithmExecution/insomniamatchingalgorithm.h \
     AlgorithmExecution/matchreportview.h \
-    AlgorithmExecution/team.h
+    AlgorithmExecution/team.h \
+    DataAccessLayer/mapconfigs.h
 
 FORMS    += \
     UserAuthentication/loginform.ui \

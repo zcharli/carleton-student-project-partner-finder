@@ -1,6 +1,9 @@
 #include "project.h"
 #include "projectpartnerprofile.h"
+#include "projectpartnerprofileproxy.h"
 #include "studentuser.h"
+#include "DataAccessLayer/dataaccessfacade.h"
+#include "mapconfigs.h"
 #include <QJsonArray>
 
 #define NUMBER_OF_CONFIGURATIONS 1
@@ -15,11 +18,12 @@ Project::Project(QString title, QString desc)
     projectConfigurations = Configuration::DefaultConfigurations();
 }
 
-Project::Project()
+Project::Project(const QJsonObject& projectJSON)
 {
     numberOfRegisteredUsers = 0;
     id = 0;
     projectConfigurations = Configuration::DefaultConfigurations();
+    deserializeJSONFromRetrieve(projectJSON);
 }
 
 Project::~Project()
@@ -120,7 +124,7 @@ bool Project::serializeJSONForSave(QJsonObject& projectJSON)
     QJsonArray configArray;
     if(id != 0)
     {
-        projectJSON["id"] = id;
+        projectJSON[PROJECT_id] = id;
     }
 
 
@@ -130,29 +134,53 @@ bool Project::serializeJSONForSave(QJsonObject& projectJSON)
         projectConfigurations[i].serializeJSONForSave(config);
         configArray.append(config);
     }
-    projectJSON.insert("description", description);
-    projectJSON.insert("title", title);
-    projectJSON.insert("numberOfRegisteredUsers", numberOfRegisteredUsers);
-    projectJSON["configurations"] = configArray;
+    projectJSON.insert(PROJECT_description, description);
+    projectJSON.insert(PROJECT_title, title);
+    projectJSON.insert(PROJECT_numberOfRegisteredUsers, numberOfRegisteredUsers);
+    projectJSON[PROJECT_configuration] = configArray;
 
     return true;
 }
 
 bool Project::deserializeJSONFromRetrieve(const QJsonObject& projectJSON)
 {
+    if(projectJSON.isEmpty())
+    {
+        return false;
+    }
+
     int i;
 
-    id = projectJSON.value("id").toInt();
-    title = projectJSON.value("title").toString();
-    description = projectJSON.value("description").toString();
-    numberOfRegisteredUsers = projectJSON.value("numberOfRegisteredUsers").toInt();
-    QJsonArray configArray = projectJSON["configurations"].toArray();
+    id = projectJSON.value(PROJECT_id).toInt();
+    title = projectJSON.value(PROJECT_title).toString();
+    description = projectJSON.value(PROJECT_description).toString();
+    numberOfRegisteredUsers = projectJSON.value(PROJECT_numberOfRegisteredUsers).toInt();
+
+    QJsonArray configArray = projectJSON[PROJECT_configuration].toArray();
     for(i=0;i<configArray.size();++i)
     {
         QJsonObject config = configArray[i].toObject();
 
         projectConfigurations[i].deserializeJSONFromRetrieve(config);
     }
+
+    if(projectJSON.contains(PPP_KEY))
+    {
+        QJsonArray registeredPPPList = projectJSON[PPP_KEY].toObject()[PPP_KEY].toArray();
+
+        for(i=0;i<registeredPPPList.size();++i)
+        {
+            User* stuUser = DataAccessFacade::defaultUser(Student);
+            ProjectPartnerProfile* profile = DataAccessFacade::defaultProfile((*((StudentUser*)stuUser)));
+            profile->deserializeJSONFromRetrieve(registeredPPPList[i].toObject());
+            registeredPPPs.insert(*profile);
+
+            // we copied these things so we can delete them into the
+            delete profile;
+            delete stuUser;
+        }
+    }
+
 
     return true;
 }
@@ -170,27 +198,26 @@ bool Project::serializeJSONFromCollection(QJsonObject& json, const QVector<Proje
         projectJSONArray.append(project);
     }
 
-    json["count"] = projectList.size();
-    json["projects"] = projectJSONArray;
+    json[COUNT_KEY] = projectList.size();
+    json[PROJECTS_KEY] = projectJSONArray;
     return true;
 }
 
 
 bool Project::deserializeJSONFromCollection(const QJsonObject& json, QVector<Project*>& projectList)
 {
-    if(!json.contains("projects"))
+    if(!json.contains(PROJECTS_KEY))
     {
         return false;
     }
 
-    QJsonArray projectJSONArray = json["projects"].toArray();
+    QJsonArray projectJSONArray = json[PROJECTS_KEY].toArray();
     int i = 0;
-    int count = json["count"].toInt();
+    int count = json[COUNT_KEY].toInt();
 
     for(i=0;i<count;++i)
     {
-        Project* project = new Project();
-        project->deserializeJSONFromRetrieve(projectJSONArray[i].toObject());
+        Project* project = new Project(projectJSONArray[i].toObject());
         projectList.append(project);
     }
 

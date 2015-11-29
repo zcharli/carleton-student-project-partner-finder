@@ -4,6 +4,8 @@
 #include "studentuser.h"
 #include "imappable.h"
 
+class QJsonObject;
+
 #define NUMBER_OF_WORK_ETHICS_QUALIFICATIONS 8
 #define NUMBER_OF_QUALIFICATIONS 24
 
@@ -55,6 +57,7 @@ class Qualification : private IMappable
 
 public:
     Qualification(QualificationType=noneType, int=0);
+    Qualification(const QJsonObject&);
 
     /*!     returns a qualifications array defaulted to the correct indexes that match
      *      The QualificationType. the values are initialized to zero

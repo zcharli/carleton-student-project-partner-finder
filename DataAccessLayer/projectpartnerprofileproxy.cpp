@@ -1,4 +1,5 @@
 #include "projectpartnerprofileproxy.h"
+#include <QJsonObject>
 
 ProjectPartnerProfileProxy::ProjectPartnerProfileProxy(StudentUser& user, int pScore, int tScore, unsigned char we):
 ProjectPartnerProfile(user, pScore, tScore, we, NULL)
@@ -7,7 +8,6 @@ ProjectPartnerProfile(user, pScore, tScore, we, NULL)
     pppID = 0;
     ppp = NULL;
 }
-
 
 ProjectPartnerProfileReal& ProjectPartnerProfileProxy::loadPPP()
 {
@@ -28,4 +28,16 @@ void ProjectPartnerProfileProxy::changeQualification(Qualification qualification
 Qualification ProjectPartnerProfileProxy::getQualification(int index)
 {
     return loadPPP().getQualification(index);
+}
+
+
+bool ProjectPartnerProfileProxy::serializeJSONForSave(QJsonObject& pppJSON)
+{
+    return loadPPP().serializeJSONForSave(pppJSON);
+}
+
+
+bool ProjectPartnerProfileProxy::deserializeJSONFromRetrieve(const QJsonObject& pppJSON)
+{
+    return loadPPP().deserializeJSONFromRetrieve(pppJSON);
 }

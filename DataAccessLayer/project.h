@@ -23,7 +23,7 @@ class Project : private IMappable
     int id;
 
 public:
-    Project();
+    Project(const QJsonObject&);
     Project(QString, QString);
     ~Project();
 

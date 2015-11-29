@@ -39,9 +39,9 @@ public:
      *           this user and builds a maps to represent the objects returned
      *  @output: status: int (success or failure)
      */
-    int retrieveProjectsForUser(QJsonObject&);
+    int retrieveProjectsForUser(QJsonObject&,int);
 
-    /*!  @input: single project mappable object with id: QJsonObject&
+    /*!  @input: single project mappable object with id: QJsonObject&, limitOfProjects: int
      *    @desc: retreives all PPPs registered to this project from the database
      *           and builds a maps to represent the objects returned
      *  @output: status: int (success or failure)
