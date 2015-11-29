@@ -22,7 +22,7 @@ public:
      *        @desc: handles the database actions necessary for retrieving the PPP for a User
      *      @return: success or failure: bool
      */
-    int fetchPPPForUser(QJsonObject&, int);
+    int fetchPPPForUser(QJsonObject&, int, bool);
 
     /*!
      *       @param: user: QJsonObject&, user id: int
