@@ -4,6 +4,7 @@
 #include "cupidslider.h"
 #include "ui_profilewidget.h"
 #include "sidebarwidget.h"
+#include "codingwidget.h"
 
 //  Subsystem dependencies
 #include "DataAccessLayer/projectpartnerprofile.h"
@@ -73,6 +74,8 @@ public:
 
     int numBoxSelected;
 
+    CodingWidget codingWidget;
+
     void enableDisableCheckBoxes();
     void setUpDefault();
 
@@ -82,6 +85,7 @@ signals:
     void userToCreatePPP();
     void userToLeavePPP();
     void userToViewPPP();
+    void userToCodingQuestion();
 
 private:
     void didSetProfile();
@@ -111,6 +115,8 @@ private slots:
     void on_chkDependable_clicked();
 
     void handleUserContextSwitch(DetailViewType);
+
+    void on_btnSaveCoding_clicked();
 
 private:
     Ui::ProfileWidget *ui;

@@ -7,10 +7,31 @@ CodingWidget::CodingWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     highlighter = new Highlighter(ui->txtEdit->document());
-    highlighter2 = new Highlighter(ui->txtEdit2->document());
 }
 
 CodingWidget::~CodingWidget()
 {
+    delete highlighter;
     delete ui;
+}
+
+int CodingWidget::getCodingQuestionResult(){
+    return 0;
+
+}
+
+int CodingWidget::getMultipleChoiceResults(){
+    int total = 0;
+    if(ui->q1Opt1->isChecked())
+        total++;
+    if(ui->q2Opt2->isChecked())
+        total++;
+    if(ui->q3Opt1->isChecked())
+        total++;
+    if(ui->q4Opt1->isChecked())
+        total++;
+    if(ui->q5Opt2->isChecked())
+        total++;
+    return total;
+
 }

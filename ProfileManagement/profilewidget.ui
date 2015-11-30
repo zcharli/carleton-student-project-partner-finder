@@ -41,6 +41,9 @@
       <number>9</number>
      </property>
      <item>
+      <layout class="QVBoxLayout" name="codingQuestionView"/>
+     </item>
+     <item>
       <widget class="QWidget" name="noProfileView" native="true">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -112,7 +115,7 @@ Click on the Create PPP to begin.</string>
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="userCodingTab">
         <attribute name="title">
@@ -129,8 +132,8 @@ Click on the Create PPP to begin.</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>760</width>
-              <height>288</height>
+              <width>742</width>
+              <height>283</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -345,7 +348,7 @@ Click on the Create PPP to begin.</string>
               <x>0</x>
               <y>0</y>
               <width>742</width>
-              <height>288</height>
+              <height>283</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -384,6 +387,13 @@ Click on the Create PPP to begin.</string>
     <widget class="QPushButton" name="btnSave">
      <property name="text">
       <string>Save Changes</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnSaveCoding">
+     <property name="text">
+      <string>Submit  Changes</string>
      </property>
     </widget>
    </item>

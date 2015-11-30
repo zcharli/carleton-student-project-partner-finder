@@ -1,8 +1,7 @@
 #include "profilewidget.h"
-
 //  Subsystem dependencies
 #include "DataAccessLayer/qualification.h"
-
+#include <iostream>
 #define DEFAULT_VALUE 0
 
 ProfileWidget::ProfileWidget(QWidget *parent):
@@ -70,7 +69,7 @@ ProfileWidget::ProfileWidget(QWidget *parent):
     ui->formLayout_3->addRow(new QLabel("Version Control\nExperience"), sliderTeammateVersionControl);
     ui->formLayout_3->addRow(new QLabel("Web Development\nSkills"), sliderTeammateWebDevelopment);
     numBoxSelected = 0;
-
+    ui->codingQuestionView->addWidget(&codingWidget);
     viewWillAppear();
 }
 
@@ -290,12 +289,21 @@ void ProfileWidget::on_btnSave_clicked()
 void ProfileWidget::on_btnEditPPP_clicked()
 {
     emit userToEditPPP();
+    enableDisableCheckBoxes();
 }
 
 void ProfileWidget::on_btnCreatePPP_clicked()
 {
     emit userToCreatePPP();
+
 }
+
+void ProfileWidget::on_btnSaveCoding_clicked()
+{
+    std::cout << "You Got " << codingWidget.getMultipleChoiceResults() << " out of 5";
+    //call emit userToCodingQuestion() to generate coding question widget
+}
+
 
 void ProfileWidget::handleUserContextSwitch(DetailViewType type)
 {
