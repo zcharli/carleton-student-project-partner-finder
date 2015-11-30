@@ -48,14 +48,14 @@ SOURCES += \
     ProjectManagement/createprojectcontroller.cpp \
     ProjectManagement/abstractprojectview.cpp \
     AlgorithmExecution/insomniamatchingalgorithm.cpp \
-    AlgorithmExecution/matchreportview.cpp \
     AlgorithmExecution/team.cpp \
     main.cpp \
     sidebarwidget.cpp \
     settingswidget.cpp \
     cupidwindow.cpp \
     homewidget.cpp \
-    highlighter.cpp
+    highlighter.cpp \
+    AlgorithmExecution/matchreportview.cpp
 
 
 HEADERS  += \
@@ -96,14 +96,14 @@ HEADERS  += \
     ProjectManagement/createprojectcontroller.h \
     ProjectManagement/abstractprojectview.h \
     AlgorithmExecution/insomniamatchingalgorithm.h \
-    AlgorithmExecution/matchreportview.h \
     AlgorithmExecution/team.h \
     errorcodes.h \
     sidebarwidget.h \
     settingswidget.h \
     cupidwindow.h \
     homewidget.h \
-    highlighter.h
+    highlighter.h \
+    AlgorithmExecution/matchreportview.h
 
 FORMS    += \
     UserAuthentication/loginform.ui \
@@ -117,7 +117,8 @@ FORMS    += \
     settingswidget.ui \
     sidebarwidget.ui \
     homewidget.ui \
-    ProfileManagement/codingwidget.ui
+    ProfileManagement/codingwidget.ui \
+    AlgorithmExecution/matchreportview.ui
 
 RESOURCES += \
     stylesheet.qrc
