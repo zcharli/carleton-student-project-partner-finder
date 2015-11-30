@@ -259,6 +259,7 @@ void PPPController::enableInteractions(bool shouldEnable)
     profileView->sliderTeammateNetworkComputing->setEnabled(shouldEnable);
     profileView->sliderTeammateVersionControl->setEnabled(shouldEnable);
     profileView->sliderTeammateWebDevelopment->setEnabled(shouldEnable);
+    profileView->enableDisableCheckBoxes();
 }
 
 void PPPController::editPPP()
@@ -290,6 +291,8 @@ void PPPController::savePPP()
             QMessageBox messageBox;
             messageBox.information(0,"Success","You can start registering your self to projects!");
             messageBox.setFixedSize(500,200);
+            user->setFetchIDForPPP(profile->getPPPID());
+            user->setProfile(profile);
         }
         else
         {

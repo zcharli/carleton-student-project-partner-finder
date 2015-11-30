@@ -102,6 +102,39 @@ User* DataAccessFacade::defaultUser(UserType type)
     return user;
 }
 
+void DataAccessFacade::doneUsingProfile(ProjectPartnerProfile* profile)
+{
+    int index = allocatedProfiles.indexOf(profile);
+    if(index != -1)
+    {
+        allocatedProfiles.remove(index);
+        delete profile;
+        profile = NULL;
+    }
+}
+
+void DataAccessFacade::doneUsingProject(Project* project)
+{
+    int index = allocatedProjects.indexOf(project);
+    if(index != -1)
+    {
+        allocatedProjects.remove(index);
+        delete project;
+        project = NULL;
+    }
+}
+
+void DataAccessFacade::doneUsingUser(User* user)
+{
+    int index = allocatedUsers.indexOf(user);
+    if(index != -1)
+    {
+        allocatedUsers.remove(index);
+        delete user;
+        user = NULL;
+    }
+}
+
 DataAccessFacade& DataAccessFacade::managedDataAccess()
 {
     if(dataInstance == NULL)

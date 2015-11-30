@@ -63,6 +63,89 @@ void ProjectPartnerProfileProxy::updateProfileScores()
     this->teammateTechnicalScore = loadPPP().getTeammateTechnicalScore();
 }
 
+StudentUser& ProjectPartnerProfileProxy::getStudentUser()
+{
+    if(ppp != NULL)
+      return loadPPP().getStudentUser();
+
+    return user;
+}
+
+int ProjectPartnerProfileProxy::getPPPID() const
+{
+  if(ppp != NULL)
+  {
+      const ProjectPartnerProfileReal& real = *ppp;
+      return real.getPPPID();
+  }
+
+  return pppID;
+}
+
+int ProjectPartnerProfileProxy::getPPPID()
+{
+  if(ppp != NULL)
+    return loadPPP().getPPPID();
+
+  return pppID;
+}
+
+void ProjectPartnerProfileProxy::setPPPID(int id)
+{
+  if(ppp != NULL)
+    loadPPP().setPPPID(id);
+
+  pppID = id;
+}
+
+unsigned char ProjectPartnerProfileProxy::getWorkEthicByte()
+{
+  if(ppp != NULL)
+    return loadPPP().getWorkEthicByte();
+
+  return workEthic;
+}
+
+void ProjectPartnerProfileProxy::setWorkEthicByte(unsigned char we)
+{
+  if(ppp != NULL)
+    loadPPP().setWorkEthicByte(we);
+
+  workEthic = we;
+}
+
+int ProjectPartnerProfileProxy::getPersonalTechnicalScore()
+{
+  if(ppp != NULL)
+    return loadPPP().getPersonalTechnicalScore();
+
+  return personalTechnicalScore;
+}
+
+void ProjectPartnerProfileProxy::setPersonalTechnicalScore(int ps)
+{
+  if(ppp != NULL)
+    loadPPP().setPersonalTechnicalScore(ps);
+
+  personalTechnicalScore = ps;
+}
+
+int ProjectPartnerProfileProxy::getTeammateTechnicalScore()
+{
+  if(ppp != NULL)
+    return loadPPP().getTeammateTechnicalScore();
+
+  return teammateTechnicalScore;
+}
+
+void ProjectPartnerProfileProxy::setTeammateTechnicalScore(int ts)
+{
+  if(ppp != NULL)
+    loadPPP().setTeammateTechnicalScore(ts);
+
+  teammateTechnicalScore = ts;
+}
+
 bool ProjectPartnerProfileProxy::serializeJSONForSave(QJsonObject& pppJSON)
 {
     if(ppp != NULL)

@@ -96,7 +96,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
         if(DataAccessFacade::managedDataAccess().execute(login, **currentUser) != 0)
         {
             //error occured
-            delete *currentUser;
+            DataAccessFacade::doneUsingUser(*currentUser);
             *currentUser = NULL;
             presentError(LOGIN_ERROR_MESSAGE);
             return;
@@ -114,8 +114,8 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
                     if(DataAccessFacade::managedDataAccess().execute(fetchPPP, *((StudentUser*)(*currentUser)), *((ProjectPartnerProfile*)profile)) != 0)
                     {
                         // Error occurred on retrieving PPP
-                        delete *currentUser;
-                        delete profile;
+                        DataAccessFacade::doneUsingUser(*currentUser);
+                        DataAccessFacade::doneUsingProfile(profile);
                         *currentUser = NULL;
                         profile = NULL;
                         QMessageBox messageBox;
