@@ -20,7 +20,7 @@ class QJsonObject;
 class ProjectPartnerProfile : private IMappable
 {
 protected:
-    StudentUser& user;
+    StudentUser user;
     Qualification *qualifications;
     int pppID;
     int personalTechnicalScore;

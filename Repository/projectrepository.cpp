@@ -110,7 +110,7 @@ int ProjectRepository::userUpdatedProject(QJsonObject& projectToUpdate, int user
     updateProject.prepare(updateProjQuery);
     updateProject.bindValue(":title",projectToSave[PROJECT_title].toString());
     updateProject.bindValue(":desc",projectToSave[PROJECT_description].toString());
-    updateProject.bindValue(":id",projectToSave[PROJECT_id].toString());
+    updateProject.bindValue(":pid",projectToSave[PROJECT_id].toInt());
     if(!updateProject.exec())
     {
         qDebug() << "updateProject error:  "<< updateProject.lastError();
@@ -127,7 +127,7 @@ int ProjectRepository::userUpdatedProject(QJsonObject& projectToUpdate, int user
         updateProjConfig.prepare(updateProjConfigQuery);
         updateProjConfig.bindValue(":val", projectConfigs[i].toObject()[CONFIGURATION_value].toInt());
         updateProjConfig.bindValue(":cid",i + 1);
-        updateProjConfig.bindValue(":pid",projectToSave[PROJECT_id].toString());
+        updateProjConfig.bindValue(":pid",projectToSave[PROJECT_id].toInt());
 
         if(!updateProjConfig.exec())
         {

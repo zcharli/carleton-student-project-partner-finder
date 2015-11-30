@@ -128,6 +128,7 @@ void ProjectDetailsView::on_btnRegistration_clicked()
             // Refresh the current UI
             qDebug() << "UnRegistration Successful";
             project->unRegisterPPP(*(currentUser->getProfile()));
+            currentUser->removeProjectFromUser(project->getProjectId());
             updateUI();
             QMessageBox messageBox;
             messageBox.information(0,"Success","You're now unregistered from this project!");
@@ -148,6 +149,7 @@ void ProjectDetailsView::on_btnRegistration_clicked()
         {
             qDebug() << "Registration Successful";
             project->registerPPP(*(currentUser->getProfile()));
+            currentUser->addProjectToUser(project->getProjectId());
             ui->btnRegistration->setText(tr("Unregister"));
             isRegistered = true;
             updateUI();

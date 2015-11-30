@@ -14,7 +14,7 @@ enum UserType {
 class User : private IMappable
 {
 public:
-  User(QString&, QString&, QString&);
+  User(QString, QString, QString);
   User();
   virtual ~User();
 
@@ -47,21 +47,21 @@ public:
     *        @desc: sets the User's Firstname
     *      @return: void
     */
-    void setFirstName(QString&);
+    void setFirstName(QString);
 
     /*!
     *       @param: newLastName: QString&
     *        @desc: sets the User's LastName
     *      @return: void
     */
-    void setLastName(QString&);
+    void setLastName(QString);
 
     /*!
     *       @param: newUserName: QString&
     *        @desc: sets the User's UseraName
     *      @return: void
     */
-    void setUserName(QString&);
+    void setUserName(QString);
 
     /*!
     *       @param: id: int

@@ -63,7 +63,6 @@ int UserRepository::userCreatedPPP(QJsonObject& pppJSON, int userId)
 
     // Set the PPP since its been created
     pppJSON[PPP_pppID] = pppID;
-    //pppJSON[PPP_pppID] = pppJSON;
 
     QString qualificationQuery;
     int i;
