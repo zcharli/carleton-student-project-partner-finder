@@ -16,6 +16,7 @@ PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
     QObject::connect(profileView, SIGNAL(userToEditPPP()), this, SLOT(editPPP()));
     QObject::connect(profileView, SIGNAL(userToSavePPP()), this, SLOT(savePPP()));
     QObject::connect(profileView, SIGNAL(userToCreatePPP()), this, SLOT(createPPP()));
+    QObject::connect(profileView, SIGNAL(userToCodingQuestion()), this, SLOT(openCodingQuestion()));
     QObject::connect(profileView, SIGNAL(userToLeavePPP()), this, SLOT(handleContexSwitchAwayFromView()));
     QObject::connect(profileView, SIGNAL(userToViewPPP()), this, SLOT(handleContextSwitchToView()));
 
@@ -99,11 +100,14 @@ void PPPController::setupUIForState(ProfileState state)
         //choose which main view to display
         profileView->getUI().noProfileView->setHidden(true);
         profileView->getUI().myProfileWidget->setHidden(false);
+        profileView->codingWidget.setHidden(true);
 
         //hide all other buttons except edit
         profileView->getUI().btnSave->setHidden(true);
         profileView->getUI().btnEditPPP->setHidden(false);
         profileView->getUI().btnCreatePPP->setHidden(true);
+        profileView->getUI().btnSaveCoding->setHidden(true);
+
         populateProfileView();
 
         //disableAllInteractions
@@ -113,11 +117,14 @@ void PPPController::setupUIForState(ProfileState state)
         //choose which main view to display
         profileView->getUI().noProfileView->setHidden(true);
         profileView->getUI().myProfileWidget->setHidden(false);
+        profileView->codingWidget.setHidden(true);
 
         //hide all other buttons except save
         profileView->getUI().btnSave->setHidden(false);
         profileView->getUI().btnEditPPP->setHidden(true);
         profileView->getUI().btnCreatePPP->setHidden(true);
+        profileView->getUI().btnSaveCoding->setHidden(true);
+
         populateProfileView();
 
         //disableAllInteractions
@@ -127,14 +134,29 @@ void PPPController::setupUIForState(ProfileState state)
         //choose which main view to display
         profileView->getUI().noProfileView->setHidden(false);
         profileView->getUI().myProfileWidget->setHidden(true);
+        profileView->codingWidget.setHidden(true);
 
         //hide all other buttons except save
         profileView->getUI().btnSave->setHidden(true);
         profileView->getUI().btnEditPPP->setHidden(true);
         profileView->getUI().btnCreatePPP->setHidden(false);
+        profileView->getUI().btnSaveCoding->setHidden(true);
 
         //enableAllInteractions
         enableInteractions(true);
+        break;
+    case CodingQuestion:
+        //choose which main view to display
+        profileView->getUI().noProfileView->setHidden(true);
+        profileView->getUI().myProfileWidget->setHidden(true);
+        profileView->codingWidget.setHidden(false);
+
+        //hide all other buttons except save
+        profileView->getUI().btnSave->setHidden(true);
+        profileView->getUI().btnEditPPP->setHidden(true);
+        profileView->getUI().btnCreatePPP->setHidden(true);
+        profileView->getUI().btnSaveCoding->setHidden(false);
+
         break;
     default:
         break;
@@ -328,6 +350,10 @@ void PPPController::createPPP()
     profile = DataAccessFacade::defaultProfile(*currentUser);
 
     setupUIForState(Editing);
+}
+
+void PPPController::openCodingQuestion(){
+    setupUIForState(CodingQuestion);
 }
 
 

@@ -14,11 +14,12 @@ class CodingWidget : public QWidget
 public:
     explicit CodingWidget(QWidget *parent = 0);
     ~CodingWidget();
+    int getMultipleChoiceResults();
+    int getCodingQuestionResult();
 
 private:
     Ui::CodingWidget *ui;
     Highlighter *highlighter;
-    Highlighter *highlighter2;
 };
 
 #endif // CODINGWIDGET_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>554</width>
+    <height>323</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,14 +35,14 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-435</y>
-        <width>384</width>
-        <height>723</height>
+        <y>0</y>
+        <width>538</width>
+        <height>1394</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="lblQ1">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 1 - In the following code, what will be output if you compile and execute the following code?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#0000ff;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; i = 320;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; *b = &amp;amp;i;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; **ptr = &amp;amp;b;&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;cout &amp;lt;&amp;lt; *ptr&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -52,66 +52,333 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="opt1">
+        <widget class="QRadioButton" name="q1Opt1">
          <property name="text">
           <string>320</string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q1ButtonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="opt2">
+        <widget class="QRadioButton" name="q1Opt2">
          <property name="text">
           <string>Address of i</string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q1ButtonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="opt3">
+        <widget class="QRadioButton" name="q1Opt3">
          <property name="text">
           <string>Address of b</string>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q1ButtonGroup</string>
+         </attribute>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="opt4">
+        <widget class="QRadioButton" name="q1Opt4">
          <property name="text">
           <string>Compiler Error</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q1ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblQ2">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 2 - In a Deque data structure , the only ways you can insert and remove information is with:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QRadioButton" name="q2Opt1">
          <property name="text">
-          <string>Question 2</string>
+          <string>pushfront(), popback()</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q2ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q2Opt2">
+         <property name="text">
+          <string>pushfront(), popback(), popfront(), pushback()</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q2ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q2Opt3">
+         <property name="text">
+          <string>pushfront(), popfront()</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q2ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q2Opt4">
+         <property name="text">
+          <string>pushback(), popback()</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q2ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblQ3">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 3 - In the following code, what will is the value of c if you compile and execute the following code (Note ^ is the operator for XOR)?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#0000ff;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; a = 0b01000000;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; b = 0b01010111;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; c = a^b;&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q3Opt1">
+         <property name="text">
+          <string>0b00010111</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q3ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q3Opt2">
+         <property name="text">
+          <string>0b01010111</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q3ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q3Opt3">
+         <property name="text">
+          <string>0b01000000</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q3ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q3Opt4">
+         <property name="text">
+          <string>0b01111111</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q3ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblQ4">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 4 - What is the purpose of extern?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q4Opt1">
+         <property name="text">
+          <string>A storage specifier that resolves the scope of global symbols.</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q4ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q4Opt2">
+         <property name="text">
+          <string>It is the used in the syntax for deriving classes</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q4ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q4Opt3">
+         <property name="text">
+          <string>It is used to specify a class in which it can access all the private attributes</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q4ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q4Opt4">
+         <property name="text">
+          <string>This term does not exist in C++</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q4ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblQ5">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 5 - What is function overloading?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q5Opt1">
+         <property name="text">
+          <string>Calling a funtion from another function</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q5ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q5Opt2">
+         <property name="text">
+          <string>Having more than one function of same name</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q5ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q5Opt3">
+         <property name="text">
+          <string>A function without parameters</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q5ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="q5Opt4">
+         <property name="text">
+          <string>When a function calls itself</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">q5ButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblQ6">
+         <property name="text">
+          <string>Question 6</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QTextEdit" name="txtEdit"/>
        </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Question 3</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="txtEdit2"/>
-       </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>Submit Changes</string>
-     </property>
     </widget>
    </item>
   </layout>
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="q1ButtonGroup"/>
+  <buttongroup name="q2ButtonGroup"/>
+  <buttongroup name="q3ButtonGroup"/>
+  <buttongroup name="q4ButtonGroup"/>
+  <buttongroup name="q5ButtonGroup"/>
+ </buttongroups>
 </ui>

@@ -13,7 +13,8 @@ enum ProfileState
 {
     Viewing = 0,
     Editing,
-    NoProfile
+    NoProfile,
+    CodingQuestion
 };
 
 class PPPController : public QObject
@@ -39,6 +40,7 @@ public slots:
     void editPPP();
     void savePPP();
     void createPPP();
+    void openCodingQuestion();
     void handleContextSwitchToView();
     void handleContexSwitchAwayFromView();
 };

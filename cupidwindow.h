@@ -45,7 +45,6 @@ private:
     ProjectListView projectsWidget;
     SettingsWidget settingsWidget;
     HomeWidget homeWidget;
-    CodingWidget code;
 
     //ProjectManagement
 
