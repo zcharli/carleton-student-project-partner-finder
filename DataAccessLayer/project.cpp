@@ -50,7 +50,7 @@ void Project::registerPPP(ProjectPartnerProfile& profile)
     // The student count is updated when the request query is successful
     registeredPPPs.insert(profile);
     numberOfRegisteredUsers++;
-    profile.getStudentUser().addProjectToUser(this->id);
+    //profile.getStudentUser().addProjectToUser(this->id);
 }
 
 void Project::unRegisterPPP(ProjectPartnerProfile& profile)
@@ -58,7 +58,7 @@ void Project::unRegisterPPP(ProjectPartnerProfile& profile)
     // The student count is updated when the request query is successful
     registeredPPPs.remove(profile);
     numberOfRegisteredUsers--;
-    profile.getStudentUser().removeProjectFromUser(this->id);
+    //profile.getStudentUser().removeProjectFromUser(this->id);
 }
 
 int Project::getNumberOfRegisteredUsers()

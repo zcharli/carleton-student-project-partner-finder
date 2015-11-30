@@ -86,10 +86,7 @@ bool ProjectPartnerProfileProxy::deserializeJSONFromRetrieve(const QJsonObject& 
 {
     if(ppp != NULL)
     {
-<<<<<<< HEAD
-=======
         pppID = pppJSON[PPP_pppID].toInt();
->>>>>>> master
         return loadPPP().deserializeJSONFromRetrieve(pppJSON);
     }
 

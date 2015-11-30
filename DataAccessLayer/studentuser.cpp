@@ -80,13 +80,13 @@ bool StudentUser::serializeJSONForSave(QJsonObject& userJSON)
     userJSON[USER_userName] = userName;
     userJSON[USER_userType] = (int)userType;
 
-    if(profile != NULL)
+    /*if(profile != NULL)
     {
         QJsonObject pppJSON;
         profile->serializeJSONForSave(pppJSON);
         userJSON[STUDENT_ppp] = pppJSON;
     }
-
+    */
     return true;
 }
 
@@ -105,7 +105,7 @@ bool StudentUser::deserializeJSONFromRetrieve(const QJsonObject& userJSON)
         pppIDForFetch = userJSON[STUDENT_pppIDForFetch].toInt();
     }
 
-    if(userJSON.contains(STUDENT_ppp))
+    /*if(userJSON.contains(STUDENT_ppp))
     {
        // Note that this call to the
        if(profile == NULL)
@@ -115,7 +115,7 @@ bool StudentUser::deserializeJSONFromRetrieve(const QJsonObject& userJSON)
        }
        QJsonObject ppp = userJSON[STUDENT_ppp].toObject();
        profile->deserializeJSONFromRetrieve(ppp);
-    }
+    }*/
 
     return true;
 }
