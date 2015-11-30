@@ -2,7 +2,6 @@
 #define MATCHREPORTVIEW_H
 
 #include <QWidget>
-<<<<<<< HEAD
 #include <QToolBox>
 #include <QString>
 #include "sidebarwidget.h"
@@ -10,10 +9,6 @@
 #include "teamcellwidget.h"
 #include "DataAccessLayer/project.h"
 
-=======
-#include "sidebarwidget.h"
-#include "insomniamatchingalgorithm.h"
->>>>>>> Created team UI classes
 
 namespace Ui {
 class MatchReportView;
@@ -40,33 +35,20 @@ public:
     * @return: void
     */
     void viewWillDisappear();
-<<<<<<< HEAD
     QToolBox teamAccordion;
     TeamCellWidget** teams;
     int teamSize;
-=======
->>>>>>> Created team UI classes
 
 signals:
 
 
 private slots:
     void handleUserContextSwitch(DetailViewType);
-<<<<<<< HEAD
 
 private:
     Ui::MatchReportView *ui;
     InsomniaMatchingAlgorithm matchingAlgorithm;
     Project* projectToMatch;
-=======
-    //void generateMatchReport();
-    //void startAlgoClicked();
-
-private:
-    Ui::MatchReportView *ui;
-    InsomniaMatchingAlgorithm *matchingAlgorithm;
-
->>>>>>> Created team UI classes
 
 };
 
