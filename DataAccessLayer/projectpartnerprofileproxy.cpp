@@ -86,6 +86,10 @@ bool ProjectPartnerProfileProxy::deserializeJSONFromRetrieve(const QJsonObject& 
 {
     if(ppp != NULL)
     {
+<<<<<<< HEAD
+=======
+        pppID = pppJSON[PPP_pppID].toInt();
+>>>>>>> master
         return loadPPP().deserializeJSONFromRetrieve(pppJSON);
     }
 
@@ -104,6 +108,12 @@ bool ProjectPartnerProfileProxy::deserializeJSONFromRetrieve(const QJsonObject& 
         personalTechnicalScore = pppJSON[PPP_personalTechnicalScore].toInt();
         teammateTechnicalScore = pppJSON[PPP_teammateTechnicalScore].toInt();
         workEthic = (unsigned char)pppJSON[PPP_workEthic].toInt();
+    }
+
+    if(pppJSON.contains(USER_KEY))
+    {
+        QJsonObject userJson = pppJSON[USER_KEY].toObject();
+        user.deserializeJSONFromRetrieve(userJson);
     }
 
     return true;
