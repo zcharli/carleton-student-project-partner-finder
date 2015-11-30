@@ -14,7 +14,8 @@ enum DetailViewType
     Profile,
     Settings,
     ProjectDetailType,
-    Logout
+    Logout,
+    MatchReport
 };
 
 namespace Ui {
