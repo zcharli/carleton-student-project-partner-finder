@@ -13,7 +13,7 @@ bool compare(ProjectPartnerProfile* first, ProjectPartnerProfile* second)
     return first->getPersonalTechnicalScore() > second->getPersonalTechnicalScore();
 }
 
-InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm()//(Project* project)
+InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
 {
     this->project = project;
 
@@ -315,7 +315,6 @@ int InsomniaMatchingAlgorithm::launch()
             return ALGORITHM_EXECUTE_ERROR;
         }
     }
-
 
     int i = 1;
     foreach(Team *team, teamsForProject)

@@ -18,6 +18,8 @@
 #include "ProjectManagement/projectlistmanagerfactory.h"
 #include "ProfileManagement/codingwidget.h"
 
+#include "AlgorithmExecution/matchreportview.h"
+#include "AlgorithmExecution/insomniamatchingalgorithm.h"
 
 #include <QMainWindow>
 
@@ -28,7 +30,6 @@ class cuPIDWindow;
 class cuPIDWindow : public QMainWindow
 {
     Q_OBJECT
-
 
 public:
     Ui::cuPIDWindow *ui;
@@ -46,8 +47,7 @@ private:
     SettingsWidget settingsWidget;
     HomeWidget homeWidget;
     CodingWidget code;
-
-    //ProjectManagement
+    MatchReportView matchReport;
 
 
     //Other views to be managed by the window
@@ -148,6 +148,14 @@ public slots:
      * @return: void
     */
     void generateProjectDetailsPage();
+
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted after the
+     *          Start Algo Button is clicked
+     * @return: void
+    */
+    void generateMatchReportSummary();
 
 };
 
