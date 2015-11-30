@@ -28,7 +28,10 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&createProjectWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&projectDetailsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&homeWidget);
+    ui->mainContentStackedWidget->layout()->addWidget(&matchReport);
     ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
+
+
 
     //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
@@ -74,11 +77,10 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     QObject::connect(this, SIGNAL(userToViewProject()),
                      &projectDetailsWidget, SLOT(userToViewProject()));
 
-    //    QObject::connect(&projectDetailsWidget,SIGNAL(registrationClicked()),
-    //                     &projectDetailsWidget,SLOT(on_btnRegistration_clicked));
-
     QObject::connect(&projectsWidget, SIGNAL(userToViewProject()), this, SLOT(generateProjectDetailsPage()));
     QObject::connect(this, SIGNAL(userToViewProject()), &projectDetailsWidget, SLOT(userToViewProject()));
+
+    QObject::connect(&projectDetailsWidget, SIGNAL(startAlgoClicked()), this, SLOT(generateMatchReportSummary()));
 
 }
 
@@ -174,6 +176,11 @@ void cuPIDWindow::generateProjectDetailsPage()
 {
     ui->mainContentStackedWidget->setCurrentWidget(&projectDetailsWidget);
     emit userToViewProject();
+}
+
+void cuPIDWindow::generateMatchReportSummary()
+{
+    ui->mainContentStackedWidget->setCurrentWidget(&matchReport);
 }
 
 cuPIDWindow::~cuPIDWindow()

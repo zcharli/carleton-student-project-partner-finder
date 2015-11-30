@@ -316,7 +316,6 @@ int InsomniaMatchingAlgorithm::launch()
         }
     }
 
-
     int i = 1;
     foreach(Team *team, teamsForProject)
     {

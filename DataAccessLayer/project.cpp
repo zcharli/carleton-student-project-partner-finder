@@ -82,12 +82,9 @@ QString& Project::getTitle()
     return title;
 }
 
-void Project::getRegisteredPPPs(QVector<ProjectPartnerProfile*>& listToPopulate)
+QList<ProjectPartnerProfile> Project::getRegisteredPPPs()
 {
-    foreach (ProjectPartnerProfile profile, registeredPPPs)
-    {
-        listToPopulate.append(&profile);
-    }
+    return registeredPPPs.toList();
 }
 
 QString& Project::getDescription()

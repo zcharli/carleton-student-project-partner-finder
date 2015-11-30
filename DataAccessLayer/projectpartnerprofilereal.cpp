@@ -111,6 +111,6 @@ bool ProjectPartnerProfileReal::deserializeJSONFromRetrieve(const QJsonObject& p
 
     user.setFetchIDForPPP(pppID);
 
-    
+
     return true;
 }

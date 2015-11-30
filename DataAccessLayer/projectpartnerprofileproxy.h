@@ -17,6 +17,79 @@ public:
     virtual ~ProjectPartnerProfileProxy();
 
     /*!
+     *       @param: none
+     *        @desc: get the StudentUser who owns the current PPP
+     *      @return: owner: StudentUser&
+     */
+     virtual StudentUser& getStudentUser();
+
+    /*!
+     *       @param: none
+     *        @desc: get the project partner id
+     *      @return: pppID: int
+     */
+    virtual int getPPPID() const;
+
+    /*!
+     *       @param: none
+     *        @desc: get the project partner id
+     *      @return: pppID: int
+     */
+    virtual int getPPPID();
+
+    /*!
+     *       @param: ppp id: int
+     *        @desc: set the project partner id
+     *      @return: none
+     */
+     virtual void setPPPID(int);
+
+    /*!
+     *       @param: none
+     *        @desc: gets the work ethic byte
+     *      @return: workEthic: char
+     */
+     virtual unsigned char getWorkEthicByte();
+
+
+    /*!
+     *       @param: workEthic: char
+     *        @desc: sets the work ethic char
+     *      @return: none
+     */
+     virtual void setWorkEthicByte(unsigned char);
+
+    /*!
+     *       @param: none
+     *        @desc: returns the score that the user registered their PPP with
+     *      @return: personalTechnicalScore: int
+     */
+     virtual int getPersonalTechnicalScore();
+
+    /*!
+     *       @param: personalTechnicalScore: int
+     *        @desc: sets the computed personal technical score
+     *      @return: none
+     */
+     virtual void setPersonalTechnicalScore(int);
+
+
+    /*!
+     *       @param: none
+     *        @desc: gets the precomputed teammate technical score
+     *      @return: teammateTechnicalScore: int
+     */
+     virtual int getTeammateTechnicalScore();
+
+
+    /*!
+     *       @param: teammateTechnicalScore: int
+     *        @desc: sets the precomputed teammate technical score
+     *      @return: none
+     */
+     virtual void setTeammateTechnicalScore(int);
+
+    /*!
      *       @param: qualificationToChange: Qualification
      *        @desc: changes the value of the given qualification
      *      @return: void

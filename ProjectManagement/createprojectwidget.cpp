@@ -73,7 +73,7 @@ void CreateProjectWidget::saveNewProject()
     {
         // Error occurred
         qDebug() << "Save failed";
-        delete project;
+        DataAccessFacade::doneUsingProject(project);
         project = NULL;
         QMessageBox messageBox;
         messageBox.critical(0,"Error","An error occured while attempting to fulfil your request.");
