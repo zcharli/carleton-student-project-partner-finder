@@ -6,6 +6,7 @@
 #include <QVector>
 #include <QString>
 #include <QSet>
+#include <QList>
 #include "imappable.h"
 
 //forward declarations
@@ -70,7 +71,7 @@ public:
      *        @desc: returns the list of PPPs that are registered into the project
      *      @return: void
      */
-    void getRegisteredPPPs(QVector<ProjectPartnerProfile*>&);
+    QList<ProjectPartnerProfile> getRegisteredPPPs();
 
     /*!
      *       @param: profileToUnregister: ProjectPartnerProfile&

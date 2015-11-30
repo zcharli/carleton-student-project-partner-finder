@@ -75,7 +75,7 @@ void SignUpForm::attemptSignUpForUser(UserType type, User **currentUser)
         return;
     else
     {
-        delete (*currentUser);  //Something went wrong in database.
+        DataAccessFacade::doneUsingUser(*currentUser);  //Something went wrong in database.
         *currentUser = NULL;
         QMessageBox messageBox;
         messageBox.critical(0,"Error","Either this username or something terrible happened to the database.");

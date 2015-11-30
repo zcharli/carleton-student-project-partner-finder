@@ -30,7 +30,7 @@ protected:
 public:
     ProjectPartnerProfile(StudentUser&,int,int,unsigned char, Qualification*);
     ProjectPartnerProfile(StudentUser&, const QJsonObject&);
-    
+
     virtual ~ProjectPartnerProfile();
 
     //accessor Functions
@@ -39,7 +39,7 @@ public:
      *        @desc: get the StudentUser who owns the current PPP
      *      @return: owner: StudentUser&
      */
-     StudentUser& getStudentUser();
+     virtual StudentUser& getStudentUser();
 
     /****************************************************************************/
     //                    Virtual Functions                                     //
@@ -79,28 +79,28 @@ public:
      *        @desc: get the project partner id
      *      @return: pppID: int
      */
-    int getPPPID() const;
+    virtual int getPPPID() const;
 
     /*!
      *       @param: none
      *        @desc: get the project partner id
      *      @return: pppID: int
      */
-    int getPPPID();
+    virtual int getPPPID();
 
     /*!
      *       @param: ppp id: int
      *        @desc: set the project partner id
      *      @return: none
      */
-     void setPPPID(int);
+     virtual void setPPPID(int);
 
     /*!
      *       @param: none
      *        @desc: gets the work ethic byte
      *      @return: workEthic: char
      */
-     unsigned char getWorkEthicByte();
+     virtual unsigned char getWorkEthicByte();
 
 
     /*!
@@ -108,21 +108,21 @@ public:
      *        @desc: sets the work ethic char
      *      @return: none
      */
-     void setWorkEthicByte(unsigned char);
+     virtual void setWorkEthicByte(unsigned char);
 
     /*!
      *       @param: none
      *        @desc: returns the score that the user registered their PPP with
      *      @return: personalTechnicalScore: int
      */
-     int getPersonalTechnicalScore();
+     virtual int getPersonalTechnicalScore();
 
     /*!
      *       @param: personalTechnicalScore: int
      *        @desc: sets the computed personal technical score
      *      @return: none
      */
-     void setPersonalTechnicalScore(int);
+     virtual void setPersonalTechnicalScore(int);
 
 
     /*!
@@ -130,7 +130,7 @@ public:
      *        @desc: gets the precomputed teammate technical score
      *      @return: teammateTechnicalScore: int
      */
-     int getTeammateTechnicalScore();
+     virtual int getTeammateTechnicalScore();
 
 
     /*!
@@ -138,7 +138,7 @@ public:
      *        @desc: sets the precomputed teammate technical score
      *      @return: none
      */
-     void setTeammateTechnicalScore(int);
+     virtual void setTeammateTechnicalScore(int);
 
     /*!
      *       @param: empty Json Object: QJsonObject&

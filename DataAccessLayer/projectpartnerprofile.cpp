@@ -4,10 +4,11 @@
 #include <QJsonArray>
 #include "mapconfigs.h"
 
-ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore,int tscore,unsigned char we, Qualification* qualifications) :
-    user(studentUser), personalTechnicalScore(pscore), teammateTechnicalScore(tscore), workEthic(we)
+ProjectPartnerProfile::ProjectPartnerProfile(StudentUser& studentUser,int pscore,int tscore,unsigned char we, Qualification* qualifications) : user(studentUser),
+    personalTechnicalScore(pscore), teammateTechnicalScore(tscore), workEthic(we)
 {
     this->qualifications = qualifications;
+    this->user = studentUser;
     pppID = 0;
 }
 
