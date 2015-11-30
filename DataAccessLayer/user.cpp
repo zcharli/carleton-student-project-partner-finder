@@ -1,6 +1,6 @@
 #include "user.h"
 
-User::User(QString& firstName, QString& lastName, QString& userName)
+User::User(QString firstName, QString lastName, QString userName)
 {
     this->firstName = firstName;
     this->lastName = lastName;
@@ -37,17 +37,17 @@ QString& User::getUserName()
     return userName;
 }
 
-void User::setFirstName(QString& newFirstName)
+void User::setFirstName(QString newFirstName)
 {
     firstName = newFirstName;
 }
 
-void User::setLastName(QString& newLastName)
+void User::setLastName(QString newLastName)
 {
     lastName = newLastName;
 }
 
-void User::setUserName(QString& newUserName)
+void User::setUserName(QString newUserName)
 {
     userName = newUserName;
 }

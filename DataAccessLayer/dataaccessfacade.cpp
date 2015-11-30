@@ -179,23 +179,29 @@ int DataAccessFacade::execute(ActionType action, User& user, Project* project)
     return successStatus;
 }
 
-int DataAccessFacade::execute(ActionType action, User& user, QVector<Project*> projectList)
+int DataAccessFacade::execute(ActionType action, User& user, QVector<Project*>& projectList)
 {
 
     int successStatus = SUCCESS;
-
+    QJsonObject projects;
+    projects[FLOATING_USR_ID] = user.getUserId();
     switch(action)
     {
         case discoverProjects:
-            //successStatus = repoProject->fetchAllProjects(user, projects);
+            successStatus = dispatcher->retrieveAllProjects(projects);
             break;
         case fetchUsersProjects:
-            //successStatus = repoProject->fetchProjectsForUser(user, projects);
+            successStatus = dispatcher->retrieveProjectsForUser(projects);
             break;
         default:
             successStatus = INVALID_ACTION;
     }
 
+    if(successStatus == SUCCESS)
+    {
+        Project::deserializeJSONFromCollection(projects, projectList);
+
+    }
     return successStatus;
 }
 

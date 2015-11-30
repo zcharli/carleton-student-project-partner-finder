@@ -126,6 +126,7 @@ void LoginForm::getCurrentUserWithUserName(QString& username, UserType type, Use
                     else
                     {
                         //Success!!
+                        ((StudentUser*)*currentUser)->setProfile(profile);
                     }
                 }
             }

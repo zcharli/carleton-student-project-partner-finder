@@ -108,5 +108,7 @@ bool ProjectPartnerProfileReal::deserializeJSONFromRetrieve(const QJsonObject& p
         QJsonObject userJson = pppJSON[USER_KEY].toObject();
         user.deserializeJSONFromRetrieve(userJson);
     }
+
+    user.setFetchIDForPPP(pppID);
     return true;
 }

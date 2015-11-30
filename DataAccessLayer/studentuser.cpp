@@ -12,6 +12,14 @@ StudentUser::StudentUser(QString& fName, QString& lName, QString& userName):
     pppIDForFetch = 0;
 }
 
+StudentUser::StudentUser(const StudentUser& copy):
+    User(copy.firstName, copy.lastName, copy.userName)
+{
+    profile = NULL;
+    userType = Student;
+    pppIDForFetch = copy.pppIDForFetch;
+}
+
 StudentUser::StudentUser(const QJsonObject& studentJSON)
 {
     profile = NULL;
@@ -50,15 +58,8 @@ ProjectPartnerProfile* StudentUser::getProfile()
 
 void StudentUser::setProfile(ProjectPartnerProfile* newProfile)
 {
-    if(profile == NULL)
-    {
-        profile = newProfile;
-    }
-    else
-    {
-        delete profile;
-        profile = newProfile;
-    }
+
+   profile = newProfile;
 }
 
 bool StudentUser::serializeJSONForSave(QJsonObject& userJSON)

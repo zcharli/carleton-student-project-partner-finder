@@ -8,7 +8,6 @@
 ProjectPartnerProfileProxy::ProjectPartnerProfileProxy(StudentUser& user, int pScore, int tScore, unsigned char we):
 ProjectPartnerProfile(user, pScore, tScore, we, NULL)
 {
-    user.profile = this;
     pppID = 0;
     ppp = NULL;
 }
@@ -34,6 +33,7 @@ ProjectPartnerProfileReal& ProjectPartnerProfileProxy::loadPPP()
         {
             ppp->deserializeJSONFromRetrieve(realPPPJson[PPP_KEY].toObject());
         }
+
     }
 
     return *ppp;
@@ -85,7 +85,9 @@ bool ProjectPartnerProfileProxy::serializeJSONForSave(QJsonObject& pppJSON)
 bool ProjectPartnerProfileProxy::deserializeJSONFromRetrieve(const QJsonObject& pppJSON)
 {
     if(ppp != NULL)
+    {
         return loadPPP().deserializeJSONFromRetrieve(pppJSON);
+    }
 
     if(pppJSON.isEmpty())
     {

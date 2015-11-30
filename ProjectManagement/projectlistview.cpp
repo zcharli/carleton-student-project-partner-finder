@@ -13,7 +13,7 @@ ProjectListView::ProjectListView(QWidget *parent) :
     items = NULL;
     listSize = 0;
     listType = noList;
-    this->setLayout(new QFormLayout);
+    this->setLayout(new QVBoxLayout);
     this->layout()->addWidget(&scrollArea);
     scrollArea.setLayout(new QHBoxLayout);
     viewWillAppear();

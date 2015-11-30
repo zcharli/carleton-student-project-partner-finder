@@ -25,10 +25,10 @@ UserRepository::UserRepository(QSqlDatabase& db)
 
 UserRepository::~UserRepository() {}
 
-int UserRepository::userCreatedPPP(QJsonObject& user, int userId)
+int UserRepository::userCreatedPPP(QJsonObject& pppJSON, int userId)
 {
     //QJsonObject userJSON = user[USER_KEY].toObject();
-    QJsonObject pppJSON = user[PPP_KEY].toObject();
+    //QJsonObject pppJSON = user[PPP_KEY].toObject();
     QJsonArray qualificationArrayJSON = pppJSON[QUALIFICATIONS_KEY].toArray();
     qDebug() << qualificationArrayJSON.size();
     QSqlQuery insertPPP(this->db);
@@ -63,7 +63,7 @@ int UserRepository::userCreatedPPP(QJsonObject& user, int userId)
 
     // Set the PPP since its been created
     pppJSON[PPP_pppID] = pppID;
-    user[STUDENT_pppIDForFetch] = pppJSON;
+    //user[STUDENT_pppIDForFetch] = pppJSON;
 
     QString qualificationQuery;
     int i;

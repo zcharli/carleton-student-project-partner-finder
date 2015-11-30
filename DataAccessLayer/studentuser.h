@@ -23,6 +23,7 @@ class StudentUser : public User
 public:
     StudentUser(const QJsonObject&);
     StudentUser(QString&, QString&, QString&);
+    StudentUser(const StudentUser&);
 
     virtual ~StudentUser();
 

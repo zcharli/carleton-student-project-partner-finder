@@ -136,7 +136,7 @@ public:
      *              fetchUsersProjects: fetches the projects that applies to the user
      * @output: successRate: int (0 if true) otherwise returns the error number
      */
-    int execute(ActionType, User&, QVector<Project*>);
+    int execute(ActionType, User&, QVector<Project*>&);
 
     /*   @input: actionToExecute: ActionType (input), user: User&
      *    @desc: executes action on the given user
