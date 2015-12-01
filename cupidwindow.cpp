@@ -29,6 +29,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&projectDetailsWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&homeWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&matchReport);
+    ui->mainContentStackedWidget->setCurrentWidget(&homeWidget);
 
     //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
