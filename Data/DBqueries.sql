@@ -29,31 +29,31 @@ insert into `users` (`fname`,`lname`,`username`,`type`,`ppp_id`,`date_created`) 
 insert into `users` (`fname`,`lname`,`username`,`type`,`ppp_id`,`date_created`) values ("Penny",	"Cuoco",	"penny",	1,	24,	CURRENT_TIMESTAMP);
 insert into `users` (`fname`,`lname`,`username`,`type`,`ppp_id`,`date_created`) values ("Leonard",	"Hofstadter",	"lenny",	1,	25,	CURRENT_TIMESTAMP);
 
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (1,"",50,158,107);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (2,"",66,186,81);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (3,"",58,170,103);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (4,"",49,218,79);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (5,"",49,155,61);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (6,"",50,78,59);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (7,"",58,90,67);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (8,"",61,55,55);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (9,"",61,213,57);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (10,"",69,167,86);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (11,"",69,227,60);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (12,"",69,31,71);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (13,"",63,151,60);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (14,"",72,107,50);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (15,"",66,182,72);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (16,"",58,117,76);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (17,"",57,181,64);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (18,"",62,155,63);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (19,"",67,115,87);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (20,"",71,158,62);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (21,"",69,213,64);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (22,"",78,143,78);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (23,"",67,227,61);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (24,"",81,173,47);
-insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values (25,"",64,211,77);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (1,"",50,158,107);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (2,"",66,186,81);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (3,"",58,170,103);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (4,"",49,218,79);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (5,"",49,155,61);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (6,"",50,78,59);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (7,"",58,90,67);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (8,"",61,55,55);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (9,"",61,213,57);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (10,"",69,167,86);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (11,"",69,227,60);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (12,"",69,31,71);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (13,"",63,151,60);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (14,"",72,107,50);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (15,"",66,182,72);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (16,"",58,117,76);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (17,"",57,181,64);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (18,"",62,155,63);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (19,"",67,115,87);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (20,"",71,158,62);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (21,"",69,213,64);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (22,"",78,143,78);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (23,"",67,227,61);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (24,"",81,173,47);
+insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (25,"",64,211,77);
 
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,1,104);
@@ -80,6 +80,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,1,10);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,1,10);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,1,10);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,1,100);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,2,87);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,2,8);
@@ -105,6 +107,9 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,2,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,2,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,2,7);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,2,7,90);
+
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,3,66);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,3,4);
@@ -130,6 +135,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,3,3);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,3,5);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,3,6);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,3,80);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,4,99);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,4,3);
@@ -155,6 +162,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,4,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,4,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,4,3);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,4,70);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,5,74);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,5,3);
@@ -180,6 +189,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,5,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,5,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,5,3);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,5,60);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,6,83);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,6,5);
@@ -205,6 +216,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,6,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,6,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,6,6);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,6,6,50);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,7,93);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,7,3);
@@ -230,6 +243,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,7,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,7,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,7,8);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,7,40);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,8,110);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,8,4);
@@ -255,6 +270,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,8,5);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,8,3);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,8,4);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,8,30);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,9,120);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,9,9);
@@ -280,6 +297,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,9,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,9,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,9,9);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,9,20);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,10,108);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,10,6);
@@ -305,6 +324,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,10,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,10,7);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,10,9);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,10,10);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,11,77);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,11,8);
@@ -330,6 +351,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,11,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,11,3);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,11,4);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,11,1);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,12,69);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,12,8);
@@ -355,6 +378,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,12,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,12,5);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,12,9);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,12,5);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,13,66);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,13,3);
@@ -380,6 +405,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,13,5);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,13,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,13,8);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,13,15);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,14,71);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,14,6);
@@ -405,6 +432,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,14,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,14,5);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,14,3);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,14,25);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,15,69);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,15,8);
@@ -430,6 +459,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,15,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,15,5);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,15,3);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,15,35);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,16,94);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,16,5);
@@ -455,6 +486,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,16,7);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,16,10);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,16,9);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,16,45);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,17,102);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,17,6);
@@ -480,6 +513,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,17,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,17,3);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,17,4);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,17,55);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,18,100);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,18,5);
@@ -505,6 +540,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,18,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,18,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,18,6);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,18,65);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,19,84);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,19,8);
@@ -530,6 +567,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,19,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,19,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,19,7);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,19,75);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,20,93);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,20,6);
@@ -555,6 +594,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,20,5);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,20,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,20,6);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,20,85);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,21,63);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,21,5);
@@ -580,6 +621,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,21,7);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,21,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,21,6);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,21,95);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,22,105);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,22,6);
@@ -605,6 +648,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,22,7);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,22,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,22,5);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,22,69);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,23,98);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,23,8);
@@ -630,6 +675,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,23,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,23,5);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,23,4);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,23,49);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,24,88);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,24,4);
@@ -655,6 +702,8 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,24,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,24,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,24,8);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,24,29);
+
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,25,83);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,25,6);
@@ -680,3 +729,18 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(20
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21,25,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,25,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,25,8);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,25,79);
+
+
+
+INSERT INTO `project_configurations` VALUES (1,2,4);
+INSERT INTO `project_configurations` VALUES (1,3,4);
+INSERT INTO `project_configurations` VALUES (1,4,4);
+
+
+INSERT INTO `project` VALUES ('cuPID Project','The Carleton Univeristy Project Identifier project is a project for COMP 3004 students to spend sleepless nights while trying to meet requirements specifications, and software design. Register at your own risk.','2015-11-04 02:38:07');
+INSERT INTO `project` VALUES ('Just Another Project','Are you a great coder looking for something to sink your teeth into?
+Well look no further, cuPID will find you the best project. Just click that register button at the top right corner and we will handle the rest.','2015-11-04 02:52:09');
+INSERT INTO `project` VALUES ('COMP 2404 Project','Learn how to make great c++ programs.
+Work together in teams of 4 in order to create c++ programs along with embedded user interfaces.','2015-11-04 03:59:25');
+

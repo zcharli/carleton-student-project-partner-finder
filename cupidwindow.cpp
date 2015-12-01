@@ -30,8 +30,6 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->mainContentStackedWidget->layout()->addWidget(&homeWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&matchReport);
 
-    ui->mainContentStackedWidget->layout()->addWidget(&code);
-
     //connects signals between sidebar and detail views
     QObject::connect(&projectSidebar, SIGNAL(profileClicked()),
                      this, SLOT(generateProfilePage()));
@@ -55,7 +53,7 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      &projectSidebar, SLOT(on_btnDiscoverProjects_clicked()));
     QObject::connect(&homeWidget, SIGNAL(editSettingsClicked()),
                      &projectSidebar, SLOT(on_btnSettings_clicked()));
-    QObject::connect(&homeWidget, SIGNAL(ProjectClicked()),
+    QObject::connect(&homeWidget, SIGNAL(createProjectClicked()),
                      &projectSidebar, SLOT(on_btnCreateProject_clicked()));
 
     //setup context switch handlers
