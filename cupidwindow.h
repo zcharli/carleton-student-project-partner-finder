@@ -46,10 +46,7 @@ private:
     ProjectListView projectsWidget;
     SettingsWidget settingsWidget;
     HomeWidget homeWidget;
-
-    //ProjectManagement
     MatchReportView matchReport;
-
 
     //Other views to be managed by the window
     ProjectDetailsView projectDetailsWidget;
