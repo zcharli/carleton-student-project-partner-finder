@@ -73,3 +73,9 @@ void SideBarWidget::on_btnHome_clicked()
     emit userToSwitchContextTo(Home);
     emit homeClicked();
 }
+
+//void SideBarWidget::on_btnStartAlgo_clicked()
+//{
+//    emit userToSwitchContextTo(MatchReport);
+//    emit algorithmClicked();
+//}
