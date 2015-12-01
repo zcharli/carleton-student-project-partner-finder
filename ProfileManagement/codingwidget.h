@@ -16,6 +16,7 @@ public:
     ~CodingWidget();
     int getMultipleChoiceResults();
     int getCodingQuestionResult();
+    bool checkAllQuestionsAnswered();
 
 private:
     Ui::CodingWidget *ui;

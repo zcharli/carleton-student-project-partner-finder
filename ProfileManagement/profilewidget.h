@@ -85,7 +85,7 @@ signals:
     void userToCreatePPP();
     void userToLeavePPP();
     void userToViewPPP();
-    void userToCodingQuestion();
+    void userToSubmitCodingQuestion();
 
 private:
     void didSetProfile();

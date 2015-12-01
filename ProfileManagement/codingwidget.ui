@@ -35,16 +35,36 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>538</width>
-        <height>1394</height>
+        <y>-1224</y>
+        <width>540</width>
+        <height>1519</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="text">
+          <string>We will like to know just how technical you are. 
+Please Answer the following Short Questions in order to successfully 
+save your profile</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="lblQ1">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 1 - In the following code, what will be output if you compile and execute the following code?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#0000ff;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; i = 320;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; *b = &amp;amp;i;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; **ptr = &amp;amp;b;&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;cout &amp;lt;&amp;lt; *ptr&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 1 - In the following code, what will be output if you compile and execute the following code?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#ffa500;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; i = 320;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; *b = &amp;amp;i;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; **ptr = &amp;amp;b;&lt;br/&gt;    cout &amp;lt;&amp;lt; *ptr&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -170,7 +190,7 @@
        <item>
         <widget class="QLabel" name="lblQ3">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 3 - In the following code, what will is the value of c if you compile and execute the following code (Note ^ is the operator for XOR)?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#0000ff;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; a = 0b01000000;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; b = 0b01010111;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; c = a^b;&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 3 - In the following code, what will is the value of c if you compile and execute the following code (Note ^ is the operator for XOR)?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#ffa500;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;unsigned&lt;/span&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;char&lt;/span&gt; a = 0b01000000;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;unsigned&lt;/span&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;char&lt;/span&gt; b = 0b01010111;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;unsigned&lt;/span&gt;&lt;span style=&quot; color:#0000ff;&quot;/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;char&lt;/span&gt; c = a^b;&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>

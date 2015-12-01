@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QJsonObject>
 
+#define DEFAULT_CGPA 12.0
+
 Qualification::Qualification(QualificationType type, int value)
 {
     this->type = type;
@@ -27,19 +29,20 @@ Qualification* Qualification::DefaultQualifications()
     return array;
 }
 
-void Qualification::TechnicalScoreForProfile(ProjectPartnerProfile& ppp, float& personal, float& teammate)
+void Qualification::TechnicalScoreForProfile(ProjectPartnerProfile& ppp, float codingScore, float& personal, float& teammate)
 {
     //TODO: NORMALIZE THE STUDENTUSERS SCORE WITH CGPA AND CODING QUESTION
+    int normalizer = (ppp.getQualification(userCGPA) + (codingScore * 100))/(100 + (DEFAULT_CGPA * 10));  //this truncates, but that's what we want
 
     for (int i = 0; i < NUMBER_OF_QUALIFICATIONS; i++)
     {
         if (i >= 1 && i <= 11)
         {
-            personal += ppp.getQualification(i).getValue();
+            personal += ppp.getQualification(i).getValue() * normalizer;
         }
         else if(i >= 13 && i <= 23)
         {
-            teammate += ppp.getQualification(i).getValue();
+            teammate += ppp.getQualification(i).getValue() * normalizer;
         }
     }
 }

@@ -23,6 +23,8 @@ class PPPController : public QObject
     ProfileWidget *profileView;
     ProjectPartnerProfile *profile;
 
+    bool newUserAnsweredCodingQuestion;
+
     void didSetProfile();
     void enableInteractions(bool);
     void setupUIForState(ProfileState);
@@ -40,7 +42,7 @@ public slots:
     void editPPP();
     void savePPP();
     void createPPP();
-    void openCodingQuestion();
+    void saveScoreForCodingQuestion();
     void handleContextSwitchToView();
     void handleContexSwitchAwayFromView();
 };

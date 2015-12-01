@@ -16,10 +16,11 @@ PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
     QObject::connect(profileView, SIGNAL(userToEditPPP()), this, SLOT(editPPP()));
     QObject::connect(profileView, SIGNAL(userToSavePPP()), this, SLOT(savePPP()));
     QObject::connect(profileView, SIGNAL(userToCreatePPP()), this, SLOT(createPPP()));
-    QObject::connect(profileView, SIGNAL(userToCodingQuestion()), this, SLOT(openCodingQuestion()));
+    QObject::connect(profileView, SIGNAL(userToSubmitCodingQuestion()), this, SLOT(saveScoreForCodingQuestion()));
     QObject::connect(profileView, SIGNAL(userToLeavePPP()), this, SLOT(handleContexSwitchAwayFromView()));
     QObject::connect(profileView, SIGNAL(userToViewPPP()), this, SLOT(handleContextSwitchToView()));
 
+    newUserAnsweredCodingQuestion = false;
 
     retrievePPP();
 }
@@ -304,14 +305,21 @@ void PPPController::savePPP()
 
     StudentUser *user = (StudentUser*)DataAccessFacade::managedDataAccess().getCurrentUser();
 
+
+
     if(profile->getPPPID() == 0)
     {
+        if(!newUserAnsweredCodingQuestion)
+        {
+            setupUIForState(CodingQuestion);
+            return;
+        }
         //new PPP account
         if(DataAccessFacade::managedDataAccess().execute(createdPPP, *user, *profile) == 0)
         {
             // SAVE SUCCESSFUL Message
             QMessageBox messageBox;
-            messageBox.information(0,"Success","You can start registering your self to projects!");
+            messageBox.information(0,"Success!","You can start registering your self to projects!");
             messageBox.setFixedSize(500,200);
             user->setFetchIDForPPP(profile->getPPPID());
             user->setProfile(profile);
@@ -355,8 +363,12 @@ void PPPController::createPPP()
     setupUIForState(Editing);
 }
 
-void PPPController::openCodingQuestion(){
-    setupUIForState(CodingQuestion);
+void PPPController::saveScoreForCodingQuestion(){
+    //TODO: execute solver for coding question
+
+
+    newUserAnsweredCodingQuestion = true;
+    savePPP();
 }
 
 
