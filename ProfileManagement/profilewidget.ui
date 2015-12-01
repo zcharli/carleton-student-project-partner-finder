@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>784</width>
-    <height>500</height>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -115,7 +115,7 @@ Click on the Create PPP to begin.</string>
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="userCodingTab">
         <attribute name="title">
@@ -133,7 +133,7 @@ Click on the Create PPP to begin.</string>
               <x>0</x>
               <y>0</y>
               <width>742</width>
-              <height>283</height>
+              <height>288</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -348,7 +348,7 @@ Click on the Create PPP to begin.</string>
               <x>0</x>
               <y>0</y>
               <width>742</width>
-              <height>283</height>
+              <height>288</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6">

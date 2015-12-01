@@ -95,6 +95,9 @@ QTextEdit, QLineEdit, QSpinBox {
     border:none;
     color: white;
 }
+
+QScrollArea { border:none; }
+QToolBox::tab { color: white; }
 QRadioButton, QCheckBox, QGroupBox { color: white; }
 /* Button */
 QPushButton, QPushButton *{
