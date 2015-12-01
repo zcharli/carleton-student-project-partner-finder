@@ -49,6 +49,7 @@ SOURCES += \
     ProjectManagement/abstractprojectview.cpp \
     AlgorithmExecution/insomniamatchingalgorithm.cpp \
     AlgorithmExecution/team.cpp \
+    AlgorithmExecution/teamcellwidget.cpp \
     main.cpp \
     sidebarwidget.cpp \
     settingswidget.cpp \
@@ -97,6 +98,7 @@ HEADERS  += \
     ProjectManagement/abstractprojectview.h \
     AlgorithmExecution/insomniamatchingalgorithm.h \
     AlgorithmExecution/team.h \
+    AlgorithmExecution/teamcellwidget.h \
     errorcodes.h \
     sidebarwidget.h \
     settingswidget.h \
@@ -118,7 +120,8 @@ FORMS    += \
     sidebarwidget.ui \
     homewidget.ui \
     ProfileManagement/codingwidget.ui \
-    AlgorithmExecution/matchreportview.ui
+    AlgorithmExecution/matchreportview.ui \
+    AlgorithmExecution/teamcellwidget.ui
 
 RESOURCES += \
     stylesheet.qrc

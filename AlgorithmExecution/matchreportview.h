@@ -2,9 +2,13 @@
 #define MATCHREPORTVIEW_H
 
 #include <QWidget>
+#include <QToolBox>
+#include <QString>
 #include "sidebarwidget.h"
 #include "insomniamatchingalgorithm.h"
+#include "teamcellwidget.h"
 #include "DataAccessLayer/project.h"
+
 
 namespace Ui {
 class MatchReportView;
@@ -31,6 +35,9 @@ public:
     * @return: void
     */
     void viewWillDisappear();
+    QToolBox teamAccordion;
+    TeamCellWidget** teams;
+    int teamSize;
 
 signals:
 
