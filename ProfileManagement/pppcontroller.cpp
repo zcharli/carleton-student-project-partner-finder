@@ -392,6 +392,9 @@ void PPPController::processFinishedMarkingQuestion()
                     arg(QString::number(numCorrect),QString::number(codingScore));
             QMessageBox::critical(0,"Success!", scoreMessage);
             messageBox.setFixedSize(500,200);
+            newUserAnsweredCodingQuestion = true;
+            float pppNormalizer = ((float)numCorrect + codingScore)/105.0 * 100;
+            profile->changeQualification(Qualification(scoreNormalizer, pppNormalizer));
             savePPP();
         }
         else

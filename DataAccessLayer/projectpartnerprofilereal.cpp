@@ -36,9 +36,8 @@ void ProjectPartnerProfileReal::updateProfileScores()
 {
     float teamScore;
     float personalScore;
-    float codingQuestionNormalizer = 0.85;
 
-    Qualification::TechnicalScoreForProfile(*this, codingQuestionNormalizer, personalScore, teamScore);
+    Qualification::TechnicalScoreForProfile(*this, personalScore, teamScore);
     personalTechnicalScore = personalScore;
     teammateTechnicalScore = teamScore;
     workEthic = (unsigned char)(this->qualifications[userWorkEthic].getValue());
