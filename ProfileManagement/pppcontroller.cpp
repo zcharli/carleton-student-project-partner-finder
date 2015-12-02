@@ -2,6 +2,8 @@
 
 #include <QMessageBox>
 #include <QDebug>
+#include <QFile>
+#include <QStringList>
 
 //  Subsystem dependencies
 #include "DataAccessLayer/dataaccessfacade.h"
@@ -363,12 +365,115 @@ void PPPController::createPPP()
     setupUIForState(Editing);
 }
 
+void PPPController::processFinishedMarkingQuestion()
+{
+    if(codeMarker->exitCode() == 0)
+    {
+        QString stdout = codeMarker->readAllStandardOutput();
+        qDebug() << "stdout: " << stdout;
+
+        float codingScore = stdout.toFloat();
+        int numCorrect = profileView->codingWidget.getMultipleChoiceResults();
+        qDebug() << codingScore;
+        newUserAnsweredCodingQuestion = true;
+        delete codeMarker;
+        codeMarker = NULL;
+        QMessageBox messageBox;
+        QString scoreMessage = QString("Success! We just marked your submission.\n You scored: %1 out of 5 on the multiple choice questions \n %2 out of 100 in the coding.\nTHANKS!").
+                arg(QString::number(numCorrect),QString::number(codingScore));
+        QMessageBox::critical(0,"Success!", scoreMessage);
+        messageBox.setFixedSize(500,200);
+//        savePPP();
+    }
+    else
+    {
+        QMessageBox messageBox;
+        messageBox.setFixedSize(500,200);
+        QString stderr = codeMarker->readAllStandardError();
+        QString errorMessage = QString("Error","We found the Following errors while trying to mark your code.\n Please resolve them and try again\n%1").
+                arg(stderr);
+        QMessageBox::critical(0,"Error!", errorMessage);
+    }
+}
+
 void PPPController::saveScoreForCodingQuestion(){
-    //TODO: execute solver for coding question
+    if(profileView->codingWidget.checkAllQuestionsAnswered())
+    {
+         //First write user's answer to a file
+        QString submissionFileName = "studentSubmission";
+        QString filePath="./codeChecker/" + submissionFileName;
+        QFile file( filePath );
+        if ( file.open(QIODevice::ReadWrite) )
+        {
+            QTextStream stream( &file );
+            stream << profileView->codingWidget.getCodeTextFromTextView() << endl;
+            qDebug() << "Submission Written to file";
+
+            //  Run code checker on submission
+            codeMarker = new QProcess();
+            QObject::connect(codeMarker, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processFinishedMarkingQuestion()));
+            QString programName = "codeChecker/codeChecker.sh";
+            QStringList args = QStringList() << submissionFileName;
+            qDebug() << args;
+            codeMarker->start(programName, args);
+            //bool finished = codeMarker->waitForFinished(5000); //    wait time is in milliseconds
+
+//            if(markingSuccessful)
+//            {
+//                QString stdout = codeMarker->readAllStandardOutput();
+//                qDebug() << "stdout: " << stdout;
+
+//                float codingScore = stdout.toFloat();
+//                int numCorrect = profileView->codingWidget.getMultipleChoiceResults();
+//                qDebug() << codingScore;
+//                newUserAnsweredCodingQuestion = true;
+//                delete codeMarker;
+//                codeMarker = NULL;
+//                QMessageBox messageBox;
+//                QString scoreMessage = QString("Success! We just marked your submission.\n You scored: %1 out of 5 on the multiple choice questions \n %2 out of 100 in the coding.\nTHANKS!").
+//                        arg(QString::number(numCorrect),QString::number(codingScore));
+//                QMessageBox::critical(0,"Success!", scoreMessage);
+//                messageBox.setFixedSize(500,200);
+//        //        savePPP();
+//            }
+//            else
+//            {
+//                if(!finished && !markingSuccessful)
+//                {
+//                    // Code Took Too Long
+//                    QMessageBox messageBox;
+//                    messageBox.critical(0,"Error","Your code took too long Please try one more time' :(");
+//                    messageBox.setFixedSize(500,200);
+//                }
+//                else
+//                {
+//                    // UPDATE ERROR MESSAGE
+//                    QMessageBox messageBox;
+//                    messageBox.setFixedSize(500,200);
+//                    QString stderr = codeMarker->readAllStandardError();
+//                    messageBox.critical(0,"Error","We found the Following errors while trying to mark your code.\n Please resolve them and try again");
+//                }
+//            }
+
+        }
+        else
+        {
+            //TODO: Error unable to write to file
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","We were unable to save your submission\n It seems like we need permission from you to do some file writing :)");
+            messageBox.setFixedSize(500,200);
+        }
+
+    }
+    else
+    {
+        // UPDATE ERROR MESSAGE
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","The Questions don't seem too bad..\n Please attempt all questions in order to save your profile' :(");
+        messageBox.setFixedSize(500,200);
+    }
 
 
-    newUserAnsweredCodingQuestion = true;
-    savePPP();
 }
 
 

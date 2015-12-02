@@ -7,7 +7,9 @@
 #include "DataAccessLayer/qualification.h"
 #include "DataAccessLayer/projectpartnerprofileproxy.h"
 
+
 #include <QObject>
+#include <QProcess>
 
 enum ProfileState
 {
@@ -22,7 +24,8 @@ class PPPController : public QObject
     Q_OBJECT
     ProfileWidget *profileView;
     ProjectPartnerProfile *profile;
-
+    QProcess *codeMarker;
+    bool markingSuccessful;
     bool newUserAnsweredCodingQuestion;
 
     void didSetProfile();
@@ -43,6 +46,7 @@ public slots:
     void savePPP();
     void createPPP();
     void saveScoreForCodingQuestion();
+    void processFinishedMarkingQuestion();
     void handleContextSwitchToView();
     void handleContexSwitchAwayFromView();
 };
