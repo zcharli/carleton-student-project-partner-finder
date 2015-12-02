@@ -15,7 +15,8 @@ public:
     explicit CodingWidget(QWidget *parent = 0);
     ~CodingWidget();
     int getMultipleChoiceResults();
-    int getCodingQuestionResult();
+    bool checkAllQuestionsAnswered();
+    QString getCodeTextFromTextView();
 
 private:
     Ui::CodingWidget *ui;

@@ -126,4 +126,9 @@ FORMS    += \
 RESOURCES += \
     stylesheet.qrc
 
-OTHER_FILES +=
+
+copydata.commands = $(COPY_DIR) $$PWD/codeChecker $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata

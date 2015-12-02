@@ -15,14 +15,20 @@ CodingWidget::~CodingWidget()
     delete ui;
 }
 
-int CodingWidget::getCodingQuestionResult(){
-    return 0;
+bool CodingWidget::checkAllQuestionsAnswered()
+{
+    return ui->q1ButtonGroup->checkedButton() != NULL && ui->q2ButtonGroup->checkedButton() != NULL && ui->q3ButtonGroup->checkedButton() != NULL
+            && ui->q4ButtonGroup->checkedButton() != NULL && ui->q5ButtonGroup->checkedButton() != NULL && ui->txtEdit->toPlainText() != "";
+}
 
+QString CodingWidget::getCodeTextFromTextView()
+{
+    return ui->txtEdit->toPlainText();
 }
 
 int CodingWidget::getMultipleChoiceResults(){
     int total = 0;
-    if(ui->q1Opt1->isChecked())
+    if(ui->q1Opt2->isChecked())
         total++;
     if(ui->q2Opt2->isChecked())
         total++;
