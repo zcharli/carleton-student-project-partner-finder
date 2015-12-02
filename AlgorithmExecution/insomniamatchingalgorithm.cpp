@@ -13,7 +13,7 @@ bool compare(ProjectPartnerProfile* first, ProjectPartnerProfile* second)
     return first->getPersonalTechnicalScore() > second->getPersonalTechnicalScore();
 }
 
-InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project, QVector<Team*>& teamsToBuild)
+InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
 {
     this->project = project;
 
@@ -43,7 +43,7 @@ InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project, QVector<T
         profiles.append(profile);
     }
 
-    setUpAlgorithmForLaunch(teamsToBuild);
+    setUpAlgorithmForLaunch();
 }
 
 InsomniaMatchingAlgorithm::~InsomniaMatchingAlgorithm()
@@ -51,7 +51,7 @@ InsomniaMatchingAlgorithm::~InsomniaMatchingAlgorithm()
     cleanUpMap();
 }
 
-int InsomniaMatchingAlgorithm::setUpAlgorithmForLaunch(QVector<Team*>& teamsToBuild)
+int InsomniaMatchingAlgorithm::setUpAlgorithmForLaunch()
 {
     //TODO: WIll have to do querying for PPPs registered in project here
     foreach (ProjectPartnerProfile* profile, profiles)
@@ -81,7 +81,7 @@ int InsomniaMatchingAlgorithm::setUpAlgorithmForLaunch(QVector<Team*>& teamsToBu
         qSort(list->begin(), list->end(), compare);
     }
 
-    return launch(teamsToBuild);
+    return SUCCESS;
 }
 
 QVector<ProjectPartnerProfile*>* InsomniaMatchingAlgorithm::getLowestBucket()

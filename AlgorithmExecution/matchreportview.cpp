@@ -23,8 +23,8 @@ void MatchReportView::viewWillAppear()
 {
     projectToMatch = DataAccessFacade::managedDataAccess().getCurrentProject();
     teamMatchList = new QVector<Team*>();
-    matchingAlgorithm = new InsomniaMatchingAlgorithm(projectToMatch,*teamMatchList);
-
+    matchingAlgorithm = new InsomniaMatchingAlgorithm(projectToMatch);
+    matchingAlgorithm->launch(*teamMatchList);
 
     //initiallizes the amount of teams created
     teamSize = teamMatchList->size();

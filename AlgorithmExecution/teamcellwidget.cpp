@@ -11,14 +11,6 @@ TeamCellWidget::TeamCellWidget(Team& teamToDisplay, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    if(profilesInTeam.size() > 0)
-    {
-        widgetsToTrackForDeletion = new QListWidgetItem*[profilesInTeam.size()];
-    }
-    else
-    {
-        widgetsToTrackForDeletion = NULL;
-    }
     ui->stackedWidget->setCurrentWidget(ui->MatchSummary);
     viewWillAppear();
 }
@@ -39,6 +31,15 @@ TeamCellWidget::~TeamCellWidget()
 
 void TeamCellWidget::viewWillAppear()
 {
+    if(profilesInTeam.size() > 0)
+    {
+        widgetsToTrackForDeletion = new QListWidgetItem*[profilesInTeam.size()];
+    }
+    else
+    {
+        widgetsToTrackForDeletion = NULL;
+    }
+
     teamTechScore = QString::number(teamToParse.getTeamTechScore());
     teamSatScore = QString::number(teamToParse.getTeamSatisfaction());
     teamNeedScore = QString::number(teamToParse.getTeamRequiredTeammateTechScore());

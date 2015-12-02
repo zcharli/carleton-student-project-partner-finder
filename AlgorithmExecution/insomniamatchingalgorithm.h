@@ -62,7 +62,7 @@ class InsomniaMatchingAlgorithm
      *               - All profile fetching from project and algorithm configuration must be done here.
      *      @return: success status: int
      */
-    int setUpAlgorithmForLaunch(QVector<Team*>&);
+    int setUpAlgorithmForLaunch();
 
     /*!
      *       @param: none
@@ -101,7 +101,7 @@ class InsomniaMatchingAlgorithm
 
 
 public:
-    InsomniaMatchingAlgorithm(Project*,QVector<Team*>&);
+    InsomniaMatchingAlgorithm(Project*);
     ~InsomniaMatchingAlgorithm();
 
     /*!
