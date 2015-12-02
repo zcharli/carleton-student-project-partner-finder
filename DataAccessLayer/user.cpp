@@ -37,6 +37,11 @@ QString& User::getUserName()
     return userName;
 }
 
+QString User::getUsernameIdentifer()
+{
+    return firstName + " " + lastName + " (" + userName + ")";
+}
+
 void User::setFirstName(QString newFirstName)
 {
     firstName = newFirstName;

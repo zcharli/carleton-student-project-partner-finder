@@ -59,6 +59,14 @@ signals:
 
     /*!
      *  @param: void
+     *   @desc: A signal emitted when the start algorithm button is clicked
+     *          to tell the algorithm widget to launch
+     * @return: void
+    */
+    void userToSwitchContextTo(DetailViewType);
+
+    /*!
+     *  @param: void
      *   @desc: A signal emitted when the edit Project button is clicked
      * @return: void
     */

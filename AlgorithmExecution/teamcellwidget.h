@@ -3,6 +3,10 @@
 
 #include <QWidget>
 
+class Team;
+class ProjectPartnerProfile;
+class QListWidgetItem;
+
 namespace Ui {
 class TeamCellWidget;
 }
@@ -12,7 +16,7 @@ class TeamCellWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit TeamCellWidget(QWidget *parent = 0, QString score= "Team Score: 0", QString students = "Tommy Texter, Sassy Sally", int numStu = 0, QString rules = "No Rules");
+    explicit TeamCellWidget(Team&,QWidget *parent = 0);
     ~TeamCellWidget();
 
 private slots:
@@ -22,6 +26,13 @@ private slots:
 
 private:
     Ui::TeamCellWidget *ui;
+    QVector<ProjectPartnerProfile*>& profilesInTeam;
+    Team& teamToParse;
+    QListWidgetItem **widgetsToTrackForDeletion;
+    QString teamTechScore;
+    QString teamSatScore;
+    QString teamNeedScore;
+    void viewWillAppear();
 };
 
 #endif // TEAMCELLWIDGET_H

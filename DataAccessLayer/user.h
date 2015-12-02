@@ -72,6 +72,13 @@ public:
 
     /*!
     *       @param: none
+    *        @desc: returns the firstname lastname (username)
+    *      @return: QString
+    */
+    QString getUsernameIdentifer();
+
+    /*!
+    *       @param: none
     *        @desc: gets the user's id
     *      @return: id: int
     */
