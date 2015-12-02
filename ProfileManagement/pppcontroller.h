@@ -10,6 +10,7 @@
 
 #include <QObject>
 #include <QProcess>
+#include <QTimer>
 
 enum ProfileState
 {
@@ -25,6 +26,7 @@ class PPPController : public QObject
     ProfileWidget *profileView;
     ProjectPartnerProfile *profile;
     QProcess *codeMarker;
+    QTimer *timer;
     bool markingSuccessful;
     bool newUserAnsweredCodingQuestion;
 
@@ -45,6 +47,7 @@ public slots:
     void editPPP();
     void savePPP();
     void createPPP();
+    void codingTimerFinished();
     void saveScoreForCodingQuestion();
     void processFinishedMarkingQuestion();
     void handleContextSwitchToView();

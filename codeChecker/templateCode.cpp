@@ -46,7 +46,7 @@ int main()
 	}
 
 	//setup for efficiency
-	#define SLOWEST_TIME 1000
+	#define SLOWEST_TIME 5000
 	setUpList(&list, "test02.in", 10000000);
 	auto t1 = Clock::now();
 	maximumThreeNumbersInList(list, 10000000, maxThreeList);

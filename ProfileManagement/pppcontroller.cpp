@@ -367,34 +367,62 @@ void PPPController::createPPP()
 
 void PPPController::processFinishedMarkingQuestion()
 {
-    if(codeMarker->exitCode() == 0)
+    if (timer != NULL && timer->isActive())
     {
-        QString stdout = codeMarker->readAllStandardOutput();
-        qDebug() << "stdout: " << stdout;
-
-        float codingScore = stdout.toFloat();
-        int numCorrect = profileView->codingWidget.getMultipleChoiceResults();
-        qDebug() << codingScore;
-        newUserAnsweredCodingQuestion = true;
-        delete codeMarker;
-        codeMarker = NULL;
-        QMessageBox messageBox;
-        QString scoreMessage = QString("Success! We just marked your submission.\n You scored: %1 out of 5 on the multiple choice questions \n %2 out of 100 in the coding.\nTHANKS!").
-                arg(QString::number(numCorrect),QString::number(codingScore));
-        QMessageBox::critical(0,"Success!", scoreMessage);
-        messageBox.setFixedSize(500,200);
-//        savePPP();
+        // Finished running before timer
+        timer->stop();
+        markingSuccessful = true;
     }
-    else
+
+    if(markingSuccessful)
     {
-        QMessageBox messageBox;
-        messageBox.setFixedSize(500,200);
-        QString stderr = codeMarker->readAllStandardError();
-        QString errorMessage = QString("Error","We found the Following errors while trying to mark your code.\n Please resolve them and try again\n%1").
-                arg(stderr);
-        QMessageBox::critical(0,"Error!", errorMessage);
+        if(codeMarker->exitCode() == 0)
+        {
+            QString stdout = codeMarker->readAllStandardOutput();
+            qDebug() << "stdout: " << stdout;
+
+            float codingScore = stdout.toFloat();
+            int numCorrect = profileView->codingWidget.getMultipleChoiceResults();
+            qDebug() << codingScore;
+            newUserAnsweredCodingQuestion = true;
+            delete codeMarker;
+            codeMarker = NULL;
+            QMessageBox messageBox;
+            QString scoreMessage = QString("Success! We just marked your submission.\n You scored: %1 out of 5 on the multiple choice questions \n %2 out of 100 in the coding.\nTHANKS!").
+                    arg(QString::number(numCorrect),QString::number(codingScore));
+            QMessageBox::critical(0,"Success!", scoreMessage);
+            messageBox.setFixedSize(500,200);
+            savePPP();
+        }
+        else
+        {
+            QMessageBox messageBox;
+            messageBox.setFixedSize(500,200);
+            QString stderr = codeMarker->readAllStandardError();
+            QString errorMessage = "Error! We found the Following errors while trying to mark your code.\n Please resolve them and try again\n" + stderr;
+            QMessageBox::critical(0,"Error!", errorMessage);
+        }
     }
 }
+
+void PPPController::codingTimerFinished()
+{
+    delete timer;
+    timer = NULL;
+
+    if (codeMarker != NULL)
+    {
+        //code is still running so we terminate it
+        markingSuccessful = false;
+        codeMarker->terminate();
+
+        // Code Took Too Long
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Your code took too long Please try one more time' :(");
+        messageBox.setFixedSize(500,200);
+    }
+}
+
 
 void PPPController::saveScoreForCodingQuestion(){
     if(profileView->codingWidget.checkAllQuestionsAnswered())
@@ -409,6 +437,11 @@ void PPPController::saveScoreForCodingQuestion(){
             stream << profileView->codingWidget.getCodeTextFromTextView() << endl;
             qDebug() << "Submission Written to file";
 
+            //  Setup timer for the code marking
+            timer = new QTimer();
+            timer->setSingleShot(true);
+            QObject::connect(timer, SIGNAL(timeout()), this, SLOT(codingTimerFinished()));
+
             //  Run code checker on submission
             codeMarker = new QProcess();
             QObject::connect(codeMarker, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processFinishedMarkingQuestion()));
@@ -416,45 +449,7 @@ void PPPController::saveScoreForCodingQuestion(){
             QStringList args = QStringList() << submissionFileName;
             qDebug() << args;
             codeMarker->start(programName, args);
-            //bool finished = codeMarker->waitForFinished(5000); //    wait time is in milliseconds
-
-//            if(markingSuccessful)
-//            {
-//                QString stdout = codeMarker->readAllStandardOutput();
-//                qDebug() << "stdout: " << stdout;
-
-//                float codingScore = stdout.toFloat();
-//                int numCorrect = profileView->codingWidget.getMultipleChoiceResults();
-//                qDebug() << codingScore;
-//                newUserAnsweredCodingQuestion = true;
-//                delete codeMarker;
-//                codeMarker = NULL;
-//                QMessageBox messageBox;
-//                QString scoreMessage = QString("Success! We just marked your submission.\n You scored: %1 out of 5 on the multiple choice questions \n %2 out of 100 in the coding.\nTHANKS!").
-//                        arg(QString::number(numCorrect),QString::number(codingScore));
-//                QMessageBox::critical(0,"Success!", scoreMessage);
-//                messageBox.setFixedSize(500,200);
-//        //        savePPP();
-//            }
-//            else
-//            {
-//                if(!finished && !markingSuccessful)
-//                {
-//                    // Code Took Too Long
-//                    QMessageBox messageBox;
-//                    messageBox.critical(0,"Error","Your code took too long Please try one more time' :(");
-//                    messageBox.setFixedSize(500,200);
-//                }
-//                else
-//                {
-//                    // UPDATE ERROR MESSAGE
-//                    QMessageBox messageBox;
-//                    messageBox.setFixedSize(500,200);
-//                    QString stderr = codeMarker->readAllStandardError();
-//                    messageBox.critical(0,"Error","We found the Following errors while trying to mark your code.\n Please resolve them and try again");
-//                }
-//            }
-
+            timer->start(5000);
         }
         else
         {
