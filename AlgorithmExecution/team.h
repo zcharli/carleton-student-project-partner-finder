@@ -2,6 +2,7 @@
 #define TEAM_H
 
 #include <QVector>
+#include <QStringList>
 #include "DataAccessLayer/qualification.h"
 #include "DataAccessLayer/projectpartnerprofile.h"
 
@@ -11,6 +12,7 @@ class Team
     int teamTechScore;
     int teamRequiredTeammateTechScore;
     int satisfaction;
+    QStringList matchSummaryForTeam;
     unsigned char teamWorkEthic;
 
     /*!
@@ -74,6 +76,13 @@ public:
      *      @return: teamSatisfaction: int
      */
     int getTeamSatisfaction();
+
+    /*!
+     *       @param: none
+     *        @desc: returns the summary of how the team was created
+     *      @return: matchSummary: QStringList&
+     */
+    QStringList& getMatchSummaryForTeam();
 
 
 
