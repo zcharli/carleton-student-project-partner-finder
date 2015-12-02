@@ -32,6 +32,11 @@ int Team::getTeamSize()
     return profiles.size();
 }
 
+QStringList& Team::getMatchSummaryForTeam()
+{
+  return matchSummaryForTeam;
+}
+
 int Team::changeTeamParametersForNewlyAddedTeammember(ProjectPartnerProfile& profile)
 {
 
@@ -47,7 +52,7 @@ int Team::changeTeamParametersForNewlyAddedTeammember(ProjectPartnerProfile& pro
     {
         //  Need to normalize here
         teamWorkEthic = teamWorkEthic | profile.getWorkEthicByte();
-        satisfaction = profile.getPersonalTechnicalScore() - teamRequiredTeammateTechScore;
+        satisfaction += profile.getPersonalTechnicalScore() - teamRequiredTeammateTechScore;
         teamTechScore = (teamTechScore + profile.getPersonalTechnicalScore())/2;
         teamRequiredTeammateTechScore = (teamRequiredTeammateTechScore + profile.getTeammateTechnicalScore())/2;
 

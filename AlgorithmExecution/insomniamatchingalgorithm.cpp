@@ -65,10 +65,79 @@ int InsomniaMatchingAlgorithm::setUpAlgorithmForLaunch()
         qSort(list->begin(), list->end(), compare);
     }
 
-    launch();
-
-    return SUCCESS;
+    QVector<Team*>teams;
+    return launch(teams);
 }
+
+QVector<ProjectPartnerProfile*>* InsomniaMatchingAlgorithm::getLowestBucket()
+{
+    while(!profileMaps.empty())
+    {
+        QVector<ProjectPartnerProfile*>* lowestBucket = profileMaps.first();
+        if(lowestBucket->empty())
+        {
+            profileMaps.remove(profileMaps.firstKey());
+            delete lowestBucket;
+        }
+        else
+        {
+            return lowestBucket;
+        }
+    }
+
+    return NULL;
+}
+
+QVector<ProjectPartnerProfile*>* InsomniaMatchingAlgorithm::getImmediateHighestBucketForTechnicalScore(int technicalScore)
+{
+  int key = technicalScore/10 * 10;
+  while(key <= profileMaps.lastKey())
+  {
+      QVector<ProjectPartnerProfile*>* immediateHighestBucket = profileMaps.value(key);
+      if(immediateHighestBucket != NULL)
+      {
+        if(immediateHighestBucket->empty())
+        {
+            profileMaps.remove(key);
+            delete immediateHighestBucket;
+        }
+        else
+        {
+            if(immediateHighestBucket->last()->getPersonalTechnicalScore() >= technicalScore)
+              return immediateHighestBucket;
+        }
+      }
+      key += 10;
+  }
+
+  return NULL;
+}
+
+QVector<ProjectPartnerProfile*>* InsomniaMatchingAlgorithm::getImmediateLowestBucketForTechnicalScore(int technicalScore)
+{
+    int key = technicalScore/10 * 10;
+    while(key >= profileMaps.firstKey())
+    {
+        QVector<ProjectPartnerProfile*>* immediateLowestBucket = profileMaps.value(key);
+        if(immediateLowestBucket != NULL)
+        {
+          if(immediateLowestBucket->empty())
+          {
+              profileMaps.remove(key);
+              delete immediateLowestBucket;
+          }
+          else
+          {
+              if(immediateLowestBucket->first()->getPersonalTechnicalScore() <= technicalScore)
+                return immediateLowestBucket;
+          }
+        }
+        key -= 10;
+    }
+
+    return NULL;
+}
+
 
 QVector<ProjectPartnerProfile*>* InsomniaMatchingAlgorithm::getHighestBucket()
 {
@@ -103,6 +172,7 @@ void InsomniaMatchingAlgorithm::cleanUpMap()
 
 ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeamInBucket(Team& team, QVector<ProjectPartnerProfile*>* bucket)
 {
+  int closestIndex = -1;
   ProjectPartnerProfile* profile = NULL;
   if(bucket == NULL)
       return NULL;
@@ -112,12 +182,20 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeam
   {
       ProjectPartnerProfile* potentialTeamMate = bucket->value(i);
       if(potentialTeamMate->getPersonalTechnicalScore() < team.getTeamRequiredTeammateTechScore()) // potential teammate doesn't meet tech score requirement
+      {
+          //  keep track of the index of the profile that is as close to the TS as possible
+          closestIndex = i;
           continue;
+      }
 
       if(checkProfileCompatibleWithTeam(&team, potentialTeamMate) < 3) //  potential teammate isnt compatible in terms of WE
           continue;
 
       profile = potentialTeamMate;
+      QString log = "Added Student: " + profile->getStudentUser().getFirstName() + " "
+              + profile->getStudentUser().getLastName() +
+              " because user met Work Ethic and Technical Score criteria";
+      team.getMatchSummaryForTeam() << log;
       break;
   }
 
@@ -125,17 +203,20 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeam
       return profile;
 
   //  Attempt to get member based on workethic in the same bucket
-  for (int i = bucket->size()-1; i >= 0; i--)
+  //  This will be done starting from the user that meets the teamTechScore of the team as close as possible to the farthest
+  //  Note: If we got here, it means no one satisfied both WE and TS, this consequently means that we have the index of the closest TS profile to start from
+  for (int i = closestIndex; i < bucket->size(); i++)
   {
-      //  As an optimization, we only have to check the profiles that were less than the required teammatescore here.
       ProjectPartnerProfile* potentialTeamMate = bucket->value(i);
-      if(potentialTeamMate->getPersonalTechnicalScore() >= team.getTeamRequiredTeammateTechScore()) // stop checking from here to optimize
-          break;
 
       if(checkProfileCompatibleWithTeam(&team, potentialTeamMate) < 3) //  potential teammate isnt compatible in terms of WE
           continue;
 
       profile = potentialTeamMate;
+      QString log = "Added Student: " + profile->getStudentUser().getFirstName() + " "
+              + profile->getStudentUser().getLastName() +
+              " because user met Work Ethic criteria only, but fell within the team satisfaction level.";
+      team.getMatchSummaryForTeam() << log;
       break;
   }
 
@@ -149,13 +230,16 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeam
 ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam(Team& team)
 {
     ProjectPartnerProfile* profile = NULL;
-    int keyForTeam = team.getTeamTechScore()/10 * 10;
+    int keyForTeam = team.getTeamRequiredTeammateTechScore()/10 * 10;
     int flexibility = -(team.getTeamSatisfaction())/10 * 10;
+    float flexMetric = -(team.getTeamSatisfaction())/10.0 * 10.0; //  Need this to prevent truncation
     QVector<ProjectPartnerProfile*> teamMateBucket;
 
-    if(flexibility < 0)
+    if(flexMetric < 0)
     {
         //  Means we over satisfied the team so we can afford to go lower
+        if (team.getMembersInTeam().size() > 1)
+          team.getMatchSummaryForTeam() << "Algorithm: Over satisfied team's last request. Attempting to relax required teammate score to neutralize satisfaction for team";
         int key = keyForTeam;
         int Lbound = key + flexibility;
         for (int i = key; (i >= Lbound && i >= 0); i -= 10)
@@ -170,6 +254,8 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
     else
     {
         //  Means we under satisfied the team so we have to get higher profiles
+        if (team.getMembersInTeam().size() > 1)
+          team.getMatchSummaryForTeam() << "Algorithm: Under satisfied team's last request. Attempting to tighten required teammate score to neutralize satisfaction for team";
         int key = keyForTeam;
         int Ubound = key + flexibility;
         for (int i = key; (i <= Ubound && i < 100); i += 10)
@@ -187,18 +273,28 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
         profile = getBestCompatibleMemberForTeamInBucket(team, &teamMateBucket);
         if (profile == NULL)
         {
-            //TODO: NO Profiles satisfying team flexibility criteria
-            //      Get the best highest member in the whole map
-            QVector<ProjectPartnerProfile*>* bucket = getHighestBucket();
-            if(bucket != NULL)
+            QVector<ProjectPartnerProfile*>* bucket = NULL;
+            if(flexMetric < 0) //  oversatisfied
             {
-                profile = bucket->first();
+                bucket = getImmediateLowestBucketForTechnicalScore(team.getTeamRequiredTeammateTechScore());
+                if (bucket != NULL)
+                {
+                  profile = bucket->first(); // highest member in immediately lowest bucket
+                  QString log = "Edge Case(Unable to find a profile satisfying team criteria) Added Student: " + profile->getStudentUser().getFirstName() + " "
+                          + profile->getStudentUser().getLastName() +
+                          " because user is meets the technicalScore as close as possible";
+                }
             }
-            else
+            else  //undersatisfied
             {
-                //  Should never get to this case, but for sanity reasons
-                qDebug() << "ERROR: All buckets are empty!\n";
-                return NULL;
+                bucket = getImmediateHighestBucketForTechnicalScore(team.getTeamRequiredTeammateTechScore());
+                if(bucket != NULL)
+                {
+                  profile = bucket->last(); // lowest member in immediately highest bucket
+                  QString log = "Edge Case(Unable to find a profile satisfying team criteria) Added Student: " + profile->getStudentUser().getFirstName() + " "
+                          + profile->getStudentUser().getLastName() +
+                          " because user is meets the technicalScore as close as possible";
+                }
             }
         }
     }
@@ -207,16 +303,49 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
         //TODO: NO Profiles within flexibility bounds
         qDebug() << "NO Profiles within flexibility bounds\n";
 
-        QVector<ProjectPartnerProfile*>* bucket = getHighestBucket();
-        if(bucket != NULL)
+        QVector<ProjectPartnerProfile*>* bucket = NULL;
+        if(flexMetric < 0) //  oversatisfied
         {
-            profile = bucket->first();
+            bucket = getImmediateLowestBucketForTechnicalScore(team.getTeamRequiredTeammateTechScore());
+            if (bucket != NULL)
+            {
+              profile = bucket->first(); // highest member in immediately lowest bucket
+              QString log = "Edge Case(No Profiles within flexibility bounds of team) Added Student: " + profile->getStudentUser().getFirstName() + " "
+                      + profile->getStudentUser().getLastName() +
+                      " to neutralize team satisfaction because user is meets the technicalScore as close as possible";
+            }
+        }
+        else  //undersatisfied
+        {
+            bucket = getImmediateHighestBucketForTechnicalScore(team.getTeamRequiredTeammateTechScore());
+            if(bucket != NULL)
+            {
+              profile = bucket->last(); // lowest member in immediately highest bucket
+              QString log = "Edge Case(No Profiles within flexibility bounds of team) Added Student: " + profile->getStudentUser().getFirstName() + " "
+                      + profile->getStudentUser().getLastName() +
+                      " to neutralize team satisfaction because user is meets the technicalScore as close as possible";
+            }
+        }
+    }
+
+    if(profile == NULL)
+    {
+        //GET the highest member here
+        if(flexMetric < 0)
+        {
+          QVector<ProjectPartnerProfile*>* bucket = getLowestBucket();
+          profile = bucket->first();
+          QString log = "Edge Case(No User found to satisfy all conditions of team) Added Student: " + profile->getStudentUser().getFirstName() + " "
+                  + profile->getStudentUser().getLastName() +
+                  " as extreme measure to neutralize team satisfaction";
         }
         else
         {
-            //  Should never get to this case, but for sanity reasons
-            qDebug() << "ERROR: All buckets are empty!\n";
-            return NULL;
+          QVector<ProjectPartnerProfile*>* bucket = getHighestBucket();
+          profile = bucket->last();
+          QString log = "Edge Case(No User found to satisfy all conditions of team) Added Student: " + profile->getStudentUser().getFirstName() + " "
+                  + profile->getStudentUser().getLastName() +
+                  " as extreme measure to neutralize team satisfaction";
         }
     }
 
@@ -276,7 +405,7 @@ QVector<int> InsomniaMatchingAlgorithm::getTeamSizeConfigurations(int numberOfRe
     return configurations;
 }
 
-int InsomniaMatchingAlgorithm::launch()
+int InsomniaMatchingAlgorithm::launch(QVector<Team*>& teamsForProject)
 {
     int teamSize = 5;
     //TODO: Do preprocess team configuration here
@@ -325,6 +454,11 @@ int InsomniaMatchingAlgorithm::launch()
         foreach(ProjectPartnerProfile* profile, team->getMembersInTeam())
         {
             qDebug() << "--- Member: (" << profile->getPersonalTechnicalScore() << ", " << profile->getTeammateTechnicalScore() << ")";
+        }
+
+        foreach(QString log, team->getMatchSummaryForTeam())
+        {
+            qDebug() << "-----Summary: " << log;
         }
 
         i++;

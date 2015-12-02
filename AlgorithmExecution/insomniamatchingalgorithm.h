@@ -11,7 +11,6 @@ class InsomniaMatchingAlgorithm
     Project* project;
 
     QMap<int, QVector<ProjectPartnerProfile*>* > profileMaps;
-    QVector<Team*> teamsForProject;
     QVector<ProjectPartnerProfile*> profiles;
 
     /*!
@@ -73,6 +72,27 @@ class InsomniaMatchingAlgorithm
 
     /*!
      *       @param: none
+     *        @desc: Finds the currently lowest bucket of Profiles
+     *      @return: lowestProfileBucket: QVector<ProjectPartnerProfile*>* (returns NULL if none found)
+     */
+    QVector<ProjectPartnerProfile*>* getLowestBucket();
+
+    /*!
+     *       @param: none
+     *        @desc: Finds the immediate lowest bucket of Profiles for the given tech score
+     *      @return: immediateLowestProfileBucket: QVector<ProjectPartnerProfile*>* (returns NULL if none found)
+     */
+    QVector<ProjectPartnerProfile*>* getImmediateLowestBucketForTechnicalScore(int);
+
+    /*!
+     *       @param: none
+     *        @desc: Finds the immediate highest bucket of Profiles for the given tech score
+     *      @return: immediateHighestProfileBucket: QVector<ProjectPartnerProfile*>* (returns NULL if none found)
+     */
+    QVector<ProjectPartnerProfile*>* getImmediateHighestBucketForTechnicalScore(int);
+
+    /*!
+     *       @param: none
      *        @desc: Cleans up the map to remove any empty buckets
      *      @return: void
      */
@@ -87,7 +107,7 @@ public:
      *        @desc: launches the insomnia algorithm for creating teams on the given profile
      *      @return: algorithmExecution success status: int
      */
-    int launch();
+    int launch(QVector<Team*>&);
 };
 
 #endif // INSOMNIAMATCHINGALGORITHM_H
