@@ -1,35 +1,67 @@
 #include "teamcellwidget.h"
 #include "ui_teamcellwidget.h"
 
-TeamCellWidget::TeamCellWidget(QWidget *parent, QString score, QString students, int numStu, QString rules) :
-    QWidget(parent),
+#include <QListWidgetItem>
+#include "team.h"
+#include "DataAccessLayer/projectpartnerprofile.h"
+
+TeamCellWidget::TeamCellWidget(Team& teamToDisplay, QWidget *parent) :
+    QWidget(parent), profilesInTeam(teamToDisplay.getMembersInTeam()), teamToParse(teamToDisplay),
     ui(new Ui::TeamCellWidget)
 {
     ui->setupUi(this);
 
-    ui->lblNumStudentsRegistered->setText(QString::number(numStu));
-    ui->lblRules->setText(rules);
-    ui->lblStudentsInTeam->setText(students);
-    ui->lblTeamScore->setText(score);
+    ui->stackedWidget->setCurrentWidget(ui->MatchSummary);
+    viewWillAppear();
 }
 
 TeamCellWidget::~TeamCellWidget()
 {
+    if(widgetsToTrackForDeletion != NULL)
+    {
+        int i;
+        for(i=0;i<profilesInTeam.size();++i)
+        {
+            delete widgetsToTrackForDeletion[i];
+        }
+        delete widgetsToTrackForDeletion;
+    }
     delete ui;
 }
 
-/*
- * Allows the user to go back to the match summary
- */
-void TeamCellWidget::on_btnBack_clicked()
+void TeamCellWidget::viewWillAppear()
 {
-    ui->stackedWidget->setCurrentWidget(ui->MatchSummary);
+    if(profilesInTeam.size() > 0)
+    {
+        widgetsToTrackForDeletion = new QListWidgetItem*[profilesInTeam.size()];
+    }
+    else
+    {
+        widgetsToTrackForDeletion = NULL;
+    }
+
+    teamTechScore = QString::number(teamToParse.getTeamTechScore());
+    teamSatScore = QString::number(teamToParse.getTeamSatisfaction());
+    teamNeedScore = QString::number(teamToParse.getTeamRequiredTeammateTechScore());
+
+    ui->lblTeamScore->setText(teamTechScore);
+    ui->lblSatisfiabilityScore->setText(teamSatScore);
+    ui->lblNumStudentsRegistered->setText(QString::number(profilesInTeam.size()));
+    ui->lblTeamNeedScore->setText(teamNeedScore);
+    int i;
+    for(i=0;i<profilesInTeam.size();++i)
+    {
+        widgetsToTrackForDeletion[i] = new QListWidgetItem(QIcon("../cuPID/Images/User_Circle.png"),profilesInTeam.value(i)->getStudentUser().getUsernameIdentifer());
+        ui->lstStudentList->addItem(widgetsToTrackForDeletion[i]);
+    }
 }
 
-/*
- * Allows the user to go to the Detailed Summary
- */
-void TeamCellWidget::on_btnDetails_clicked()
+void TeamCellWidget::on_btnBack_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->DetailedSummary);
+}
+
+void TeamCellWidget::on_btnDetails_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->MatchSummary);
 }

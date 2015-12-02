@@ -13,6 +13,7 @@ class InsomniaMatchingAlgorithm
     QMap<int, QVector<ProjectPartnerProfile*>* > profileMaps;
     QVector<ProjectPartnerProfile*> profiles;
 
+
     /*!
      *       @param: ppp1: ProjectPartnerProfile*, ppp2: ProjectPartnerProfile*
      *        @desc: checks to see if ppp1 & ppp2 are compatible based on work ethic
@@ -100,7 +101,8 @@ class InsomniaMatchingAlgorithm
 
 
 public:
-    InsomniaMatchingAlgorithm();//(Project*);
+    InsomniaMatchingAlgorithm(Project*);
+    ~InsomniaMatchingAlgorithm();
 
     /*!
      *       @param: none

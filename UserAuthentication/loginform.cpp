@@ -30,7 +30,7 @@ LoginForm::LoginForm(QWidget *parent) :
     connect(ui->btnStudent, &QPushButton::clicked, this, &LoginForm::slotStudentUserLogin);
     connect(ui->btnSignUp, &QPushButton::clicked, this, &LoginForm::slotCreateNewAccount);
     connect(&signUpForm, &SignUpForm::signUpAccepted, this, &LoginForm::signUpSucceeded);
-    InsomniaMatchingAlgorithm algo;
+    //InsomniaMatchingAlgorithm algo;
     viewWillAppear();
 }
 
