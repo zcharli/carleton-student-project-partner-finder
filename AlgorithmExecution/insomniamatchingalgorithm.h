@@ -99,6 +99,13 @@ class InsomniaMatchingAlgorithm
      */
     void cleanUpMap();
 
+    /*!
+     *       @param: logType: LogType, logString: QString,
+     *        @desc: Cleans up the map to remove any empty buckets
+     *      @return: void
+     */
+    QPair<LogType,QString> createLogEntry(LogType,QString);
+
 
 public:
     InsomniaMatchingAlgorithm(Project*);

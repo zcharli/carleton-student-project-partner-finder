@@ -122,3 +122,8 @@ void SignUpForm::slotStudentUserSignup()
     else
         presentError(QString(SIGN_UP_ERROR_MESSAGE));
 }
+
+void SignUpForm::on_btnBack_clicked()
+{
+    emit goBackToLogin();
+}

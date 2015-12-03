@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QToolBox>
+#include <QListWidget>
 #include <QString>
 #include "sidebarwidget.h"
 #include "insomniamatchingalgorithm.h"
@@ -52,7 +53,10 @@ private:
     QToolBox teamAccordion;
     int teamSize;
     void cleanUpMatch();
-
+    void setUpSummary();
+    void displaySummary();
+    QString getFormattedMemebersInTeam(Team&);
+    QWidget* container;
 };
 
 #endif // MATCHREPORTVIEW_H

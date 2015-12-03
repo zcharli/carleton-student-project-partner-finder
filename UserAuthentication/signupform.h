@@ -49,6 +49,13 @@ signals:
     */
     void signUpAccepted(User *currentUser);
 
+    /*!
+     *  @param: clear
+     *   @desc: A signal emitted when the back button is pressed
+     * @return: void
+    */
+    void goBackToLogin();
+
 public slots:
     /*!
      *  @param: none
@@ -65,6 +72,9 @@ public slots:
      * @return: void
     */
     void slotStudentUserSignup();
+
+private slots:
+    void on_btnBack_clicked();
 
 private:
     Ui::SignUpForm *ui;

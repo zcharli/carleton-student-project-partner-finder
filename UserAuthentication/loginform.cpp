@@ -13,7 +13,8 @@
 #include <QDebug>
 
 #define PROG_BAR_DEFAULT_VALUE 0
-
+#define LOGIN_WIDGET 0
+#define SIGN_UP_WIDGET 2
 #define DEBUG_USER "Leonidas"
 
 /*  Generic Error Messages For the login Screen     */
@@ -26,10 +27,13 @@ LoginForm::LoginForm(QWidget *parent) :
     ui(new Ui::LoginForm)
 {
     ui->setupUi(this);
+    ui->stackedWidget->addWidget(&signUpForm);
+    ui->stackedWidget->setCurrentIndex(LOGIN_WIDGET);
     connect(ui->btnAdministrator, &QPushButton::clicked, this, &LoginForm::slotAdministratorUserLogin);
     connect(ui->btnStudent, &QPushButton::clicked, this, &LoginForm::slotStudentUserLogin);
     connect(ui->btnSignUp, &QPushButton::clicked, this, &LoginForm::slotCreateNewAccount);
     connect(&signUpForm, &SignUpForm::signUpAccepted, this, &LoginForm::signUpSucceeded);
+    connect(&signUpForm, &SignUpForm::goBackToLogin, this, &LoginForm::slotBackToLoginpage);
     //InsomniaMatchingAlgorithm algo;
     viewWillAppear();
 }
@@ -237,13 +241,18 @@ void LoginForm::slotStudentUserLogin()
 
 void LoginForm::slotCreateNewAccount()
 {
-    hide();
-    signUpForm.show();
+    ui->stackedWidget->setCurrentIndex(SIGN_UP_WIDGET);
+}
+
+void LoginForm::slotBackToLoginpage()
+{
+    ui->stackedWidget->setCurrentIndex(LOGIN_WIDGET);
 }
 
 
 void LoginForm::promptUserLogin()
 {
     viewWillAppear();
+    ui->stackedWidget->setCurrentIndex(LOGIN_WIDGET);
     show();
 }

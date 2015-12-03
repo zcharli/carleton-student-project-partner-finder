@@ -5,4 +5,11 @@
         <file>Stylesheets/style.qss</file>
         <file>Stylesheets/style Green.qss</file>
     </qresource>
+    <qresource prefix="/images">
+        <file>Images/Add.png</file>
+        <file>Images/Over.png</file>
+        <file>Images/Under.png</file>
+        <file>Images/User.png</file>
+        <file>Images/None.png</file>
+    </qresource>
 </RCC>

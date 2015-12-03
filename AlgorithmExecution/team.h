@@ -3,8 +3,15 @@
 
 #include <QVector>
 #include <QStringList>
+#include <QPair>
 #include "DataAccessLayer/qualification.h"
 #include "DataAccessLayer/projectpartnerprofile.h"
+
+enum LogType {
+    OverSatisfied = 0,
+    UnderSatisfied,
+    AddedStudent
+};
 
 class Team
 {
@@ -12,7 +19,7 @@ class Team
     int teamTechScore;
     int teamRequiredTeammateTechScore;
     int satisfaction;
-    QStringList matchSummaryForTeam;
+    QVector<QPair<LogType,QString> > matchSummaryForTeam;
     unsigned char teamWorkEthic;
 
     /*!
@@ -82,7 +89,14 @@ public:
      *        @desc: returns the summary of how the team was created
      *      @return: matchSummary: QStringList&
      */
-    QStringList& getMatchSummaryForTeam();
+    QVector<QPair<LogType,QString> >& getMatchSummaryForTeam();
+
+    /*!
+     *       @param: pair: QPair
+     *        @desc: adds a piece of a log and icon identifier to the summary
+     *      @return: none
+     */
+    void addLog(QPair<LogType,QString>);
 
 
 

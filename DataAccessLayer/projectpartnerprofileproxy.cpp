@@ -6,7 +6,7 @@
 #include "DataAccessLayer/mapconfigs.h"
 
 ProjectPartnerProfileProxy::ProjectPartnerProfileProxy(StudentUser& user, int pScore, int tScore, unsigned char we):
-ProjectPartnerProfile(user, pScore, tScore, we, NULL)
+    ProjectPartnerProfile(user, pScore, tScore, we, NULL)
 {
     pppID = 0;
     ppp = NULL;
@@ -66,84 +66,89 @@ void ProjectPartnerProfileProxy::updateProfileScores()
 StudentUser& ProjectPartnerProfileProxy::getStudentUser()
 {
     if(ppp != NULL)
-      return loadPPP().getStudentUser();
+        return loadPPP().getStudentUser();
 
     return user;
 }
 
 int ProjectPartnerProfileProxy::getPPPID() const
 {
-  if(ppp != NULL)
-  {
-      const ProjectPartnerProfileReal& real = *ppp;
-      return real.getPPPID();
-  }
+    if(ppp != NULL)
+    {
+        const ProjectPartnerProfileReal& real = *ppp;
+        return real.getPPPID();
+    }
 
-  return pppID;
+    return pppID;
 }
 
 int ProjectPartnerProfileProxy::getPPPID()
 {
-  if(ppp != NULL)
-    return loadPPP().getPPPID();
+    if(ppp != NULL)
+        return loadPPP().getPPPID();
 
-  return pppID;
+    return pppID;
 }
 
 void ProjectPartnerProfileProxy::setPPPID(int id)
 {
-  if(ppp != NULL)
-    loadPPP().setPPPID(id);
+    if(ppp != NULL)
+        loadPPP().setPPPID(id);
 
-  pppID = id;
+    pppID = id;
 }
 
 unsigned char ProjectPartnerProfileProxy::getWorkEthicByte()
 {
-  if(ppp != NULL)
-    return loadPPP().getWorkEthicByte();
+    if(ppp != NULL)
+        return loadPPP().getWorkEthicByte();
 
-  return workEthic;
+    return workEthic;
 }
 
 void ProjectPartnerProfileProxy::setWorkEthicByte(unsigned char we)
 {
-  if(ppp != NULL)
-    loadPPP().setWorkEthicByte(we);
+    if(ppp != NULL)
+        loadPPP().setWorkEthicByte(we);
 
-  workEthic = we;
+    workEthic = we;
 }
 
 int ProjectPartnerProfileProxy::getPersonalTechnicalScore()
 {
-  if(ppp != NULL)
-    return loadPPP().getPersonalTechnicalScore();
+    if(ppp != NULL)
+        return loadPPP().getPersonalTechnicalScore();
 
-  return personalTechnicalScore;
+    return personalTechnicalScore;
 }
 
 void ProjectPartnerProfileProxy::setPersonalTechnicalScore(int ps)
 {
-  if(ppp != NULL)
-    loadPPP().setPersonalTechnicalScore(ps);
+    if(ppp != NULL)
+        loadPPP().setPersonalTechnicalScore(ps);
 
-  personalTechnicalScore = ps;
+    personalTechnicalScore = ps;
 }
 
 int ProjectPartnerProfileProxy::getTeammateTechnicalScore()
 {
-  if(ppp != NULL)
-    return loadPPP().getTeammateTechnicalScore();
+    if(ppp != NULL)
+        return loadPPP().getTeammateTechnicalScore();
 
-  return teammateTechnicalScore;
+    return teammateTechnicalScore;
+}
+
+QString ProjectPartnerProfileProxy::getTechnicalScores()
+{
+    return "(" + QString::number(personalTechnicalScore) + ", " + QString::number(teammateTechnicalScore) + ")";
 }
 
 void ProjectPartnerProfileProxy::setTeammateTechnicalScore(int ts)
 {
-  if(ppp != NULL)
-    loadPPP().setTeammateTechnicalScore(ts);
+    if(ppp != NULL)
+        loadPPP().setTeammateTechnicalScore(ts);
 
-  teammateTechnicalScore = ts;
+    teammateTechnicalScore = ts;
 }
 
 bool ProjectPartnerProfileProxy::serializeJSONForSave(QJsonObject& pppJSON)
