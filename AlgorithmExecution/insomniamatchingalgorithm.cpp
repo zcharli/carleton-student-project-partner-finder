@@ -188,6 +188,7 @@ void InsomniaMatchingAlgorithm::cleanUpMap()
 ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeamInBucket(Team& team, QVector<ProjectPartnerProfile*>* bucket)
 {
   int closestIndex = -1;
+  float flexMetric = -(team.getTeamSatisfaction())/10.0 * 10.0; //  Need this to prevent truncation
   ProjectPartnerProfile* profile = NULL;
   if(bucket == NULL)
       return NULL;
@@ -196,7 +197,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeam
   for (int i = bucket->size()-1; i >= 0; i--)
   {
       ProjectPartnerProfile* potentialTeamMate = bucket->value(i);
-      if(potentialTeamMate->getPersonalTechnicalScore() < team.getTeamRequiredTeammateTechScore()) // potential teammate doesn't meet tech score requirement
+      if(potentialTeamMate->getPersonalTechnicalScore() < team.getTeamRequiredTeammateTechScore() + flexMetric) // potential teammate doesn't meet tech score requirement
       {
           //  keep track of the index of the profile that is as close to the TS as possible
           closestIndex = i;
@@ -254,7 +255,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
     {
         //  Means we over satisfied the team so we can afford to go lower
         if (team.getMembersInTeam().size() > 1)
-            team.getMatchSummaryForTeam() << "Algorithm: Over satisfied team's last request. Attempting to relax required teammate score to neutralize satisfaction for team";
+          team.getMatchSummaryForTeam() << "Algorithm: Team is Over Satisfied. Attempting to relax required teammate score to neutralize satisfaction for team";
 
         int key = keyForTeam;
         int Lbound = key + flexibility;
@@ -271,7 +272,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
     {
         //  Means we under satisfied the team so we have to get higher profiles
         if (team.getMembersInTeam().size() > 1)
-            team.getMatchSummaryForTeam() << "Algorithm: Under satisfied team's last request. Attempting to tighten required teammate score to neutralize satisfaction for team";
+          team.getMatchSummaryForTeam() << ((flexMetric == 0) ? "Algorithm: Team is Perfectly satisfied. Attempting to find next compatible member for team" : "Algorithm: Team is Under Satisfied. Attempting to tighten required teammate score to neutralize satisfaction for team");
 
         int key = keyForTeam;
         int Ubound = key + flexibility;
