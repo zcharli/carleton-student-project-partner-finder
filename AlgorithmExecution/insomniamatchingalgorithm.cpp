@@ -33,10 +33,10 @@ InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
     QString fname, lname, uname = "";
     StudentUser testUser = StudentUser(fname, lname, uname);
 
-    for (int i = 0; i < 54; i++)
+    for (int i = 0; i < 55; i++)
     {
-        int pscore = qrand() % ((100) - 60) + 60;
-        int tscore = qrand() % ((100) - 60) + 60;
+        int pscore = qrand() % ((100) - 80) + 80;
+        int tscore = qrand() % ((100) - 80) + 80;
         unsigned char we = i % 2 == 0 ? 218 : 155;
         ProjectPartnerProfile *profile = new ProjectPartnerProfileReal(testUser, pscore, tscore, we, NULL);
 
@@ -187,59 +187,60 @@ void InsomniaMatchingAlgorithm::cleanUpMap()
 
 ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeamInBucket(Team& team, QVector<ProjectPartnerProfile*>* bucket)
 {
-    int closestIndex = -1;
-    ProjectPartnerProfile* profile = NULL;
-    if(bucket == NULL)
-        return NULL;
+  int closestIndex = -1;
+  float flexMetric = -(team.getTeamSatisfaction())/10.0 * 10.0; //  Need this to prevent truncation
+  ProjectPartnerProfile* profile = NULL;
+  if(bucket == NULL)
+      return NULL;
 
-    //  Attempt to get member based on workethic and technical score
-    for (int i = bucket->size()-1; i >= 0; i--)
-    {
-        ProjectPartnerProfile* potentialTeamMate = bucket->value(i);
-        if(potentialTeamMate->getPersonalTechnicalScore() < team.getTeamRequiredTeammateTechScore()) // potential teammate doesn't meet tech score requirement
-        {
-            //  keep track of the index of the profile that is as close to the TS as possible
-            closestIndex = i;
-            continue;
-        }
+  //  Attempt to get member based on workethic and technical score
+  for (int i = bucket->size()-1; i >= 0; i--)
+  {
+      ProjectPartnerProfile* potentialTeamMate = bucket->value(i);
+      if(potentialTeamMate->getPersonalTechnicalScore() < team.getTeamRequiredTeammateTechScore() + flexMetric) // potential teammate doesn't meet tech score requirement
+      {
+          //  keep track of the index of the profile that is as close to the TS as possible
+          closestIndex = i;
+          continue;
+      }
 
-        if(checkProfileCompatibleWithTeam(&team, potentialTeamMate) < 3) //  potential teammate isnt compatible in terms of WE
-            continue;
+      if(checkProfileCompatibleWithTeam(&team, potentialTeamMate) < 3) //  potential teammate isnt compatible in terms of WE
+          continue;
 
-        profile = potentialTeamMate;
-        QString log = "Added Student: " + profile->getStudentUser().getFirstName() + " "
-                + profile->getStudentUser().getLastName() +
-                " because user met Work Ethic and Technical Score criteria";
-        team.getMatchSummaryForTeam() << log;
-        break;
-    }
+      profile = potentialTeamMate;
+      QString log = "Added Student: " + profile->getStudentUser().getFirstName() + " "
+              + profile->getStudentUser().getLastName() +
+              " because user met Work Ethic and Technical Score criteria";
+      team.getMatchSummaryForTeam() << log;
+      break;
+  }
 
-    if(profile != NULL) // Found a work Ethic and Technical score Match
-        return profile;
+  if(profile != NULL) // Found a work Ethic and Technical score Match
+      return profile;
 
-    //  Attempt to get member based on workethic in the same bucket
-    //  This will be done starting from the user that meets the teamTechScore of the team as close as possible to the farthest
-    //  Note: If we got here, it means no one satisfied both WE and TS, this consequently means that we have the index of the closest TS profile to start from
-    for (int i = closestIndex; i < bucket->size(); i++)
-    {
-        ProjectPartnerProfile* potentialTeamMate = bucket->value(i);
+  //  Attempt to get member based on workethic in the same bucket
+  //  This will be done starting from the user that meets the teamTechScore of the team as close as possible to the farthest
+  //  Note: If we got here, it means no one satisfied both WE and TS, this consequently means that we have the index of the closest TS profile to start from
+  for (int i = closestIndex; i < bucket->size(); i++)
+  {
+      ProjectPartnerProfile* potentialTeamMate = bucket->value(i);
 
-        if(checkProfileCompatibleWithTeam(&team, potentialTeamMate) < 3) //  potential teammate isnt compatible in terms of WE
-            continue;
+      if(checkProfileCompatibleWithTeam(&team, potentialTeamMate) < 3) //  potential teammate isnt compatible in terms of WE
+          continue;
 
-        profile = potentialTeamMate;
-        QString log = "Added Student: " + profile->getStudentUser().getFirstName() + " "
-                + profile->getStudentUser().getLastName() +
-                " because user met Work Ethic criteria only, but fell within the team satisfaction level.";
-        team.getMatchSummaryForTeam() << log;
-        break;
-    }
+      profile = potentialTeamMate;
+      QString log = "Added Student: " + profile->getStudentUser().getFirstName() + " "
+              + profile->getStudentUser().getLastName() +
+              " because user met Work Ethic criteria only, but fell within the team satisfaction level.";
+      team.getMatchSummaryForTeam() << log;
+      break;
+  }
 
-    if(profile != NULL) //Found a member in terms of work ethic only
-        return profile;
+  if(profile != NULL) //Found a member in terms of work ethic only
+      return profile;
 
-    //  wasn't able to find anyone compatible for the team in the bucket
-    return NULL;
+  //  wasn't able to find anyone compatible for the team in the bucket
+  return NULL;
 }
 
 ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam(Team& team)
@@ -254,7 +255,8 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
     {
         //  Means we over satisfied the team so we can afford to go lower
         if (team.getMembersInTeam().size() > 1)
-            team.getMatchSummaryForTeam() << "Algorithm: Over satisfied team's last request. Attempting to relax required teammate score to neutralize satisfaction for team";
+          team.getMatchSummaryForTeam() << "Algorithm: Team is Over Satisfied. Attempting to relax required teammate score to neutralize satisfaction for team";
+
         int key = keyForTeam;
         int Lbound = key + flexibility;
         for (int i = key; (i >= Lbound && i >= 0); i -= 10)
@@ -270,7 +272,8 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
     {
         //  Means we under satisfied the team so we have to get higher profiles
         if (team.getMembersInTeam().size() > 1)
-            team.getMatchSummaryForTeam() << "Algorithm: Under satisfied team's last request. Attempting to tighten required teammate score to neutralize satisfaction for team";
+          team.getMatchSummaryForTeam() << ((flexMetric == 0) ? "Algorithm: Team is Perfectly satisfied. Attempting to find next compatible member for team" : "Algorithm: Team is Under Satisfied. Attempting to tighten required teammate score to neutralize satisfaction for team");
+
         int key = keyForTeam;
         int Ubound = key + flexibility;
         for (int i = key; (i <= Ubound && i < 100); i += 10)
