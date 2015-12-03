@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QJsonObject>
 
+#define DEFAULT_CGPA 12.0
+
 Qualification::Qualification(QualificationType type, int value)
 {
     this->type = type;
@@ -29,17 +31,18 @@ Qualification* Qualification::DefaultQualifications()
 
 void Qualification::TechnicalScoreForProfile(ProjectPartnerProfile& ppp, float& personal, float& teammate)
 {
-    //TODO: NORMALIZE THE STUDENTUSERS SCORE WITH CGPA AND CODING QUESTION
+    qDebug() << "normalizer: " << ppp.getQualification(scoreNormalizer).getValue();
+    int normalizer = (ppp.getQualification(userCGPA).getValue() + ppp.getQualification(scoreNormalizer).getValue())/(100 + (DEFAULT_CGPA * 10));  //this truncates, but that's what we want
 
     for (int i = 0; i < NUMBER_OF_QUALIFICATIONS; i++)
     {
-        if (i >= 1 && i <= 11)
+        if (i >= userOO && i <= userWebDevelopment)
         {
-            personal += ppp.getQualification(i).getValue();
+            personal += ppp.getQualification(i).getValue() * normalizer;
         }
-        else if(i >= 13 && i <= 23)
+        else if(i >= teamMateOO && i <= teamMateWebDevelopment)
         {
-            teammate += ppp.getQualification(i).getValue();
+            teammate += ppp.getQualification(i).getValue() * normalizer;
         }
     }
 }
@@ -132,4 +135,3 @@ bool Qualification::deserializeJSONFromRetrieve(const QJsonObject& qualification
     value = qualificationJSON.value("value").toInt();
     return true;
 }
-

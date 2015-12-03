@@ -1,11 +1,12 @@
 #include "highlighter.h"
+#include <QColor>
 
 Highlighter::Highlighter(QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
     HighlightingRule rule;
 
-    keywordFormat.setForeground(Qt::blue);
+    keywordFormat.setForeground(QBrush(QColor(255, 165, 0)));
     keywordFormat.setFontWeight(QFont::Bold);
     QStringList keywordPatterns;
     keywordPatterns << "\\bchar\\b"   << "\\bconst\\b"    << "\\bdouble\\b"

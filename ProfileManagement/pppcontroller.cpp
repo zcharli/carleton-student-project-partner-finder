@@ -2,6 +2,8 @@
 
 #include <QMessageBox>
 #include <QDebug>
+#include <QFile>
+#include <QStringList>
 
 //  Subsystem dependencies
 #include "DataAccessLayer/dataaccessfacade.h"
@@ -16,10 +18,11 @@ PPPController::PPPController(ProfileWidget* profileView, QObject *parent) :
     QObject::connect(profileView, SIGNAL(userToEditPPP()), this, SLOT(editPPP()));
     QObject::connect(profileView, SIGNAL(userToSavePPP()), this, SLOT(savePPP()));
     QObject::connect(profileView, SIGNAL(userToCreatePPP()), this, SLOT(createPPP()));
-    QObject::connect(profileView, SIGNAL(userToCodingQuestion()), this, SLOT(openCodingQuestion()));
+    QObject::connect(profileView, SIGNAL(userToSubmitCodingQuestion()), this, SLOT(saveScoreForCodingQuestion()));
     QObject::connect(profileView, SIGNAL(userToLeavePPP()), this, SLOT(handleContexSwitchAwayFromView()));
     QObject::connect(profileView, SIGNAL(userToViewPPP()), this, SLOT(handleContextSwitchToView()));
 
+    newUserAnsweredCodingQuestion = false;
 
     retrievePPP();
 }
@@ -304,14 +307,21 @@ void PPPController::savePPP()
 
     StudentUser *user = (StudentUser*)DataAccessFacade::managedDataAccess().getCurrentUser();
 
+
+
     if(profile->getPPPID() == 0)
     {
+        if(!newUserAnsweredCodingQuestion)
+        {
+            setupUIForState(CodingQuestion);
+            return;
+        }
         //new PPP account
         if(DataAccessFacade::managedDataAccess().execute(createdPPP, *user, *profile) == 0)
         {
             // SAVE SUCCESSFUL Message
             QMessageBox messageBox;
-            messageBox.information(0,"Success","You can start registering your self to projects!");
+            messageBox.information(0,"Success!","You can start registering your self to projects!");
             messageBox.setFixedSize(500,200);
             user->setFetchIDForPPP(profile->getPPPID());
             user->setProfile(profile);
@@ -355,8 +365,113 @@ void PPPController::createPPP()
     setupUIForState(Editing);
 }
 
-void PPPController::openCodingQuestion(){
-    setupUIForState(CodingQuestion);
+void PPPController::processFinishedMarkingQuestion()
+{
+    if (timer != NULL && timer->isActive())
+    {
+        // Finished running before timer
+        timer->stop();
+        markingSuccessful = true;
+    }
+
+    if(markingSuccessful)
+    {
+        if(codeMarker->exitCode() == 0)
+        {
+            QString stdout = codeMarker->readAllStandardOutput();
+            qDebug() << "stdout: " << stdout;
+
+            float codingScore = stdout.toFloat();
+            int numCorrect = profileView->codingWidget.getMultipleChoiceResults();
+            qDebug() << codingScore;
+            newUserAnsweredCodingQuestion = true;
+            delete codeMarker;
+            codeMarker = NULL;
+            QMessageBox messageBox;
+            QString scoreMessage = QString("Success! We just marked your submission.\n You scored: %1 out of 5 on the multiple choice questions \n %2 out of 100 in the coding.\nTHANKS!").
+                    arg(QString::number(numCorrect),QString::number(codingScore));
+            QMessageBox::critical(0,"Success!", scoreMessage);
+            messageBox.setFixedSize(500,200);
+            newUserAnsweredCodingQuestion = true;
+            float pppNormalizer = ((float)numCorrect + codingScore)/105.0 * 100;
+            profile->changeQualification(Qualification(scoreNormalizer, pppNormalizer));
+            savePPP();
+        }
+        else
+        {
+            QMessageBox messageBox;
+            messageBox.setFixedSize(500,200);
+            QString stderr = codeMarker->readAllStandardError();
+            QString errorMessage = "Error! We found the Following errors while trying to mark your code.\n Please resolve them and try again\n" + stderr;
+            QMessageBox::critical(0,"Error!", errorMessage);
+        }
+    }
+}
+
+void PPPController::codingTimerFinished()
+{
+    delete timer;
+    timer = NULL;
+
+    if (codeMarker != NULL)
+    {
+        //code is still running so we terminate it
+        markingSuccessful = false;
+        codeMarker->terminate();
+
+        // Code Took Too Long
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Your code took too long Please try one more time' :(");
+        messageBox.setFixedSize(500,200);
+    }
+}
+
+
+void PPPController::saveScoreForCodingQuestion(){
+    if(profileView->codingWidget.checkAllQuestionsAnswered())
+    {
+         //First write user's answer to a file
+        QString submissionFileName = "studentSubmission";
+        QString filePath="./codeChecker/" + submissionFileName;
+        QFile file( filePath );
+        if ( file.open(QIODevice::ReadWrite) )
+        {
+            QTextStream stream( &file );
+            stream << profileView->codingWidget.getCodeTextFromTextView() << endl;
+            qDebug() << "Submission Written to file";
+
+            //  Setup timer for the code marking
+            timer = new QTimer();
+            timer->setSingleShot(true);
+            QObject::connect(timer, SIGNAL(timeout()), this, SLOT(codingTimerFinished()));
+
+            //  Run code checker on submission
+            codeMarker = new QProcess();
+            QObject::connect(codeMarker, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processFinishedMarkingQuestion()));
+            QString programName = "codeChecker/codeChecker.sh";
+            QStringList args = QStringList() << submissionFileName;
+            qDebug() << args;
+            codeMarker->start(programName, args);
+            timer->start(5000);
+        }
+        else
+        {
+            //TODO: Error unable to write to file
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","We were unable to save your submission\n It seems like we need permission from you to do some file writing :)");
+            messageBox.setFixedSize(500,200);
+        }
+
+    }
+    else
+    {
+        // UPDATE ERROR MESSAGE
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","The Questions don't seem too bad..\n Please attempt all questions in order to save your profile' :(");
+        messageBox.setFixedSize(500,200);
+    }
+
+
 }
 
 

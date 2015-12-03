@@ -35,9 +35,7 @@ public:
     * @return: void
     */
     void viewWillDisappear();
-    QToolBox teamAccordion;
-    TeamCellWidget** teams;
-    int teamSize;
+
 
 signals:
 
@@ -47,8 +45,13 @@ private slots:
 
 private:
     Ui::MatchReportView *ui;
-    InsomniaMatchingAlgorithm matchingAlgorithm;
+    InsomniaMatchingAlgorithm *matchingAlgorithm;
     Project* projectToMatch;
+    QVector<Team*>* teamMatchList;
+    TeamCellWidget** teamUiWidget;
+    QToolBox teamAccordion;
+    int teamSize;
+    void cleanUpMatch();
 
 };
 

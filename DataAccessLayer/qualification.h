@@ -7,7 +7,7 @@
 class QJsonObject;
 
 #define NUMBER_OF_WORK_ETHICS_QUALIFICATIONS 8
-#define NUMBER_OF_QUALIFICATIONS 24
+#define NUMBER_OF_QUALIFICATIONS 25
 
 enum QualificationType
 {
@@ -35,6 +35,7 @@ enum QualificationType
     teamMateNetworkComputing,
     teamMateVersionControl,
     teamMateWebDevelopment,
+    scoreNormalizer,
     noneType
 };
 

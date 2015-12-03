@@ -35,16 +35,34 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>538</width>
-        <height>1394</height>
+        <y>-1237</y>
+        <width>547</width>
+        <height>1951</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;We will like to know just how technical you are. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Please Answer the following Short Questions in order to successfully &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;save your profile&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="lblQ1">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 1 - In the following code, what will be output if you compile and execute the following code?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#0000ff;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; i = 320;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; *b = &amp;amp;i;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;int&lt;/span&gt; **ptr = &amp;amp;b;&lt;br/&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;cout &amp;lt;&amp;lt; *ptr&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 1&lt;/span&gt; - In the following code, what will be output if you compile and execute the following code?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#ffa500;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; i = 320;&lt;br/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; *b = &amp;amp;i;&lt;br/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; **ptr = &amp;amp;b;&lt;br/&gt;    cout &amp;lt;&amp;lt; *ptr&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -107,7 +125,7 @@
        <item>
         <widget class="QLabel" name="lblQ2">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 2 - In a Deque data structure , the only ways you can insert and remove information is with:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 2&lt;/span&gt; - In a Deque data structure , the only ways you can insert and remove information is with:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -170,7 +188,7 @@
        <item>
         <widget class="QLabel" name="lblQ3">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 3 - In the following code, what will is the value of c if you compile and execute the following code (Note ^ is the operator for XOR)?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#0000ff;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#0000ff;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; a = 0b01000000;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; b = 0b01010111;&lt;br/&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;    unsigned char&lt;/span&gt; c = a^b;&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 3&lt;/span&gt; - In the following code, what will is the value of c if you compile and execute the following code (Note ^ is the operator for XOR)?&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; main (&lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot; color:#ffa500;&quot;&gt;char&lt;/span&gt; *argv[]) {&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;unsignedchar&lt;/span&gt; a = 0b01000000;&lt;br/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;unsignedchar&lt;/span&gt; b = 0b01010111;&lt;br/&gt;&lt;span style=&quot; color:#ffa500;&quot;&gt;unsignedchar&lt;/span&gt; c = a^b;&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -233,7 +251,7 @@
        <item>
         <widget class="QLabel" name="lblQ4">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 4 - What is the purpose of extern?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 4&lt;/span&gt; - What is the purpose of extern?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -296,7 +314,7 @@
        <item>
         <widget class="QLabel" name="lblQ5">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Question 5 - What is function overloading?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 5 &lt;/span&gt;- What is function overloading?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -359,7 +377,7 @@
        <item>
         <widget class="QLabel" name="lblQ6">
          <property name="text">
-          <string>Question 6</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 6&lt;/span&gt;:&lt;/p&gt;&lt;p&gt;Write a function that produces the max three numbers in a list of integers.&lt;/p&gt;&lt;p&gt;The Function description and prototype is as follows:&lt;/p&gt;&lt;p&gt;/*!&lt;/p&gt;&lt;p&gt;* &lt;span style=&quot; color:#00aa00;&quot;&gt;@param&lt;/span&gt;: (in) listToCheck: &lt;span style=&quot; color:#ffa500;&quot;&gt;int*&lt;/span&gt;, &lt;/p&gt;&lt;p&gt;* --------------(in) numElementsInList: &lt;span style=&quot; color:#ffa500;&quot;&gt;int&lt;/span&gt;, &lt;/p&gt;&lt;p&gt;* --------------(out) maxThreeElementsInList: &lt;span style=&quot; color:#ffa500;&quot;&gt;int*&lt;/span&gt;&lt;/p&gt;&lt;p&gt;* &lt;span style=&quot; color:#00aa00;&quot;&gt;@description&lt;/span&gt;: This function takes a integer array and a count, and an &lt;/p&gt;&lt;p&gt;* ----------------------empty arrary to populate with the maximum three&lt;/p&gt;&lt;p&gt;* ----------------------elements in the list.&lt;/p&gt;&lt;p&gt;* &lt;span style=&quot; color:#00aa00;&quot;&gt;@output&lt;/span&gt;: &lt;span style=&quot; color:#ffa500;&quot;&gt;void&lt;/span&gt;&lt;/p&gt;&lt;p&gt;*/&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ffa500;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; maximumThreeNumbersInList(&lt;/span&gt;&lt;span style=&quot; font-weight:600; color:#ffa500;&quot;&gt;int* &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;list, &lt;/span&gt;&lt;span style=&quot; font-weight:600; color:#ffa500;&quot;&gt;int&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; count, &lt;/span&gt;&lt;span style=&quot; font-weight:600; color:#ffa500;&quot;&gt;int* &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;maxThree);&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Please Write your implementation for the function in the text field below.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ensure that your function prototype matches the one above:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -375,10 +393,10 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="q1ButtonGroup"/>
   <buttongroup name="q2ButtonGroup"/>
   <buttongroup name="q3ButtonGroup"/>
   <buttongroup name="q4ButtonGroup"/>
   <buttongroup name="q5ButtonGroup"/>
+  <buttongroup name="q1ButtonGroup"/>
  </buttongroups>
 </ui>

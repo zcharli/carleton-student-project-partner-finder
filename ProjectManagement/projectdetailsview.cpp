@@ -177,6 +177,7 @@ void ProjectDetailsView::on_btnStartAlgo_clicked()
 {
     // Start the matching algorithm
     emit startAlgoClicked();
+    emit userToSwitchContextTo(MatchReport);
 }
 
 void ProjectDetailsView::on_btnEditProject_clicked()
