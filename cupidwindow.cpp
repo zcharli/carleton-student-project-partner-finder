@@ -21,6 +21,9 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
     ui->sideBar->layout()->addWidget(&projectSidebar);
     projectSidebar.show();
 
+    //add recent projects to sidebar
+    projectSidebar.getUI()->recentWidget->layout()->addWidget(&recentProjectsWidget);
+
     //adds all the main content to the main widget
     ui->mainContentStackedWidget->layout()->addWidget(&profileWidget);
     ui->mainContentStackedWidget->layout()->addWidget(&projectsWidget);
@@ -106,6 +109,9 @@ void cuPIDWindow::viewWillAppear()
         sideBarUi->dividerCreateProject->hide();
         homeWidget.setStudent();
     }
+
+    // Inform RecentProjectsWidget to load recentProjects
+    recentProjectsWidget.reloadRecentProjects();
 }
 
 void cuPIDWindow::viewWillDisappear()

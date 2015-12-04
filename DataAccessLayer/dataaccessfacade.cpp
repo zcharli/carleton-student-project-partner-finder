@@ -214,7 +214,6 @@ int DataAccessFacade::execute(ActionType action, User& user, Project* project)
 
 int DataAccessFacade::execute(ActionType action, User& user, QVector<Project*>& projectList)
 {
-
     int successStatus = SUCCESS;
     QJsonObject projects;
     projects[FLOATING_USR_ID] = user.getUserId();
@@ -225,6 +224,9 @@ int DataAccessFacade::execute(ActionType action, User& user, QVector<Project*>& 
             break;
         case fetchUsersProjects:
             successStatus = dispatcher->retrieveProjectsForUser(projects);
+            break;
+        case fetchUserRecentProjects:
+            successStatus = dispatcher->retrieveProjectsForUser(projects, 3);
             break;
         default:
             successStatus = INVALID_ACTION;

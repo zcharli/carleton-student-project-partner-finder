@@ -21,6 +21,7 @@ enum ActionType
     unregisteredFromProject,
     discoverProjects,
     fetchUsersProjects,
+    fetchUserRecentProjects,
     fetchProject,
     createdProject,
     updatedProject,
