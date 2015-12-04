@@ -1,6 +1,13 @@
 #include "matchreportview.h"
 #include "ui_matchreportview.h"
+
 #include "DataAccessLayer/dataaccessfacade.h"
+
+#include <qdebug.h>
+#include <QFormLayout>
+#include <QVBoxLayout>
+
+#define SUMMARY_WIDGET_HEIGHT 450
 
 MatchReportView::MatchReportView(QWidget *parent) :
     QWidget(parent),
@@ -10,6 +17,7 @@ MatchReportView::MatchReportView(QWidget *parent) :
     this->teamMatchList = NULL;
     this->teamUiWidget = NULL;
     this->matchingAlgorithm = NULL;
+    this->container = NULL;
 }
 
 MatchReportView::~MatchReportView()
@@ -21,6 +29,11 @@ MatchReportView::~MatchReportView()
 
 void MatchReportView::viewWillAppear()
 {
+    setUpSummary();
+}
+
+void MatchReportView::setUpSummary()
+{
     projectToMatch = DataAccessFacade::managedDataAccess().getCurrentProject();
     teamMatchList = new QVector<Team*>();
     matchingAlgorithm = new InsomniaMatchingAlgorithm(projectToMatch);
@@ -29,20 +42,36 @@ void MatchReportView::viewWillAppear()
     //initiallizes the amount of teams created
     teamSize = teamMatchList->size();
     //sets the height of the full widget
-    teamAccordion.setFixedHeight(50*teamSize);
+    //teamAccordion.setFixedHeight(1310);
 
     //initializes a cell widget
     teamUiWidget = new TeamCellWidget*[teamSize];
 
     //goes through all teams and inserts a cell with the information provided
+    displaySummary();
 
-    for(int i=0; i < teamSize; i++){
-        teamUiWidget[i] = new TeamCellWidget(*(teamMatchList->value(i)));
-        teamAccordion.addItem(teamUiWidget[i],"Team "+QString::number(i+1));
+    //ui->scrollArea->setWidget(&teamAccordion);
+}
+
+void MatchReportView::displaySummary()
+{
+    if(teamSize > 0)
+    {
+        container = new QWidget();
+        container->setLayout(new QVBoxLayout);
+        ui->scrollArea->setWidget(container);
+        ui->scrollArea->setWidgetResizable(true);
+        ui->scrollArea->clearFocus();
+        for(int i=0; i < teamSize; i++)
+        {
+            //QString formatedMembersInTeam = getFormattedMemebersInTeam(*(teamMatchList->value(i)));
+            teamUiWidget[i] = new TeamCellWidget(*(teamMatchList->value(i)), i+1,this);
+            //teamAccordion.addItem();
+            //teamAccordion.addItem(teamUiWidget[i],"Team "+QString::number(i+1));
+            teamUiWidget[i]->setFixedHeight(SUMMARY_WIDGET_HEIGHT);
+            container->layout()->addWidget(teamUiWidget[i]);
+        }
     }
-
-    //sets the teamAccordion widget to be scrollable
-    ui->scrollArea->setWidget(&teamAccordion);
 }
 
 void MatchReportView::viewWillDisappear()
@@ -56,10 +85,13 @@ void MatchReportView::cleanUpMatch()
     if(teamUiWidget != NULL)
     {
         for(i=0; i < teamSize; ++i){
+            container->layout()->removeWidget(teamUiWidget[i]);
             delete teamUiWidget[i];
         }
-        delete teamUiWidget;
+        delete container;
+        delete [] teamUiWidget;
         teamUiWidget = NULL;
+        container = NULL;
     }
 
     if(teamMatchList != NULL)
@@ -72,11 +104,21 @@ void MatchReportView::cleanUpMatch()
         teamMatchList = NULL;
     }
 
+    if(container != NULL)
+    {
+//        for(i=0;i<teamSize;++i)
+//        {
+
+//        }
+    }
+
     if(matchingAlgorithm != NULL)
     {
         delete matchingAlgorithm;
         matchingAlgorithm = NULL;
     }
+
+    teamSize = 0;
 }
 
 void MatchReportView::handleUserContextSwitch(DetailViewType type)

@@ -1,6 +1,6 @@
 #include "team.h"
 #include "errorcodes.h"
-
+#include <QDebug>
 Team::Team()
 {
     teamWorkEthic = 0;
@@ -27,12 +27,18 @@ int Team::addProfileToTeam(ProjectPartnerProfile* profile)
     return SUCCESS;
 }
 
+void Team::addLog(QPair<LogType, QString> log)
+{
+    qDebug() << log.second << " " << QString::number(matchSummaryForTeam.size());
+    matchSummaryForTeam.append(log);
+}
+
 int Team::getTeamSize()
 {
     return profiles.size();
 }
 
-QStringList& Team::getMatchSummaryForTeam()
+QVector<QPair<LogType,QString> >& Team::getMatchSummaryForTeam()
 {
   return matchSummaryForTeam;
 }
