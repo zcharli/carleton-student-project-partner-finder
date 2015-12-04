@@ -52,11 +52,28 @@ private:
     TeamCellWidget** teamUiWidget;
     QToolBox teamAccordion;
     int teamSize;
-    void cleanUpMatch();
-    void setUpSummary();
-    void displaySummary();
-    QString getFormattedMemebersInTeam(Team&);
     QWidget* container;
+
+    /*!
+    *  @param: none
+    *   @desc: Cleans up match summary when disapearing off screen
+    * @return: void
+    */
+    void cleanUpMatch();
+
+    /*!
+    *  @param: none
+    *   @desc: Allocates resources needed for match report
+    * @return: void
+    */
+    void setUpSummary();
+
+    /*!
+    *  @param: none
+    *   @desc: Logic to prepare the report for viewing
+    * @return: void
+    */
+    void displaySummary();   
 };
 
 #endif // MATCHREPORTVIEW_H

@@ -140,6 +140,9 @@ int ProjectPartnerProfileProxy::getTeammateTechnicalScore()
 
 QString ProjectPartnerProfileProxy::getTechnicalScores()
 {
+    if(ppp != NULL)
+        return loadPPP().getTechnicalScores();
+
     return "(" + QString::number(personalTechnicalScore) + ", " + QString::number(teammateTechnicalScore) + ")";
 }
 

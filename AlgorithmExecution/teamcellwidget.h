@@ -44,9 +44,33 @@ private:
     QString detailStackTitle;
     int teamNumber;
     int numberOfSummaryElements;
+
+    /*!
+    *  @param: none
+    *   @desc: Prepares the view to be displayed by allocating resources
+    * @return: void
+    */
     void viewWillAppear();
+
+    /*!
+    *  @param: none
+    *   @desc: Set up the widgets needed to display a team summary report
+    * @return: void
+    */
     void prepareForDisplay();
+
+    /*!
+    *  @param: none
+    *   @desc: Changes the color of a label based on the satisfaction rating
+    * @return: void
+    */
     void evaluateSatificationColor(QLabel*);
+
+    /*!
+    *  @param: logType: LogType
+    *   @desc: Looks for the correct icon to place for algorithm log types
+    * @return: QString
+    */
     QString getReasonIcon(LogType);
 };
 

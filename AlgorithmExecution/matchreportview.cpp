@@ -7,6 +7,8 @@
 #include <QFormLayout>
 #include <QVBoxLayout>
 
+#define SUMMARY_WIDGET_HEIGHT 450
+
 MatchReportView::MatchReportView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MatchReportView)
@@ -66,33 +68,10 @@ void MatchReportView::displaySummary()
             teamUiWidget[i] = new TeamCellWidget(*(teamMatchList->value(i)), i+1,this);
             //teamAccordion.addItem();
             //teamAccordion.addItem(teamUiWidget[i],"Team "+QString::number(i+1));
-            teamUiWidget[i]->setFixedHeight(450);
+            teamUiWidget[i]->setFixedHeight(SUMMARY_WIDGET_HEIGHT);
             container->layout()->addWidget(teamUiWidget[i]);
         }
     }
-}
-
-QString MatchReportView::getFormattedMemebersInTeam(Team& team)
-{
-    QString membersInTeam = "\n";
-    int i;
-
-    QVector<ProjectPartnerProfile*>& profilesInTeam = team.getMembersInTeam();
-
-    for(i=0;i<profilesInTeam.size();++i)
-    {
-        qDebug() << profilesInTeam.value(i)->getStudentUser().getUsernameIdentifer();
-        if((i+1)%3 == 0)
-        {
-            membersInTeam += "\n";
-        }
-
-        membersInTeam += profilesInTeam.value(i)->getStudentUser().getUsernameIdentifer() + "\t";
-    }
-
-    membersInTeam += "\n";
-
-    return membersInTeam;
 }
 
 void MatchReportView::viewWillDisappear()

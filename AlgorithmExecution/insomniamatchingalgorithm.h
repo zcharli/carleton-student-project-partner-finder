@@ -101,8 +101,8 @@ class InsomniaMatchingAlgorithm
 
     /*!
      *       @param: logType: LogType, logString: QString,
-     *        @desc: Cleans up the map to remove any empty buckets
-     *      @return: void
+     *        @desc: Creates a log entry for the algorithm
+     *      @return: pair: QPair<LogType,QString>
      */
     QPair<LogType,QString> createLogEntry(LogType,QString);
 
