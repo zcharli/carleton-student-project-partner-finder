@@ -18,19 +18,6 @@ InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
 {
     this->project = project;
 
-
-    // Deep ass copy
-    //    foreach(ProjectPartnerProfile ppp, project->getRegisteredPPPs())
-    //    {
-    //        ProjectPartnerProfile *profile = new ProjectPartnerProfileReal(ppp.getStudentUser(),
-    //                                                                       ppp.getPersonalTechnicalScore(),
-    //                                                                       ppp.getTeammateTechnicalScore(),
-    //                                                                       ppp.getWorkEthicByte(), NULL);
-
-    //        profiles.append(profile);
-    //    }
-    //    /// End of Testing
-    //    //  Testing
     QString fname = "First";
     QString lname = "Last";
     QString uname = "Username";
@@ -38,8 +25,8 @@ InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
 
     for (int i = 0; i < 150; i++)
     {
-        int pscore = qrand() % ((100) - 60) + 60;
-        int tscore = qrand() % ((100) - 60) + 60;
+        int pscore = qrand() % ((100) - 80) + 80;
+        int tscore = qrand() % ((100) - 80) + 80;
         unsigned char we = i % 2 == 0 ? 218 : 155;
         ProjectPartnerProfile *profile = new ProjectPartnerProfileReal(testUser, pscore, tscore, we, NULL);
 
@@ -269,6 +256,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
         {
             team.addLog(createLogEntry(OverSatisfied,"Algorithm: Over satisfied team's last request. Attempting to relax required teammate score to neutralize satisfaction for team"));
         }
+
         int key = keyForTeam;
         int Lbound = key + flexibility;
         for (int i = key; (i >= Lbound && i >= 0); i -= 10)
@@ -284,6 +272,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
     {
         //  Means we under satisfied the team so we have to get higher profiles
         if (team.getMembersInTeam().size() > 1)
+
         {
             team.addLog(createLogEntry(UnderSatisfied,"Algorithm: Under satisfied team's last request. Attempting to tighten required teammate score to neutralize satisfaction for team"));
         }
