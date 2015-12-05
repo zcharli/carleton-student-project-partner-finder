@@ -32,7 +32,7 @@ StudentUser::~StudentUser()
 {
     if(profile != NULL)
     {
-        delete profile;
+        DataAccessFacade::doneUsingProfile(profile);
         profile = NULL;
     }
 }

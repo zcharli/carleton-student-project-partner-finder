@@ -32,7 +32,7 @@ Qualification* Qualification::DefaultQualifications()
 void Qualification::TechnicalScoreForProfile(ProjectPartnerProfile& ppp, float& personal, float& teammate)
 {
     qDebug() << "normalizer: " << ppp.getQualification(scoreNormalizer).getValue();
-    int normalizer = (ppp.getQualification(userCGPA).getValue() + ppp.getQualification(scoreNormalizer).getValue())/(100 + (DEFAULT_CGPA * 10));  //this truncates, but that's what we want
+    float normalizer = (ppp.getQualification(userCGPA).getValue() + ppp.getQualification(scoreNormalizer).getValue())/(100 + (DEFAULT_CGPA * 10));  //this truncates, but that's what we want
 
     for (int i = 0; i < NUMBER_OF_QUALIFICATIONS; i++)
     {

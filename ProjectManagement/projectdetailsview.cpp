@@ -110,7 +110,6 @@ void ProjectDetailsView::on_btnRegistration_clicked()
 
     //QVector<Project*> projects;
     //projects.append(project);
-
     if(isRegistered)
     {
 
@@ -177,7 +176,6 @@ void ProjectDetailsView::on_btnStartAlgo_clicked()
 {
     // Start the matching algorithm
     emit startAlgoClicked();
-    emit userToSwitchContextTo(MatchReport);
 }
 
 void ProjectDetailsView::on_btnEditProject_clicked()
@@ -203,8 +201,6 @@ void ProjectDetailsView::on_btnEditProject_clicked()
             project->changeConfiguration(Configuration(TeamSize, newTeamConfiguration));
             project->setDescription(newDescription);
             project->setTitle(newTitle);
-            QVector<Project*> projects;
-            projects.append(project);
 
             //Save Configurations
             if(DataAccessFacade::managedDataAccess().execute(updatedProject, *(DataAccessFacade::managedDataAccess().getCurrentUser()), project) != 0)

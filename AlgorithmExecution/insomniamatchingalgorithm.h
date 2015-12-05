@@ -9,10 +9,8 @@
 class InsomniaMatchingAlgorithm
 {
     Project* project;
-
     QMap<int, QVector<ProjectPartnerProfile*>* > profileMaps;
-    QVector<ProjectPartnerProfile*> profiles;
-
+    QVector<ProjectPartnerProfile*>& profiles;
 
     /*!
      *       @param: ppp1: ProjectPartnerProfile*, ppp2: ProjectPartnerProfile*

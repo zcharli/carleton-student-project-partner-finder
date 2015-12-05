@@ -14,36 +14,20 @@ bool compare(ProjectPartnerProfile* first, ProjectPartnerProfile* second)
     return first->getPersonalTechnicalScore() > second->getPersonalTechnicalScore();
 }
 
-InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project)
+InsomniaMatchingAlgorithm::InsomniaMatchingAlgorithm(Project* project):profiles(project->getRegisteredPPPs())
 {
     this->project = project;
-
-    QString fname = "First";
-    QString lname = "Last";
-    QString uname = "Username";
-    StudentUser testUser = StudentUser(fname, lname, uname);
-
-    for (int i = 0; i < 150; i++)
-    {
-        int pscore = qrand() % ((100) - 80) + 80;
-        int tscore = qrand() % ((100) - 80) + 80;
-        unsigned char we = i % 2 == 0 ? 218 : 155;
-        ProjectPartnerProfile *profile = new ProjectPartnerProfileReal(testUser, pscore, tscore, we, NULL);
-
-        profiles.append(profile);
-    }
-
     setUpAlgorithmForLaunch();
 }
 
 InsomniaMatchingAlgorithm::~InsomniaMatchingAlgorithm()
 {
+    //TODO: Do clean up here!
     cleanUpMap();
 }
 
 int InsomniaMatchingAlgorithm::setUpAlgorithmForLaunch()
 {
-    //TODO: WIll have to do querying for PPPs registered in project here
     foreach (ProjectPartnerProfile* profile, profiles)
     {
         int key = profile->getPersonalTechnicalScore()/10 * 10;
@@ -186,6 +170,7 @@ QPair<LogType,QString> InsomniaMatchingAlgorithm::createLogEntry(LogType type,QS
 ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeamInBucket(Team& team, QVector<ProjectPartnerProfile*>* bucket)
 {
     int closestIndex = -1;
+    float flexMetric = -(team.getTeamSatisfaction())/10.0 * 10.0; //  Need this to prevent truncation
     ProjectPartnerProfile* profile = NULL;
     if(bucket == NULL)
         return NULL;
@@ -194,7 +179,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeam
     for (int i = bucket->size()-1; i >= 0; i--)
     {
         ProjectPartnerProfile* potentialTeamMate = bucket->value(i);
-        if(potentialTeamMate->getPersonalTechnicalScore() < team.getTeamRequiredTeammateTechScore()) // potential teammate doesn't meet tech score requirement
+        if(potentialTeamMate->getPersonalTechnicalScore() < team.getTeamRequiredTeammateTechScore() + flexMetric) // potential teammate doesn't meet tech score requirement
         {
             //  keep track of the index of the profile that is as close to the TS as possible
             closestIndex = i;
@@ -336,6 +321,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
                 QString log = "Edge Case(No Profiles within flexibility bounds of team) Added Student: " + profile->getStudentUser().getFirstName() + " "
                         + profile->getStudentUser().getLastName() +
                         " to neutralize team satisfaction because user is meets the technicalScore as close as possible";
+                team.addLog(createLogEntry(AddedStudent,log));
             }
         }
         else  //undersatisfied
@@ -411,12 +397,15 @@ QVector<int> InsomniaMatchingAlgorithm::getTeamSizeConfigurations(int numberOfRe
             configurations.append(normalSize);
 
         //  Normalize the configurations
-        int maxNormalTeamIndex = 0;
-        while(qAbs(abnormalTeamSize - configurations[maxNormalTeamIndex]) > 1 && maxNormalTeamIndex < configurations.size())
+        if(configurations.size() > 0)
         {
-            configurations[maxNormalTeamIndex]--;
-            abnormalTeamSize++;
-            maxNormalTeamIndex++;
+          int maxNormalTeamIndex = 0;
+          while(maxNormalTeamIndex < configurations.size() && qAbs(abnormalTeamSize - configurations[maxNormalTeamIndex]) > 1)
+          {
+              configurations[maxNormalTeamIndex]--;
+              abnormalTeamSize++;
+              maxNormalTeamIndex++;
+          }
         }
         configurations.append(abnormalTeamSize);
         qSort(configurations);
@@ -433,8 +422,7 @@ QVector<int> InsomniaMatchingAlgorithm::getTeamSizeConfigurations(int numberOfRe
 
 int InsomniaMatchingAlgorithm::launch(QVector<Team*>& teamsForProject)
 {
-    int teamSize = 5;
-    //TODO: Do preprocess team configuration here
+    int teamSize = project->getProjectConfiguration(TeamSize).getValue();
     QVector<int> teamSizeConfigurations = getTeamSizeConfigurations(profiles.size(), teamSize);
     while(!teamSizeConfigurations.empty())
     {
@@ -450,6 +438,10 @@ int InsomniaMatchingAlgorithm::launch(QVector<Team*>& teamsForProject)
             highestBucket->removeFirst();
             cleanUpMap();
             team->addProfileToTeam(firstMember);
+            QString log = "Added Student: " + firstMember->getStudentUser().getFirstName() + " "
+                    + firstMember->getStudentUser().getLastName() +
+                    " as first member of team, because user currently has the highest technical score ranking";
+            team->addLog(createLogEntry(AddedStudent,log));
 
             // Add other members to team based on compatibility
             for (int j = 0; j < sizeForTeam-1; j++)

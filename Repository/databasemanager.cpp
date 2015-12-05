@@ -14,7 +14,7 @@ DatabaseManager::DatabaseManager()
     //QString dbPath = "/cuPID/Data/cuPIDdb";
     //QString dbPath = "/home/student/cuPIDdb";
     QString dbPath = "Data/cuPIDdb";
-    db.setDatabaseName("../"+dbPath);
+    db.setDatabaseName("../cuPID/"+dbPath);
     db.open();
     if(db.isOpen())
     {

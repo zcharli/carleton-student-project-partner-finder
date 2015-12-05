@@ -48,7 +48,7 @@ void Project::changeConfiguration(Configuration config)
 void Project::registerPPP(ProjectPartnerProfile& profile)
 {
     // The student count is updated when the request query is successful
-    registeredPPPs.insert(profile);
+    addPPPtoProject(profile);
     numberOfRegisteredUsers++;
     //profile.getStudentUser().addProjectToUser(this->id);
 }
@@ -56,7 +56,7 @@ void Project::registerPPP(ProjectPartnerProfile& profile)
 void Project::unRegisterPPP(ProjectPartnerProfile& profile)
 {
     // The student count is updated when the request query is successful
-    registeredPPPs.remove(profile);
+    removePPPFromProject(profile);
     numberOfRegisteredUsers--;
     //profile.getStudentUser().removeProjectFromUser(this->id);
 }
@@ -74,7 +74,7 @@ void Project::setNumberOfRegisteredUsers(int newNum)
 
 bool Project::isPPPRegistered(ProjectPartnerProfile& profile)
 {
-    return registeredPPPs.contains(profile);
+    return registeredIDs.contains(profile.getPPPID());
 }
 
 QString& Project::getTitle()
@@ -82,9 +82,9 @@ QString& Project::getTitle()
     return title;
 }
 
-QList<ProjectPartnerProfile> Project::getRegisteredPPPs()
+QVector<ProjectPartnerProfile*>& Project::getRegisteredPPPs()
 {
-    return registeredPPPs.toList();
+    return registeredPPPs;
 }
 
 QString& Project::getDescription()
@@ -114,7 +114,21 @@ int Project::getProjectId()
 
 void Project::addPPPtoProject(ProjectPartnerProfile& ppp)
 {
-    registeredPPPs.insert(ppp);
+    registeredPPPs.append(&ppp);
+    registeredIDs.insert(ppp.getPPPID());
+}
+
+void Project::removePPPFromProject(ProjectPartnerProfile& ppp)
+{
+   for(int i = 0; i < registeredPPPs.size(); i++)
+   {
+      if(registeredPPPs[i]->getPPPID() == ppp.getPPPID())
+      {
+          registeredPPPs.remove(i);
+          break;
+      }
+   }
+   registeredIDs.remove(ppp.getPPPID());
 }
 
 bool Project::serializeJSONForSave(QJsonObject& projectJSON)
@@ -172,11 +186,7 @@ bool Project::deserializeJSONFromRetrieve(const QJsonObject& projectJSON)
             User* stuUser = DataAccessFacade::defaultUser(Student);
             ProjectPartnerProfile* profile = DataAccessFacade::defaultProfile((*((StudentUser*)stuUser)));
             profile->deserializeJSONFromRetrieve(registeredPPPList[i].toObject());
-            registeredPPPs.insert(*profile);
-
-            // we copied these things so we can delete them into the
-            delete profile;
-            delete stuUser;
+            addPPPtoProject(*profile);
         }
     }
 

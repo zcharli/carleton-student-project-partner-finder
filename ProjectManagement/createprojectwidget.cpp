@@ -99,7 +99,6 @@ CreateProjectWidget::~CreateProjectWidget()
     delete ui;
     if (project != NULL)
     {
-        delete project;
         project = NULL;
     }
 }

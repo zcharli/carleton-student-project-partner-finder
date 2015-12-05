@@ -17,11 +17,26 @@ class QJsonObject;
 class Project : private IMappable
 {
     Configuration *projectConfigurations;
-    QSet<ProjectPartnerProfile> registeredPPPs;
+    QVector<ProjectPartnerProfile*> registeredPPPs;
+    QSet<int> registeredIDs;
     int numberOfRegisteredUsers;
     QString title;
     QString description;
     int id;
+
+    /*!
+     *       @param: ppp: ProjectPartnerProfile*
+     *        @desc: adds the ppp to the collection of profiles for this project
+     *      @return: none
+     */
+    void addPPPtoProject(ProjectPartnerProfile&);
+
+    /*!
+     *       @param: ppp: ProjectPartnerProfile*
+     *        @desc: adds the ppp to the collection of profiles for this project
+     *      @return: none
+     */
+    void removePPPFromProject(ProjectPartnerProfile&);
 
 public:
     Project(const QJsonObject&);
@@ -71,7 +86,7 @@ public:
      *        @desc: returns the list of PPPs that are registered into the project
      *      @return: void
      */
-    QList<ProjectPartnerProfile> getRegisteredPPPs();
+    QVector<ProjectPartnerProfile*>& getRegisteredPPPs();
 
     /*!
      *       @param: profileToUnregister: ProjectPartnerProfile&
@@ -129,13 +144,6 @@ public:
      *      @return: id: int
      */
     int getProjectId();
-
-    /*!
-     *       @param: ppp: ProjectPartnerProfile*
-     *        @desc: adds the ppp to the collection of profiles for this project
-     *      @return: none
-     */
-    void addPPPtoProject(ProjectPartnerProfile&);
 
     /*!
      *       @param: empty Json Object: QJsonObject&

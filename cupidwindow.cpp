@@ -71,8 +71,6 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
                      &createProjectWidget, SLOT(handleUserContextSwitch(DetailViewType)));
     QObject::connect(&projectSidebar, SIGNAL(userToSwitchContextTo(DetailViewType)),
                      &projectDetailsWidget, SLOT(handleUserContextSwitch(DetailViewType)));
-    QObject::connect(&projectDetailsWidget, SIGNAL(userToSwitchContextTo(DetailViewType)),
-                     &matchReport, SLOT(handleUserContextSwitch(DetailViewType)));
 
     QObject::connect(&createProjectWidget, SIGNAL(createProjectSucceeded()),
                      this, SLOT(generateProjectDetailsPage()));
@@ -188,6 +186,7 @@ void cuPIDWindow::generateProjectDetailsPage()
 
 void cuPIDWindow::generateMatchReportSummary()
 {
+    matchReport.viewWillAppear();
     ui->mainContentStackedWidget->setCurrentWidget(&matchReport);
 }
 

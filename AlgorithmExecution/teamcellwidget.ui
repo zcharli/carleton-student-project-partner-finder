@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>603</width>
+    <width>638</width>
     <height>339</height>
    </rect>
   </property>
@@ -362,7 +362,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>581</width>
+              <width>616</width>
               <height>210</height>
              </rect>
             </property>
@@ -413,7 +413,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Skills Deviation:</string>
+            <string>Satisfaction Level:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

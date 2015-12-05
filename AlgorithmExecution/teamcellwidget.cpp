@@ -9,8 +9,8 @@
 #include "DataAccessLayer/projectpartnerprofile.h"
 
 TeamCellWidget::TeamCellWidget(Team& teamToDisplay, int teamNumber, QWidget *parent) :
-    QWidget(parent), profilesInTeam(teamToDisplay.getMembersInTeam()), teamNumber(teamNumber),
-    reasonsList(teamToDisplay.getMatchSummaryForTeam()), teamToParse(teamToDisplay),
+    QWidget(parent), profilesInTeam(teamToDisplay.getMembersInTeam()), teamToParse(teamToDisplay), teamNumber(teamNumber),
+    reasonsList(teamToDisplay.getMatchSummaryForTeam()),
     ui(new Ui::TeamCellWidget)
 {
     ui->setupUi(this);
@@ -53,6 +53,20 @@ void TeamCellWidget::viewWillAppear()
     prepareForDisplay();
 }
 
+QString TeamCellWidget::satisfactionTextForSatisfactionLevel(int satisfactionLevel)
+{
+    if(satisfactionLevel < 0)
+        satisfactionLevel *= -1;
+
+    if(satisfactionLevel <= 10)
+        return "Perfect";
+    else if(satisfactionLevel <= 25)
+        return "Okay";
+    else
+        return "Poor";
+}
+
+
 void TeamCellWidget::prepareForDisplay()
 {
     if(profilesInTeam.size() > 0)
@@ -78,7 +92,7 @@ void TeamCellWidget::prepareForDisplay()
     evaluateSatificationColor(ui->lblSatisfiabilityScore);
     ui->lblNumStudentsRegistered->setText(QString::number(profilesInTeam.size()));
     ui->lblTeamNeedScore->setText(teamNeedScore);
-    ui->lblSummarySAT->setText(teamSatScore);
+    ui->lblSummarySAT->setText(satisfactionTextForSatisfactionLevel(teamToParse.getTeamSatisfaction()));
     evaluateSatificationColor(ui->lblSummarySAT);
 
     // Table settings for student names
