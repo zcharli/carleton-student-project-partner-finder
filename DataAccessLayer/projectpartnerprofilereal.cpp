@@ -45,6 +45,11 @@ void ProjectPartnerProfileReal::updateProfileScores()
     //TODO: technical normalizations for profile
 }
 
+QString ProjectPartnerProfileReal::getTechnicalScores()
+{
+    return "(" + QString::number(personalTechnicalScore) + ", " + QString::number(teammateTechnicalScore) + ")";
+}
+
 bool ProjectPartnerProfileReal::serializeJSONForSave(QJsonObject& pppJSON)
 {
     int i;

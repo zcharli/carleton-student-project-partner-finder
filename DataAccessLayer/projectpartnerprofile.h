@@ -76,6 +76,13 @@ public:
 
     /*!
      *       @param: none
+     *        @desc: gets personal and team technical score string
+     *      @return: teammateTechnicalScore: int
+     */
+     virtual QString getTechnicalScores();
+
+    /*!
+     *       @param: none
      *        @desc: get the project partner id
      *      @return: pppID: int
      */

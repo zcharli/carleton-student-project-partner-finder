@@ -24,6 +24,13 @@ public:
     virtual Qualification getQualification(int);
 
     /*!
+     *       @param: none
+     *        @desc: gets personal and team technical score string
+     *      @return: teammateTechnicalScore: int
+     */
+     virtual QString getTechnicalScores();
+
+    /*!
      *       @param: qualificationIndex: int
      *        @desc: gets the given qualification for the specified index
      *      @return: Qualification

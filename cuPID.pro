@@ -56,7 +56,8 @@ SOURCES += \
     cupidwindow.cpp \
     homewidget.cpp \
     highlighter.cpp \
-    AlgorithmExecution/matchreportview.cpp
+    AlgorithmExecution/matchreportview.cpp \
+    ProjectManagement/recentprojectswidget.cpp
 
 
 HEADERS  += \
@@ -105,7 +106,8 @@ HEADERS  += \
     cupidwindow.h \
     homewidget.h \
     highlighter.h \
-    AlgorithmExecution/matchreportview.h
+    AlgorithmExecution/matchreportview.h \
+    ProjectManagement/recentprojectswidget.h
 
 FORMS    += \
     UserAuthentication/loginform.ui \
@@ -121,7 +123,8 @@ FORMS    += \
     homewidget.ui \
     ProfileManagement/codingwidget.ui \
     AlgorithmExecution/matchreportview.ui \
-    AlgorithmExecution/teamcellwidget.ui
+    AlgorithmExecution/teamcellwidget.ui \
+    ProjectManagement/recentprojectswidget.ui
 
 RESOURCES += \
     stylesheet.qrc

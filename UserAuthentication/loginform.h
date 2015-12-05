@@ -110,6 +110,14 @@ public slots:
      * @return: void
     */
     void slotCreateNewAccount();
+
+    /*!
+     *  @param: none
+     *   @desc: A slot to accept the signal emitted from an
+     *          attempt to go back to login from a sign up
+     * @return: void
+    */
+    void slotBackToLoginpage();
 };
 
 #endif // LOGINFORM_H

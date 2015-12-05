@@ -107,7 +107,7 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,2,9);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,2,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,2,7);
-INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,2,7,90);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,2,90);
 
 
 
@@ -216,7 +216,7 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,6,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,6,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,6,6);
-INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,6,6,50);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,6,50);
 
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,7,93);
@@ -738,9 +738,13 @@ INSERT INTO `project_configurations` VALUES (1,3,4);
 INSERT INTO `project_configurations` VALUES (1,4,4);
 
 
-INSERT INTO `project` VALUES ('cuPID Project','The Carleton Univeristy Project Identifier project is a project for COMP 3004 students to spend sleepless nights while trying to meet requirements specifications, and software design. Register at your own risk.','2015-11-04 02:38:07');
-INSERT INTO `project` VALUES ('Just Another Project','Are you a great coder looking for something to sink your teeth into?
+INSERT INTO `project` VALUES (1, 'cuPID Project','The Carleton Univeristy Project Identifier project is a project for COMP 3004 students to spend sleepless nights while trying to meet requirements specifications, and software design. Register at your own risk.','2015-11-04 02:38:07');
+INSERT INTO `project` VALUES (2,'Just Another Project','Are you a great coder looking for something to sink your teeth into?
 Well look no further, cuPID will find you the best project. Just click that register button at the top right corner and we will handle the rest.','2015-11-04 02:52:09');
-INSERT INTO `project` VALUES ('COMP 2404 Project','Learn how to make great c++ programs.
+INSERT INTO `project` VALUES (3, 'COMP 2404 Project','Learn how to make great c++ programs.
 Work together in teams of 4 in order to create c++ programs along with embedded user interfaces.','2015-11-04 03:59:25');
 
+
+INSERT INTO `project_registration` VALUES(1, 1);
+INSERT INTO `project_registration` VALUES(2, 1);
+INSERT INTO `project_registration` VALUES(3, 1);

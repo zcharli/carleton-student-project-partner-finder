@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>595</height>
+    <width>245</width>
+    <height>418</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>300</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -37,7 +43,7 @@
         <bool>true</bool>
        </property>
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -45,7 +51,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>40</height>
+         <height>0</height>
         </size>
        </property>
        <property name="font">
@@ -56,14 +62,14 @@
          <bold>false</bold>
          <underline>false</underline>
          <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>false</kerning>
         </font>
        </property>
        <property name="text">
-        <string>Carleton 
-University</string>
+        <string>Carleton University</string>
        </property>
        <property name="scaledContents">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -142,16 +148,6 @@ University</string>
       </widget>
      </item>
      <item>
-      <widget class="Line" name="dividerCreateProject">
-       <property name="frameShadow">
-        <enum>QFrame::Sunken</enum>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="btnMyProjects">
        <property name="text">
         <string>MY PROJECTS</string>
@@ -159,9 +155,9 @@ University</string>
       </widget>
      </item>
      <item>
-      <widget class="Line" name="dividerMyProjects">
-       <property name="enabled">
-        <bool>false</bool>
+      <widget class="Line" name="dividerCreateProject">
+       <property name="frameShadow">
+        <enum>QFrame::Sunken</enum>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -174,20 +170,20 @@ University</string>
         <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
+        <enum>QSizePolicy::Preferred</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>15</height>
+         <height>40</height>
         </size>
        </property>
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="lblRecentProjects">
+      <widget class="QWidget" name="recentWidget" native="true">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -201,35 +197,26 @@ University</string>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>40</height>
+         <height>16777215</height>
         </size>
        </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Recent projects</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QListView" name="lstvRecentProjects">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>2</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color:rgb(0,0,0,0);
-border-style: none;
-QListWidget::item {
-border-top: 1px solid black;
-border-bottom: 1px solid black;
-}</string>
-       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QFormLayout" name="formLayout"/>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
@@ -238,15 +225,25 @@ border-bottom: 1px solid black;
         <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
+        <enum>QSizePolicy::Preferred</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>15</height>
+         <height>40</height>
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="Line" name="dividerMyProjects">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btnProfile">
@@ -289,7 +286,7 @@ border-bottom: 1px solid black;
         <enum>Qt::Vertical</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
+        <enum>QSizePolicy::Preferred</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

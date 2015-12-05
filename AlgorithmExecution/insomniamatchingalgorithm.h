@@ -99,6 +99,13 @@ class InsomniaMatchingAlgorithm
      */
     void cleanUpMap();
 
+    /*!
+     *       @param: logType: LogType, logString: QString,
+     *        @desc: Creates a log entry for the algorithm
+     *      @return: pair: QPair<LogType,QString>
+     */
+    QPair<LogType,QString> createLogEntry(LogType,QString);
+
 
 public:
     InsomniaMatchingAlgorithm(Project*);

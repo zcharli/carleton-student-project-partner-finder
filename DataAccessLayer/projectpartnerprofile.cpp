@@ -86,6 +86,11 @@ unsigned char ProjectPartnerProfile::getWorkEthicByte()
     return workEthic;
 }
 
+QString ProjectPartnerProfile::getTechnicalScores()
+{
+    return "(" + QString::number(personalTechnicalScore) + ", " + QString::number(teammateTechnicalScore) + ")";
+}
+
 void ProjectPartnerProfile::setWorkEthicByte(unsigned char meThic)
 {
     workEthic = meThic;

@@ -8,6 +8,7 @@
 //  Subsystem dependencies
 #include "ProfileManagement/profilewidget.h"
 #include "ProjectManagement/createprojectwidget.h"
+#include "ProjectManagement/recentprojectswidget.h"
 #include "DataAccessLayer/user.h"
 #include "ProjectManagement/projectlistview.h"
 #include "ProfileManagement/pppcontroller.h"
@@ -43,6 +44,7 @@ private:
 
     SideBarWidget projectSidebar;
     ProfileWidget profileWidget;
+    RecentProjectsWidget recentProjectsWidget;
     CreateProjectWidget createProjectWidget;
     ProjectListView projectsWidget;
     HomeWidget homeWidget;

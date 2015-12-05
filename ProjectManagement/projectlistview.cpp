@@ -123,7 +123,6 @@ void ProjectListView::displayList()
 
 void ProjectListView::viewProjectSelected(int index)
 {
-    DataAccessFacade::managedDataAccess().deleteCurrentProject();
     DataAccessFacade::managedDataAccess().setCurrentProject(projectList[index]);
     emit userToViewProject();
     viewWillDisappear();

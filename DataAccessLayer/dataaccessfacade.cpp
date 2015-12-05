@@ -25,6 +25,40 @@ DataAccessFacade::~DataAccessFacade()
 {
   //  Clean up
   delete dispatcher;
+
+  foreach(Project *project, allocatedProjects)
+  {
+    if(project != NULL)
+    {
+      int index = allocatedProjects.indexOf(project);
+      allocatedProjects.remove(index);
+      delete project;
+      project = NULL;
+    }
+  }
+
+  foreach(ProjectPartnerProfile *profile, allocatedProfiles)
+  {
+    if(profile != NULL)
+    {
+      int index = allocatedProfiles.indexOf(profile);
+      allocatedProfiles.remove(index);
+      delete profile;
+      profile = NULL;
+    }
+  }
+
+  foreach(User *user, allocatedUsers)
+  {
+    if(user != NULL)
+    {
+      int index = allocatedUsers.indexOf(user);
+      allocatedUsers.remove(index);
+      delete user;
+      user = NULL;
+    }
+  }
+
 }
 
 void DataAccessFacade::setCurrentUser(User* userToSet)
@@ -100,6 +134,14 @@ User* DataAccessFacade::defaultUser(UserType type)
     }
     allocatedUsers.append(user);
     return user;
+}
+
+void DataAccessFacade::trackAllocatedProject(Project* project)
+{
+  if(project != NULL)
+  {
+    allocatedProjects.append(project);
+  }
 }
 
 void DataAccessFacade::doneUsingProfile(ProjectPartnerProfile* profile)
@@ -214,7 +256,6 @@ int DataAccessFacade::execute(ActionType action, User& user, Project* project)
 
 int DataAccessFacade::execute(ActionType action, User& user, QVector<Project*>& projectList)
 {
-
     int successStatus = SUCCESS;
     QJsonObject projects;
     projects[FLOATING_USR_ID] = user.getUserId();
@@ -225,6 +266,9 @@ int DataAccessFacade::execute(ActionType action, User& user, QVector<Project*>& 
             break;
         case fetchUsersProjects:
             successStatus = dispatcher->retrieveProjectsForUser(projects);
+            break;
+        case fetchUserRecentProjects:
+            successStatus = dispatcher->retrieveProjectsForUser(projects, 3);
             break;
         default:
             successStatus = INVALID_ACTION;
