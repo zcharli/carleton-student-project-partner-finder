@@ -43,7 +43,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="LoginFormStack">
         <property name="sizePolicy">
@@ -128,12 +128,6 @@
            </item>
            <item>
             <widget class="QLabel" name="lblDescription">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
              <property name="lineWidth">
               <number>2</number>
              </property>
@@ -248,15 +242,6 @@
           </layout>
          </item>
         </layout>
-        <zorder>btnAdministrator</zorder>
-        <zorder>txtLogin</zorder>
-        <zorder>btnStudent</zorder>
-        <zorder>btnSignUp</zorder>
-        <zorder>btnStudent</zorder>
-        <zorder>txtLogin</zorder>
-        <zorder>btnAdministrator</zorder>
-        <zorder>btnSignUp</zorder>
-        <zorder>verticalLayoutWidget</zorder>
        </widget>
        <widget class="QWidget" name="SignUpStack">
         <property name="enabled">

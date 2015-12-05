@@ -37,6 +37,7 @@ public:
     explicit cuPIDWindow(QWidget *parent = 0);
     ~cuPIDWindow();
     void displayProfile(ProfileWidget*);
+    SettingsWidget settingsWidget;
 private:
     //Controllers
     PPPController *pppController;
@@ -46,7 +47,6 @@ private:
     RecentProjectsWidget recentProjectsWidget;
     CreateProjectWidget createProjectWidget;
     ProjectListView projectsWidget;
-    SettingsWidget settingsWidget;
     HomeWidget homeWidget;
     MatchReportView matchReport;
 

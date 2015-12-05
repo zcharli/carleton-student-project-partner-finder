@@ -1,56 +1,35 @@
-/* Button Styling
-QPushButton, QPushButton *{
-    border:none;
-    padding:10 10 10 10;
-    font-family: "Sans Serif", Times, serif;
-    outline:0;
-    width:100%;
-}
-#sideBar{
-    color:black;
-}
-
-QPushButton:hover, #sideBar QPushButton:hover {
-    background-color: #99B0E5;
-    color:white;
-}
-
-#LoginForm, #sideBar{
-    border-bottom-right-radius: 2px;
-    border-top-right-radius: 2px;
-    background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
-                                        stop:0 #6482C7, stop:1  #02788E);
-}
-
-#centralwidget {
-  border: 1px solid #978b88;
-  background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
-                                      stop:0 #E6E0FA, stop:1  #ffffff);
-}
-
-#sideBar QPushButton, #sideBar QLabel {
-    color: black;
-}
-
-
-#LoginForm QPushButton:hover{
-    background-color: #729399;
-}
-*/
-
-
 /* Sidebar */
 #LoginForm, #SignUpForm, #sideBar {
-    color:white;
+    color:%4;
     background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
-                                        stop:0 #840b11, stop:1  #c0010b);
+                                        stop:0 %1, stop:1  %2);
 }
-#LoginForm QPushButton, #SignUpForm QPushButton, #sideBar QPushButton, #LoginForm QLabel, #SignUpForm QLabel, #sideBar QLabel {
-    color: white;
+#sideBar #RecentProjectsWidget {
+    background:rgba(255, 255, 255, 10%);
+}
+
+#LoginForm QPushButton, #SignUpForm QPushButton, #sideBar QPushButton, #LoginForm QLabel, #SignUpForm QLabel {
+    color: %4;
     background: transparent;
     border:none;
 }
+#RecentProjectsWidget *{
+    padding:5 0 0 0;
+}
 
+
+
+QLabel {
+    padding-left: 10;
+}
+
+#sideBar QLabel {
+    color: %4;
+    padding: 10 10 10 10;
+}
+#lblAppname, #lblUsername {
+    border-bottom:2px solid %4;
+}
 #LoginForm QPushButton, #SignUpForm QPushButton{
     background:rgba(255, 255, 255, 10%);
     border-bottom: 1px solid rgba(0, 0, 0, 30%);
@@ -59,9 +38,10 @@ QPushButton:hover, #sideBar QPushButton:hover {
 
 
 #LoginForm QPushButton:hover, #SignUpForm QPushButton:hover, #sideBar QPushButton:hover {
-    background-color: #550000;
+    background-color: %3;
     color:white;
 }
+
 /* Sidebar End */
 
 
@@ -73,23 +53,24 @@ QPushButton:hover, #sideBar QPushButton:hover {
 /* Content Widget */
 #mainContentStackedWidget QLabel, #mainContentStackedWidget QPushButton{ color:white; }
 #mainContentStackedWidget { background: rgba(0, 0, 0, 60%);}
-/* Label */
-#mainContentStackedWidget QLabel, #sideBar QLabel{ padding: 10 10 10 10; }
+/* Label
+#mainContentStackedWidget QLabel{ padding: 10 10 10 10; }
 /* Content Widget End */
 
 
 
 
 /* cuPID Logo Images set to a QLabel */
-#lblLogo{ background-image:url(../cuPID/Images/arrow-white-2.svg); }
-#lblheader { background-image:url(../cuPID/Images/arrow-black-2.svg); }
-
+#lblLogo, #lblheader{ background-image:url(../cuPID/Images/arrow-white-2.svg); }
 /* cuPID Logo End */
 
 /* Formatting for all QT Elements */
 
 /* All Widgets */
-QWidget *{ background:transparent; }
+QWidget *{
+    background:transparent;
+    font-family:%5;
+}
 QTextEdit, QLineEdit, QSpinBox {
     background: rgba(0, 0, 0, 70%);
     border:none;
@@ -99,44 +80,60 @@ QTextEdit, QLineEdit, QSpinBox {
 QScrollArea { border:none; }
 QToolBox::tab { color: white; }
 QRadioButton, QCheckBox, QGroupBox { color: white; }
+QFontComboBox {
+    color:white;
+    background:rgba(255, 255, 255, 10%);
+}
 /* Button */
 QPushButton, QPushButton *{
     border:none;
     border-bottom: 1px solid rgba(0, 0, 0, 30%);
-    padding:10 10 10 10;
-    font-family: "Sans Serif", Times, serif;
+    padding:10 0 10 0;
     outline:0;
     width:100%;
     background:rgba(255, 255, 255, 10%);
 }
 
 QPushButton:hover {
-    background-color: #550000;
+    background-color: %3;
     color:white;
 }
+
 /* Button End */
 
-/* QTabbedWidget Configurations */
-QTabWidget::pane {
-    border-top: 2px solid transparent;
-}
+/* QTabbedWidget Configurations
 QTabBar {
     background: rgba(255, 255, 255, 10%);
     color: black;
     margin:20;
+    border-radius:10px;
 }
 
-QTabBar:hover {
-    background: rgba(255, 255, 255, 70%);
-    color: black;
-}
 
-QTabBar:selected {
-    background: rgba(255, 255, 255, 70%);
-    color: black;
-}
+
 /* QTabbedWidget End */
+QTabWidget::pane { /* The tab widget frame */
+    border-top: 2px solid #C2C7CB;
+}
 
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+    color: white;
+    padding: 5px;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background:#E18C69;
+    color:black;
+}
+
+QTabBar::tab:!selected, QTabBar::tab:!hover {
+    margin-top: 2px;
+}
 
 
 

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>784</width>
+    <width>521</width>
     <height>505</height>
    </rect>
   </property>
@@ -102,6 +102,12 @@ Click on the Create PPP to begin.</string>
      </item>
      <item>
       <widget class="QTabWidget" name="myProfileWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="autoFillBackground">
         <bool>false</bool>
        </property>
@@ -124,6 +130,12 @@ Click on the Create PPP to begin.</string>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <widget class="QScrollArea" name="scrollArea">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="widgetResizable">
             <bool>true</bool>
            </property>
@@ -132,7 +144,7 @@ Click on the Create PPP to begin.</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>742</width>
+              <width>479</width>
               <height>288</height>
              </rect>
             </property>
@@ -199,6 +211,9 @@ Click on the Create PPP to begin.</string>
              <property name="text">
               <string>You're likely to fulfil commitment they have made to the project.</string>
              </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item row="2" column="0">
@@ -212,6 +227,9 @@ Click on the Create PPP to begin.</string>
             <widget class="QLabel" name="lblOrganizedDesc">
              <property name="text">
               <string> You're likely to have smooth interactions over the group meetings.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -276,7 +294,7 @@ Click on the Create PPP to begin.</string>
            <item row="8" column="0">
             <widget class="QCheckBox" name="chkFlexible">
              <property name="text">
-              <string>Flixible</string>
+              <string>Flexible</string>
              </property>
             </widget>
            </item>
@@ -339,6 +357,12 @@ Click on the Create PPP to begin.</string>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QScrollArea" name="scrollArea_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="widgetResizable">
             <bool>true</bool>
            </property>
@@ -347,7 +371,7 @@ Click on the Create PPP to begin.</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>742</width>
+              <width>479</width>
               <height>288</height>
              </rect>
             </property>

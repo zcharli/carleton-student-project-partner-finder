@@ -73,7 +73,7 @@
       <set>Qt::AlignHCenter|Qt::AlignTop</set>
      </property>
      <property name="margin">
-      <number>40</number>
+      <number>30</number>
      </property>
     </widget>
    </item>

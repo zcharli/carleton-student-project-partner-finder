@@ -8,8 +8,8 @@
 #include "DataAccessLayer/qualification.h"
 #include <QLayout>
 
-#define WINDOW_MAX_WIDTH 1000
-#define WINDOW_MAX_HEIGHT 650
+#define WINDOW_MAX_WIDTH 1280
+#define WINDOW_MAX_HEIGHT 853
 
 cuPIDWindow::cuPIDWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -101,15 +101,12 @@ void cuPIDWindow::viewWillAppear()
     if (dynamic_cast<AdministratorUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
     {
         sideBarUi->btnDiscoverProjects->hide();
-        sideBarUi->dividerDiscoverProject->hide();
         sideBarUi->btnProfile->hide();
-        sideBarUi->dividerProfile->hide();
         homeWidget.setAdmin();
     }
     else if (dynamic_cast<StudentUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
     {
         sideBarUi->btnCreateProject->hide();
-        sideBarUi->dividerCreateProject->hide();
         homeWidget.setStudent();
     }
 

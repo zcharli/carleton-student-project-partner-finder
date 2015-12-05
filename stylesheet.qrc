@@ -1,9 +1,6 @@
 <RCC>
     <qresource prefix="/style">
-        <file>Stylesheets/style - Blue.qss</file>
-        <file>Stylesheets/style - Yellow.qss</file>
         <file>Stylesheets/style.qss</file>
-        <file>Stylesheets/style Green.qss</file>
     </qresource>
     <qresource prefix="/images">
         <file>Images/Add.png</file>
