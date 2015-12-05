@@ -64,8 +64,13 @@ QLabel {
 #mainContentStackedWidget QLabel{ padding: 10 10 10 10; }
 /* Content Widget End */
 
+#EditTeamConfigurationsDialog *{
+    background:grey;
+}
 
-
+#EditTeamConfigurationsDialog QLabel{
+    background:transparent;
+}
 
 /* cuPID Logo Images set to a QLabel */
 #lblLogo, #lblheader{ background-image:url(../cuPID/Images/arrow-white-2.svg); }
