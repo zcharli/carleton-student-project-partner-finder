@@ -95,15 +95,12 @@ void cuPIDWindow::viewWillAppear()
     if (dynamic_cast<AdministratorUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
     {
         sideBarUi->btnDiscoverProjects->hide();
-        sideBarUi->dividerDiscoverProject->hide();
         sideBarUi->btnProfile->hide();
-        sideBarUi->dividerProfile->hide();
         homeWidget.setAdmin();
     }
     else if (dynamic_cast<StudentUser *>(DataAccessFacade::managedDataAccess().getCurrentUser()))
     {
         sideBarUi->btnCreateProject->hide();
-        sideBarUi->dividerCreateProject->hide();
         homeWidget.setStudent();
     }
 }

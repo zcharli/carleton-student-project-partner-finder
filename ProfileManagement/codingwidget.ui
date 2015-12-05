@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>554</width>
-    <height>323</height>
+    <width>725</width>
+    <height>399</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,6 +28,12 @@
    </property>
    <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -35,9 +41,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-1237</y>
-        <width>547</width>
-        <height>1951</height>
+        <y>-1063</y>
+        <width>709</width>
+        <height>1829</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -393,10 +399,10 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="q5ButtonGroup"/>
+  <buttongroup name="q1ButtonGroup"/>
   <buttongroup name="q2ButtonGroup"/>
   <buttongroup name="q3ButtonGroup"/>
   <buttongroup name="q4ButtonGroup"/>
-  <buttongroup name="q5ButtonGroup"/>
-  <buttongroup name="q1ButtonGroup"/>
  </buttongroups>
 </ui>

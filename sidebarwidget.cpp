@@ -5,11 +5,6 @@ SideBarWidget::SideBarWidget(QWidget *parent) :
     ui(new Ui::SideBarWidget)
 {
     ui->setupUi(this);
-    ui->dividerCreateProject->hide();
-    ui->dividerDiscoverProject->hide();
-    ui->dividerMyProjects->hide();
-    ui->dividerProfile->hide();
-    ui->dividerSettings->hide();
 
     viewWillAppear();
 
