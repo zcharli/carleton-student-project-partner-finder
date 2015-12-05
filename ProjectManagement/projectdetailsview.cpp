@@ -159,7 +159,7 @@ void ProjectDetailsView::on_btnRegistration_clicked()
         }
     }
 
-    emit registrationClicked();
+    emit userMightHaveChangedRecentProjects();
 }
 
 
@@ -234,6 +234,7 @@ void ProjectDetailsView::handleUserContextSwitch(DetailViewType type)
     {
         //entering view
         viewWillAppear();
+        emit userMightHaveChangedRecentProjects();
     }
     else
     {

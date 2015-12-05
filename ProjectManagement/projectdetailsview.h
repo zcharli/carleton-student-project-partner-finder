@@ -45,13 +45,6 @@ public:
 signals:
     /*!
      *  @param: void
-     *   @desc: A signal emitted when the registration button is clicked
-     * @return: void
-    */
-    void registrationClicked();
-
-    /*!
-     *  @param: void
      *   @desc: A signal emitted when the start algorithm button is clicked
      * @return: void
     */
@@ -67,10 +60,10 @@ signals:
 
     /*!
      *  @param: void
-     *   @desc: A signal emitted when the edit Project button is clicked
+     *   @desc: A signal emitted when the user might have changed his/her (recent) projects
      * @return: void
     */
-    void editProjectClicked();
+    void userMightHaveChangedRecentProjects();
 
 private slots:
     void on_btnRegistration_clicked();

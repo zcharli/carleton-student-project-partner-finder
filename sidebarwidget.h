@@ -2,7 +2,6 @@
 #define SIDEBARWIDGET_H
 
 #include "ui_sidebarwidget.h"  //Side effect of creating a getter to the ui element of the class, but this makes things easier
-
 #include <QWidget>
 
 enum DetailViewType
@@ -25,6 +24,7 @@ class SideBarWidget;
 class SideBarWidget : public QWidget
 {
     Q_OBJECT
+
 
 public:
     explicit SideBarWidget(QWidget *parent = 0);

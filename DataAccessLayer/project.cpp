@@ -218,6 +218,7 @@ bool Project::deserializeJSONFromCollection(const QJsonObject& json, QVector<Pro
     {
         Project* project = new Project(projectJSONArray[i].toObject());
         projectList.append(project);
+        DataAccessFacade::trackAllocatedProject(project);
     }
 
     return true;
