@@ -23,7 +23,8 @@ public:
     explicit RecentProjectsWidget(QWidget *parent = 0);
     ~RecentProjectsWidget();
 
-    void reloadRecentProjects();
+signals:
+    void userToViewProject();
 
 private:
     Ui::RecentProjectsWidget *ui;
@@ -32,6 +33,7 @@ public slots:
     void on_btnRecent1_clicked();
     void on_btnRecent2_clicked();
     void on_btnRecent3_clicked();
+    void reloadRecentProjects();
 };
 
 #endif // RECENTPROJECTSWIDGET_H

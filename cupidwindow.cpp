@@ -84,6 +84,9 @@ cuPIDWindow::cuPIDWindow(QWidget *parent) :
 
     QObject::connect(&projectDetailsWidget, SIGNAL(startAlgoClicked()), this, SLOT(generateMatchReportSummary()));
 
+    //Connect recent projects signals
+    QObject::connect(&projectDetailsWidget, SIGNAL(userMightHaveChangedRecentProjects()), &recentProjectsWidget, SLOT(reloadRecentProjects()));
+    QObject::connect(&recentProjectsWidget, SIGNAL(userToViewProject()), this, SLOT(generateProjectDetailsPage()));
 }
 
 void cuPIDWindow::viewWillAppear()

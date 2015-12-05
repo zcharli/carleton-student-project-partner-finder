@@ -26,10 +26,10 @@ void RecentProjectsWidget::reloadRecentProjects()
     if(projects.size() > 0)
     {
         int size = projects.size();
-        for(int i = 0; i < size; i++)
+        foreach(Project *project, projects)
         {
-            Project * project = projects[i];
-            projects.remove(i);
+            int index = projects.indexOf(project);
+            projects.remove(index);
             DataAccessFacade::managedDataAccess().doneUsingProject(project);
         }
     }
@@ -61,15 +61,18 @@ void RecentProjectsWidget::reloadRecentProjects()
 
 void RecentProjectsWidget::on_btnRecent1_clicked()
 {
-
+    DataAccessFacade::managedDataAccess().setCurrentProject(projects[0]);
+    emit userToViewProject();
 }
 
 void RecentProjectsWidget::on_btnRecent2_clicked()
 {
-
+    DataAccessFacade::managedDataAccess().setCurrentProject(projects[1]);
+    emit userToViewProject();
 }
 
 void RecentProjectsWidget::on_btnRecent3_clicked()
 {
-
+    DataAccessFacade::managedDataAccess().setCurrentProject(projects[2]);
+    emit userToViewProject();
 }

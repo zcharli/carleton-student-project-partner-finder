@@ -25,6 +25,40 @@ DataAccessFacade::~DataAccessFacade()
 {
   //  Clean up
   delete dispatcher;
+
+  foreach(Project *project, allocatedProjects)
+  {
+    if(project != NULL)
+    {
+      int index = allocatedProjects.indexOf(project);
+      allocatedProjects.remove(index);
+      delete project;
+      project = NULL;
+    }
+  }
+
+  foreach(ProjectPartnerProfile *profile, allocatedProfiles)
+  {
+    if(profile != NULL)
+    {
+      int index = allocatedProfiles.indexOf(profile);
+      allocatedProfiles.remove(index);
+      delete profile;
+      profile = NULL;
+    }
+  }
+
+  foreach(User *user, allocatedUsers)
+  {
+    if(user != NULL)
+    {
+      int index = allocatedUsers.indexOf(user);
+      allocatedUsers.remove(index);
+      delete user;
+      user = NULL;
+    }
+  }
+
 }
 
 void DataAccessFacade::setCurrentUser(User* userToSet)
@@ -100,6 +134,14 @@ User* DataAccessFacade::defaultUser(UserType type)
     }
     allocatedUsers.append(user);
     return user;
+}
+
+void DataAccessFacade::trackAllocatedProject(Project* project)
+{
+  if(project != NULL)
+  {
+    allocatedProjects.append(project);
+  }
 }
 
 void DataAccessFacade::doneUsingProfile(ProjectPartnerProfile* profile)

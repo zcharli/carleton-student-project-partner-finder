@@ -61,6 +61,7 @@ public:
     static Project* defaultProject();
     static User* defaultUser(UserType);
 
+    static void trackAllocatedProject(Project*);
     static void doneUsingProfile(ProjectPartnerProfile*);
     static void doneUsingProject(Project*);
     static void doneUsingUser(User*);
