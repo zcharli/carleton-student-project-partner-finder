@@ -52,7 +52,7 @@ void SettingsWidget::on_btnChangeSettings_clicked()
 
 void SettingsWidget::on_btnColorSelector_clicked()
 {
-    selectedColor = QColorDialog::getColor();
+selectedColor = QColorDialog::getColor(Qt::red, this, "Color Selector", QColorDialog::DontUseNativeDialog);
 //gets the lightness of the color selected
     int l = selectedColor.toHsl().lightness();
 
