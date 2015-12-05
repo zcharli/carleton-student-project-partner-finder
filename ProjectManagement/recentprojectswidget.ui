@@ -36,7 +36,7 @@
        <item row="2" column="0" colspan="2">
         <widget class="QPushButton" name="btnRecent1">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -57,7 +57,7 @@
        <item row="3" column="0" colspan="2">
         <widget class="QPushButton" name="btnRecent2">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>

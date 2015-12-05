@@ -47,22 +47,22 @@
       <widget class="QLabel" name="lblheader">
        <property name="font">
         <font>
-         <pointsize>50</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <pointsize>72</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
         </font>
        </property>
        <property name="autoFillBackground">
         <bool>true</bool>
        </property>
        <property name="text">
-        <string/>
+        <string>cuPID</string>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
