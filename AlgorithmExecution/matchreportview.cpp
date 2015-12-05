@@ -29,6 +29,7 @@ MatchReportView::~MatchReportView()
 
 void MatchReportView::viewWillAppear()
 {
+    cleanUpMatch();
     setUpSummary();
 }
 

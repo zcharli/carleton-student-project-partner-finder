@@ -94,10 +94,8 @@ int UserRepository::userCreatedPPP(QJsonObject& pppJSON, int userId)
     return 0;
 }
 
-int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId, bool full)
+int UserRepository::fetchPPPForUser(QJsonObject& pppJSON, int pppId, bool full)
 {
-    QJsonObject pppJSON;
-
 
     // This join will ensure we only return PPP qualifications if the user has a PPP
     // This also helps ensure that after a student deletes their profile, then nothing will return
@@ -125,7 +123,6 @@ int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId, bool full)
 
                 qualificationArrayJSON.append(qualification);
             }
-            user[STUDENT_pppIDForFetch] = pppId;
         }
         else
         {
@@ -166,7 +163,6 @@ int UserRepository::fetchPPPForUser(QJsonObject& user, int pppId, bool full)
     }
 
     pppJSON[PPP_pppID] = pppId;
-    user[PPP_KEY] = pppJSON;
 
     return 0;
 }

@@ -247,6 +247,7 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
         if(fetchProject.next())
         {
             QJsonObject project;
+            QJsonObject ppp;
             QJsonArray projectConfigs;
             // Index
             //  0 -> project id
@@ -300,6 +301,9 @@ int ProjectRepository::fetchProjectForUser(QJsonObject& projectReturn, int proje
                 qDebug() << "fetchProject error:  "<< this->db.lastError();
                 return this->db.lastError().number();
             }
+
+            fetchPPPsForProject(ppp,projectId);
+            project[PPP_KEY] = ppp;
             projectArrayWithSingleProject.append(project);
             tracker++;
         }
@@ -340,6 +344,7 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
             //  1 -> project_title
             //  2 -> project_description
             QJsonObject project;
+            QJsonObject ppp;
             QJsonArray projectConfigs;
 
             QString projectTitle = QString(fetchProject.value(1).toString());
@@ -391,6 +396,8 @@ int ProjectRepository::fetchProjectsForUser(QJsonObject& projectsForUser, int us
             }
 
             ++tracker;
+            fetchPPPsForProject(ppp,projectId);
+            project[PPP_KEY] = ppp;
             projectsReturned.append(project);
         }
     }

@@ -46,6 +46,13 @@ private:
     int numberOfSummaryElements;
 
     /*!
+    *  @param: satisfaction string: QString
+    *   @desc: Prepares the satisfaction string for the given satisfaction level
+    * @return: void
+    */
+    QString satisfactionTextForSatisfactionLevel(int);
+
+    /*!
     *  @param: none
     *   @desc: Prepares the view to be displayed by allocating resources
     * @return: void

@@ -42,7 +42,7 @@ void PPPController::retrievePPP()
         if(DataAccessFacade::managedDataAccess().execute(fetchPPP, *currentUser, *profile) != 0)
         {
             // Error occurred on retrieving PPP
-            delete profile;
+            DataAccessFacade::doneUsingProfile(profile);
             profile = NULL;
             QMessageBox messageBox;
             messageBox.critical(0,"Error","An error occured while trying to fetch your profile");
@@ -306,8 +306,6 @@ void PPPController::savePPP()
     updatePPP();
 
     StudentUser *user = (StudentUser*)DataAccessFacade::managedDataAccess().getCurrentUser();
-
-
 
     if(profile->getPPPID() == 0)
     {

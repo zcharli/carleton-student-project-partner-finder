@@ -31,7 +31,7 @@ ProjectPartnerProfileReal& ProjectPartnerProfileProxy::loadPPP()
         SUCCESS_STATUS = DataAccessFacade::managedDataAccess().getDispatcher().retrievePPPForUser(realPPPJson, true);
         if(SUCCESS_STATUS == SUCCESS)
         {
-            ppp->deserializeJSONFromRetrieve(realPPPJson[PPP_KEY].toObject());
+            ppp->deserializeJSONFromRetrieve(realPPPJson);
         }
 
     }
@@ -159,8 +159,6 @@ bool ProjectPartnerProfileProxy::serializeJSONForSave(QJsonObject& pppJSON)
     if(ppp != NULL)
         return loadPPP().serializeJSONForSave(pppJSON);
 
-
-    int i;
     if(pppID != 0)
     {
         pppJSON[PPP_pppID] = pppID;
@@ -189,7 +187,6 @@ bool ProjectPartnerProfileProxy::deserializeJSONFromRetrieve(const QJsonObject& 
     // There are some cases where perosnal and teammate tech scores are NOT
     // pulled in for the logged in user
     // tech score are pulled in for when the algorithm needs them
-    int i;
     pppID = pppJSON[PPP_pppID].toInt();
     if(pppJSON.contains(PPP_personalTechnicalScore))
     {

@@ -176,7 +176,7 @@ void LoginForm::signUpSucceeded(User *currentUser)
     QString username = currentUser->getUserName();
     UserType type = currentUser->getUserType();
 
-    delete currentUser;
+    DataAccessFacade::doneUsingUser(currentUser);
     currentUser = NULL;
 
     getCurrentUserWithUserName(username, type, &currentUser);

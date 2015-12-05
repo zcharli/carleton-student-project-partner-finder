@@ -55,6 +55,33 @@ insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_te
 insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (24,"",81,173,47);
 insert into `ppp` (`ppp_id`, `bio`, `personal_tech_score`, `we_bs`, `teammate_tech_score`) values  (25,"",64,211,77);
 
+INSERT INTO "qualification" VALUES(1);
+INSERT INTO "qualification" VALUES(2);
+INSERT INTO "qualification" VALUES(3);
+INSERT INTO "qualification" VALUES(4);
+INSERT INTO "qualification" VALUES(5);
+INSERT INTO "qualification" VALUES(6);
+INSERT INTO "qualification" VALUES(7);
+INSERT INTO "qualification" VALUES(8);
+INSERT INTO "qualification" VALUES(9);
+INSERT INTO "qualification" VALUES(10);
+INSERT INTO "qualification" VALUES(11);
+INSERT INTO "qualification" VALUES(12);
+INSERT INTO "qualification" VALUES(13);
+INSERT INTO "qualification" VALUES(14);
+INSERT INTO "qualification" VALUES(15);
+INSERT INTO "qualification" VALUES(16);
+INSERT INTO "qualification" VALUES(17);
+INSERT INTO "qualification" VALUES(18);
+INSERT INTO "qualification" VALUES(19);
+INSERT INTO "qualification" VALUES(20);
+INSERT INTO "qualification" VALUES(21);
+INSERT INTO "qualification" VALUES(22);
+INSERT INTO "qualification" VALUES(23);
+INSERT INTO "qualification" VALUES(24);
+INSERT INTO "qualification" VALUES(25);
+
+INSERT INTO "configurations" VALUES(1, "");
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,1,104);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(2,1,10);
@@ -731,20 +758,16 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,25,8);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,25,79);
 
-
-
-INSERT INTO `project_configurations` VALUES (1,2,4);
-INSERT INTO `project_configurations` VALUES (1,3,4);
-INSERT INTO `project_configurations` VALUES (1,4,4);
-
-
 INSERT INTO `project` VALUES (1, 'cuPID Project','The Carleton Univeristy Project Identifier project is a project for COMP 3004 students to spend sleepless nights while trying to meet requirements specifications, and software design. Register at your own risk.','2015-11-04 02:38:07');
 INSERT INTO `project` VALUES (2,'Just Another Project','Are you a great coder looking for something to sink your teeth into?
 Well look no further, cuPID will find you the best project. Just click that register button at the top right corner and we will handle the rest.','2015-11-04 02:52:09');
 INSERT INTO `project` VALUES (3, 'COMP 2404 Project','Learn how to make great c++ programs.
 Work together in teams of 4 in order to create c++ programs along with embedded user interfaces.','2015-11-04 03:59:25');
 
-
 INSERT INTO `project_registration` VALUES(1, 1);
 INSERT INTO `project_registration` VALUES(2, 1);
 INSERT INTO `project_registration` VALUES(3, 1);
+
+INSERT INTO `project_configurations` VALUES (1,1,4);
+INSERT INTO `project_configurations` VALUES (1,2,4);
+INSERT INTO `project_configurations` VALUES (1,3,4);

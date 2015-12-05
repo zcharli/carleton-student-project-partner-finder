@@ -34,8 +34,8 @@ bool ProjectPartnerProfileReal::hasWorkEthic(WorkEthicQualificationMapping bitPo
 
 void ProjectPartnerProfileReal::updateProfileScores()
 {
-    float teamScore;
-    float personalScore;
+    float teamScore = 0;
+    float personalScore = 0;
 
     Qualification::TechnicalScoreForProfile(*this, personalScore, teamScore);
     personalTechnicalScore = personalScore;
