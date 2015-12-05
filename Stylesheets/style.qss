@@ -4,15 +4,27 @@
     background-color: qlineargradient(  spread:pad, x1:0 y1:0, x2:1 y2:0,
                                         stop:0 %1, stop:1  %2);
 }
+#sideBar #RecentProjectsWidget {
+    background:rgba(255, 255, 255, 10%);
+}
+
 #LoginForm QPushButton, #SignUpForm QPushButton, #sideBar QPushButton, #LoginForm QLabel, #SignUpForm QLabel {
     color: %4;
     background: transparent;
     border:none;
 }
+#RecentProjectsWidget *{
+    padding:5 0 0 0;
+}
+
+
+
+QLabel {
+    padding-left: 10;
+}
 
 #sideBar QLabel {
     color: %4;
-    background: transparent;
     padding: 10 10 10 10;
 }
 #lblAppname, #lblUsername {
@@ -86,29 +98,42 @@ QPushButton:hover {
     background-color: %3;
     color:white;
 }
+
 /* Button End */
 
-/* QTabbedWidget Configurations */
-QTabWidget::pane {
-    border-top: 2px solid transparent;
-}
+/* QTabbedWidget Configurations
 QTabBar {
     background: rgba(255, 255, 255, 10%);
     color: black;
     margin:20;
+    border-radius:10px;
 }
 
-QTabBar:hover {
-    background: rgba(255, 255, 255, 70%);
-    color: black;
-}
 
-QTabBar:selected {
-    background: rgba(255, 255, 255, 70%);
-    color: black;
-}
+
 /* QTabbedWidget End */
+QTabWidget::pane { /* The tab widget frame */
+    border-top: 2px solid #C2C7CB;
+}
 
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+    color: white;
+    padding: 5px;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background:#E18C69;
+    color:black;
+}
+
+QTabBar::tab:!selected, QTabBar::tab:!hover {
+    margin-top: 2px;
+}
 
 
 

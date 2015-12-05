@@ -8,8 +8,8 @@
 #include "DataAccessLayer/qualification.h"
 #include <QLayout>
 
-#define WINDOW_MAX_WIDTH 1000
-#define WINDOW_MAX_HEIGHT 650
+#define WINDOW_MAX_WIDTH 1280
+#define WINDOW_MAX_HEIGHT 853
 
 cuPIDWindow::cuPIDWindow(QWidget *parent) :
     QMainWindow(parent),
