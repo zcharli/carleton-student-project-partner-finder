@@ -2,7 +2,7 @@
 //  Subsystem dependencies
 #include "DataAccessLayer/qualification.h"
 #include <QDebug>
-#define DEFAULT_VALUE 0
+#define DEFAULT_VALUE 0.0
 
 ProfileWidget::ProfileWidget(QWidget *parent):
     QWidget(parent),

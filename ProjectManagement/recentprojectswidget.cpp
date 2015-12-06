@@ -22,7 +22,7 @@ RecentProjectsWidget::~RecentProjectsWidget()
 void RecentProjectsWidget::reloadRecentProjects()
 {
     User *user = DataAccessFacade::managedDataAccess().getCurrentUser();
-
+    Project *currentProject = DataAccessFacade::managedDataAccess().getCurrentProject();
     if(projects.size() > 0)
     {
         int size = projects.size();
@@ -30,7 +30,8 @@ void RecentProjectsWidget::reloadRecentProjects()
         {
             int index = projects.indexOf(project);
             projects.remove(index);
-            DataAccessFacade::managedDataAccess().doneUsingProject(project);
+            if(currentProject != NULL && project != currentProject)
+                DataAccessFacade::managedDataAccess().doneUsingProject(project);
         }
     }
 

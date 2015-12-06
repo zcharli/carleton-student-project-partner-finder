@@ -1,6 +1,6 @@
 #include "projectcellwidget.h"
 
-#define MAX_HEIGHT 175
+#define MAX_HEIGHT 200
 
 
 ProjectCellWidget::ProjectCellWidget(QWidget *parent) :

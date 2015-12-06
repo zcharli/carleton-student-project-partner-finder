@@ -153,6 +153,7 @@ void PPPController::setupUIForState(ProfileState state)
         profileView->getUI().noProfileView->setHidden(true);
         profileView->getUI().myProfileWidget->setHidden(true);
         profileView->codingWidget.setHidden(false);
+        profileView->codingWidget.viewWillAppear();
 
         //hide all other buttons except save
         profileView->getUI().btnSave->setHidden(true);

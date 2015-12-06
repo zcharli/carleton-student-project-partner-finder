@@ -18,6 +18,8 @@ public:
     bool checkAllQuestionsAnswered();
     QString getCodeTextFromTextView();
 
+    void viewWillAppear();
+
 private:
     Ui::CodingWidget *ui;
     Highlighter *highlighter;

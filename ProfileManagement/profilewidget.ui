@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>521</width>
-    <height>505</height>
+    <height>541</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -145,7 +145,7 @@ Click on the Create PPP to begin.</string>
               <x>0</x>
               <y>0</y>
               <width>479</width>
-              <height>288</height>
+              <height>304</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -162,9 +162,12 @@ Click on the Create PPP to begin.</string>
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QSpinBox" name="spinUserCGPA">
+                <widget class="QDoubleSpinBox" name="spinUserCGPA">
                  <property name="maximum">
-                  <number>12</number>
+                  <double>12.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -372,7 +375,7 @@ Click on the Create PPP to begin.</string>
               <x>0</x>
               <y>0</y>
               <width>479</width>
-              <height>288</height>
+              <height>304</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6">
