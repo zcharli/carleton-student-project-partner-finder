@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>638</width>
+    <width>650</width>
     <height>339</height>
    </rect>
   </property>
@@ -41,7 +41,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="DetailedSummary">
       <property name="sizePolicy">
@@ -171,7 +171,7 @@
             <string>0 Students</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -213,7 +213,7 @@
             <string>Team Score</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -362,7 +362,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>616</width>
+              <width>628</width>
               <height>210</height>
              </rect>
             </property>
