@@ -9,6 +9,57 @@ CodingWidget::CodingWidget(QWidget *parent) :
     highlighter = new Highlighter(ui->txtEdit->document());
 }
 
+void CodingWidget::viewWillAppear()
+{
+    //Set all buttons and text to default state
+    QAbstractButton *button = NULL;
+    button = ui->q1ButtonGroup->checkedButton();
+    if(button != NULL)
+    {
+        button->group()->setExclusive(false);
+        button->setChecked(false);
+        button->group()->setExclusive(true);
+    }
+
+    button = NULL;
+    button = ui->q2ButtonGroup->checkedButton();
+    if(button != NULL)
+    {
+        button->group()->setExclusive(false);
+        button->setChecked(false);
+        button->group()->setExclusive(true);
+    }
+
+    button = NULL;
+    button = ui->q3ButtonGroup->checkedButton();
+    if(button != NULL)
+    {
+        button->group()->setExclusive(false);
+        button->setChecked(false);
+        button->group()->setExclusive(true);
+    }
+
+    button = NULL;
+    button = ui->q4ButtonGroup->checkedButton();
+    if(button != NULL)
+    {
+        button->group()->setExclusive(false);
+        button->setChecked(false);
+        button->group()->setExclusive(true);
+    }
+
+    button = NULL;
+    button = ui->q5ButtonGroup->checkedButton();
+    if(button != NULL)
+    {
+        button->group()->setExclusive(false);
+        button->setChecked(false);
+        button->group()->setExclusive(true);
+    }
+
+    ui->txtEdit->setPlainText("");
+}
+
 CodingWidget::~CodingWidget()
 {
     delete highlighter;

@@ -463,26 +463,5 @@ int InsomniaMatchingAlgorithm::launch(QVector<Team*>& teamsForProject)
         }
     }
 
-    int i = 1;
-    foreach(Team *team, teamsForProject)
-    {
-        qDebug() << "TEAM " << i << "("<< team->getTeamTechScore() << ", " << team->getTeamRequiredTeammateTechScore() << ")";
-        qDebug() << "Satisfaction: " << team->getTeamSatisfaction();
-
-        foreach(ProjectPartnerProfile* profile, team->getMembersInTeam())
-        {
-            qDebug() << "--- Member: (" << profile->getPersonalTechnicalScore() << ", " << profile->getTeammateTechnicalScore() << ")";
-        }
-
-        QVector<QPair<LogType,QString> >& summary = team->getMatchSummaryForTeam();
-        for(int j=0;j<summary.size();++j)
-        {
-            qDebug() << "-----Summary: " << summary[j].second;
-        }
-
-        i++;
-
-    }
-
     return SUCCESS;
 }
