@@ -216,7 +216,7 @@ void ProjectDetailsView::on_btnEditProject_clicked()
                 // notify update succeeded
                 qDebug() << "Success";
                 QMessageBox messageBox;
-                messageBox.information(0,"Success","Your project has been successfulyl updated!");
+                messageBox.information(0,"Success","Your project has been successfully updated!");
                 messageBox.setFixedSize(500,200);
                 updateUI();
             }
