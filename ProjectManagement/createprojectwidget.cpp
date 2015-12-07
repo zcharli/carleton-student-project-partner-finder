@@ -76,7 +76,7 @@ void CreateProjectWidget::saveNewProject()
         DataAccessFacade::doneUsingProject(project);
         project = NULL;
         QMessageBox messageBox;
-        messageBox.critical(0,"Error","An error occured while attempting to fulfil your request.");
+        messageBox.critical(0,"Error","An error occured while attempting to fulfill your request.");
         messageBox.setFixedSize(500,200);
     }
     else

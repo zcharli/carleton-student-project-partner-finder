@@ -1,8 +1,10 @@
 #include "profilewidget.h"
 //  Subsystem dependencies
 #include "DataAccessLayer/qualification.h"
+
 #include <QDebug>
-#define DEFAULT_VALUE 0.0
+
+#define DEFAULT_VALUE 1
 
 ProfileWidget::ProfileWidget(QWidget *parent):
     QWidget(parent),
@@ -186,6 +188,65 @@ Ui::ProfileWidget& ProfileWidget::getUI()
     return *ui;
 }
 
+bool ProfileWidget::checkPersonalSectionCompleted()
+{
+    bool changed = false;
+
+    if(ui->spinUserCGPA->value() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserOO->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserUI->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserScripting->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserDB->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserDesignPatterns->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserDataStructures->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserSoftwareDocumentation->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserNetworkComputing->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserVersionControl->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderUserWebDevelopment->getValue() != DEFAULT_VALUE)
+        changed = true;
+
+    return changed;
+}
+
+bool ProfileWidget::checkTeammateSectionCompleted()
+{
+    bool changed = false;
+    if(this->sliderTeammateOO->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderTeammateUI->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(    this->sliderTeammateScripting->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderTeammateDB->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderTeammateDesignPatterns->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderTeammateDataStructures->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderTeammateComputerSecurity->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderTeammateSoftwareDocumentation->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderTeammateNetworkComputing->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(this->sliderTeammateVersionControl->getValue() != DEFAULT_VALUE)
+        changed = true;
+    if(sliderTeammateWebDevelopment->getValue() != DEFAULT_VALUE)
+        changed = true;
+
+    return changed;
+}
+
 void ProfileWidget::on_chkHardworking_clicked()
 {
     if(ui->chkHardworking->isChecked())
@@ -283,9 +344,18 @@ void ProfileWidget::enableDisableCheckBoxes(){
     }
 }
 
+bool ProfileWidget::checkWorkEthicSelected()
+{
+    return numBoxSelected == 5;
+}
+
 void ProfileWidget::on_btnSave_clicked()
 {
     emit userToSavePPP();
+}
+
+void ProfileWidget::lockWorkEthicCheckboxes()
+{
     ui->chkDependable->setEnabled(false);
     ui->chkEfficient->setEnabled(false);
     ui->chkFlexible->setEnabled(false);

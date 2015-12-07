@@ -79,6 +79,34 @@ public:
     void enableDisableCheckBoxes();
     void setUpDefault();
 
+    /*!
+     *  @param: none
+     *   @desc: checks to see if all work ethics are selected
+     * @return: bool
+    */
+    bool checkWorkEthicSelected();
+
+    /*!
+     *  @param: none
+     *   @desc: after successful save, the checkboxes are locked
+     * @return: none
+    */
+    void lockWorkEthicCheckboxes();
+
+    /*!
+     *  @param: none
+     *   @desc: check if the UI elements of the personal profile form has been filled in
+     * @return: bool
+    */
+    bool checkPersonalSectionCompleted();
+
+    /*!
+     *  @param: none
+     *   @desc: check if the UI elements of the teammate profile form has been filled in
+     * @return: bool
+    */
+    bool checkTeammateSectionCompleted();
+
 signals:
     void userToEditPPP();
     void userToSavePPP();
@@ -120,6 +148,7 @@ private slots:
 
 private:
     Ui::ProfileWidget *ui;
+
 };
 
 #endif // PROFILEWIDGET_H

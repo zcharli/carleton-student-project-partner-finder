@@ -36,6 +36,7 @@ class PPPController : public QObject
     void populateProfileView();
     void updatePPP();
     void retrievePPP();
+    bool validateProfileForm();
 
 public:
     explicit PPPController(ProfileWidget*, QObject *parent = 0);
