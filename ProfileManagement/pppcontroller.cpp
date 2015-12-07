@@ -302,8 +302,73 @@ void PPPController::editPPP()
     }
 }
 
+bool PPPController::validateProfileForm()
+{
+    bool isValid = true;
+
+    if(!profileView->checkWorkEthicSelected())
+    {
+        QMessageBox messageBox;
+        messageBox.warning(0,"Incomplete","Incomplete profile, please make sure you select 5 work ethic characteristics.");
+        messageBox.setFixedSize(500,200);
+        return false;
+    }
+
+    bool personalFormChanged = profileView->checkPersonalSectionCompleted();
+    bool teammateFormChanged = profileView->checkTeammateSectionCompleted();
+
+    if(!personalFormChanged || !teammateFormChanged)
+    {
+        QString promptMessage = "We noticed you didn't change the default";
+
+        if(!personalFormChanged)
+        {
+            promptMessage += " personal qualifications";
+        }
+
+        if(!teammateFormChanged)
+        {
+            if(!personalFormChanged)
+                promptMessage += " and";
+            promptMessage += " teammate qualifications";
+        }
+
+        promptMessage += "!";
+
+        QMessageBox messageBox;
+        messageBox.setFixedSize(500,200);
+
+        messageBox.setText(promptMessage);
+        messageBox.setInformativeText("Are you want to continue?");
+        messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        messageBox.setDefaultButton(QMessageBox::Yes);
+        int ret = messageBox.exec();
+
+        switch (ret) {
+            case QMessageBox::Yes:
+            // Yes was clicked
+                isValid = true;
+                break;
+            case QMessageBox::No:
+            // No was clicked
+                isValid = false;
+                break;
+            default:
+            // should never be reached
+                break;
+        }
+    }
+
+    return isValid;
+}
+
 void PPPController::savePPP()
 {
+    if(!validateProfileForm())
+    {
+        return;
+    }
+
     updatePPP();
 
     StudentUser *user = (StudentUser*)DataAccessFacade::managedDataAccess().getCurrentUser();
@@ -320,7 +385,7 @@ void PPPController::savePPP()
         {
             // SAVE SUCCESSFUL Message
             QMessageBox messageBox;
-            messageBox.information(0,"Success!","You can start registering your self to projects!");
+            messageBox.information(0,"Success!","You can start registering yourself to projects!");
             messageBox.setFixedSize(500,200);
             user->setFetchIDForPPP(profile->getPPPID());
             user->setProfile(profile);
@@ -401,7 +466,7 @@ void PPPController::processFinishedMarkingQuestion()
             QMessageBox messageBox;
             messageBox.setFixedSize(500,200);
             QString stderr = codeMarker->readAllStandardError();
-            QString errorMessage = "Error! We found the Following errors while trying to mark your code.\n Please resolve them and try again\n" + stderr;
+            QString errorMessage = "Error! We found the following errors while trying to mark your code.\n Please resolve them and try again\n" + stderr;
             QMessageBox::critical(0,"Error!", errorMessage);
         }
     }
