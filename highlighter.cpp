@@ -13,7 +13,7 @@ Highlighter::Highlighter(QTextDocument *parent)
                     << "\\benum\\b"   << "\\bexplicit\\b" << "\\bint\\b"
                     << "\\blong\\b"   << "\\bshort\\b"    << "\\bsigned\\b"
                     << "\\bstatic\\b" << "\\bunsigned\\b" << "\\bvolatile\\b"
-                    << "string"       << "\\breturn\\b"   << "\\bbool\\b";
+                    << "\\bstring\\b"       << "\\breturn\\b"   << "\\bbool\\b" << "\\bvoid\\b";
 
     foreach (const QString &pattern, keywordPatterns) {
         rule.pattern = QRegExp(pattern);

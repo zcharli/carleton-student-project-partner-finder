@@ -8,6 +8,10 @@
 
 #include "DataAccessLayer/projectpartnerprofile.h"
 
+#define PERFECT_LEGEND "A perfect satisfaction is when all the team members are perfectly satisfied with the members they are matched with. In most cases, this occurs when the algorithm was able to always satisfy the teammate requests made by the members of the team without hitting any edge cases"
+#define OKAY_SATISFACTION "An okay satisfaction is when all the team members are moderately satisfied with the members they are matched with. In most cases, this occurs when the algorithm encoutered an edge case while trying to satisfy the request of the team"
+#define POOR_SATISFACTION "A poor satisfaction is when all the team members are not satisfied with the members they were matched with. In most cases this occurs as a result of users with low technical scores requesting for users with higher technical scores. The algorithm will encounter multiple edge cases to create this team"
+
 TeamCellWidget::TeamCellWidget(Team& teamToDisplay, int teamNumber, QWidget *parent) :
     QWidget(parent), profilesInTeam(teamToDisplay.getMembersInTeam()), teamToParse(teamToDisplay), teamNumber(teamNumber),
     reasonsList(teamToDisplay.getMatchSummaryForTeam()),
@@ -93,6 +97,7 @@ void TeamCellWidget::prepareForDisplay()
     ui->lblNumStudentsRegistered->setText(QString::number(profilesInTeam.size()));
     ui->lblTeamNeedScore->setText(teamNeedScore);
     ui->lblSummarySAT->setText(satisfactionTextForSatisfactionLevel(teamToParse.getTeamSatisfaction()));
+    ui->lblLegend->setText(getLegendForSatisfactionLevel(ui->lblSummarySAT->text()));
     evaluateSatificationColor(ui->lblSummarySAT);
 
     // Table settings for student names
@@ -148,6 +153,21 @@ void TeamCellWidget::evaluateSatificationColor(QLabel* label)
     {
         label->setStyleSheet("QLabel { color: #e41e22; }");
     }
+}
+
+QString TeamCellWidget::getLegendForSatisfactionLevel(QString &satisfaction)
+{
+    QString legend = "";
+
+    if(satisfaction == "Perfect")
+        legend = PERFECT_LEGEND;
+    else if(satisfaction == "Okay")
+        legend = OKAY_SATISFACTION;
+    else if (satisfcation == "Poor")
+        legend = POOR_SATISFACTION;
+
+    return legend;
+
 }
 
 QString TeamCellWidget::getReasonIcon(LogType type)

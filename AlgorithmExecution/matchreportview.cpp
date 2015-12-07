@@ -7,7 +7,7 @@
 #include <QFormLayout>
 #include <QVBoxLayout>
 
-#define SUMMARY_WIDGET_HEIGHT 450
+#define SUMMARY_WIDGET_HEIGHT 500
 
 MatchReportView::MatchReportView(QWidget *parent) :
     QWidget(parent),

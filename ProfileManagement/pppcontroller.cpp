@@ -285,7 +285,8 @@ void PPPController::enableInteractions(bool shouldEnable)
     profileView->sliderTeammateNetworkComputing->setEnabled(shouldEnable);
     profileView->sliderTeammateVersionControl->setEnabled(shouldEnable);
     profileView->sliderTeammateWebDevelopment->setEnabled(shouldEnable);
-    profileView->enableDisableCheckBoxes();
+    if(shouldEnable)
+        profileView->enableDisableCheckBoxes();
 }
 
 void PPPController::editPPP()
