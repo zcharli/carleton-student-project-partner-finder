@@ -288,7 +288,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
                     profile = bucket->first(); // highest member in immediately lowest bucket
                     QString log = "Edge Case(Unable to find a profile satisfying team criteria) Added Student: " + profile->getStudentUser().getFirstName() + " "
                             + profile->getStudentUser().getLastName() +
-                            " because user is meets the technicalScore as close as possible";
+                            " because user meets the technical score as close as possible";
                     team.addLog(createLogEntry(AddedStudent,log));
                 }
             }
@@ -300,7 +300,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
                     profile = bucket->last(); // lowest member in immediately highest bucket
                     QString log = "Edge Case(Unable to find a profile satisfying team criteria) Added Student: " + profile->getStudentUser().getFirstName() + " "
                             + profile->getStudentUser().getLastName() +
-                            " because user is meets the technicalScore as close as possible";
+                            " because user meets the technical score as close as possible";
                     team.addLog(createLogEntry(AddedStudent,log));
                 }
             }
@@ -320,7 +320,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
                 profile = bucket->first(); // highest member in immediately lowest bucket
                 QString log = "Edge Case(No Profiles within flexibility bounds of team) Added Student: " + profile->getStudentUser().getFirstName() + " "
                         + profile->getStudentUser().getLastName() +
-                        " to neutralize team satisfaction because user is meets the technicalScore as close as possible";
+                        " to neutralize team satisfaction because user meets the technical score as close as possible";
                 team.addLog(createLogEntry(AddedStudent,log));
             }
         }
@@ -332,7 +332,7 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getNextCompatibleMemberForTeam
                 profile = bucket->last(); // lowest member in immediately highest bucket
                 QString log = "Edge Case(No Profiles within flexibility bounds of team) Added Student: " + profile->getStudentUser().getFirstName() + " "
                         + profile->getStudentUser().getLastName() +
-                        " to neutralize team satisfaction because user is meets the technicalScore as close as possible";
+                        " to neutralize team satisfaction because user meets the technical score as close as possible";
                 team.addLog(createLogEntry(AddedStudent,log));
             }
         }
