@@ -41,9 +41,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-1063</y>
-        <width>709</width>
-        <height>1829</height>
+        <y>-1649</y>
+        <width>707</width>
+        <height>2142</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -388,7 +388,19 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="txtEdit"/>
+        <widget class="QTextEdit" name="txtEdit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>400</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -399,10 +411,10 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="q5ButtonGroup"/>
   <buttongroup name="q1ButtonGroup"/>
   <buttongroup name="q2ButtonGroup"/>
   <buttongroup name="q3ButtonGroup"/>
   <buttongroup name="q4ButtonGroup"/>
+  <buttongroup name="q5ButtonGroup"/>
  </buttongroups>
 </ui>

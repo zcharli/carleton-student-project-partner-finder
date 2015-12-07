@@ -81,14 +81,6 @@ ProfileWidget::ProfileWidget(QWidget *parent):
 void ProfileWidget::viewWillAppear()
 {
     //setup Profile for current Profile
-    ui->chkDependable->setEnabled(false);
-    ui->chkEfficient->setEnabled(false);
-    ui->chkFlexible->setEnabled(false);
-    ui->chkHardworking->setEnabled(false);
-    ui->chkHumour->setEnabled(false);
-    ui->chkImpulsive->setEnabled(false);
-    ui->chkOrganized->setEnabled(false);
-    ui->chkProactive->setEnabled(false);
 }
 
 

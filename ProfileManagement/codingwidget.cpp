@@ -1,6 +1,8 @@
 #include "codingwidget.h"
 #include "ui_codingwidget.h"
 
+#define DEFAULT_CODING_TEXT "void maximumThreeNumbersInList(int *list, int count, int* maxThree)\n{\n}"
+
 CodingWidget::CodingWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CodingWidget)
@@ -57,7 +59,7 @@ void CodingWidget::viewWillAppear()
         button->group()->setExclusive(true);
     }
 
-    ui->txtEdit->setPlainText("");
+    ui->txtEdit->setPlainText(DEFAULT_CODING_TEXT);
 }
 
 CodingWidget::~CodingWidget()
@@ -69,7 +71,7 @@ CodingWidget::~CodingWidget()
 bool CodingWidget::checkAllQuestionsAnswered()
 {
     return ui->q1ButtonGroup->checkedButton() != NULL && ui->q2ButtonGroup->checkedButton() != NULL && ui->q3ButtonGroup->checkedButton() != NULL
-            && ui->q4ButtonGroup->checkedButton() != NULL && ui->q5ButtonGroup->checkedButton() != NULL && ui->txtEdit->toPlainText() != "";
+            && ui->q4ButtonGroup->checkedButton() != NULL && ui->q5ButtonGroup->checkedButton() != NULL && ui->txtEdit->toPlainText() != DEFAULT_CODING_TEXT;
 }
 
 QString CodingWidget::getCodeTextFromTextView()
