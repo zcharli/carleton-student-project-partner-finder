@@ -16,7 +16,7 @@ void setUpList(int** list, string input, int count)
 	*list = new int[count];
 	int number;
 	int i = 0;
-	while (file >> number)
+	while (file >> number && i < count)
 	{
 		(*list)[i] = number;
 		i++;
@@ -46,10 +46,10 @@ int main()
 	}
 
 	//setup for efficiency
-	#define SLOWEST_TIME 5000
-	setUpList(&list, "test02.in", 10000000);
+	#define SLOWEST_TIME 2500
+	setUpList(&list, "test02.in", 5000000);
 	auto t1 = Clock::now();
-	maximumThreeNumbersInList(list, 10000000, maxThreeList);
+	maximumThreeNumbersInList(list, 5000000, maxThreeList);
 	auto t2 = Clock::now();
 	resultFile << (SLOWEST_TIME-(double(chrono::duration_cast<chrono::milliseconds>(t2-t1).count())))/SLOWEST_TIME * 100.0;
 }
