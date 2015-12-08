@@ -155,7 +155,7 @@ void TeamCellWidget::evaluateSatificationColor(QLabel* label)
     }
 }
 
-QString TeamCellWidget::getLegendForSatisfactionLevel(QString &satisfaction)
+QString TeamCellWidget::getLegendForSatisfactionLevel(QString satisfaction)
 {
     QString legend = "";
 
@@ -163,7 +163,7 @@ QString TeamCellWidget::getLegendForSatisfactionLevel(QString &satisfaction)
         legend = PERFECT_LEGEND;
     else if(satisfaction == "Okay")
         legend = OKAY_SATISFACTION;
-    else if (satisfcation == "Poor")
+    else if (satisfaction == "Poor")
         legend = POOR_SATISFACTION;
 
     return legend;
