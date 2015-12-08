@@ -471,6 +471,8 @@ void PPPController::processFinishedMarkingQuestion()
             QMessageBox::critical(0,"Error!", errorMessage);
         }
     }
+    profileView->getUI().btnSaveCoding->setText("Submit Answers");
+    profileView->getUI().btnSaveCoding->setEnabled(true);
 }
 
 void PPPController::codingTimerFinished()
@@ -495,6 +497,10 @@ void PPPController::codingTimerFinished()
 void PPPController::saveScoreForCodingQuestion(){
     if(profileView->codingWidget.checkAllQuestionsAnswered())
     {
+        //change button text
+        profileView->getUI().btnSaveCoding->setText("Marking Submission...");
+        profileView->getUI().btnSaveCoding->setEnabled(false);
+        
          //First write user's answer to a file
         QString submissionFileName = "studentSubmission";
         QString filePath="./codeChecker/" + submissionFileName;
