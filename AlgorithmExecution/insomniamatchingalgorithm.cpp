@@ -169,7 +169,7 @@ QPair<LogType,QString> InsomniaMatchingAlgorithm::createLogEntry(LogType type,QS
 
 ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeamInBucket(Team& team, QVector<ProjectPartnerProfile*>* bucket)
 {
-    int closestIndex = -1;
+    int closestIndex = 0;
     float flexMetric = -(team.getTeamSatisfaction())/10.0 * 10.0; //  Need this to prevent truncation
     ProjectPartnerProfile* profile = NULL;
     if(bucket == NULL)
@@ -187,7 +187,10 @@ ProjectPartnerProfile* InsomniaMatchingAlgorithm::getBestCompatibleMemberForTeam
         }
 
         if(checkProfileCompatibleWithTeam(&team, potentialTeamMate) < 3) //  potential teammate isnt compatible in terms of WE
+        {
+            closestIndex = i;
             continue;
+        }
 
         profile = potentialTeamMate;
         QString log = "Added Student: " + profile->getStudentUser().getFirstName() + " "

@@ -37,7 +37,7 @@ private:
     QTableWidgetItem **studentUserTableWidgetItems;
     QTableWidgetItem **studentTechScoreTableWidgetItems;
     QListWidgetItem **summaryElementsToTrackForDeletion;
-    QString getLegendForSatisfactionLevel(QString satisfaction);
+    QString getLegendForSatisfactionLevel(QString);
     QString teamTechScore;
     QString teamSatScore;
     QString teamNeedScore;
