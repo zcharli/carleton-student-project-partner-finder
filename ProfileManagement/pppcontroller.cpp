@@ -96,7 +96,7 @@ void PPPController::handleContexSwitchAwayFromView()
 
 void PPPController::setupUIForState(ProfileState state)
 {
-
+    currentState = state;
     switch(state)
     {
     case Viewing:
@@ -365,7 +365,7 @@ bool PPPController::validateProfileForm()
 
 void PPPController::savePPP()
 {
-    if(!validateProfileForm())
+    if(currentState == Editing && !validateProfileForm())
     {
         return;
     }
@@ -497,10 +497,10 @@ void PPPController::codingTimerFinished()
 void PPPController::saveScoreForCodingQuestion(){
     if(profileView->codingWidget.checkAllQuestionsAnswered())
     {
-        //change button text
+        //change button to say loading
         profileView->getUI().btnSaveCoding->setText("Marking Submission...");
         profileView->getUI().btnSaveCoding->setEnabled(false);
-        
+
          //First write user's answer to a file
         QString submissionFileName = "studentSubmission";
         QString filePath="./codeChecker/" + submissionFileName;
