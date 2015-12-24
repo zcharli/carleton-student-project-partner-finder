@@ -324,7 +324,7 @@ INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(21
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(22,9,4);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(23,9,6);
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(24,9,9);
-INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,9,20);
+INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(25,9,90);
 
 
 INSERT INTO "ppp_qualifications" (`qualification_id`,`ppp_id`,`value`) VALUES(1,10,108);

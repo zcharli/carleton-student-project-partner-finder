@@ -426,6 +426,9 @@ QVector<int> InsomniaMatchingAlgorithm::getTeamSizeConfigurations(int numberOfRe
 int InsomniaMatchingAlgorithm::launch(QVector<Team*>& teamsForProject)
 {
     int teamSize = project->getProjectConfiguration(TeamSize).getValue();
+    if(teamSize <= 0)
+        return -1;
+
     QVector<int> teamSizeConfigurations = getTeamSizeConfigurations(profiles.size(), teamSize);
     while(!teamSizeConfigurations.empty())
     {

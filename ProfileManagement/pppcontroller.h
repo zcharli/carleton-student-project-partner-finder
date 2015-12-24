@@ -29,6 +29,7 @@ class PPPController : public QObject
     QTimer *timer;
     bool markingSuccessful;
     bool newUserAnsweredCodingQuestion;
+    ProfileState currentState;
 
     void didSetProfile();
     void enableInteractions(bool);

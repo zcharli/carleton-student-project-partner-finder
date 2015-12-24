@@ -374,8 +374,8 @@ Click on the Create PPP to begin.</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>479</width>
-              <height>304</height>
+              <width>98</width>
+              <height>28</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -420,7 +420,7 @@ Click on the Create PPP to begin.</string>
    <item>
     <widget class="QPushButton" name="btnSaveCoding">
      <property name="text">
-      <string>Submit  Changes</string>
+      <string>Submit  Answers</string>
      </property>
     </widget>
    </item>
