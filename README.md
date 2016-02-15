@@ -1,21 +1,8 @@
-[![cuPID Demo](https://www.youtube.com/embed/vMsCENg2PTc)](https://www.youtube.com/embed/vMsCENg2PTc)
+[![cuPID Demo](http://www.youtube.com/watch?v=vMsCENg2PTc)](http://www.youtube.com/watch?v=vMsCENg2PTc)
 
 
 # cuPID: Carleton University Project Partner Identifier
 
-'''
-
-              #######  ########  #######
-              ##   ###    ##     ##     ##
- ####  #    # #######     ##     ##      ##
-#      #    # ##          ##     ##      ##
-#      #    # ##          ##     ##      ##
-#      #    # ##          ##     ##     ##
- ####   ####  ##       ########  #######
-
-
-
-'''
 ## What's New in cuPID 2.0
 
 - New user's answer coding Question before new account is saved in database.
