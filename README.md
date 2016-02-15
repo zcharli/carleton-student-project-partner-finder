@@ -13,6 +13,7 @@ cuPID: Carleton University Project Partner Identifier
 
 
 
+[![cuPID Demo](https://youtu.be/vMsCENg2PTc)](https://youtu.be/vMsCENg2PTc)
 ------------------------------------------------
     What's New in cuPID 2.0
 ------------------------------------------------
