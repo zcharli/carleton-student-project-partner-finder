@@ -1,7 +1,9 @@
-######################################################
-cuPID: Carleton University Project Partner Identifier
-######################################################
+[![cuPID Demo](https://www.youtube.com/embed/vMsCENg2PTc)](https://www.youtube.com/embed/vMsCENg2PTc)
 
+
+# cuPID: Carleton University Project Partner Identifier
+
+'''
 
               #######  ########  #######
               ##   ###    ##     ##     ##
@@ -13,10 +15,9 @@ cuPID: Carleton University Project Partner Identifier
 
 
 
-[![cuPID Demo](https://youtu.be/vMsCENg2PTc)](https://youtu.be/vMsCENg2PTc)
-------------------------------------------------
-    What's New in cuPID 2.0
-------------------------------------------------
+'''
+## What's New in cuPID 2.0
+
 - New user's answer coding Question before new account is saved in database.
   This feature is used for technical score normalization as explained in the
   document. (SEE END OF FILE!!!!)
@@ -30,14 +31,11 @@ cuPID: Carleton University Project Partner Identifier
 - Recent Project section added to side bar to keep track of the last 3 projects
   a user has executed an action on.
 - Better fault tolerance and error detection for great user experience.
-- General User Interface tweaks to enhance user experience for application.
-------------------------------------------------
+- General User Interface tweaks to enhance user experience for application.-
 
 
-------------------------------------------------
-Installation Instructions
-------------------------------------------------
-##Setup##
+## Installation Instructions
+### Setup
 cuPID is brought to you by the insomnia team.
 In order to launch this product, you must have the Qt Framework installed.
 The following steps stipulate installation instructions for the user:
@@ -55,7 +53,7 @@ The following steps stipulate installation instructions for the user:
   After configuration, your directory should look like this:
   - cuPID, Data, build-cuPID-Desktop-Debug
 
-##Code Checker Integration##
+### Code Checker Integration
 - Call us paranoid, but we want to ensure the best user experience. In order to
   ensure that the code checking feature works seamlessly, we will need you to
   do a little check for us.
@@ -69,11 +67,11 @@ The following steps stipulate installation instructions for the user:
     (This assumes you are currently in the codeChecker directory)
     chmod 777 codeChecker.sh
   - Once all this is done, you are all set
-------------------------------------------------
 
-###################################################################
-Data Filled Information for Testing Features
-###################################################################
+
+
+# Data Filled Information for Testing Features
+```
 Username        LoginType
 Leo               Admin     (Owner of all projects in the db at the moment)
 Jman              Admin
@@ -105,7 +103,7 @@ howie             Student
 shelby            Student
 penny             Student
 lenny             Student
-###################################################################
+```
 
 We are exited to deliver the final cuPID system.
 Hope you enjoy.
@@ -113,13 +111,10 @@ Hope you enjoy.
 Yours truly, the insomnia team :)
 
 
-###############################################################################
-###############################################################################
-###############################################################################
-###############################################################################
-To Bypass Coding question (This is just for testing only)
-Insert the following code into the coding textview to get the max possible mark
 
+###To Bypass Coding question (This is just for testing only)
+###Insert the following code into the coding textview to get the max possible mark
+```
 void maximumThreeNumbersInList(int*list, int count, int*maxThree)
 {
 	maxThree[0] = -999999;
@@ -144,7 +139,4 @@ void maximumThreeNumbersInList(int*list, int count, int*maxThree)
 		}
 	}
 }
-###############################################################################
-###############################################################################
-###############################################################################
-###############################################################################
+```
