@@ -1,4 +1,4 @@
-[![cuPID Demo](http://www.youtube.com/watch?v=vMsCENg2PTc)](http://www.youtube.com/watch?v=vMsCENg2PTc)
+[![cuPID Demo](http://img.youtube.com/vi/vMsCENg2PTc/0.jpg)](http://www.youtube.com/watch?v=vMsCENg2PTc)
 
 
 # cuPID: Carleton University Project Partner Identifier
